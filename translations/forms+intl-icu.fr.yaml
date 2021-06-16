@@ -1,0 +1,34 @@
+register:
+    title: "Se créer un compte"
+    submit: "S'inscrire"
+    reset: "Recommencer"
+    password: "Mot de passe"
+    passwordConfirm: "Confirmer mot de passe"
+    email: "Adresse e-mail"
+    username: "Pseudonyme"
+    firstname: "Prénom"
+    lastname: "Nom"
+    agreeTerms: "Accepter les termes d'utilisations"
+
+logout:
+    title: "Se déconnecter"
+
+login:
+    title: "Bonjour !"
+    submit: "Se connecter"
+    username: "Pseudonyme / Email"
+    password: "Mot de passe"
+    rememberMe: "Se souvenir de moi !"
+    noAccount: "Pas encore de compte ?"
+    forgotPassword: "Mot de passe oublié ?"
+
+crud:
+    roles:
+        superAdministrator: "Super Administrateur"
+        administrator: "Administrateur"
+        user: "Utilisateur"
+    status:
+        future: "Programmé"
+        published: "Publié"
+        draft: "Brouillon"
+        secret: "Privé"

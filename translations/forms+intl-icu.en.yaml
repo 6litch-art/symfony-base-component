@@ -1,0 +1,34 @@
+register:
+    title: 'Create an account'
+    submit: "Sign Up!"
+    reset: "Reset"
+    password: "Password"
+    passwordConfirm: "Confirm password"
+    email: "E-mail"
+    username: "Username"
+    firstname: "Firstname"
+    lastname: "Lastname"
+    agreeTerms: 'Agree terms'
+
+logout:
+    title: "Sign Out"
+
+login:
+    title: "Sign In"
+    submit: "Sign In"
+    username: "Pseudonyme / Email"
+    password: "Mot de passe"
+    remember_me: "Remember me !"
+    no_account: "Don't have an account?"
+    forgot_password: "Forgot your password?"
+
+crud:
+    roles:
+        superAdministrator: "Super Administrator"
+        administrator: "Administrator"
+        user: "User"
+    status:
+        future: "Future"
+        published: "Published"
+        draft: "Draft"
+        secret: "Private"

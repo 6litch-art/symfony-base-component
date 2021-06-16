@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Profile!{% endblock %}
+{% block content %}
+    <article class="half">
+	<h1>Settings</h1>
+
+	    {% if user %}
+	    <div class="mb-3">
+	        You are logged in as {{ user.username }}, <a href="{{ path('base_logout') }}">Logout</a>
+	    </div>
+	    {% endif %}
+    </article>
+{% endblock %}
