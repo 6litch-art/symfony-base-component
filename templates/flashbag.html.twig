@@ -1,0 +1,44 @@
+{% if app.session is not null and app.session.started %}
+    {% set flashbag = app.session.flashbag.all %}
+
+    {% if flashbag|length > 0 %}
+        <div id="flash-messages">
+            {% for label, flashes in flashbag %}
+
+                {% if label == "error" %}
+                    {% set label = "danger" %}
+                {% endif %}
+
+                {% for flash in flashes %}
+                    <article class="alert alert-{{label}} alert-dismissible fade show">
+                        <div>
+                            {% if flash is iterable %}
+
+                                {% if flash|length > 1 %}
+
+                                    {% set flash_title = flash|first %}
+                                    {% set flash_message = flash|slice(1,flash|length) %}
+
+                                    {% if flash_title is not empty %}
+                                    <h5>{{flash_title|trans2|raw}}</h5><hr>
+                                    {% endif %}
+
+                                    {% for message in flash_message %}
+                                        {{ message|trans2|raw }}<br/>
+                                    {% endfor %}
+
+                                {% else %}
+                                    {{ flash|trans2|raw }}
+                                {% endif %}
+
+                            {% else %}
+                                    {{ flash|trans2|raw }}
+                            {% endif %}
+                            <button type="button" class="btn-close alert-{{label}}" aria-label="Close" onclick="this.closest('article').style.display='none'"></button>
+                        </div>
+                    </article>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endif %}

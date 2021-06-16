@@ -1,0 +1,109 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block stylesheets %}
+<style>
+.invalid-feedback {
+    display: block;
+}
+.invalid-feedback ul li {
+    list-style: none;
+}
+
+
+.invalid-feedback ul li:before {
+    content: "\f1e2"; /* FontAwesome Unicode */
+    font-size: 15pt;
+    font-weight: 900;
+    font-family: "Font Awesome 5 Free";
+
+    display: inline-block;
+    width: 1.2em;
+    margin-left: 1em;
+
+    position: relative;
+    top: 2px;
+    left: 0px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<article class="half signin d-flex justify-content-center">
+    {{ form_start(form) }}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-center">Sign Up</h3>
+            <div class="d-flex justify-content-center social-icons">
+                <a href="{{path("oauth_facebook")}}" class="btn btn-lg btn-social-icon-circle btn-outline-facebook-alt"></a>
+                <a href="{{path("oauth_instagram")}}" class="btn btn-lg btn-social-icon-circle btn-outline-instagram-alt"></a>
+                <a href="{{path("oauth_google")}}" class="btn btn-lg btn-social-icon-circle btn-outline-google-alt"></a>
+            </div>
+        </div>
+
+        <div class="card-body">
+            {#<div class="input-group form-group mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fa-fw fab fa-slack-hash {{ form.username.vars.required ? "required" : "" }}"></i>
+                    </span>
+                </div>
+                {{ form_widget(form.username) }}
+            </div>
+            <div class="input-group form-group mb-2">
+                <small>{{ form_help(form.username) }}</small>
+                <div class="invalid-feedback">{{ form_errors(form.username) }}</div>
+            </div>#}
+
+            <div class="input-group form-group mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="fa-fw fas fa-at {{ form.email.vars.required ? "required" : "" }}"></i>
+                    </span>
+                </div>
+                {{ form_widget(form.email, {'attr': {'placeholder': 'forms.register.email'|trans2}, value: user.getEmail()|default('') }) }}
+
+
+            </div>
+            <div class="input-group form-group mb-2">
+                <small>{{ form_help(form.email) }}</small>
+                <div class="invalid-feedback">{{ form_errors(form.email) }}</div>
+            </div>
+
+            <div class="input-group form-group mb-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa-fw fas fa-lock-open  {{ form.plainPassword.first.vars.required ? "required" : "" }}"></i></span>
+                </div>
+                {{ form_widget(form.plainPassword.first, {'attr': {'placeholder': 'forms.register.password'|trans2}}) }}
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa-fw fas fa-lock {{ form.plainPassword.second.vars.required ? "required" : "" }}"></i></span>
+                </div>
+                {{ form_widget(form.plainPassword.second, {'attr': {'placeholder': 'forms.register.passwordConfirm'|trans2}}) }}
+            </div>
+            <div class="input-group form-group mb-2">
+                <small>{{ form_help(form.plainPassword.first) }}</small>
+                <div class="invalid-feedback">{{ form_errors(form.plainPassword.first) }}</div>
+            </div>
+
+            <hr>
+
+            <div class="col d-flex justify-content-center">
+                <div class="form-group form-check form-switch form-switch-md">
+                    {{ form_widget(form.agreeTerms) }}
+                    {{ form_label(form.agreeTerms, 'forms.register.agreeTerms'|trans2) }}
+                </div>
+            </div>
+            {{ form_row(form._csrf_token) }}
+        </div>
+
+        <div class="card-footer">
+            <div class="col d-flex justify-content-end">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">{{ 'forms.register.submit'|trans2 }}</button>&nbsp;&nbsp;
+                <button class="btn btn-lg btn-outline-primary btn-block" type="reset">{{'forms.register.reset'|trans2 }}</button>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+</article>
+{% endblock %}

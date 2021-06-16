@@ -1,0 +1,49 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block content %}
+<article class="half card">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-center">Sign In</h3>
+        </div>
+        <div class="card-body">
+
+            <p class="label"><label for="_auth_code">{{ "auth_code"|trans({}, 'SchebTwoFactorBundle') }} {{ twoFactorProvider }}:</label></p>
+
+            <form class="form" action="{{ checkPathUrl ? checkPathUrl: path(checkPathRoute) }}" method="post">
+                <p class="widget">
+                    <input
+                        id="_auth_code"
+                        type="text"
+                        name="{{ authCodeParameterName }}"
+                        autocomplete="one-time-code"
+                        autofocus
+                        {#
+                        https://www.twilio.com/blog/html-attributes-two-factor-authentication-autocomplete
+                        If your 2fa methods are using numeric codes only, add these attributes for better user experience:
+                        inputmode="numeric"
+                        pattern="[0-9]*"
+                        #}
+                    />
+                </p>
+
+                {% if displayTrustedOption %}
+                    <p class="widget"><label for="_trusted"><input id="_trusted" type="checkbox" name="{{ trustedParameterName }}" /> {{ "trusted"|trans({}, 'SchebTwoFactorBundle') }}</label></p>
+                {% endif %}
+                <input type="hidden" name="{{ csrfParameterName }}" value="{{ csrf_token(csrfTokenId) }}">
+            </form>
+
+        </div>
+
+        <div class="card-footer">
+            <div class="col d-flex justify-content-end">
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Confirm</button>&nbsp;&nbsp;
+                <button class="btn btn-lg btn-outline-primary btn-block" onclick="window.location.href='{{ logoutPath }}'">Cancel</button>
+            </div>
+        </div>
+    </div>
+</article>
+{% endblock %}

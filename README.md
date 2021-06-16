@@ -1,3 +1,3 @@
-# Base Bundle
+# Base Helper
 
-Bundle used in connection with some basic methods & twig template.
+Base helper used in connection with basic methods.
