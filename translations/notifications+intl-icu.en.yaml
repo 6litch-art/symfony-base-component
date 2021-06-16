@@ -1,0 +1,31 @@
+invalidTimezone: "Invalid user timezone detected from your browser. Time are displayed in UTC"
+
+login:
+    success:
+        normal: Hi {0}! You just logged in.
+        alien: "Welcome, visitor from the outside! Please consider signing up!"
+        back: "Welcome back {0} !"
+
+    already: You are already logged in !
+    partial: You're partially logged in ! You can sign in.
+    social: Hi ! You just got connected to thought your {0} account
+
+    pending: "Your user account requires to be moderated by an administrator"
+    banned: 'Your user account no longer exists.'
+
+impersonator:
+    "<b>Reminder:</b> You are currently impersonating <b>{0}</b> !
+    <a class='badge bg-warning badge-warning' href='?_switch_user=_exit'>Exit impersonation</a>"
+
+logout:
+    success: "{0} You're now disconnected."
+    already: "You're not logged in into your account anymore :D"
+
+register:
+    csrfToken: "Invalid CSRF token detected. We cannot proceed with the registration"
+    verifyEmail:
+        pending: Your account needs to be verified. Please resend a confirmation by clicking <a class='badge bg-warning badge-warning' href="{0}">here</a>
+        success: "You've got successfully registered ! You account is already verified."
+        check:   "Please confirm your account by checking your email."
+        already: "Your account has already been verified !"
+        resend:  "A confirmation email has already been sent ! Please wait {0} minute(s) before next submission."

@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+	<article class="half text-center">
+		<h1>{{ 'controllers.exception.title'|trans2 }}</h1><br/>
+		<h3>{{ exception.getCode }} {{ exception.getMessage }}</h3>
+
+		{% if not exception.isKnown %}
+		<p>{{ 'controllers.exception.description'|trans2([base.getMail()])|raw }}</p>
+		{% endif %}
+		<p>{{ 'controllers.exception.return'|trans2([path('app_homepage')])|raw }}<p>
+	</article>
+{% endblock %}

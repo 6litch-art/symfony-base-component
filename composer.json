@@ -1,0 +1,46 @@
+{
+    "name": "xkzl/base-bundle",
+    "type": "symfony-bundle",
+    "description": "Base helper integration for Symfony",
+    "keywords": ["symfony", "base", "helper"],
+    "homepage": "https://gitlab.glitchr.io/repository-public/symfony",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marco Meyer",
+            "email": "marco.meyerconde@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Base\\": "./src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Base\\": "./Tests"
+        }
+    },
+    "require": {
+        "php": ">=7.2.5",
+        "symfony/config": "^4.4.17|^5.0",
+        "symfony/dependency-injection": "^4.4.17|^5.0",
+        "symfony/http-kernel": "^4.4.17|^5.0",
+        "symfonycasts/reset-password-bundle": "^1.6",
+        "symfonycasts/verify-email-bundle": "^1.3",
+        "easycorp/easyadmin-bundle": "^3.0",
+        "vich/uploader-bundle": "^1.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5",
+        "symfony/framework-bundle": "^4.4.17|^5.0",
+        "symfony/twig-bundle": "^4.4.17|^5.0",
+        "symfony/var-dumper": "^4.4.17|^5.0"
+    },
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    }
+}
