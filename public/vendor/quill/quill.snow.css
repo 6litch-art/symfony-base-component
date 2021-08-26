@@ -41,6 +41,7 @@ img, svg {
   padding: 0;
 }
 .ql-editor {
+  resize: vertical;
   box-sizing: border-box;
   line-height: 1.42;
   height: 100%;
