@@ -6,7 +6,7 @@ use Base\Database\NamingStrategy;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 
-abstract class EnumType extends Type
+abstract class SetType extends Type
 {
     public static function getStaticName() { 
         $array = explode('\\', get_called_class());
@@ -26,14 +26,15 @@ abstract class EnumType extends Type
     }
     
     public function requiresSQLCommentHint(AbstractPlatform $platform) { return true; }
+
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
         $permittedValues = array_map(fn($val) => "'".$val."'", $this->getPermittedValues());
 
-        return "ENUM(".implode(", ", $permittedValues).")";
+        return "SET(".implode(", ", $permittedValues).")";
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform) { return $value; }
+    public function convertToPHPValue($value, AbstractPlatform $platform) { return explode(",", $value); }
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         if (!in_array($value, $this->getPermittedValues())) {
