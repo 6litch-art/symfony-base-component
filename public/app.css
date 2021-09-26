@@ -1,0 +1,129 @@
+.dropzone {
+    border-radius: 1em;
+    border: 0.5px solid #ced4da !important;
+}
+
+.imageupload {
+    display: flex;
+    flex-direction: row-reverse;
+
+}
+
+.imageupload_thumbnail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 125px;
+    width: 125px;
+    margin-right: 1em;
+
+    border-radius: 1em;
+    border: 0.5px solid #ced4da;
+    overflow: hidden;
+}
+
+.imageupload_thumbnail>img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.fileupload {
+    flex-grow: 1;
+}
+
+.fileupload input {
+    padding-right: 30px;
+}
+
+.avatarupload .avatar-image input[type="file"] {
+    display: none;
+}
+
+.avatarupload .avatar-figure {
+    position: relative;
+    border: 3px solid transparent;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+    transition: all ease-in-out .3s;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 100%;
+
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+}
+
+.avatarupload .avatar {
+    width: 100%;
+    height: 100%;
+}
+
+.fileupload .deleteBtn {
+    position: relative;
+    height: 0px;
+    width: 0px;
+    top: -38px;
+    left: calc(100% - 38px);
+}
+
+.avatarupload .avatar:hover {
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.avatarupload .deleteBtn .btn {
+
+    background-color: #FFF;
+    color: #000A;
+    border-radius: 100%;
+    padding: 6px 14px;
+
+    transform:rotate(45deg);
+    line-height: 0.5;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1px;
+    align-items: start;
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.4)
+}
+
+.avatarupload .deleteBtn {
+    display: block;
+    position: relative;
+    height: 0px;
+    width: 0px;
+    left: 85px;
+    top: -140px;
+}
+
+.avatarupload .avatar-figcaption {
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    width: inherit;
+    height: inherit;
+    border-radius: 100%;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0);
+    transition: all ease-in-out .3s;
+
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+
+.avatarupload .avatar-figcaption:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, .2);
+}
+
+.avatarupload .avatar-figcaption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatarupload .avatar-figcaption>i {
+    color: #FFFA;
+}
