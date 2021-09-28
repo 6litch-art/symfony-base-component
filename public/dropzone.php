@@ -1,3 +1,0 @@
-<?php
-
-dump($_FILES);
