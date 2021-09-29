@@ -1,15 +1,39 @@
 .dropzone {
     border-radius: 1em;
     border: 0.5px solid #ced4da !important;
+    flex-grow:1;
+}
+
+.nav-tabs { padding-top:1em; }
+.nav-link { background-color:transparent; }
+.tab-pane { padding:1em; }
+
+.fileupload {
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.fileupload .deleteBtn {
+    position: relative;
+    width: 0px;
+    right: 25px;
+}
+
+.fileupload input {
+    padding-right: 30px;
 }
 
 .imageupload {
     display: flex;
-    flex-direction: row-reverse;
-
+    flex-direction: row;
+    align-items: start;
 }
 
-.imageupload_thumbnail {
+.imageupload figure   {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,87 +46,71 @@
     overflow: hidden;
 }
 
-.imageupload_thumbnail>img {
+.imageupload figure > img {
     object-fit: cover;
     width: 100%;
     height: 100%;
 }
 
-.fileupload {
-    flex-grow: 1;
-}
+.avatarupload input[type="file"] { display: none; }
+.avatarupload .fileupload .deleteBtn { display:none !important; }
+.avatarupload figure { border-radius: 100%; }
 
-.fileupload input {
-    padding-right: 30px;
-}
-
-.avatarupload .avatar-image input[type="file"] {
-    display: none;
-}
-
-.avatarupload .avatar-figure {
+.imageupload figure {
     position: relative;
     border: 3px solid transparent;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
     transition: all ease-in-out .3s;
     cursor: pointer;
     box-sizing: border-box;
-    border-radius: 100%;
-
     width: 120px;
     height: 120px;
     overflow: hidden;
 }
 
-.avatarupload .avatar {
-    width: 100%;
-    height: 100%;
-}
-
-.fileupload .deleteBtn {
-    position: relative;
-    height: 0px;
-    width: 0px;
-    top: -38px;
-    left: calc(100% - 38px);
-}
-
-.avatarupload .avatar:hover {
+.imageupload figure:hover {
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
 }
 
-.avatarupload .deleteBtn .btn {
+.avatarupload
+{
+    display:flex;
+}
 
-    background-color: #FFF;
-    color: #000A;
-    border-radius: 100%;
-    padding: 6px 14px;
-
-    transform:rotate(45deg);
+.avatarupload .deleteBtn 
+{
+    position: relative;
+    top: 5px;
+    right: 50px;
+    height: 0px;
+    width: 0px;
     line-height: 0.5;
     display: flex;
     justify-content: center;
-    margin-bottom: 1px;
     align-items: start;
-    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.4)
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.4);
 }
 
-.avatarupload .deleteBtn {
-    display: block;
-    position: relative;
-    height: 0px;
-    width: 0px;
-    left: 85px;
-    top: -140px;
+.avatarupload .deleteBtn > i:hover {
+    color:#A00A;
+}
+.avatarupload .deleteBtn > i {
+
+    cursor: pointer;
+    color: #000A;
+    border-radius: 100%;
+    background-color: #FFF;
+    border: 1px solid #FFF;
+    transform:rotate(45deg);
 }
 
-.avatarupload .avatar-figcaption {
+.imageupload figcaption {
     cursor: pointer;
     position: absolute;
     top: 0px;
     width: inherit;
     height: inherit;
-    border-radius: 100%;
+    border-radius: inherit;
     opacity: 0;
     background-color: rgba(0, 0, 0, 0);
     transition: all ease-in-out .3s;
@@ -112,18 +120,17 @@
     z-index: 2;
 }
 
-
-.avatarupload .avatar-figcaption:hover {
+.imageupload figcaption:hover {
     opacity: 1;
     background-color: rgba(0, 0, 0, .2);
 }
 
-.avatarupload .avatar-figcaption {
+.imageupload figcaption {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.avatarupload .avatar-figcaption>i {
+.imageupload figcaption>i {
     color: #FFFA;
 }
