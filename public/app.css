@@ -4,8 +4,6 @@
     flex-grow:1;
 }
 
-.form-control {padding-bottom:1em;}
-
 .nav-tabs { padding-top:1em; }
 img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .nav-link { background-color:transparent; }
