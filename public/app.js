@@ -31,7 +31,7 @@ function getUser()
         time:new Date(),
         timezone:opts.timeZone,
         calendar:opts.calendar,
-        locale:opts.locale.replaceAll("-", "_"),
+        locale:opts.locale,
         numberingSystem:opts.numberingSystem,
         browser(){return navigator.userAgent},
         viewport(){return [

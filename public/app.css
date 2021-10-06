@@ -4,14 +4,54 @@
     flex-grow:1;
 }
 
+.dropzone .dz-preview .dz-image
+{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border: 0.5px solid #ced4da !important;
+}
+
+.dropzone .dz-preview .dz-remove
+{
+    position: relative;
+    top: -1.5em;
+    z-index:11;
+    background-color: rgba(255,255,255,.4);
+    border-radius: 3px;
+    padding: 0 .4em;
+    color:#000;
+    text-decoration: none;
+}
+
+.dropzone .dz-preview .dz-remove:hover
+{
+    text-decoration: none !important;
+}
+
 .nav-tabs { padding-top:1em; }
 img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .nav-link { background-color:transparent; }
 .tab-pane { padding:1em; }
 
+.form-control .required:after,
+.nav-tabs .required:after {
+    content: "*";
+    color: red;
+    font-weight:bold;
+}
+
 .fileupload {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
+.fileupload .field {
+
+    flex-grow: 1;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -81,8 +121,9 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .avatarupload .deleteBtn 
 {
     position: relative;
+    z-index:2;
     top: 5px;
-    right: 50px;
+    right: 40px;
     height: 0px;
     width: 0px;
     line-height: 0.5;
