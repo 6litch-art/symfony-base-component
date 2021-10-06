@@ -1,6 +1,6 @@
 <?php
 
-namespace Base\Entity;
+namespace Base\Entity\Thread;
 
 use App\Entity\User;
 use App\Entity\Thread\Tag;
@@ -32,57 +32,40 @@ use Doctrine\ORM\Mapping\DiscriminatorColumn;
  * @ORM\Entity()
  */
 
-class ThreadTranslation implements TranslationInterface
+class TagTranslation implements TranslationInterface
 {
     use TranslationTrait;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    protected $title;
+    protected $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    protected $excerpt;
+    protected $description;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    protected $content;
-
-    public function getTitle(): ?string
+    public function getName(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(?string $title): self
+    public function setName(string $name): self
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getExcerpt(): ?string
+    public function getDescription(): ?string
     {
-        return $this->excerpt;
+        return $this->description;
     }
 
-    public function setExcerpt(?string $excerpt): self
+    public function setDescription(string $description): self
     {
-        $this->excerpt = $excerpt;
-
-        return $this;
-    }
-
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(?string $content): self
-    {
-        $this->content = $content;
+        $this->description = $description;
 
         return $this;
     }
