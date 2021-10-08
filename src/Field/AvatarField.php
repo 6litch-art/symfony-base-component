@@ -10,7 +10,7 @@ use Base\Field\Type\FileType;
 use Base\Field\Type\ImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FieldTrait;
 
-final class FileField implements FieldInterface
+final class AvatarField implements FieldInterface
 {
     use FieldTrait;
 
@@ -22,12 +22,13 @@ final class FileField implements FieldInterface
             ->setProperty($propertyName)
             ->setLabel($label)
             ->setTemplateName('crud/field/file')
-            ->setFormType(FileType::class)
+            ->setFormType(AvatarType::class)
             ->addCssClass('field-file')
             ->addCssClass('file-widget')
             ->setTemplatePath('@Base/crud/field/file.html.twig')
             ->setTextAlign(TextAlign::CENTER)
-            ->setFormTypeOptionIfNotSet("data_class", null);
+            ->setFormTypeOptionIfNotSet("data_class", null)
+            ->setCustomOption(self::OPTION_RENDER_FORMAT, "avatar");
     }
 
     public function allowDelete(bool $allowDelete = true): self
@@ -36,28 +37,4 @@ final class FileField implements FieldInterface
         return $this;
     }
 
-    public function setMultipleFiles(bool $multipleFiles = true): self
-    {
-        $this->setFormTypeOption("multiple", $multipleFiles);
-        return $this;
-    }
-
-    public function renderAsText(): self
-    {
-        $this->setCustomOption(self::OPTION_RENDER_FORMAT, "text");
-        return $this;
-    }
-
-    public function renderAsCount(): self
-    {
-        $this->setCustomOption(self::OPTION_RENDER_FORMAT, "count");
-        return $this;
-    }
-
-    public function renderAsImage(): self
-    {
-        $this->setCustomOption(self::OPTION_RENDER_FORMAT, "image")
-             ->setFormType(ImageType::class);
-        return $this;
-    }
 }
