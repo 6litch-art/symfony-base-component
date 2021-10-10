@@ -36,7 +36,7 @@
 img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .nav-link { background-color:transparent; }
 .tab-pane { padding:1em; }
-
+.input-group-text { height: 100%; }
 .form-group .required:after, 
 .form-control .required:after,
 .nav-tabs .required:after,
