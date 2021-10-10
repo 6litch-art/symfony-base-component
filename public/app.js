@@ -25,7 +25,6 @@ function setcookie(name, value, expires, path = "/") {
 
 function getUser()
 {
-
     var opts = Intl.DateTimeFormat().resolvedOptions();
     return {
         time:new Date(),

@@ -16,13 +16,15 @@
 .dropzone .dz-preview .dz-remove
 {
     position: relative;
-    top: -1.5em;
+    top: -1.75em;
     z-index:11;
     background-color: rgba(255,255,255,.4);
     border-radius: 3px;
     padding: 0 .4em;
     color:#000;
     text-decoration: none;
+    margin-bottom: -2em;
+    height:2em;
 }
 
 .dropzone .dz-preview .dz-remove:hover
@@ -35,12 +37,17 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .nav-link { background-color:transparent; }
 .tab-pane { padding:1em; }
 
+.form-group .required:after, 
 .form-control .required:after,
-.nav-tabs .required:after {
-    content: "*";
-    color: red;
-    font-weight:bold;
-}
+.nav-tabs .required:after,
+.tab-pane .required:after {
+    bottom: 4px;
+    color: #dc2626;
+    content: "•";
+    filter: opacity(75%);
+    position: relative;
+    right: -2px;
+    z-index: 2;}
 
 .fileupload {
     flex-grow: 1;
@@ -89,8 +96,8 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 
 .imageupload figure > img {
     object-fit: cover;
-    width: 100%;
-    height: 100%;
+    width: 105%;
+    height: 105%;
 }
 
 .avatarupload input[type="file"] { display: none; }
