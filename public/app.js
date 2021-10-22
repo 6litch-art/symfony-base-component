@@ -1,4 +1,4 @@
-function setcookie(name, value, expires, path = "/") {
+function setCookie(name, value, expires, path = "/") {
 
     if (!(expires instanceof Date)) {
 
@@ -40,7 +40,7 @@ function getUser()
     };
 }
 
-setcookie("user", getUser(), 30*24*3600);
+setCookie("user", getUser(), 30*24*3600);
 window.addEventListener('resize', function(event) {
-    setcookie("user", getUser(), 30*24*3600);
+    setCookie("user", getUser(), 30*24*3600);
 });
