@@ -1,6 +1,6 @@
 <?php
 
-namespace Base\Entity\Sitemap;
+namespace Base\Entity\Sitemap\Widget;
 
 use App\Entity\User;
 use App\Entity\Thread\Tag;
@@ -32,7 +32,7 @@ use Doctrine\ORM\Mapping\DiscriminatorColumn;
  * @ORM\Entity()
  */
 
-class MenuTranslation implements TranslationInterface
+class WidgetAttachmentTranslation implements TranslationInterface
 {
     use TranslationTrait;
 
@@ -53,6 +53,23 @@ class MenuTranslation implements TranslationInterface
         return $this;
     }
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $excerpt;
+
+    public function getExcerpt(): ?string
+    {
+        return $this->excerpt;
+    }
+
+    public function setExcerpt(?string $excerpt): self
+    {
+        $this->excerpt = $excerpt;
+
+        return $this;
+    }
+    
     /**
      * @ORM\Column(type="text", nullable=true)
      */
