@@ -1,13 +1,13 @@
 <?php
 
-namespace Base\Entity\Sitemap\Widget;
+namespace Base\Entity\Sitemap;
 
 use App\Entity\User;
 use App\Entity\Thread\Tag;
 use App\Entity\Thread\Like;
 use App\Entity\Thread\Mention;
 
-use Base\Repository\Sitemap\WidgetTextRepository;
+use Base\Repository\ThreadRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -27,22 +27,15 @@ use Base\Traits\EntityHierarchyTrait;
 use Base\Database\Traits\TranslatableTrait;
 
 /**
- * @ORM\Entity(repositoryClass=WidgetTextRepository::class)
+ * @ORM\Entity(repositoryClass=EnvironmentRepository::class)
  * @ORM\InheritanceType( "JOINED" )
  * 
  * @ORM\DiscriminatorColumn( name = "class", type = "string" )
  *     @DiscriminatorEntry( value = "abstract" )
  */
 
-class WidgetText implements TranslatableInterface
+class Environment
 {
-    use TranslatableTrait;
-    public function getTitle()  : ?string { return $this->translate()->getTitle();   }
-    public function setTitle(?string $title) {
-        $this->translate()->setTitle($title);  
-        return $this; 
-    }
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -50,18 +43,26 @@ class WidgetText implements TranslatableInterface
      */
     protected $id;
 
-    public function __construct(?string $title = null)
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $name;
+
+    public function __construct(string $name, ?string $value = null)
     {
-        $this->setTitle($title);
+        $this->setName($name);
+        $this->setValue($value);
     }
 
-    public function __toString()
-    {
-        return $this->getTitle() ?? get_class($this);
-    }
+    public function __toString() { return $this->getName(); }
 
-    public function getId(): ?int
+    public function getId(): ?int { return $this->id; }
+
+    public function getName(): string { return $this->name; }
+    public function setName(string $name)
     {
-        return $this->id;
-    }
+        $this->name = $name;
+        return $this;
+    } 
+
 }
