@@ -72,7 +72,7 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 }
 
 .fileupload input {
-    padding-right: 30px;
+    padding-right: 30px !important;
 }
 
 .imageupload {
@@ -92,8 +92,14 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     border-radius: 1em;
     border: 0.5px solid #ced4da;
     overflow: hidden;
+
+    flex-basis: 125px;
 }
 
+.imageupload .fileupload
+{
+    flex-basis: calc(100% - 125px);
+}
 .imageupload figure > img {
     object-fit: cover;
     width: 105%;
@@ -182,4 +188,9 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 
 .imageupload figcaption>i {
     color: #FFFA;
+}
+
+.avatarupload .form-filesize
+{
+    display:none;
 }
