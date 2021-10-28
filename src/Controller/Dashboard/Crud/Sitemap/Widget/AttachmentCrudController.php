@@ -1,8 +1,8 @@
 <?php
 
-namespace Base\Controller\Dashboard\Crud\Sitemap;
+namespace Base\Controller\Dashboard\Crud\Sitemap\Widget;
 
-use Base\Entity\Sitemap\Widget;
+use Base\Entity\Sitemap\Widget\Attachment;
 use Base\Service\BaseService;
 
 use Base\Entity\User;
@@ -29,22 +29,22 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\BatchActionDto;
 
-class WidgetCrudController extends AbstractCrudController
+class AttachmentCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Widget::class;
+        return Attachment::class;
     }
 
     public function createEntity(string $entityFqcn)
     {
-        return new Widget("","");
+        return new Attachment();
     }
 
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index', 'Widget Management')
+            ->setPageTitle('index', 'User Management')
             ->setDefaultSort(['id' => 'DESC'])
             ->setFormOptions(
                 ['validation_groups' => ['new']], // Crud::PAGE_NEW
@@ -70,6 +70,19 @@ class WidgetCrudController extends AbstractCrudController
 
         yield LinkIdField::new('id')->hideOnForm();
         foreach ( ($callbacks["id"] ?? $defaultCallback)() as $yield)
+            yield $yield;
+
+        yield TextField::new('name');
+        foreach ( ($callbacks["name"] ?? $defaultCallback)() as $yield)
+            yield $yield;
+
+        yield TranslatableField::new('value')->hideOnIndex();
+        foreach ( ($callbacks["value"] ?? $defaultCallback)() as $yield)
+            yield $yield;
+            
+        if (!$this->isGranted('ROLE_SUPERADMIN')) yield TextField::new('comment')->hideOnForm();
+        else yield TextField::new('comment');
+        foreach ( ($callbacks["comment"] ?? $defaultCallback)() as $yield)
             yield $yield;
     }
 
