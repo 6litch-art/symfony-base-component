@@ -15,14 +15,14 @@ document.querySelectorAll("[data-file-field]").forEach((function (el) {
             
             // Initialize existing pictures
             var val = $('#'+id).val();
-            val = (!val || val.length === 0 ? [] : val.split('|'));
+                val = (!val || val.length === 0 ? [] : val.split('|'));
 
             $('#'+id).val(val.map(path => {
                 return path.substring(path.lastIndexOf('/') + 1);
             }).join('|'));
 
             var arr = []
-            $.each(val, function(key,path) { 
+            $.each(val, function(key, path) { 
                 arr.push(fetch(path).then(p => p.blob()).then(function(blob) {
                     return {path:path, blob: blob};
                 })); 
@@ -54,6 +54,7 @@ document.querySelectorAll("[data-file-field]").forEach((function (el) {
                     $.each(this.files, function(key,file) {
                         if(name == file.name) queue.push(file.uuid);
                     });
+
                 }.bind(this));
 
                 $('#'+id).val(queue.join('|'));
