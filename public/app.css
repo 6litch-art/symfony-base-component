@@ -1,3 +1,144 @@
+
+.form-switch.form-check .form-check-label { margin-left:0.25em;}
+.form-switch.form-check
+{   
+    display: flex;
+    height: 25px;
+    flex-direction: row-reverse;
+    align-items: end;
+    justify-content: flex-end;
+}
+.form-switch.form-check-input
+{
+    height:25px;
+}
+
+.form-group.field-collection label:empty {
+    display: none
+}
+
+.form-group.field-array .form-widget .form-group {
+    padding: 6px 0
+}
+
+.form-group.field-array .form-widget .form-group label {
+    display: none
+}
+
+.form-group.field-array .field-collection-item {
+    display: flex
+}
+
+.form-group.field-collection .accordion {
+    border-radius: var(4px);
+}
+
+.form-group.field-collection .accordion .form-group {
+    padding: 0
+}
+
+.form-group.field-collection .accordion-header {
+    padding-right: 28px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.form-group.field-collection .accordion-header:hover {
+    background: lightgrey;
+}
+
+.form-group.form-control.field-collection
+{
+    border-bottom-left-radius: var(4px);
+    border-bottom-right-radius: var(4px);
+    margin-top:-1px;
+}
+
+.form-group.field-collection .field-collection-delete-button {
+    position: relative !important;
+}
+
+
+.form-group.field-collection              > div                      .accordion-item { border-bottom: 1px solid lightgrey; }
+.form-group.field-collection.form-control > div:nth-last-child(-n+2) .accordion-item { border-bottom: 0px solid lightgrey; }
+.form-group.field-collection .accordion-item {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.form-group.field-collection .field-collection-item-first .accordion-header,
+.form-group.field-collection .field-collection-item-first .accordion-item {
+    border-top-left-radius: var(4px);
+    border-top-right-radius: var(4px)
+}
+
+.form-group.field-collection .field-collection-item-last .accordion-header,
+.form-group.field-collection .field-collection-item-last .accordion-item {
+    border-bottom-left-radius: var(4px);
+    border-bottom-right-radius: var(4px)
+}
+
+.form-group.field-collection .accordion-item .form-group {
+    align-items: flex-start;
+    display: flex;
+    padding: 12px 0;
+}
+.form-group.field-collection,
+.form-group.field-collection .form-group { padding:  0 !important; }
+
+.form-group.field-collection .field-collection-item { border: 0; }
+.form-group.field-collection .accordion-item .form-group label,
+.form-group.field-collection .accordion-item .form-group legend.col-form-label {
+    font-weight: 500;
+    margin: 3px 10px 0 0;
+    padding: 0;
+    width: 20%
+}
+
+.form-group.field-collection .accordion-item .accordion-body .form-widget {
+    flex: 1
+}
+
+.form-group.field-collection .accordion-item .accordion-body input {
+    border: 1px solid lightgray;
+}
+
+.form-group.field-collection .accordion-button,
+.form-group.field-collection .accordion-button:hover {
+    background: transparent;
+    border-radius: 0;
+    flex: 1;
+    padding: 8px 7px;
+    padding: 0.75rem 1.25rem;
+}
+
+.form-group.field-collection .accordion-button:after {
+    display: none
+}
+
+.form-group.field-collection .accordion-button i {
+    transition: transform .2s ease-in-out
+}
+
+.form-group.field-collection .accordion-button:not(.collapsed) i {
+    transform: rotate(90deg)
+}
+
+.form-group.field-collection .accordion-button .form-collection-item-collapse-marker {
+    color: var(grey);
+    margin: 0 8px 0 4px
+}
+
+.form-group.field-collection .field-collection-add-button {
+    margin-top: 5px
+}
+
+
+
+
 .dropzone {
     border-radius: 1em;
     border: 0.5px solid #ced4da !important;
@@ -37,10 +178,8 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .nav-link { background-color:transparent; }
 .tab-pane { padding:1em; }
 .input-group-text { height: 100%; }
-.form-group .required:after, 
-.form-control .required:after,
-.nav-tabs .required:after,
-.tab-pane .required:after {
+
+.required:after {
     bottom: 4px;
     color: #dc2626;
     content: "•";
@@ -95,6 +234,7 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 
     flex-basis: 125px;
 }
+
 
 .imageupload .fileupload
 {
@@ -193,4 +333,151 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .avatarupload .form-filesize
 {
     display:none;
+}
+
+.accordion-button {
+    align-items: center;
+    background-color: #e3e7ed;
+    border: 0;
+    border-radius: 0;
+    color: #4c5367;
+    display: flex;
+    font-size: .875rem;
+    overflow-anchor: none;
+    padding: 1rem 1.25rem;
+    position: relative;
+    text-align: left;
+    transition: all .08s ease-in, border-radius .15s ease;
+    width: 100%
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .accordion-button {
+        transition: none
+    }
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #eff1fa;
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .125);
+    color: #5768bc
+}
+
+.accordion-button:not(.collapsed):after {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%235768bc'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z'/%3E%3C/svg%3E");
+    transform: rotate(-180deg)
+}
+
+.accordion-button:after {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%234c5367'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 1.25rem;
+    content: "";
+    flex-shrink: 0;
+    height: 1.25rem;
+    margin-left: auto;
+    transition: transform .2s ease-in-out;
+    width: 1.25rem
+}
+
+@media (prefers-reduced-motion:reduce) {
+    .accordion-button:after {
+        transition: none
+    }
+}
+
+.accordion-button:hover {
+    z-index: 2
+}
+
+.accordion-button:focus {
+    border-color: #b0bae8;
+    box-shadow: 0 0 0 .25rem rgba(97, 116, 209, .25);
+    outline: 0;
+    z-index: 3
+}
+
+.accordion-header {
+    margin-bottom: 0
+}
+
+.accordion-item {
+    background-color: #e3e7ed;
+    border: 1px solid rgba(0, 0, 0, .125)
+}
+
+.accordion-item:first-of-type {
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem
+}
+
+.accordion-item:first-of-type .accordion-button {
+    border-top-left-radius: calc(.25rem - 1px);
+    border-top-right-radius: calc(.25rem - 1px)
+}
+
+.accordion-item:not(:first-of-type) {
+    border-top: 0
+}
+
+.accordion-item:last-of-type {
+    border-bottom-left-radius: .25rem;
+    border-bottom-right-radius: .25rem
+}
+
+.accordion-item:last-of-type .accordion-button.collapsed {
+    border-bottom-left-radius: calc(.25rem - 1px);
+    border-bottom-right-radius: calc(.25rem - 1px)
+}
+
+.accordion-item:last-of-type .accordion-collapse {
+    border-bottom-left-radius: .25rem;
+    border-bottom-right-radius: .25rem
+}
+
+.accordion-body {
+    padding: 1rem 1.25rem
+}
+
+.accordion-flush .accordion-collapse {
+    border-width: 0
+}
+
+.accordion-flush .accordion-item {
+    border-left: 0;
+    border-radius: 0;
+    border-right: 0
+}
+
+.accordion-flush .accordion-item:first-child {
+    border-top: 0
+}
+
+.accordion-flush .accordion-item:last-child {
+    border-bottom: 0
+}
+
+.accordion-flush .accordion-item .accordion-button {
+    border-radius: 0
+}
+
+.form-switch .form-check-input {
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='rgba(148, 163, 184, 0.8)'/%3E%3C/svg%3E");
+    border-color: lightgrey;
+    cursor: pointer;
+    height: 18px;
+    width: 32px
+}
+
+.form-switch .form-check-input:checked {
+    border-color: indigo;
+}
+
+.form-switch .form-check-input[disabled] {
+    cursor: not-allowed
+}
+
+.form-switch .form-check-input:focus {
+    box-shadow: none
 }

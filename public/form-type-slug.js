@@ -182,6 +182,7 @@
 
             // On slug change
             var slugger = new i(e);
+            var label = $('label[for="' + slugger.target.id + '"]');
 
             var targetCurrentSlug = o($(slugger.target).val(), {
                 remove: /[^A-Za-z0-9\s-]/g,
@@ -190,8 +191,31 @@
             });
 
             if(targetCurrentSlug != slugger.currentSlug) slugger.unlock();
+
+            slugger.target.setAttribute("data-required", slugger.target.getAttribute("required") || "");
+            var isTargetRequired = (slugger.locked ? slugger.field.getAttribute("required") : slugger.target.getAttribute("data-required")) == "required";
+            if (isTargetRequired) {
+                label.addClass("required");
+                slugger.target.setAttribute("required", true);
+            } else {
+                label.removeClass("required");
+                slugger.target.removeAttribute("required");
+            }
+
             slugger.lockButton.addEventListener("click", function () {
+
                 if(slugger.locked) slugger.updateValue();
+
+                var label = $('label[for="' + slugger.target.id + '"]');
+                var isTargetRequired = (slugger.locked ? slugger.field.getAttribute("required") : slugger.target.getAttribute("data-required")) == "required";
+                if (isTargetRequired) {
+                    label.addClass("required");
+                    slugger.target.setAttribute("required", true);
+                } else {
+                    label.removeClass("required");
+                    slugger.target.removeAttribute("required");
+                }
+
             });
 
             $(slugger.target).on('input', function() {
