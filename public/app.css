@@ -1,5 +1,5 @@
-
 .form-switch.form-check .form-check-label { margin-left:0.25em;}
+/* 
 .form-switch.form-check
 {   
     display: flex;
@@ -7,7 +7,7 @@
     flex-direction: row-reverse;
     align-items: end;
     justify-content: flex-end;
-}
+} */
 .form-switch.form-check-input
 {
     height:25px;
@@ -481,3 +481,5 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .form-switch .form-check-input:focus {
     box-shadow: none
 }
+
+.alert .title { font-weight:bold; }
