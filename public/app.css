@@ -1,13 +1,5 @@
 .form-switch.form-check .form-check-label { margin-left:0.25em;}
-/* 
-.form-switch.form-check
-{   
-    display: flex;
-    height: 25px;
-    flex-direction: row-reverse;
-    align-items: end;
-    justify-content: flex-end;
-} */
+
 .form-switch.form-check-input
 {
     height:25px;
@@ -466,12 +458,11 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='rgba(148, 163, 184, 0.8)'/%3E%3C/svg%3E");
     border-color: lightgrey;
     cursor: pointer;
-    height: 18px;
-    width: 32px
-}
+    height: 24px;
+    width: 32px;
 
-.form-switch .form-check-input:checked {
-    border-color: indigo;
+    position: relative;
+    top: -5px;
 }
 
 .form-switch .form-check-input[disabled] {
