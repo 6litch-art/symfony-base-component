@@ -383,7 +383,8 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 }
 
 .accordion-header {
-    margin-bottom: 0
+    margin-bottom: 0;
+    display: flex;
 }
 
 .accordion-item {
@@ -441,7 +442,9 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .accordion-flush .accordion-item:last-child {
     border-bottom: 0
 }
-
+.form-collection-item-collapse-marker {
+    margin-right:0.5em;
+}
 .accordion-flush .accordion-item .accordion-button {
     border-radius: 0
 }
