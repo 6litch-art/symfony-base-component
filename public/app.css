@@ -25,6 +25,11 @@
     flex-direction: row;
 }
 
+.field-boolean .form-switch
+{
+    margin-top: -5px;
+}
+
 .accordion-collapse
 {
     border:0;
