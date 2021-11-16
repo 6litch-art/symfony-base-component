@@ -25,11 +25,6 @@
     flex-direction: row;
 }
 
-.field-boolean .form-switch
-{
-    margin-top: -5px;
-}
-
 .accordion-collapse
 {
     border:0;
@@ -277,6 +272,13 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     justify-content: center;
     align-items: start;
     box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.4);
+}
+
+.form-errors ul {
+    list-style: none;
+    margin-left:0;
+    padding-left:0;
+    color:#dc2626;
 }
 
 .avatarupload .deleteBtn > i:hover {
