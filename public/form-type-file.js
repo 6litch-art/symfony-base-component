@@ -9,7 +9,8 @@ document.querySelectorAll("[data-file-field]").forEach((function (el) {
 
         var el             = document.getElementById(id+"_dropzone");
         var sortable       = $(el).data("file-sortable");
-        var ajaxPost       = el.getAttribute("data-file-ajaxPost");
+        var ajax       = el.getAttribute("data-file-ajax");
+        console.log($(el).data());
 
         dropzone["init"] = function() {
             
@@ -17,6 +18,7 @@ document.querySelectorAll("[data-file-field]").forEach((function (el) {
             var val = $('#'+id).val();
                 val = (!val || val.length === 0 ? [] : val.split('|'));
 
+            console.log(val, ajax);
             $('#'+id).val(val.map(path => {
                 return path.substring(path.lastIndexOf('/') + 1);
             }).join('|'));
@@ -74,7 +76,7 @@ document.querySelectorAll("[data-file-field]").forEach((function (el) {
                 
                 // Max files must be updated based on existing files 
                 if (file.status == 'existing') editor.options.maxFiles += 1;
-                else if (file.serverId) $.post(ajaxPost+"/"+file.serverId['uuid']+'/delete');
+                else if (file.serverId) $.post(ajax+"/"+file.serverId['uuid']+'/delete');
                 
                 var val = $('#'+id).val();
                     val = (!val || val.length === 0 ? [] : val.split('|'));

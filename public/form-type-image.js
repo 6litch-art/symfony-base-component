@@ -2,8 +2,7 @@ document.querySelectorAll("[data-image-field]").forEach((function (el) {
 
     var id             = el.getAttribute("data-image-field");
     var thumbnail      = el.getAttribute("data-image-thumbnail");
-    var ajaxPost       = el.getAttribute("data-image-ajaxPost");
-    var postDeletePath = el.getAttribute("data-image-postDeletePath");
+    var ajax       = el.getAttribute("data-image-ajax");
 
     var cropper        = $(el).data("image-cropper") || null;
     if (cropper) {
@@ -21,7 +20,7 @@ document.querySelectorAll("[data-image-field]").forEach((function (el) {
         $('#'+id+'_deleteBtn').on('click', function () {
         
             var file = $('#'+id+'_file').val();
-            if(file !== '') $.post(ajaxPost+"/"+file+"/delete");
+            if(file !== '') $.post(ajax+"/"+file+"/delete");
         });
 
         $('.'+id+'_modalClose').on('click', function () {
@@ -52,12 +51,12 @@ document.querySelectorAll("[data-image-field]").forEach((function (el) {
                     var formData = new FormData();
 
                     var file = $('#'+id+'_file').val();
-                    if(file !== '') $.post(postDeletePath);
+                    if(file !== '') $.post(ajax+"/"+file+"/delete");
 
                     formData.append('file', blob, $('#'+id+'_raw').val());
                     imageBlob = blob;
 
-                    $.ajax(ajaxPost, {
+                    $.ajax(ajax, {
                         method: 'POST',
                         data: formData,
                         processData: false,
