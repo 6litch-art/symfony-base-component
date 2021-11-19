@@ -26,14 +26,10 @@ use Base\Traits\BaseTrait;
 use Base\Traits\EntityHierarchyTrait;
 use Base\Database\Traits\TranslatableTrait;
 use Base\Entity\Sitemap\Widget;
-use Base\Repository\Sitemap\Widget\PageRepository;
 
 /**
- * @ORM\Entity(repositoryClass=PageRepository::class)
- * @DiscriminatorEntry( value = "page" )
+ * @ORM\Entity(repositoryClass=MenuRepository::class)
+ * @DiscriminatorEntry( value = "menu" )
  */
 
-class Page extends Widget
-{
-
-}
+class Menu extends Widget { }
