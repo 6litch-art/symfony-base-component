@@ -78,6 +78,7 @@
 .form-collection-items .form-group { padding:  0 !important; }
 
 .form-collection-items .form-collection-item { border: 0; }
+.form-collection-items .accordion-item .form-control > div span,
 .form-collection-items .accordion-item .form-control > div label,
 .form-collection-items .accordion-item .form-control > div legend.col-form-label {
     font-weight: 500;
@@ -215,7 +216,6 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     height: 125px;
     width: 125px;
     margin-right: 1em;
-    margin-bottom: 0;
 
     border-radius: 1em;
     border: 0.5px solid #ced4da;
