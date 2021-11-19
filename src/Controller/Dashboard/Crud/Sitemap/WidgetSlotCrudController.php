@@ -3,7 +3,7 @@
 namespace Base\Controller\Dashboard\Crud\Sitemap;
 
 use Base\Entity\Sitemap\Widget\Attachment;
-use Base\Entity\Sitemap\Widget;
+use Base\Entity\Sitemap\WidgetSlot;
 use Base\Service\BaseService;
 
 use Base\Entity\User;
@@ -30,22 +30,22 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\BatchActionDto;
 
-class WidgetCrudController extends AbstractCrudController
+class WidgetSlotCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Widget::class;
+        return WidgetSlot::class;
     }
 
     public function createEntity(string $entityFqcn)
     {
-        return new Widget();
+        return new WidgetSlot();
     }
 
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index', 'Widgets Management')
+            ->setPageTitle('index', 'Widget Slots Management')
             ->setDefaultSort(['id' => 'DESC'])
             ->setFormOptions(
                 ['validation_groups' => ['new']], // Crud::PAGE_NEW
@@ -60,6 +60,8 @@ class WidgetCrudController extends AbstractCrudController
         ->add(Crud::PAGE_NEW,  Action::INDEX)
         ->add(Crud::PAGE_EDIT, Action::INDEX)
 
+        ->setPermission(Action::NEW, 'ROLE_SUPERADMIN')
+        ->setPermission(Action::DELETE, 'ROLE_SUPERADMIN')
         ->setPermission(Action::EDIT, 'ROLE_ADMIN');
     }
 
