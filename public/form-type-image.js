@@ -110,7 +110,7 @@ $(document).on("DOMContentLoaded", function () {
                 });
 
                 $('#'+id+'_raw').on('change', function() {
-            
+
                     if( $('#'+id+'_raw').val() !== '') {
 
                         $('#'+id+'_figcaption').css('display', 'none');

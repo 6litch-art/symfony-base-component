@@ -4,10 +4,34 @@ $(document).on("DOMContentLoaded", function () {
 
     $(document).on("load.form_type.file", function () {
 
+
         document.querySelectorAll("[data-file-field]").forEach((function (el) {
 
             var id       = el.getAttribute("data-file-field");
             var dropzone = $(el).data('file-dropzone');
+
+            function updateMetadata(el = $("#"+id), nFiles)
+            {
+                var id = $(el).attr("id");
+                
+                var maxFiles = parseInt($("#"+id+"_dropzone").data("file-max-files")) || undefined;
+                var remainingFiles = maxFiles - nFiles;
+
+                var counter = "";
+                     if(nFiles < 1) counter = $("#"+id+"_dropzone").data("file-counter[none]"    ).replace("{0}", nFiles);
+                else if(nFiles < 2) counter = $("#"+id+"_dropzone").data("file-counter[singular]").replace("{0}", nFiles);
+                else                counter = $("#"+id+"_dropzone").data("file-counter[plural]"  ).replace("{0}", nFiles);
+    
+                var counterMax = "";
+                if(!isNaN(maxFiles)) { 
+    
+                         if(remainingFiles < 1) counterMax = $("#"+id+"_dropzone").data("file-counter-max[none]"    ).replace("{0}", remainingFiles);
+                    else if(remainingFiles < 2) counterMax = $("#"+id+"_dropzone").data("file-counter-max[singular]").replace("{0}", remainingFiles);
+                    else                        counterMax = $("#"+id+"_dropzone").data("file-counter-max[plural]"  ).replace("{0}", remainingFiles);
+                }
+    
+                $("#"+id+"_metadata").html(counter+" "+counterMax);
+            }
 
             if(dropzone) {
 
@@ -44,24 +68,9 @@ $(document).on("DOMContentLoaded", function () {
 
                             editor.files.push(mock);
                             editor.displayExistingFile(mock, path);
+
+                            updateMetadata(this.id, editor.files.length);
                         });
-                    });
-
-                    this.on('dragend', function(file) {
-
-                        var queue = [];
-                        
-                        var files = this.files;
-                        $('#editor .dz-preview .dz-image img').each(function (count, el) {
-
-                            var name = el.getAttribute('alt');
-                            $.each(this.files, function(key,file) {
-                                if(name == file.name) queue.push(file.uuid);
-                            });
-
-                        }.bind(this));
-
-                        $('#'+id).val(queue.join('|'));
                     });
 
                     this.on('success', function(file, response) {
@@ -72,6 +81,8 @@ $(document).on("DOMContentLoaded", function () {
 
                         val.push(file.serverId['uuid']);
                         $('#'+id).val(val.join('|'));
+
+                        updateMetadata(this.id, val.length);
                     });
 
                     this.on('removedfile', function(file) {
@@ -87,7 +98,29 @@ $(document).on("DOMContentLoaded", function () {
                         if (index > -1) val.splice(index, 1);
                         
                         $('#'+id).val(val.join('|'));
+                        
+                        updateMetadata(this.id, val.length);
                     });
+
+
+                     // Sortable drag-and-drop
+                     this.on('dragend', function(file) {
+
+                        var queue = [];
+                        
+                        $('#'+id+'_dropzone .dz-preview .dz-image img').each(function (count, el) {
+
+                            var name = el.getAttribute('alt');
+                            this.files.forEach(function(file) {
+                                if(name == file.name)
+                                    queue.push(file.uuid);
+                            });
+
+                        }.bind(this));
+
+                        $('#'+id).val(queue.join('|'));
+                    });
+
                 };
 
                 let editor = new Dropzone("#"+id+"_dropzone", dropzone);
