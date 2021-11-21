@@ -1,3 +1,5 @@
+Dropzone.autoDiscover = false;
+
 $(document).on("DOMContentLoaded", function () {
 
     $(document).on("load.form_type.file", function () {
@@ -8,8 +10,6 @@ $(document).on("DOMContentLoaded", function () {
             var dropzone = $(el).data('file-dropzone');
 
             if(dropzone) {
-
-                Dropzone.autoDiscover = false;
 
                 var el             = document.getElementById(id+"_dropzone");
                 var sortable       = $(el).data("file-sortable");

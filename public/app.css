@@ -486,6 +486,7 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     box-shadow: none
 }
 
+.trace-line .icon { top:auto; }
 .alert .title { font-weight:bold; }
 .alert .message { margin-left:5px;}
 .input-group button, .input-group button:active, .input-group button:focus, .input-group button:hover {
