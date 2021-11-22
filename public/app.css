@@ -52,6 +52,7 @@
     border-bottom-right-radius: 4px !important;
     width:100%;
     text-align:left;
+    padding: .375rem .75rem;
 }
 
 .form-collection-items .accordion-item {
@@ -114,7 +115,7 @@
 }
 
 .form-collection-items .form-collection-add-button {
-    margin-top: 5px
+    margin-top: 5px;
 }
 
 
