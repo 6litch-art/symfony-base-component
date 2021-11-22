@@ -2,37 +2,6 @@ $(document).on("DOMContentLoaded", function () {
 
     $(document).on("load.form_type.collection", function () {
 
-        var handleAddButton = function (e, o) {
-
-            $(e).off("click.add-entry");
-            $(e).on("click.add-entry", function () {
-                
-                var l = parseInt(o.dataset.numItems),
-                    c = this.parentElement.querySelector(".collection-empty");
-                null !== c && (c.outerHTML = '<div class="form-collection-items"><div class="form-widget-compound"></div></div>');
-                
-                var i = o.dataset.formTypeNamePlaceholder,
-                    n = new RegExp(i + "__label__", "g"),
-                    a = new RegExp(i, "g"),
-                    s = o.dataset.prototype.replace(n, ++l).replace(a, l);
-                o.dataset.numItems = l;
-
-                var d = ".form-collection-items";
-                var r = o.querySelector(d);
-
-                if (r.insertAdjacentHTML("beforeend", s), !e) {
-                    updateCollectionItemCssClasses(o);
-                    var m = r.querySelectorAll(".form-collection-item"),
-                        u = m[m.length - 1];
-                    u.querySelector(".accordion-button").classList.remove("collapsed"), u.querySelector(".accordion-collapse").classList.add("show")
-                }
-
-                $(document).trigger("collection.item-added");
-            });
-            
-            o.classList.add("processed");
-        };
-
         var updateCollectionItemCssClasses = function (e) {
 
             if (null !== e) {
@@ -50,11 +19,55 @@ $(document).on("DOMContentLoaded", function () {
                 }
             }
         }
-        
+
+        document.querySelectorAll("form .form-collection").forEach(function (e) {
+
+            var form = e.closest("form");
+            var button = form.querySelector('button[type="submit"]');
+
+            $(button).off("click");
+            $(button).on("click", function () {
+                var invalidRequired = $(':required:invalid', form);
+                if (invalidRequired.length)
+                    $(invalidRequired[0].closest(".accordion-collapse")).collapse("show");
+             });
+        });
+
         document.querySelectorAll("button.form-collection-add-button").forEach(function (e) {
             
-            var o = e.closest("[data-collection-field]");
-                o && (handleAddButton(e, o), updateCollectionItemCssClasses(o));
+            $(e).off("click.add-entry");
+            $(e).on("click.add-entry", function () {
+                    
+                var o = e.closest("[data-collection-field]");
+                
+                var l = parseInt(o.dataset.numItems),
+                    c = e.parentElement.querySelector(".collection-empty");
+                
+                null !== c && (c.outerHTML = '<div class="form-collection-items"></div>');
+                
+                var i = o.dataset.formTypeNamePlaceholder,
+                    n = new RegExp(i + "__label__", "g"),
+                    a = new RegExp(i, "g"),
+                    s = o.dataset.prototype.replace(n, ++l).replace(a, l);
+                
+                o.dataset.numItems = l;
+
+                var d = ".form-collection-items";
+                var r = o.querySelector(d);
+
+                r.insertAdjacentHTML("beforeend", s);
+                updateCollectionItemCssClasses(o);
+                var m = r.querySelectorAll(".form-collection-item"),
+                    u = m[m.length - 1];
+
+                u.querySelector(".accordion-button").classList.remove("collapsed");
+                u.querySelector(".accordion-collapse").classList.add("show")
+                o.classList.add("processed");
+
+                $(u).collapse("show");
+
+                $(document).trigger("collection.item-added");
+            });
         });
         
         document.querySelectorAll("button.form-collection-delete-button").forEach((function (e) {
@@ -63,14 +76,31 @@ $(document).on("DOMContentLoaded", function () {
             $(e).on("click.remove-entry", (function () {
 
                 var o = e.closest("[data-collection-field]");
-                e.closest(".form-collection-item").remove();
+                var f = e.closest(".form-collection-item");
 
-                $(document).trigger("collection.item-removed");
-                updateCollectionItemCssClasses(o)
+                $(o).find(f).on('hidden.bs.collapse', function() {
+                
+                    $(this).parent().remove();
+                    var l = o.dataset.numItems = $(o).find(".form-collection-item").length;
+                    if (l == 0) {
+    
+                        var collectionItems = $(o).find(".form-collection-items")[0] || undefined;
+                        if (collectionItems)
+                            collectionItems.insertAdjacentHTML("beforebegin", o.dataset.emptyCollection)
+                        
+                        $(collectionItems).remove();
+                    }
+    
+                    $(document).trigger("collection.item-removed");
+                    updateCollectionItemCssClasses(o);
+                });
+
+                $(o).find(f).collapse("hide");
             }));
         }));
 
-        $(document).on("collection.item-added collection.item-removed", function() {
+        $(document).off("collection.item-added collection.item-removed");
+        $(document).on ("collection.item-added collection.item-removed", function() {
             $(document).trigger("load.form_type");
         });
     });
