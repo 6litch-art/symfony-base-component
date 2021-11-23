@@ -46,10 +46,6 @@ $(document).on("DOMContentLoaded", function () {
                     var val = $('#'+id).val();
                         val = (!val || val.length === 0 ? [] : val.split('|'));
 
-                    $('#'+id).val(val.map(path => {
-                        return path.substring(path.lastIndexOf('/') + 1);
-                    }).join('|'));
-
                     var arr = []
                     $.each(val, function(key, path) { 
                         arr.push(fetch(path).then(p => p.blob()).then(function(blob) {
