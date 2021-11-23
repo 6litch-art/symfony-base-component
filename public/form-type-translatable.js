@@ -10,8 +10,8 @@ $(document).on("DOMContentLoaded", function () {
             var navTabs = $(e).find(".nav-tabs");
             var tabContents = $(e).find(".tab-content");
             
-            $(button).off("click");
-            $(button).on("click", function () {
+            $(button).off("click.translatable.submit");
+            $(button).on("click.translatable.submit", function () {
 
                 var invalidRequired = $(':required:invalid', form);
                 if (invalidRequired.length) {

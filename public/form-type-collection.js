@@ -23,10 +23,11 @@ $(document).on("DOMContentLoaded", function () {
         document.querySelectorAll("form .form-collection").forEach(function (e) {
 
             var form = e.closest("form");
-            var button = form.querySelector('button[type="submit"]');
+            var button = form.querySelector('button[type="submit"]');  
 
-            $(button).off("click");
-            $(button).on("click", function () {
+            $(button).off("click.collection.submit");
+            $(button).on("click.collection.submit", function () {
+
                 var invalidRequired = $(':required:invalid', form);
                 if (invalidRequired.length)
                     $(invalidRequired[0].closest(".accordion-collapse")).collapse("show");
@@ -35,8 +36,8 @@ $(document).on("DOMContentLoaded", function () {
 
         document.querySelectorAll("button.form-collection-add-button").forEach(function (e) {
             
-            $(e).off("click.add-entry");
-            $(e).on("click.add-entry", function () {
+            $(e).off("click.collection.add-entry");
+            $(e).on("click.collection.add-entry", function () {
                     
                 var o = e.closest("[data-collection-field]");
                 
@@ -72,8 +73,8 @@ $(document).on("DOMContentLoaded", function () {
         
         document.querySelectorAll("button.form-collection-delete-button").forEach((function (e) {
             
-            $(e).off("click.remove-entry");
-            $(e).on("click.remove-entry", (function () {
+            $(e).off("click.collection.remove-entry");
+            $(e).on("click.collection.remove-entry", (function () {
 
                 var o = e.closest("[data-collection-field]");
                 var f = e.closest(".form-collection-item");
