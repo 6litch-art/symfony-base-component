@@ -20,10 +20,16 @@ $(document).on("DOMContentLoaded", function () {
             }
         }
 
+        var submitButtons = document.querySelectorAll('button[type="submit"]');
         document.querySelectorAll("form .form-collection").forEach(function (e) {
 
             var form = e.closest("form");
-            var button = form.querySelector('button[type="submit"]');  
+            var formButtons = form.querySelectorAll('button[type="submit"]');
+
+            var buttons = new Set();
+            $(formButtons).each(function() { buttons.add(this); });
+            $(submitButtons).each(function() { if(this.form == form) buttons.add(this); });
+            buttons = Array.from(buttons);
 
             $(button).off("click.collection.submit");
             $(button).on("click.collection.submit", function () {
