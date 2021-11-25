@@ -20,13 +20,13 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 trait BaseNotificationTrait
 {
-    public function getMail()
+    public function getMail(): ?string
     {
         $mail = $this->getSettings()->mail() ?? null;
         if(!$mail) return null;
 
         $mailName = $this->getSettings()->mail_name() ?? ucfirst(explode("@", $mail)[0]);
-        return $mailName . " <" . $mail . ">";
+        return $mailName." <".$mail.">";
     }
 
     /**
@@ -52,9 +52,10 @@ trait BaseNotificationTrait
         BaseService::$notifier        = $notifier;
         BaseService::$notifierPolicy  = $policy;
         BaseService::$notifierOptions = $options;
-        
+
         // Address support only once..
-        BaseService::$notifier->addAdminRecipient(new Recipient($this->getMail()));
+        if( ($mail = $this->getMail()) )
+            BaseService::$notifier->addAdminRecipient(new Recipient($mail));
 
         // Add additional admin users.
         foreach ($this->getAdminUsers() as $adminUser)

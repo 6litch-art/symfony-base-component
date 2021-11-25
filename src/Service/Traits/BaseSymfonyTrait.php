@@ -189,14 +189,14 @@ trait BaseSymfonyTrait
     }
 
     public function refresh(?Request $request = null): RedirectResponse 
-    { 
+    {
         $request = $request ?? $this->getRequest();
         return $this->redirect($request->get('_route'));
     }
 
     public function isMaintenance() { return $this->getSettings()->maintenance() || file_exists($this->getParameterBag("base.maintenance.lockpath")); }
-    public function isProduction() { return $this->kernel->getEnvironment() == "prod"; }
     public function isDevelopment() { return $this->kernel->getEnvironment() == "dev"; }
+    public function isProduction()  { return $this->kernel->getEnvironment() != "dev"; }
     
     public function isCli() { return (php_sapi_name() == "cli"); }
     public function isDebug() { return $this->kernel->isDebug(); }

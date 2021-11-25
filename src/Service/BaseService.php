@@ -111,7 +111,7 @@ final class BaseService implements RuntimeExtensionInterface
         // Symfony basic services
         $this->csrfTokenManager = $csrfTokenManager;
         $this->formFactory      = $formFactory;
-        $this->requestStack           = $this->container->get("request_stack");
+        $this->requestStack     = $this->container->get("request_stack");
         $this->setLocaleProvider($localeProvider);
 
         $this->setTwig($twig);
