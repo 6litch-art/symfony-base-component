@@ -25,10 +25,7 @@
     flex-direction: row;
 }
 
-.accordion-collapse
-{
-    border:0;
-}
+.accordion-collapse { border:0; }
 
 .form-collection-items .form-collection-delete-button {
     position: absolute !important;
