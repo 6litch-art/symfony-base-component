@@ -1,10 +1,10 @@
 <?php
 
-namespace Base\Repository\Sitemap;
+namespace Base\Repository\Sitemap\WidgetSlot;
 
 use Base\Entity\Thread;
 
-use Base\Database\Repository\ServiceEntityRepository;
+use Base\Repository\Sitemap\WidgetSlotRepository;
 
 /**
  * @method Thread|null find($id, $lockMode = null, $lockVersion = null)
@@ -13,7 +13,7 @@ use Base\Database\Repository\ServiceEntityRepository;
  * @method Thread[]    findBy(array $criteria, array ?array $orderBy = null, $limit = null, $offset = null)
  */
 
-class WidgetSlotRepository extends ServiceEntityRepository
+class SocialRepository extends WidgetSlotRepository
 {
 
 }
