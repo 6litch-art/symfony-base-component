@@ -38,7 +38,7 @@ $(document).on("DOMContentLoaded", function () {
 
                 var el             = document.getElementById(id+"_dropzone");
                 var sortable       = $(el).data("file-sortable");
-                var ajaxPost       = el.getAttribute("data-file-ajaxPost");
+                var ajax       = el.getAttribute("data-file-ajax");
 
                 dropzone["init"] = function() {
                     
@@ -83,14 +83,17 @@ $(document).on("DOMContentLoaded", function () {
                     });
 
                     this.on('removedfile', function(file) {
-                        
+
                         // Max files must be updated based on existing files 
-                        if (file.status == 'existing') editor.options.maxFiles += 1;
-                        else if (file.serverId) $.post(ajaxPost+"/"+file.serverId['uuid']+'/delete');
-                        
+                        if (file.status == 'existing' && editor.options.maxFiles != null) editor.options.maxFiles += 1;
+                        else if (file.serverId) $.post(ajax+"/"+file.serverId['uuid']+'/delete');
+
                         var val = $('#'+id).val();
                             val = (!val || val.length === 0 ? [] : val.split('|'));
-
+                            val = val.map(path => {
+                                return path.substring(path.lastIndexOf('/') + 1);
+                            });
+            
                         const index = val.indexOf((file.serverId ? file.serverId['uuid'] : file.uuid));
                         if (index > -1) val.splice(index, 1);
                         
