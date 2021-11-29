@@ -1,52 +1,38 @@
 <?php
 
-namespace Base\Controller\Dashboard\Crud\Sitemap;
+namespace Base\Controller\Dashboard\Crud\Sitemap\WidgetSlot;
 
-use Base\Entity\Sitemap\Widget\Attachment;
-use Base\Entity\Sitemap\Widget;
-use Base\Service\BaseService;
-
-use Base\Entity\User;
-use Base\Field\Type\RoleType;
-
-use Base\Field\PasswordField;
-use Base\Field\ImpersonateField;
+use Base\Entity\Sitemap\WidgetSlot\Social;
+use Base\Field\FontAwesomeField;
 use Base\Field\LinkIdField;
-use Base\Field\RoleField;
-use Base\Field\BooleanField;
 use Base\Field\SlugField;
 use Base\Field\TranslatableField;
-use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
-use EasyCorp\Bundle\EasyAdminBundle\Dto\BatchActionDto;
 
-class WidgetCrudController extends AbstractCrudController
+class SocialCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Widget::class;
+        return Social::class;
     }
 
     public function createEntity(string $entityFqcn)
     {
-        return new Widget();
+        $social = new Social();
+        return $social;
     }
 
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index', 'Widgets Management')
+            ->setPageTitle('index', 'Social media management')
             ->setDefaultSort(['id' => 'DESC'])
             ->setFormOptions(
                 ['validation_groups' => ['new']], // Crud::PAGE_NEW
@@ -74,13 +60,19 @@ class WidgetCrudController extends AbstractCrudController
         foreach ( ($callbacks["id"] ?? $defaultCallback)() as $yield)
             yield $yield;
 
-        yield SlugField::new('slug')->setTargetFieldName("translations.title");
-        foreach ( ($callbacks["slug"] ?? $defaultCallback)() as $yield)
+        yield TextField::new("urlPattern")->hideOnIndex();
+        foreach ( ($callbacks["urlPattern"] ?? $defaultCallback)() as $yield)
             yield $yield;
-    
-        yield TranslatableField::new()->showOnIndex("title");
-        foreach ( ($callbacks["title"] ?? $defaultCallback)() as $yield)
+            
+        yield FontAwesomeField::new('icon');
+        foreach ( ($callbacks["icon"] ?? $defaultCallback)() as $yield)
             yield $yield;
+
+        yield SlugField::new('socialName')->setTargetFieldName("translations.label");
+        foreach ( ($callbacks["socialName"] ?? $defaultCallback)() as $yield)
+            yield $yield;
+
+        yield TranslatableField::new("label");
     }
 
     public function configureFilters(Filters $filters): Filters
