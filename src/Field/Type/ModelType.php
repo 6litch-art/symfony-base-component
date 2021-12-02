@@ -24,7 +24,7 @@ use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
-class EntityType extends AbstractType implements DataMapperInterface
+class ModelType extends AbstractType implements DataMapperInterface
 {
     protected static $entitySerializer = null;
     public static function getSerializer()
@@ -40,22 +40,7 @@ class EntityType extends AbstractType implements DataMapperInterface
      */
     public function getBlockPrefix(): string
     {
-        return 'entity2';
-    }
-
-    public function setFieldValue($entity, string $property, $value)
-    {
-        $classMetadata = $this->classMetadataManipulator->getClassMetadata(get_class($entity));
-        if($classMetadata->hasField($property))
-            return $classMetadata->setFieldValue($entity, $property, $value);
-
-        $propertyAccessor = PropertyAccess::createPropertyAccessor();
-        return $propertyAccessor->setValue($entity, $property, $value);
-    }
-
-    public function __construct(ClassMetadataManipulator $classMetadataManipulator)
-    {
-        $this->classMetadataManipulator = $classMetadataManipulator;
+        return 'model';
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -104,21 +89,21 @@ class EntityType extends AbstractType implements DataMapperInterface
             $form = $event->getForm();
 
             // Combine allow_recursive with parent if already found in child
-            foreach($options["fields"] as $fieldName => $fieldOptions) {
+            foreach($options["fields"] as $fieldName => $_POST) {
 
                 if(array_key_exists("allow_recursive", $options["fields"][$fieldName])) {
                     $options["fields"][$fieldName]["allow_recursive"] 
                         = $options["fields"][$fieldName]["allow_recursive"] & $options["allow_recursive"];
                 }
             }
-            
+
             if($options["multiple"]) {
 
                 $dataClass = $options["class"];
                 unset($options["class"]);
 
                 $form->add($form->getName(), CollectionType::class, [
-                    'entry_type' => EntityType::class,
+                    'entry_type' => ModelType::class,
                     'entry_options' => array_merge($options, [
                         'data_class' => $dataClass,
                         'multiple' => false,
@@ -133,12 +118,8 @@ class EntityType extends AbstractType implements DataMapperInterface
 
             } else {
 
-                $dataClass = $this->classMetadataManipulator->getDataClass($form);
-                $classMetadata = $this->classMetadataManipulator->getClassMetadata($dataClass);
-
+                $dataClass =  $form->getConfig()->getDataClass();
                 $fields = $options["fields"];
-                if($options["autoload"])
-                    $fields = $this->classMetadataManipulator->getFields($dataClass, $options["fields"], $options["excluded_fields"]);
 
                 foreach ($fields as $fieldName => $field) {
 
@@ -149,7 +130,7 @@ class EntityType extends AbstractType implements DataMapperInterface
                     $fieldType = $field['form_type'] ?? (!empty($field['data']) ? HiddenType::class : null);
                     unset($field['form_type']);
 
-                    $isNullable = $classMetadata->getFieldMapping($fieldName)["nullable"] ?? false;
+                    $isNullable = $field["nullable"] ?? false;
                     if(!array_key_exists("required", $field) && $isNullable)
                         $field['required'] = false;
                     
@@ -171,18 +152,19 @@ class EntityType extends AbstractType implements DataMapperInterface
         }
 
         $data = $parentData;
-        if ($data instanceof PersistentCollection) {
+        if (is_array($data)) {
 
             $form = current(iterator_to_array($forms));
-            $form->setData($data->toArray());
+            $form->setData($data);
 
-        } else if(is_object($entity = $data)) {
+        } else if(is_object($data)) {
 
-            $classMetadata = $this->classMetadataManipulator->getClassMetadata(get_class($entity));
+            throw new \Exception("Implement..", $data);
+            // $classMetadata = $this->classMetadataManipulator->getClassMetadata(get_class($entity));
 
-            $childForms = iterator_to_array($forms);
-            foreach($childForms as $fieldName => $childForm)
-                $childForm->setData($classMetadata->getFieldValue($entity, $fieldName));
+            // $childForms = iterator_to_array($forms);
+            // foreach($childForms as $fieldName => $childForm)
+            //     $childForm->setData($classMetadata->getFieldValue($entity, $fieldName));
         }
     }
 
