@@ -1,3 +1,13 @@
+.sf-toolbar 
+{
+    z-index: 10000000 !important;
+    position: relative;
+}
+
+.form-group {
+    padding:0;
+}
+
 .form-collection-items label:empty {
     display: none
 }
@@ -27,9 +37,11 @@
 
 .form-translatable .nav-tabs label { padding:0; }
 .form-translatable .tab-pane > div { margin-bottom: 1.5em; }
+.form-translatable .tab-pane > div:first-child { padding: 0.5em 0 0 0 !important; }
 .form-translatable .tab-pane > div:last-child { margin-bottom: 0; }
+.form-translatable .tab-pane { padding: 0.5em 1em; }
 
-
+.form-entity > .form-group:first-child { padding-top: 0 !important; }
 .form-entity > div { margin-bottom: 1.5em; }
 
 .accordion-collapse { border:0; }
