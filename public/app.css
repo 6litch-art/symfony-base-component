@@ -29,6 +29,7 @@
 .form-translatable .tab-pane > div { margin-bottom: 1.5em; }
 .form-translatable .tab-pane > div:last-child { margin-bottom: 0; }
 
+
 .form-entity > div { margin-bottom: 1.5em; }
 
 .accordion-collapse { border:0; }
@@ -74,6 +75,9 @@
 .form-collection-items .form-group { border:0; padding:  0 !important; }
 
 .form-collection-items .form-collection-item { border-bottom: 1px solid lightgrey;}
+.form-collection-items .form-collection-item:last-child { border-bottom: 0; }
+.form-collection-add-button { border-top: 1px solid lightgrey; }
+
 .form-collection-items .accordion-item .form-control > div span,
 .form-collection-items .accordion-item .form-control > div label,
 .form-collection-items .accordion-item .form-control > div legend.col-form-label {
