@@ -11,12 +11,15 @@ $(document).on("DOMContentLoaded", function () {
                 $('#'+editorId).parent().find(".ql-toolbar").remove();
 
             var quill = JSON.parse(el.getAttribute("data-quill-options")) || {};
+
             var quill_editor = new Quill('#'+editorId, quill);
                 quill_editor.on('text-change', function() {
 
                     var html = $('#'+editorId).find(".ql-editor")[0].innerHTML || "";
                     document.getElementById(id).value = html;
                 });
+
+            $('#'+editorId).find(".ql-editor").css("min-height", quill["height"]);
         }));
     });
 

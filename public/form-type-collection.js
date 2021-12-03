@@ -31,8 +31,8 @@ $(document).on("DOMContentLoaded", function () {
             $(submitButtons).each(function() { if(this.form == form) buttons.add(this); });
             buttons = Array.from(buttons);
 
-            $(button).off("click.collection.submit");
-            $(button).on("click.collection.submit", function () {
+            $(buttons).off("click.collection.submit");
+            $(buttons).on("click.collection.submit", function () {
 
                 var invalidRequired = $(':required:invalid', form);
                 if (invalidRequired.length)
@@ -85,9 +85,10 @@ $(document).on("DOMContentLoaded", function () {
                 var o = e.closest("[data-collection-field]");
                 var f = e.closest(".form-collection-item");
 
+                console.log(o, f);
                 $(o).find(f).on('hidden.bs.collapse', function() {
-                
-                    $(this).parent().remove();
+                    console.log("collapse");
+                    $(this).remove();
                     var l = o.dataset.numItems = $(o).find(".form-collection-item").length;
                     if (l == 0) {
     
@@ -102,6 +103,13 @@ $(document).on("DOMContentLoaded", function () {
                     updateCollectionItemCssClasses(o);
                 });
 
+                $(o).find(f).each(function() {
+
+                    var collapsed = $(this).find(".accordion-button").hasClass("collapsed");
+                    if (collapsed) $(this).trigger("hidden.bs.collapse");
+                    else $(this).find(".accordion-button").trigger("click");
+                });
+                
                 $(o).find(f).collapse("hide");
             }));
         }));

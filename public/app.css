@@ -25,6 +25,12 @@
     flex-direction: row;
 }
 
+.form-translatable .nav-tabs label { padding:0; }
+.form-translatable .tab-pane > div { margin-bottom: 1.5em; }
+.form-translatable .tab-pane > div:last-child { margin-bottom: 0; }
+
+.form-entity > div { margin-bottom: 1.5em; }
+
 .accordion-collapse { border:0; }
 
 .form-collection-items .form-collection-delete-button {
