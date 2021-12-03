@@ -48,6 +48,15 @@
     border-radius: 4px;
     margin:0em 0 0.5em 0;
 }
+
+.form-collection .form-collection-inline
+{
+    border:1px solid lightgrey;
+    border-radius: 4px;
+    margin:0em 0 0.5em 0;
+    padding:1em 1em 0em 1em;
+}
+
 .form-collection-add-button {
 
     border-top-left-radius: 0px !important;
@@ -75,8 +84,6 @@
 .form-collection-items .form-group { border:0; padding:  0 !important; }
 
 .form-collection-items .form-collection-item { border-bottom: 1px solid lightgrey;}
-.form-collection-items .form-collection-item:last-child { border-bottom: 0; }
-.form-collection-add-button { border-top: 1px solid lightgrey; }
 
 .form-collection-items .accordion-item .form-control > div span,
 .form-collection-items .accordion-item .form-control > div label,
