@@ -14,6 +14,9 @@ $(document).on("DOMContentLoaded", function () {
             if("templateSelection" in select2)
                 select2["templateSelection"] = Function('return ' + select2["templateSelection"])();
 
+            if("data" in select2["ajax"])
+                select2["ajax"]["data"] = Function('return ' + select2["ajax"]["data"])();
+
             $(el).select2(select2);
            
             if(sortable) {

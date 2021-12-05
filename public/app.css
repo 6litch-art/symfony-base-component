@@ -56,6 +56,7 @@
 
 .form-entity > .form-group:first-child { padding-top: 0 ; }
 .form-entity > div { margin-bottom: 1.5em; }
+.form-entity > div:last-child { margin-bottom: 0em !important; }
 
 .accordion-collapse { border:0; }
 
@@ -106,10 +107,10 @@
     padding: 0.5em !important;
 }
 .form-collection-items,
-.form-collection-items .form-group { border:0; padding:  0 !important; }
+.form-collection-items > .form-group { border:0; padding-top: 0 !important; }
 
 .form-collection-items .form-collection-item { border-bottom: 1px solid lightgrey;}
-
+.accordion-body { margin:0; padding:0; }
 .form-collection-items .accordion-item .form-control > div span,
 .form-collection-items .accordion-item .form-control > div label,
 .form-collection-items .accordion-item .form-control > div legend.col-form-label {
