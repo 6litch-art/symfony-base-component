@@ -1,8 +1,3 @@
-.sf-toolbar 
-{
-    z-index: 10000000 !important;
-    position: relative;
-}
 
 .form-group {
     padding:0;
@@ -512,4 +507,14 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     margin-top: 0px;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
+}
+
+/* Additional customization for select2 */
+.select2-results__options { display:flex; flex-direction: column; }
+.select2-results__option { order:-1; }
+.select2-results__option.loading-results { order:1 !important; }
+.select2-results__option--load-more { order:0 !important; }
+.select2-selection__entry i
+{
+    padding:0.25em;
 }
