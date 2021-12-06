@@ -4,21 +4,28 @@ $(document).on("DOMContentLoaded", function () {
 
         document.querySelectorAll("[data-select2-field]").forEach((function (el) {
 
-            var select2 = JSON.parse(el.getAttribute("data-select2-field")) || {};
+            var field = $("#"+el.getAttribute("data-select2-field"));
+
+            var select2 = JSON.parse(el.getAttribute("data-select2-options")) || {};
             if("template" in select2)
                 select2["template"] = Function('return ' + select2["template"])();
             if("templateResult" in select2)
                 select2["templateResult"] = Function('return ' + select2["templateResult"])();
             if("templateSelection" in select2)
                 select2["templateSelection"] = Function('return ' + select2["templateSelection"])();
-            if("initSelection" in select2)
-                select2["initSelection"] = Function('return ' + select2["initSelection"])();
 
             if("data" in select2["ajax"])
                 select2["ajax"]["data"] = Function('return ' + select2["ajax"]["data"])();
             if("processResults" in select2["ajax"])
                 select2["ajax"]["processResults"] = Function('return ' + select2["ajax"]["processResults"])();
- 
+
+            //
+            // Pre-populated data
+            selectedIds = select2["data"].map(entry => { return entry.id });
+            $(field).val(selectedIds).trigger("change");
+
+            //
+            // Debounce option (instead of delay..)
             var firstCall = true;
             var typingDelay = select2["ajax"]["delay"] || 0;
             var debounceFn = true;
@@ -30,9 +37,7 @@ $(document).on("DOMContentLoaded", function () {
 
                 function debounce(t, fn) {
                     
-                    if(typeof(debounceFn) != "undefined")
-                        clearTimeout(debounceFn);
-
+                    if(typeof(debounceFn) != "undefined") clearTimeout(debounceFn);
                     debounceFn = setTimeout(fn, t);
                 }
 
@@ -42,15 +47,20 @@ $(document).on("DOMContentLoaded", function () {
                 });
             }
 
-            var parent = parent || $(el).parent();
-            $(el).select2(select2);
-            var container = $(parent).after(el).find(".select2.select2-container")[0];
+            var parent = parent || $(field).parent();
+            $(field).select2(select2).on("select2:unselecting", function(e) {
+                $(this).data('state', 'unselected');
+            }).on("select2:open", function(e) {
+                if ($(this).data('state') === 'unselected') {
+                    $(this).removeData('state'); 
+                    $(this).select2('close');
+                }
+            });
+
+            var container = $(parent).after(field).find(".select2.select2-container")[0];
 
             var openClick = false;
-            $(el).on("select2:opening", function() { openClick = true; });
-            $(container).on("click", function() {
-
-            });
+            $(field).on("select2:opening", function() { openClick = true; });
             $(window).on("click", function(e) {
 
                 if(!openClick) {
@@ -64,7 +74,7 @@ $(document).on("DOMContentLoaded", function () {
                         while ((target = target.parentNode));
                     }
 
-                    $(el).select2("close");
+                    $(field).select2("close");
                 }
 
                 openClick = false;

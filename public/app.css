@@ -518,3 +518,5 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 {
     padding:0.25em;
 }
+
+.form-select2 { margin-bottom: 1.5em; }
