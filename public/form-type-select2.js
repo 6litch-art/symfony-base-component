@@ -14,47 +14,53 @@ $(document).on("DOMContentLoaded", function () {
             if("templateSelection" in select2)
                 select2["templateSelection"] = Function('return ' + select2["templateSelection"])();
 
-            if("data" in select2["ajax"])
-                select2["ajax"]["data"] = Function('return ' + select2["ajax"]["data"])();
-            if("processResults" in select2["ajax"])
-                select2["ajax"]["processResults"] = Function('return ' + select2["ajax"]["processResults"])();
+            if("ajax" in select2) {
 
-            //
-            // Pre-populated data
-            selectedIds = select2["data"].map(entry => { return entry.id });
-            $(field).val(selectedIds).trigger("change");
+                if("data" in select2["ajax"])
+                    select2["ajax"]["data"] = Function('return ' + select2["ajax"]["data"])();
+                if("processResults" in select2["ajax"])
+                    select2["ajax"]["processResults"] = Function('return ' + select2["ajax"]["processResults"])();
 
-            //
-            // Debounce option (instead of delay..)
-            var firstCall = true;
-            var typingDelay = select2["ajax"]["delay"] || 0;
-            var debounceFn = true;
+                //
+                // Debounce option (instead of delay..)
+                var firstCall = true;
+                var typingDelay = select2["ajax"]["delay"] || 0;
+                var debounceFn = true;
 
-            select2["ajax"]["delay"] = 0;
-            select2["ajax"]["transport"] = function (params, success) {
+                select2["ajax"]["delay"] = 0;
+                select2["ajax"]["transport"] = function (params, success) {
 
-                params["delay"] = (firstCall ? 0 : typingDelay);
+                    params["delay"] = (firstCall ? 0 : typingDelay);
 
-                function debounce(t, fn) {
-                    
-                    if(typeof(debounceFn) != "undefined") clearTimeout(debounceFn);
-                    debounceFn = setTimeout(fn, t);
+                    function debounce(t, fn) {
+                        
+                        if(typeof(debounceFn) != "undefined") clearTimeout(debounceFn);
+                        debounceFn = setTimeout(fn, t);
+                    }
+
+                    return debounce(params["delay"], function() {
+                        firstCall = false;
+                        return $.ajax(params).done(success);
+                    });
                 }
-
-                return debounce(params["delay"], function() {
-                    firstCall = false;
-                    return $.ajax(params).done(success);
-                });
             }
 
             var parent = parent || $(field).parent();
             $(field).select2(select2).on("select2:unselecting", function(e) {
+            
                 $(this).data('state', 'unselected');
+            
             }).on("select2:open", function(e) {
+                
                 if ($(this).data('state') === 'unselected') {
                     $(this).removeData('state'); 
                     $(this).select2('close');
                 }
+
+            }).on("select2:close", function(e) {
+                
+                $(this).focusout();
+
             });
 
             var container = $(parent).after(field).find(".select2.select2-container")[0];
