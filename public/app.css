@@ -35,6 +35,7 @@
 .form-translatable .tab-pane > div:first-child { padding: 0.5em 0 0 0; }
 .form-translatable .tab-pane > div:last-child { margin-bottom: 0; }
 .form-translatable .tab-pane { padding: 0.5em 1em; }
+.form-translatable .tab-content { margin-bottom:1em; border-bottom: var(--border-width) solid var(--border-color); }
 
 .form-translatable { padding:0 !important; }
 .form-translatable .form-collection > div { margin-bottom: 1.5em; }
