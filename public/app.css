@@ -521,3 +521,8 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 }
 
 .form-select2 { margin-bottom: 1.5em; }
+
+input[type="submit"] { margin-top:0.75em; }
+input[type="reset"]  { margin-top:0.75em; }
+.btn[type="submit"]  { margin-top:0.75em; }
+.btn[type="reset"]   { margin-top:0.75em; }
