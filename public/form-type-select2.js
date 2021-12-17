@@ -58,7 +58,7 @@ $(document).on("DOMContentLoaded", function () {
             $(field).val(select2["selected"] || []).trigger("change");
             
             var parent = parent || $(field).parent();
-            var select2 = $(field).select2(select2).on("select2:unselecting", function(e) {
+            $(field).select2(select2).on("select2:unselecting", function(e) {
             
                 $(this).data('state', 'unselected');
             
