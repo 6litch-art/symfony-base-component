@@ -13,6 +13,7 @@ figure { margin: 0 !important; }
     flex-direction: row;
 }
 
+.form-translatable .form-group { padding:0 !important; }
 .form-translatable .nav-tabs label { padding:0; }
 .form-translatable .tab-pane > div { margin-bottom: 1.5em; }
 .form-translatable .tab-pane > div:first-child { padding: 0.5em 0 0 0; }
