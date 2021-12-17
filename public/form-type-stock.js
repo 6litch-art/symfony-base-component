@@ -4,10 +4,6 @@ $(document).on("DOMContentLoaded", function () {
 
         document.querySelectorAll("[data-stock-field]").forEach((function (e) {
 
-            // this.locked = !1, this.lockButtonIcon.classList.replace("fa-infinite", "fa-box-open"), this.field.removeAttribute("readonly")
-            // this.locked = !0, this.lockButtonIcon.classList.replace("fa-box-open", "fa-infinite"), "" !== this.currentState ? this.field.value = this.currentState : this.updateValue(), this.field.setAttribute("readonly", "readonly")
-
-            // On stock change
             var id = $(e).data("stock-field");
             var unlimitedStr = $(e).data("stock-unlimited");
 
