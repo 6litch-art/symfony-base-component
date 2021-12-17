@@ -1,29 +1,12 @@
 
-.form-group {
-    padding:0;
-}
+figure { margin: 0 !important; }
+.form-group { padding:1em 0em; }
 
-.form-collection-items label:empty {
-    display: none
-}
-
-.form-collection-items .form-widget .form-group {
-    padding: 6px 0
-}
-
-.form-collection-items .form-widget .form-group label {
-    display: none
-}
-
-.form-collection-items .accordion-body > .form-control {
-    border: 0;
-    padding: 0;
-}
-
-.form-collection-items .accordion-body > .form-control > .form-group {
-    padding: 0.5em !important;
-}
-
+.form-collection-items label:empty { display: none }
+.form-collection-items .form-widget .form-group { padding: 6px 0 }
+.form-collection-items .form-widget .form-group label { display: none; }
+.form-collection-items .accordion-body > .form-control { border: 0; padding: 0; }
+.form-collection-items .accordion-body > .form-control > .form-group { padding: 0.5em !important; }
 .form-collection-items .accordion-header {
     position: relative;
     display: flex;
@@ -34,8 +17,8 @@
 .form-translatable .tab-pane > div { margin-bottom: 1.5em; }
 .form-translatable .tab-pane > div:first-child { padding: 0.5em 0 0 0; }
 .form-translatable .tab-pane > div:last-child { margin-bottom: 0; }
-.form-translatable .tab-pane { padding: 0.5em 1em; }
-.form-translatable .tab-content { margin-bottom:1em; border-bottom: var(--border-width) solid var(--border-color); }
+.form-translatable .tab-pane { padding: 0.5em 0em; }
+.form-translatable .tab-content { border-bottom: var(--border-width) solid var(--border-color); }
 
 .form-translatable { padding:0 !important; }
 .form-translatable .form-collection > div { margin-bottom: 1.5em; }
@@ -211,6 +194,7 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     display: flex;
     flex-direction: column;
     justify-content: center;
+    /* margin-left: 1em; */
 }
 
 .fileupload .field {
@@ -253,6 +237,10 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     flex-basis: 125px;
 }
 
+.avatarupload figure {
+
+    flex-basis: unset;
+}
 
 .imageupload .fileupload
 {
@@ -311,6 +299,10 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     color:#dc2626;
 }
 
+.form-quill
+{
+    margin-bottom:75px;
+}
 .avatarupload .deleteBtn > i:hover {
     color:#A00A;
 }
@@ -511,6 +503,7 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 }
 
 /* Additional customization for select2 */
+.select2-container { display: block !important; }
 .select2-results__options { display:flex; flex-direction: column; }
 .select2-results__option { order:-1; }
 .select2-results__option.loading-results { order:1 !important; }
@@ -520,9 +513,28 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     padding:0.25em;
 }
 
-.form-select2 { margin-bottom: 1.5em; }
-
 form input[type="submit"] { margin-top:0.75em; }
 form input[type="reset"]  { margin-top:0.75em; }
 form .btn[type="submit"]  { margin-top:0.75em; }
 form .btn[type="reset"]   { margin-top:0.75em; }
+
+.field-form_row {display:block !important; }
+.field-form_row >* {display:none !important; }
+.field-form_row.form-group { margin:1em 0; padding:0.5em 0.5em !important; }
+
+.field-form_row.col-xs-12, .field-form_row.col-sm-12,
+.field-form_row.col-md-12, .field-form_row.col-lg-12,
+.field-form_row.col-xl-12, .field-form_row.col-xxl-12
+{ border-bottom: var(--border-width) solid var(--border-color); }
+
+.input-group-text { height:100%; }
+.input-group-text .btn,
+.input-group-text .btn:not(:disabled):not(.disabled):not(.btn-link):hover,
+.input-group-text .btn:not(:disabled):not(.disabled):not(.btn-link):focus { background-color:transparent; border:0; box-shadow:none; height:100%; padding:1px; margin:0; }
+
+.form-stock .input-group-text { padding-top:5px; }
+.form-stock input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.form-stock input[type=number] { -moz-appearance: textfield; }
+
+.form-money .input-group-text  { padding-top:4px; font-weight:bold; }
+.form-money a.dropdown-item { cursor: pointer; }

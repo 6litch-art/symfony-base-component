@@ -14,6 +14,7 @@ $(document).on("DOMContentLoaded", function () {
             if("templateSelection" in select2)
                 select2["templateSelection"] = Function('return ' + select2["templateSelection"])();
 
+            var dropdown = [];
             if("ajax" in select2) {
 
                 if("data" in select2["ajax"])
@@ -39,8 +40,15 @@ $(document).on("DOMContentLoaded", function () {
                     }
 
                     return debounce(params["delay"], function() {
+                        
+                        dropdown = [];
                         firstCall = false;
-                        return $.ajax(params).done(success);
+                        return $.ajax(params).done(success).done(function(e) {
+
+                            $(e.results).each(function() {
+                                 dropdown.push(this.id);
+                            });
+                        });
                     });
                 }
             }
@@ -48,26 +56,37 @@ $(document).on("DOMContentLoaded", function () {
             //
             // Pre-populated data
             $(field).val(select2["selected"] || []).trigger("change");
-
+            
             var parent = parent || $(field).parent();
-            $(field).select2(select2).on("select2:unselecting", function(e) {
+            var select2 = $(field).select2(select2).on("select2:unselecting", function(e) {
             
                 $(this).data('state', 'unselected');
             
             }).on("select2:open", function(e) {
-                
+
                 if ($(this).data('state') === 'unselected') {
                     $(this).removeData('state'); 
                     $(this).select2('close');
                 }
 
+                // Select all not working .....
+                // $(document).on("keyup.select2", ".select2-search__field", function (e) {
+                //     if (e.keyCode === 65 && e.ctrlKey ) selectAllSelect2($(this));
+                // }.bind(this));
+
+                // function selectAllSelect2(that) {
+              
+                //     select2.val(dropdown || []).trigger("change");
+                // }
+    
             }).on("select2:close", function(e) {
                 
                 $(this).focusout();
-
+                $(document).off("select2:keyup");
             });
 
             var container = $(parent).after(field).find(".select2.select2-container")[0];
+            dropdown = $(field).select2("data");
 
             var openClick = false;
             $(field).on("select2:opening", function() { openClick = true; });
@@ -91,7 +110,7 @@ $(document).on("DOMContentLoaded", function () {
             });
 
             var sortable = el.getAttribute("data-select2-sortable") || false;
-            if(sortable) {
+            if(sortable) {
                 var choices = $(parent).after(el).find("ul.select2-selection__rendered");
                 choices.sortable({containment: 'parent'});
             }
