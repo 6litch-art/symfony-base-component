@@ -1,7 +1,20 @@
 
 figure { margin: 0 !important; }
-.form-group { padding:0em; }
+.form-group { padding:0.5em 0em; }
 
+.form-errors ul { margin:0; }
+.form-errors 
+{
+    background-color:lightpink;
+    border: 1px solid lightcoral;
+    border-radius: 10px;
+    padding:0.75em;
+    margin:0.5em 0;
+}
+
+.form-entity > .form-group:first-child { margin-bottom: 0em; }
+
+.form-collection-items .form-collection { margin-bottom: 0.5em; }
 .form-collection-items label:empty { display: none }
 .form-collection-items .form-widget .form-group { padding: 6px 0 }
 .form-collection-items .form-widget .form-group label { display: none; }
@@ -19,19 +32,8 @@ figure { margin: 0 !important; }
 .form-translatable .tab-pane > div:last-child { margin-bottom: 0; }
 .form-translatable .tab-pane { padding: 0.5em 0em; }
 .form-translatable .tab-content { border-bottom: var(--border-width) solid var(--border-color); }
-
 .form-translatable { padding:0 !important; }
-.form-translatable .form-collection > div { margin-bottom: 1.5em; }
-
-.form-errors ul { margin:0; }
-.form-errors 
-{
-    background-color:lightpink;
-    border: 1px solid lightcoral;
-    border-radius: 10px;
-    padding:0.75em;
-    margin:0.5em 0;
-}
+.form-translatable .form-collection > div { margin-bottom: .5em; }
 
 .form-entity > .form-group:first-child { padding-top: 0 ; }
 .form-entity > div { margin-bottom: 1.5em; }
