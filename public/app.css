@@ -539,3 +539,4 @@ form .btn[type="reset"]   { margin-top:0.75em; }
 
 .form-money .input-group-text  { padding-top:4px; font-weight:bold; }
 .form-money a.dropdown-item { cursor: pointer; }
+.form-money input { text-align:right; }

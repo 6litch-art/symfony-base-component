@@ -17,34 +17,6 @@ $(document).on("DOMContentLoaded", function () {
             var target       = $("#"+$(e).data("target-field"));
             var baseExchange = 1;
             
-            var decimal   = amount[amount.length - (scale+1)] || ".";
-            
-            function num2str(amount, scale, decimal = ",") {
-
-                var separator = (decimal == ".") ? "," : "";                
-                [a,b] = amount.toString().split(".");
-                
-                a = a || "";
-                b = b || "";
-
-                var scale2 = b.length - scale;
-                    scale2 = scale < 0 ? 0 : scale; 
-
-                var factor = 10**(scale2);
-                b = Math.round(b/factor);
-                b = b.toString();
-                while(b.length < scale) 
-                    b = "0" + b;
-
-                if(separator != "") {
-
-                    function addCommas(x) { return x.replace(/\B(?=(\d{3})+(?!\d))/g, separator); }
-                    return addCommas(a)+decimal+addCommas(b);
-                }
-
-                return a+decimal+b;
-            }
-
             function str2num(amount, scale) {
             
                 var decimal   = amount[amount.length - (scale+1)] || ".";
@@ -56,7 +28,48 @@ $(document).on("DOMContentLoaded", function () {
                 return (factor*parseInt(a) + parseInt(b))/factor;
             }
 
+            function num2str(amount, scale, decimal = ",") {
+
+                var separator = (decimal == ".") ? "," : " ";
+                [a,b] = amount.toString().split(".");
+                
+                a = a || "";
+                b = b || "";
+
+                var scale2 = b.length - scale;
+                    scale2 = scale2 < 0 ? 0 : scale2; 
+
+                var factor = 10**scale2;
+                if(b == "") b = 0;
+
+                b = Math.round(parseInt(b)/factor);
+                b = b.toString();
+                
+                while(b.length < scale) 
+                    b = b+"0";
+
+                function addCommas(x) { return x.replace(/\B(?=(\d{3})+(?!\d))/g, separator); }
+                return   addCommas(a)+decimal+addCommas(b);
+            }
+
+            var decimal   = amount[amount.length - (scale+1)] || ".";
             var num = str2num(amount, scale);
+            input.val(num2str(num, scale, decimal));
+
+            $(input).off("redo");
+            $(input).on ("redo", function(e) { $(input).val(e.value); });
+            $(input).off("undo");
+            $(input).on ("undo", function(e) { $(input).val(e.value); });
+
+            $(input).off("input");
+            $(input).on("input", function() {
+
+                var val = input.val().replace(/[^0-9]/g, '');
+                var factor = 10**scale;
+
+                input.val(num2str(parseInt(val)/factor, scale, decimal));
+                num = input.val();
+            });
 
             list.off("click");
             list.on("click", function() {
@@ -74,8 +87,7 @@ $(document).on("DOMContentLoaded", function () {
                 $(input).val(num2str(num, scale));
                 if(currency) $(currency).val(code);
             });
-            
-            input.val(num2str(num, scale, decimal));
+
         }))
     });
 

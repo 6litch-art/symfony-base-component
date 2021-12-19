@@ -2,28 +2,27 @@
 
 namespace Base\Field;
 
-use Base\Enum\ThreadState;
-use Base\Field\Type\StateType;
+use Base\Field\Type\DiscriminatorType;
+
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\TextAlign;
-use EasyCorp\Bundle\EasyAdminBundle\Field\FieldTrait;
 use EasyCorp\Bundle\EasyAdminBundle\Contracts\Field\FieldInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FieldTrait;
 
-class StateField extends SelectField implements FieldInterface
+class DiscriminatorField extends SelectField implements FieldInterface
 {
-    use FieldTrait;
+    use FieldTrait; 
 
-    public const OPTION_CLASS = 'class';
-    
     public static function new(string $propertyName, ?string $label = null): self
     {
         return (new self())
             ->setProperty($propertyName)
             ->setLabel($label)
             ->setTemplateName('crud/field/text')
-            ->setFormType(StateType::class)
-            ->setCustomOption(self::OPTION_CLASS, ThreadState::class)
+            ->setFormType(DiscriminatorType::class)
             ->setCustomOption(self::OPTION_SHOW, self::SHOW_ALL)
-            ->setTextAlign(TextAlign::CENTER)
+            ->setCustomOption(self::OPTION_SHOW_FIRST, self::SHOW_ALL)
+            ->setTextAlign(TextAlign::RIGHT)
+            ->setColumns(6)
             ->setTemplatePath('@EasyAdmin/crud/field/select.html.twig');
     }
 }
