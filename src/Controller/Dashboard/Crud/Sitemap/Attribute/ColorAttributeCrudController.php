@@ -3,9 +3,10 @@
 namespace Base\Controller\Dashboard\Crud\Sitemap\Attribute;
 
 use Base\Controller\Dashboard\Crud\Sitemap\AttributeCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\PercentField;
+use Base\Field\ColorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class PercentAttributeCrudController extends AttributeCrudController
+class ColorAttributeCrudController extends AttributeCrudController
 {
     public static function getPreferredIcon(): ?string { return null; } 
 
@@ -13,7 +14,7 @@ class PercentAttributeCrudController extends AttributeCrudController
     {
         return parent::configureFields($pageName, array_merge($callbacks, [
             "id" => function () {
-                yield PercentField::new('value');
+                yield ColorField::new('value')->setColumns(6);
             },
         ]));
     }
