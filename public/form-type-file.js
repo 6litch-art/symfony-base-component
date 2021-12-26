@@ -5,12 +5,12 @@ $(document).on("DOMContentLoaded", function () {
 
     $(document).on("load.form_type.file", function () {
 
-
         document.querySelectorAll("[data-file-field]").forEach((function (el) {
 
             var id       = el.getAttribute("data-file-field");
             var dropzone = $(el).data('file-dropzone');
 
+            var entityIdList = $("#"+id+"_dropzone").data("entity-id") ?? [];
             function updateMetadata(el = $("#"+id), nFiles)
             {
                 var id = $(el).attr("id");
@@ -33,20 +33,20 @@ $(document).on("DOMContentLoaded", function () {
     
                 $("#"+id+"_metadata").html(counter+" "+counterMax);
             }
-
+            
             if(dropzone) {
 
-                var el             = document.getElementById(id+"_dropzone");
-                var sortable       = $(el).data("file-sortable");
-                var ajax       = el.getAttribute("data-file-ajax");
-
+                var el       = document.getElementById(id+"_dropzone");
+                var sortable = $(el).data("file-sortable");
+                var ajax     = el.getAttribute("data-file-ajax");
+                
                 dropzone["init"] = function() {
 
                     // Initialize existing pictures
                     var val = $('#'+id).val();
                         val = (!val || val.length === 0 ? [] : val.split('|'));
 
-                    var arr = []
+                    var arr = [];
                     $.each(val, function(key, path) { 
                         arr.push(fetch(path).then(p => p.blob()).then(function(blob) {
                             return {path:path, blob: blob};
@@ -60,12 +60,13 @@ $(document).on("DOMContentLoaded", function () {
                             var blob = file.blob;
                             var id = parseInt(key)+1;
                             var uuid = path.substring(path.lastIndexOf('/') + 1);
-
-                            var mock = {status: 'existing', name: '#'+id, uuid: uuid, type: blob.type, size: blob.size};
+                            
+                            var entityId = entityIdList[uuid] ?? null;
+                            var mock = {status: 'existing', name: '#'+id, entityId: entityId, uuid: uuid, type: blob.type, size: blob.size};
 
                             editor.files.push(mock);
                             editor.displayExistingFile(mock, path);
-                            
+
                             updateMetadata(this.id, editor.files.length);
                         });
                     });
@@ -168,8 +169,16 @@ $(document).on("DOMContentLoaded", function () {
                         var preview = $(previewList)[previewList.length-1];
                         
                         // Add UUID to preview for existing files (these are not triggering "success" event)
-                        if(file.status == "existing") 
+                        if(file.status == "existing") {
+
                             $(preview).data("uuid", file.uuid);
+                            
+                            if(file.entityId !== null) {
+                                var span = $(preview).find(".dz-filename > span")[0];
+                                    span.innerHTML = "<a href="+$("#"+id+"_dropzone").data("file-href"  )
+                                                                                    .replace("{0}", file.entityId)+">"+ span.innerHTML + "</a>";
+                            }
+                        }
                     });
 
                     function getImage(fileUUID)
@@ -199,7 +208,6 @@ $(document).on("DOMContentLoaded", function () {
 
                         $('#'+id).val(queue.join('|'));
                     });
-
                 };
 
                 let editor = new Dropzone("#"+id+"_dropzone", dropzone);
