@@ -41,7 +41,7 @@ $(document).on("DOMContentLoaded", function () {
                 var ajax       = el.getAttribute("data-file-ajax");
 
                 dropzone["init"] = function() {
-                    
+
                     // Initialize existing pictures
                     var val = $('#'+id).val();
                         val = (!val || val.length === 0 ? [] : val.split('|'));
@@ -58,21 +58,38 @@ $(document).on("DOMContentLoaded", function () {
                             
                             var path = file.path;
                             var blob = file.blob;
-
                             var id = parseInt(key)+1;
                             var uuid = path.substring(path.lastIndexOf('/') + 1);
-                            var mock = {status: 'existing', name: '#'+id, uuid: uuid, type: blob.type, dataURL:URL.createObjectURL(blob), size: blob.size};
+
+                            var mock = {status: 'existing', name: '#'+id, uuid: uuid, type: blob.type, size: blob.size};
 
                             editor.files.push(mock);
                             editor.displayExistingFile(mock, path);
-
+                            
                             updateMetadata(this.id, editor.files.length);
                         });
+                    });
+
+                    this.on('error', function(file, response) {
+                        
+                        var errorMessage = $(file.previewElement).find(".dz-error-message");
+                        if (errorMessage.length == 0) return;
+
+                        errorMessage.css("opacity", 1);
+                        setTimeout(function() {
+                            errorMessage[0].style.removeProperty('opacity');
+                        }, 2000);
                     });
 
                     this.on('success', function(file, response) {
 
                         file.serverId = response;
+
+                        var previewList = $('#'+id+'_dropzone .dz-preview');
+                        var preview = $(previewList)[previewList.length-1];
+                        if(file.status !== "existing") 
+                            $(preview).data("uuid", file.uuid = file.serverId['uuid']);
+
                         var val = $('#'+id).val();
                             val = (!val || val.length === 0 ? [] : val.split('|'));
 
@@ -80,6 +97,49 @@ $(document).on("DOMContentLoaded", function () {
                         $('#'+id).val(val.join('|'));
 
                         updateMetadata(this.id, val.length);
+                    });
+
+                    function findDuplicates(files, file, dataURL = undefined)
+                    {
+                        var _i, _len;
+                        for (_i = 0, _len = files.length; _i < _len - 1; _i++) {
+
+                            if(files[_i] === file) continue; // Exception for the file itself..
+                            if(files[_i].status == "existing") {
+
+                                var img = getImage(files[_i].uuid);
+                                if(img !== undefined) { 
+                                
+                                    if(files[_i].size === file.size && img.src.toString() === dataURL)
+                                        return file;
+                                }
+
+                            } else {
+
+                                if(files[_i].size === file.size && files[_i].lastModified.toString() === file.lastModified.toString())
+                                    return file;
+                            }
+                        }
+
+                        return undefined;
+                    }
+
+                    function findByUUID(files, fileUUID)
+                    {
+                        var _i, _len;
+                        for (_i = 0, _len = files.length; _i < _len; _i++) {
+
+                            var uuid = files[_i].serverId ? files[_i].serverId['uuid'] : files[_i].uuid;
+                            if(fileUUID == uuid) return files[_i];
+                        }
+
+                        return undefined;
+                    }
+
+                    this.on("thumbnail", function(file, dataURL) {
+
+                        var duplicateFile = findDuplicates(this.files, file, dataURL);
+                        if (duplicateFile) this.removeFile(duplicateFile);
                     });
 
                     this.on('removedfile', function(file) {
@@ -102,21 +162,40 @@ $(document).on("DOMContentLoaded", function () {
                         updateMetadata(this.id, val.length);
                     });
 
+                    this.on("addedfile", function(file) {
 
-                     // Sortable drag-and-drop
-                     this.on('dragend', function(file) {
+                        var previewList = $('#'+id+'_dropzone .dz-preview');
+                        var preview = $(previewList)[previewList.length-1];
+                        
+                        // Add UUID to preview for existing files (these are not triggering "success" event)
+                        if(file.status == "existing") 
+                            $(preview).data("uuid", file.uuid);
+                    });
+
+                    function getImage(fileUUID)
+                    {
+                        var image = undefined;
+                        $('#'+id+'_dropzone .dz-preview').each(function (count, el) {
+
+                            var uuid = $(el).data('uuid');
+                            if(fileUUID == uuid) image = $(el).find(".dz-image img")[0] || undefined;
+                        });
+
+                        return image;
+                    }
+                    
+                    // Sortable drag-and-drop
+                    Array.prototype.insert = function(i,...rest) { this.splice(i,0,...rest); return this; }
+
+                    this.on('dragend', function() {
 
                         var queue = [];
-                        
-                        $('#'+id+'_dropzone .dz-preview .dz-image img').each(function (count, el) {
+                        var that = this;
+                        $('#'+id+'_dropzone .dz-preview').each(function(file) {
 
-                            var name = el.getAttribute('alt');
-                            this.files.forEach(function(file) {
-                                if(name == file.name)
-                                    queue.push(file.uuid);
-                            });
-
-                        }.bind(this));
+                            var file = findByUUID(that.files, $(this).data("uuid"));
+                            if (file) queue.push(file.status === "existing" ? file.dataURL : file.uuid);
+                        });
 
                         $('#'+id).val(queue.join('|'));
                     });
@@ -125,9 +204,8 @@ $(document).on("DOMContentLoaded", function () {
 
                 let editor = new Dropzone("#"+id+"_dropzone", dropzone);
 
-                if(sortable) {
+                if(sortable)
                     var sortable = new Sortable(document.getElementById(id+'_dropzone'), {draggable: '.dz-preview'});
-                }
 
             } else {
 
