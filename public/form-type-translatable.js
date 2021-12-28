@@ -18,7 +18,6 @@ $(document).on("DOMContentLoaded", function () {
             $(buttons).off("click.translatable.submit");
             $(buttons).on("click.translatable.submit", function () {
 
-                console.log(this);
                 var invalidRequired = $(':required:invalid', form);
                 if (invalidRequired.length) {
 

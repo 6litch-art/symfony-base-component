@@ -518,9 +518,11 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .select2-results__option { order:-1; }
 .select2-results__option.loading-results { order:1 !important; }
 .select2-results__option--load-more { order:0 !important; }
-.select2-selection__entry i
+
+.select2-selection__entry i { min-width:20px; margin-right:0.1em; }
+.select2-selection__entry 
 {
-    padding:0.25em;
+    margin:0.4em;
 }
 
 form input[type="submit"] { margin-top:0.75em; }
@@ -549,3 +551,29 @@ form .btn[type="reset"]   { margin-top:0.75em; }
 .form-money .input-group-text  { padding-top:4px; font-weight:bold; }
 .form-money a.dropdown-item { cursor: pointer; }
 .form-money input { text-align:right; }
+
+.form-attribute .select2 { width:100%; }
+.form-attribute .select2-selection { border:0px solid; }
+.form-attribute .form-translatable .tab-content { border-bottom: 0; }
+.form-attribute .form-translatable { padding: 0 .75rem !important; }
+.form-attribute .form-translatable .tab-pane > div:last-child { padding-bottom: 0 !important; }
+.form-attribute 
+{
+    padding:0;
+    border:0;
+}
+
+.form-attribute .form-translatable
+{
+    margin-top:-5px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.form-attribute-dropdown
+{
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.badge-danger { padding:0 0.5em !important; }

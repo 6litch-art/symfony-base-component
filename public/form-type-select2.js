@@ -6,13 +6,24 @@ $(document).on("DOMContentLoaded", function () {
 
             var field = $("#"+el.getAttribute("data-select2-field"));
 
+            var defaultTemplate = function(option, that) { 
+
+                dataAttribute = "";
+                for(var name in option["data"]) {
+
+                    var value = option["data"][name];
+                        value = value.replace(/"/g, '\\"');
+                    
+                    dataAttribute = name + "=\"" + value+"\" ";
+                }
+
+                return $('<span class=\"select2-selection__entry\" '+dataAttribute+'>' + (option.html ? option.html : (option.icon ? '<span><i class=\"fa-fw '+option.icon+'\"></i></span>  ' : '') + option.text + '</span>')); 
+            };
+
             var select2 = JSON.parse(el.getAttribute("data-select2-options")) || {};
-            if("template" in select2)
-                select2["template"] = Function('return ' + select2["template"])();
-            if("templateResult" in select2)
-                select2["templateResult"] = Function('return ' + select2["templateResult"])();
-            if("templateSelection" in select2)
-                select2["templateSelection"] = Function('return ' + select2["templateSelection"])();
+                select2["template"]          = "template"          in select2 ? Function('return ' + select2["template"]         )() : defaultTemplate;
+                select2["templateResult"]    = "templateResult"    in select2 ? Function('return ' + select2["templateResult"]   )() : defaultTemplate;
+                select2["templateSelection"] = "templateSelection" in select2 ? Function('return ' + select2["templateSelection"])() : defaultTemplate;
 
             var dropdown = [];
             if("ajax" in select2) {
