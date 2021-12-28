@@ -9,13 +9,13 @@ $(document).on("DOMContentLoaded", function () {
             var defaultTemplate = function(option, that) { 
 
                 dataAttribute = "";
-                for(var name in option["data"]) {
+                $(option["data"]).each(function(key, value) {
 
-                    var value = option["data"][name];
+                    var value = option["data"][key];
                         value = value.replace(/"/g, '\\"');
                     
-                    dataAttribute = name + "=\"" + value+"\" ";
-                }
+                    dataAttribute = key + "=\"" + value+"\" ";
+                });
 
                 return $('<span class=\"select2-selection__entry\" '+dataAttribute+'>' + (option.html ? option.html : (option.icon ? '<span><i class=\"fa-fw '+option.icon+'\"></i></span>  ' : '') + option.text + '</span>')); 
             };
