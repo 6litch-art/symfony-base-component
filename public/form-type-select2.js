@@ -12,6 +12,7 @@ $(document).on("DOMContentLoaded", function () {
                 $(option["data"]).each(function(key, value) {
 
                     var value = option["data"][key];
+                    if (value !== undefined)
                         value = value.replace(/"/g, '\\"');
                     
                     dataAttribute = key + "=\"" + value+"\" ";
@@ -38,7 +39,7 @@ $(document).on("DOMContentLoaded", function () {
                 var firstCall = true;
                 var typingDelay = select2["ajax"]["delay"] || 0;
                 var debounceFn = true;
-
+                
                 select2["ajax"]["delay"] = 0;
                 select2["ajax"]["transport"] = function (params, success) {
 
@@ -122,8 +123,20 @@ $(document).on("DOMContentLoaded", function () {
 
             var sortable = el.getAttribute("data-select2-sortable") || false;
             if(sortable) {
+                
                 var choices = $(parent).after(el).find("ul.select2-selection__rendered");
-                choices.sortable({containment: 'parent'});
+                    choices.sortable({containment: 'parent', update: function() { 
+                        
+                        var selectElement = $("#"+el.getAttribute("data-select2-field"));
+                        var orderBy = selectElement.parent().find("ul.select2-selection__rendered").children("li[title]").map(function(i, obj){
+                            return this.getAttribute("title");
+                        });
+
+                        orderBy.each(i => {
+                            const item = Array.from(selectElement.children()).find(x => x.innerText === orderBy[i]);
+                            if (item) item.parentElement.appendChild(item);
+                        });
+                    }});
             }
         }));
     });
