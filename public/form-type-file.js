@@ -57,14 +57,17 @@ $(document).on("DOMContentLoaded", function () {
                         $.each(val, function(key,file) {
                             
                             var path = file.path;
+                            
                             var blob = file.blob;
                             var id = parseInt(key)+1;
                             var uuid = path.substring(path.lastIndexOf('/') + 1);
-                            
+
                             var entityId = entityIdList[uuid] ?? null;
                             var mock = {status: 'existing', name: '#'+id, entityId: entityId, uuid: uuid, type: blob.type, size: blob.size};
 
                             editor.files.push(mock);
+                            
+                            if(path === "") path = "./bundles/base/images.svg";
                             editor.displayExistingFile(mock, path);
 
                             updateMetadata(this.id, editor.files.length);
@@ -172,7 +175,7 @@ $(document).on("DOMContentLoaded", function () {
                         if(file.status == "existing") {
 
                             $(preview).data("uuid", file.uuid);
-                            
+
                             if(file.entityId !== null) {
                                 var span = $(preview).find(".dz-filename > span")[0];
                                     span.innerHTML = "<a href="+$("#"+id+"_dropzone").data("file-href"  )

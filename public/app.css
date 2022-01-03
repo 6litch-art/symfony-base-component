@@ -1,6 +1,7 @@
 
 figure { margin: 0 !important; }
 .form-group { padding:0.5em 0em; }
+.form-control, .input-group-text { padding: .375rem .75rem !important; }
 
 .form-errors ul { margin:0; }
 .form-errors 
@@ -513,16 +514,18 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 }
 
 /* Additional customization for select2 */
+.select2-selection { padding:0em !important; }
 .select2-container { display: block !important; }
 .select2-results__options { display:flex; flex-direction: column; }
 .select2-results__option { order:-1; }
 .select2-results__option.loading-results { order:1 !important; }
 .select2-results__option--load-more { order:0 !important; }
-
+.select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice { margin-top: 0.35em !important; }
+.select2-selection__choice { display:flex; justify-content: center; align-items:center; }
 .select2-selection__entry i { min-width:20px; margin-right:0.1em; }
 .select2-selection__entry 
 {
-    margin:0.4em;
+    margin:0 0.25em;
 }
 
 form input[type="submit"] { margin-top:0.75em; }

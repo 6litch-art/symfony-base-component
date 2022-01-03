@@ -9,18 +9,21 @@ $(document).on("DOMContentLoaded", function () {
             var defaultTemplate = function(option, that) { 
 
                 dataAttribute = "";
-                for(var name in option["data"]) {
+                $(option["data"]).each(function(key, value) {
 
-                    var value = option["data"][name];
+                    var value = option["data"][key];
+                    if (value !== undefined)
                         value = value.replace(/"/g, '\\"');
                     
-                    dataAttribute = name + "=\"" + value+"\" ";
-                }
+                    dataAttribute = key + "=\"" + value+"\" ";
+                });
 
+                console.log(option);
                 return $('<span class=\"select2-selection__entry\" '+dataAttribute+'>' + (option.html ? option.html : (option.icon ? '<span><i class=\"fa-fw '+option.icon+'\"></i></span>  ' : '') + option.text + '</span>')); 
             };
 
             var select2 = JSON.parse(el.getAttribute("data-select2-options")) || {};
+            console.log(select2["template"]);
                 select2["template"]          = "template"          in select2 ? Function('return ' + select2["template"]         )() : defaultTemplate;
                 select2["templateResult"]    = "templateResult"    in select2 ? Function('return ' + select2["templateResult"]   )() : defaultTemplate;
                 select2["templateSelection"] = "templateSelection" in select2 ? Function('return ' + select2["templateSelection"])() : defaultTemplate;
@@ -38,7 +41,7 @@ $(document).on("DOMContentLoaded", function () {
                 var firstCall = true;
                 var typingDelay = select2["ajax"]["delay"] || 0;
                 var debounceFn = true;
-
+                
                 select2["ajax"]["delay"] = 0;
                 select2["ajax"]["transport"] = function (params, success) {
 
@@ -122,8 +125,20 @@ $(document).on("DOMContentLoaded", function () {
 
             var sortable = el.getAttribute("data-select2-sortable") || false;
             if(sortable) {
+                
                 var choices = $(parent).after(el).find("ul.select2-selection__rendered");
-                choices.sortable({containment: 'parent'});
+                    choices.sortable({containment: 'parent', update: function() { 
+                        
+                        var selectElement = $("#"+el.getAttribute("data-select2-field"));
+                        var orderBy = selectElement.parent().find("ul.select2-selection__rendered").children("li[title]").map(function(i, obj){
+                            return this.getAttribute("title");
+                        });
+
+                        orderBy.each(i => {
+                            const item = Array.from(selectElement.children()).find(x => x.innerText === orderBy[i]);
+                            if (item) item.parentElement.appendChild(item);
+                        });
+                    }});
             }
         }));
     });

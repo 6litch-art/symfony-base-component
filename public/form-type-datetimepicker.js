@@ -18,7 +18,6 @@ $(document).on("DOMContentLoaded", function () {
             });
 
             $('#'+id).datetimepicker(datetimepicker);
-
         }));
     });
 
