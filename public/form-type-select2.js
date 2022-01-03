@@ -18,10 +18,12 @@ $(document).on("DOMContentLoaded", function () {
                     dataAttribute = key + "=\"" + value+"\" ";
                 });
 
+                console.log(option);
                 return $('<span class=\"select2-selection__entry\" '+dataAttribute+'>' + (option.html ? option.html : (option.icon ? '<span><i class=\"fa-fw '+option.icon+'\"></i></span>  ' : '') + option.text + '</span>')); 
             };
 
             var select2 = JSON.parse(el.getAttribute("data-select2-options")) || {};
+            console.log(select2["template"]);
                 select2["template"]          = "template"          in select2 ? Function('return ' + select2["template"]         )() : defaultTemplate;
                 select2["templateResult"]    = "templateResult"    in select2 ? Function('return ' + select2["templateResult"]   )() : defaultTemplate;
                 select2["templateSelection"] = "templateSelection" in select2 ? Function('return ' + select2["templateSelection"])() : defaultTemplate;
