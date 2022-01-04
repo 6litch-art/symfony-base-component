@@ -55,7 +55,8 @@ figure { margin: 0 !important; }
     flex-direction: row;
 }
 
-.form-collection-items .form-collection-delete-button {
+.form-collection-item:last-child { border-bottom: 0px !important; }
+.form-collection-item .form-collection-buttons {
     position: absolute !important;
     right: 0.5em;
     z-index: 3;
@@ -80,6 +81,7 @@ figure { margin: 0 !important; }
 
 .form-collection-add-button {
 
+    border-top: 1px solid lightgrey;
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
     border-bottom-left-radius: 4px !important;
@@ -120,22 +122,40 @@ figure { margin: 0 !important; }
     width: 20%
 }
 
-.form-collection-items .accordion-item .accordion-body .form-widget {
-    flex: 1
-}
-
-.form-collection-items .accordion-item .accordion-body input {
-    border: 1px solid lightgray;
-}
-
+.form-collection-items .accordion-item .accordion-body .form-widget { flex: 1 }
+.form-collection-items .accordion-item .accordion-body input { border: 1px solid lightgray; }
 .form-collection-items .accordion-button input { margin-right: 2em; }
 .form-collection-items .accordion-button,
 .form-collection-items .accordion-button:hover {
     background: transparent;
+    font-weight:normal;
     border-radius: 0;
     flex: 1;
     padding: 0.75rem 14px;
 }
+
+.array-empty .accordion-button:after { display: none }
+.array-empty .accordion-button input { margin-right: 2em; }
+.array-empty .accordion-button,
+.array-empty .accordion-button:hover {
+    background: transparent;
+    font-weight:normal;
+    border-radius: 0;
+    flex: 1;
+    padding: 0.45rem 14px !important;
+}
+
+.collection-empty .accordion-button:after { display: none }
+.collection-empty .accordion-button input { margin-right: 2em; }
+.collection-empty .accordion-button,
+.collection-empty .accordion-button:hover {
+    background: transparent;
+    font-weight:normal;
+    border-radius: 0;
+    flex: 1;
+    padding: 0.45rem 14px !important;
+}
+
 
 .form-collection-items .accordion-button:after { display: none }
 .form-collection-items .accordion-button i { transition: transform .2s ease-in-out }
@@ -178,6 +198,9 @@ figure { margin: 0 !important; }
     height:100%;
 }
 
+.form-array-item { border-top:0px solid lightgrey; }
+.form-array-item-first { border-top: 0px !important; }
+.form-array-item-last { border-top: 0px !important;border-bottom: 0px !important; }
 .form-array 
 {
     border:1px solid lightgrey;
@@ -194,8 +217,10 @@ figure { margin: 0 !important; }
 }
 
 .form-array-add-button i { margin-right:0.25em;}
-.form-array-add-button {
 
+
+.form-array-add-button
+{
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
     border-bottom-left-radius: 4px !important;
@@ -236,19 +261,14 @@ figure { margin: 0 !important; }
     width: 20%
 }
 
-.form-array-items .accordion-item .accordion-body .form-widget {
-    flex: 1
-}
-
-.form-array-items .accordion-item .accordion-body input {
-    border: 1px solid lightgray;
-}
-
+.form-array-items .accordion-item .accordion-body .form-widget { flex: 1 }
+.form-array-items .accordion-item .accordion-body input { border: 1px solid lightgray; }
 .form-array-items .accordion-button input { margin-right: 2em; }
 .form-array-items .accordion-button,
 .form-array-items .accordion-button:hover {
 
     background: transparent;
+    font-weight:normal;
     border-radius: 0;
     flex: 1;
     padding: 0.25rem 14px;
@@ -670,16 +690,17 @@ form .btn[type="reset"]   { margin-top:0.75em; }
 .form-attribute .select2 { width:100%; }
 .form-attribute .select2-selection { border:0px solid; }
 .form-attribute .form-translatable .tab-content { border-bottom: 0; }
-.form-attribute .form-translatable { padding: 0 .75rem !important; }
 .form-attribute .form-translatable .tab-pane > div:last-child { padding-bottom: 0 !important; }
 .form-attribute { padding:0 !important; border:0; }
 
 .form-attribute .form-translatable
 {
     margin-top:-5px;
+    padding: 0 .75rem !important;
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
 }
+
 
 .form-attribute-dropdown
 {
