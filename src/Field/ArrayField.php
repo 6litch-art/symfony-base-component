@@ -5,19 +5,14 @@ namespace Base\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FieldTrait;
 use EasyCorp\Bundle\EasyAdminBundle\Contracts\Field\FieldInterface;
 
-use Base\Field\Type\CollectionType;
+use Base\Field\Type\ArrayType;
 
-class CollectionField implements FieldInterface
+class ArrayField extends CollectionField implements FieldInterface
 {
     use FieldTrait;
 
-    public const OPTION_ALLOW_ADD = 'allowAdd';
-    public const OPTION_ALLOW_DELETE = 'allowDelete';
-    public const OPTION_ENTRY_IS_COMPLEX = 'entryIsComplex';
-    public const OPTION_ENTRY_TYPE = 'entryType';
-    public const OPTION_ENTRY_OPTIONS = 'entryOptions';
-    public const OPTION_SHOW_ENTRY_LABEL = 'showEntryLabel';
-    public const OPTION_RENDER_EXPANDED = 'renderExpanded';
+    public const OPTION_LENGTH             = 'length';
+    public const OPTION_PATTERN_FIELD_NAME = 'pattern';
 
     /**
      * @param string|false|null $label
@@ -29,15 +24,32 @@ class CollectionField implements FieldInterface
             ->setLabel($label)
             ->setTemplateName('crud/field/collection')
             ->setTemplatePath('@EasyAdmin/crud/field/collection.html.twig')
-            ->setFormType(CollectionType::class)
+            ->setFormType(ArrayType::class)
             ->setCustomOption(self::OPTION_ALLOW_ADD, true)
             ->setCustomOption(self::OPTION_ALLOW_DELETE, true)
             ->setCustomOption(self::OPTION_ENTRY_IS_COMPLEX, null)
             ->setCustomOption(self::OPTION_ENTRY_TYPE, null)
             ->setCustomOption(self::OPTION_SHOW_ENTRY_LABEL, false)
             ->setCustomOption(self::OPTION_RENDER_EXPANDED, false)
+            ->setFormTypeOption(self::OPTION_LENGTH, 0)
             ->setFormTypeOption("allow_add", true)
             ->setFormTypeOption("allow_delete", true);
+    }
+
+    public function setLength(int $length): self 
+    {
+        $length = min(0, $length);
+        $this->setFormTypeOption(self::OPTION_LENGTH, $length);
+        $this->setFormTypeOption("allow_add", $length == 0);
+        $this->setFormTypeOption("allow_delete", $length == 0);
+
+        return $this;
+    }
+
+    public function setPatternFieldName(string $fieldName): self
+    {
+        $this->setFormType(self::OPTION_PATTERN_FIELD_NAME, $fieldName);
+        return $this;
     }
 
     public function allowAdd(bool $allow = true): self
