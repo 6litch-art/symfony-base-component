@@ -24,6 +24,25 @@ figure { margin: 0 !important; }
 
 .form-entity > .form-group:first-child { margin-bottom: 0em; }
 
+.form-translatable .nav-tabs label { padding:0; }
+.form-translatable .tab-pane > div { margin-bottom: 1.5em; }
+.form-translatable .tab-pane > div:first-child { padding: 0.5em 0 0 0; }
+.form-translatable .tab-pane > div:last-child { margin-bottom: 0; }
+.form-translatable .tab-pane { padding: 0.5em 0em; }
+.form-translatable .tab-content { border-bottom: var(--border-width) solid var(--border-color); }
+.form-translatable { padding:0 !important; }
+
+.form-entity > .form-group:first-child { padding-top: 0 ; }
+.form-entity > div { margin-bottom: 1.5em; }
+.form-entity > div:last-child { margin-bottom: 0em !important; }
+
+.accordion-collapse { border:0; }
+
+.form-translatable .form-collection > div { margin-bottom: .5em; }
+
+.form-collection .collection-empty { margin-bottom: 0em !important; }
+.form-collection-items { margin-bottom: 0em !important; }
+
 .form-collection-items .form-collection { margin-bottom: 0.5em; }
 .form-collection-items label:empty { display: none }
 .form-collection-items .form-widget .form-group { padding: 6px 0 }
@@ -35,21 +54,6 @@ figure { margin: 0 !important; }
     display: flex;
     flex-direction: row;
 }
-
-.form-translatable .nav-tabs label { padding:0; }
-.form-translatable .tab-pane > div { margin-bottom: 1.5em; }
-.form-translatable .tab-pane > div:first-child { padding: 0.5em 0 0 0; }
-.form-translatable .tab-pane > div:last-child { margin-bottom: 0; }
-.form-translatable .tab-pane { padding: 0.5em 0em; }
-.form-translatable .tab-content { border-bottom: var(--border-width) solid var(--border-color); }
-.form-translatable { padding:0 !important; }
-.form-translatable .form-collection > div { margin-bottom: .5em; }
-
-.form-entity > .form-group:first-child { padding-top: 0 ; }
-.form-entity > div { margin-bottom: 1.5em; }
-.form-entity > div:last-child { margin-bottom: 0em !important; }
-
-.accordion-collapse { border:0; }
 
 .form-collection-items .form-collection-delete-button {
     position: absolute !important;
@@ -124,33 +128,139 @@ figure { margin: 0 !important; }
     border: 1px solid lightgray;
 }
 
+.form-collection-items .accordion-button input { margin-right: 2em; }
 .form-collection-items .accordion-button,
 .form-collection-items .accordion-button:hover {
     background: transparent;
     border-radius: 0;
     flex: 1;
-    padding: 8px 7px;
     padding: 0.75rem 14px;
 }
 
-.form-collection-items .accordion-button:after {
-    display: none
-}
-
-.form-collection-items .accordion-button i {
-    transition: transform .2s ease-in-out
-}
-
-.form-collection-items .accordion-button:not(.collapsed) i {
-    transform: rotate(90deg)
-}
-
+.form-collection-items .accordion-button:after { display: none }
+.form-collection-items .accordion-button i { transition: transform .2s ease-in-out }
+.form-collection-items .accordion-button:not(.collapsed) i { transform: rotate(90deg) }
 .form-collection-items .accordion-button .form-collection-item-collapse-marker {
     color: var(grey);
     margin: 0 8px 0 4px
 }
 
 
+
+
+
+
+
+.form-translatable .form-array > div { margin-bottom: .5em; }
+
+.form-array .array-empty { margin-bottom: 0em !important; }
+.form-array-items { margin-bottom: 0em !important; }
+
+.form-array .accordion-header > .accordion-button { cursor:auto; }
+.form-array-items .form-array { margin-bottom: 0.5em; }
+.form-array-items label:empty { display: none }
+.form-array-items .form-widget .form-group { padding: 6px 0 }
+.form-array-items .form-widget .form-group label { display: none; }
+.form-array-items .accordion-body > .form-control { border: 0; padding: 0; }
+.form-array-items .accordion-body > .form-control > .form-group { padding: 0.5em !important; }
+.form-array-items .accordion-header input { padding:0 14px; }
+.form-array-items .accordion-header {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.form-array-items .form-array-delete-button {
+    position: absolute !important;
+    right: 0.5em;
+    z-index: 3;
+
+    height:100%;
+}
+
+.form-array 
+{
+    border:1px solid lightgrey;
+    border-radius: 4px;
+    margin:0em 0 0.5em 0;
+}
+
+.form-array .form-array-inline
+{
+    border:1px solid lightgrey;
+    border-radius: 4px;
+    margin:0em 0 0.5em 0;
+    padding:1em 1em 0em 1em;
+}
+
+.form-array-add-button i { margin-right:0.25em;}
+.form-array-add-button {
+
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-left-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+    width:100%;
+    text-align:left;
+    padding: .4rem 1rem;
+}
+
+.form-array-add-button:hover {
+    background-color: #eff1fa !important;
+    color: #5768bc;
+}
+
+.form-array-items .accordion-item {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.form-array-items .accordion-item .form-control > div {
+    align-items: flex-start;
+    display: flex;
+    padding: 0.5em !important;
+}
+.form-array-items,
+.form-array-items > .form-group { border:0; padding: 0 !important; }
+
+.form-array-items .form-array-item { border-bottom: 1px solid lightgrey;}
+.accordion-body { margin:0; padding:0; }
+.form-array-items .accordion-item .form-control > div span,
+.form-array-items .accordion-item .form-control > div label,
+.form-array-items .accordion-item .form-control > div legend.col-form-label {
+    font-weight: 500;
+    margin: 5px 0px;
+    padding: 0;
+    width: 20%
+}
+
+.form-array-items .accordion-item .accordion-body .form-widget {
+    flex: 1
+}
+
+.form-array-items .accordion-item .accordion-body input {
+    border: 1px solid lightgray;
+}
+
+.form-array-items .accordion-button input { margin-right: 2em; }
+.form-array-items .accordion-button,
+.form-array-items .accordion-button:hover {
+
+    background: transparent;
+    border-radius: 0;
+    flex: 1;
+    padding: 0.25rem 14px;
+}
+
+.form-array-items .accordion-button:after { display: none }
+.form-array-items .accordion-button i { transition: transform .2s ease-in-out }
+.form-array-items .accordion-button:not(.collapsed) i { transform: rotate(0deg) !important; }
+.form-array-items .accordion-button .form-array-item-collapse-marker {
+    color: var(grey);
+    margin: 0 8px 0 4px
+}
 
 
 .dropzone {
@@ -305,7 +415,7 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 
 .form-errors ul {
     list-style: none;
-    margin-left:0;
+    margin-left:1em;
     padding-left:0;
     color:#dc2626;
 }
@@ -385,7 +495,8 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     }
 }
 
-.accordion-button:hover {
+.accordion.form-array-item.collapse.show { border-bottom: 0; }
+.accordion-button {
     background-color: #eff1fa !important;
     color: #5768bc
 }
@@ -520,13 +631,14 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .select2-results__option { order:-1; }
 .select2-results__option.loading-results { order:1 !important; }
 .select2-results__option--load-more { order:0 !important; }
-.select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice { margin-top: 0.35em !important; }
-.select2-selection__choice { display:flex; justify-content: center; align-items:center; }
+.select2-selection--multiple .select2-selection__clear { top:0 !important; right: 1.6em !important; }
+.select2-selection--multiple .select2-selection__choice { margin-top: 0.35em !important; }
+.select2-selection__choice { display:flex; justify-content: center; }
 .select2-selection__entry i { min-width:20px; margin-right:0.1em; }
-.select2-selection__entry 
-{
-    margin:0 0.25em;
-}
+.select2-selection__entry { margin:0 0.25em; }
+
+.select2-selection--vertical .select2-selection__choice  { width:calc(100% - 40px); display:flex; justify-content: start !important; }
+.select2-selection--vertical .select2-search--inline  { display: none !important; }
 
 form input[type="submit"] { margin-top:0.75em; }
 form input[type="reset"]  { margin-top:0.75em; }
@@ -560,11 +672,7 @@ form .btn[type="reset"]   { margin-top:0.75em; }
 .form-attribute .form-translatable .tab-content { border-bottom: 0; }
 .form-attribute .form-translatable { padding: 0 .75rem !important; }
 .form-attribute .form-translatable .tab-pane > div:last-child { padding-bottom: 0 !important; }
-.form-attribute 
-{
-    padding:0;
-    border:0;
-}
+.form-attribute { padding:0 !important; border:0; }
 
 .form-attribute .form-translatable
 {

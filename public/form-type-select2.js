@@ -18,12 +18,10 @@ $(document).on("DOMContentLoaded", function () {
                     dataAttribute = key + "=\"" + value+"\" ";
                 });
 
-                console.log(option);
                 return $('<span class=\"select2-selection__entry\" '+dataAttribute+'>' + (option.html ? option.html : (option.icon ? '<span><i class=\"fa-fw '+option.icon+'\"></i></span>  ' : '') + option.text + '</span>')); 
             };
 
             var select2 = JSON.parse(el.getAttribute("data-select2-options")) || {};
-            console.log(select2["template"]);
                 select2["template"]          = "template"          in select2 ? Function('return ' + select2["template"]         )() : defaultTemplate;
                 select2["templateResult"]    = "templateResult"    in select2 ? Function('return ' + select2["templateResult"]   )() : defaultTemplate;
                 select2["templateSelection"] = "templateSelection" in select2 ? Function('return ' + select2["templateSelection"])() : defaultTemplate;
@@ -70,7 +68,7 @@ $(document).on("DOMContentLoaded", function () {
             //
             // Pre-populated data
             $(field).val(select2["selected"] || []).trigger("change");
-            
+
             var parent = parent || $(field).parent();
             $(field).select2(select2).on("select2:unselecting", function(e) {
             
@@ -99,21 +97,21 @@ $(document).on("DOMContentLoaded", function () {
                 $(document).off("select2:keyup");
             });
 
-            var container = $(parent).after(field).find(".select2.select2-container")[0];
             dropdown = $(field).select2("data");
-
+            
             var openClick = false;
             $(field).on("select2:opening", function() { openClick = true; });
             $(window).on("click", function(e) {
 
                 if(!openClick) {
 
+                    // let container = $(parent).after(field).find(".select2.select2-container")[0];
                     let results = $(document.body).find(".select2-results")[0];
                     let target = e.target;
 
                     if(!select2["closeOnSelect"]) {
 
-                        do { if (target == container || target == results) return; } 
+                        do { if (target == results) return; } 
                         while ((target = target.parentNode));
                     }
 
@@ -143,5 +141,6 @@ $(document).on("DOMContentLoaded", function () {
         }));
     });
 
+    $(document).trigger("load.form_type.select2");
     $(document).trigger("load.form_type.select2");
 });

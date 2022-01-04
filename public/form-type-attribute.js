@@ -4,7 +4,6 @@ $(document).on("DOMContentLoaded", function () {
 
         document.querySelectorAll("form .form-attribute").forEach(function (e) {
 
-            console.log("ATTRIBUTE:", e);
         });
     });
 

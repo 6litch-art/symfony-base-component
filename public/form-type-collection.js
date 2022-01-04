@@ -85,9 +85,8 @@ $(document).on("DOMContentLoaded", function () {
                 var o = e.closest("[data-collection-field]");
                 var f = e.closest(".form-collection-item");
 
-                console.log(o, f);
                 $(o).find(f).on('hidden.bs.collapse', function() {
-                    console.log("collapse");
+                    
                     $(this).remove();
                     var l = o.dataset.numItems = $(o).find(".form-collection-item").length;
                     if (l == 0) {
