@@ -2,18 +2,17 @@
 
 namespace Base\Field;
 
-use Base\Field\Type\StockType;
+use Base\Field\Type\NumberType;
 use EasyCorp\Bundle\EasyAdminBundle\Contracts\Field\FieldInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FieldTrait;
 
-final class StockField implements FieldInterface
+final class NumberField implements FieldInterface
 {
     use FieldTrait;
 
     public const OPTION_NUM_DECIMALS = 'numDecimals';
     public const OPTION_ROUNDING_MODE = 'roundingMode';
     public const OPTION_STORED_AS_STRING = 'storedAsString';
-    public const OPTION_ALLOW_INFINITY = "allowInfinity";
     /**
      * @param string|false|null $label
      */
@@ -22,15 +21,24 @@ final class StockField implements FieldInterface
         return (new self())
             ->setProperty($propertyName)
             ->setLabel($label)
-            ->setTemplateName('crud/field/stock')
-            ->setTemplatePath('@EasyAdmin/crud/field/stock.html.twig')
-            ->setFormType(StockType::class)
-            ->addCssClass('field-stock')
+            ->setTemplateName('crud/field/number')
+            ->setTemplatePath('@EasyAdmin/crud/field/number.html.twig')
+            ->setFormType(NumberType::class)
+            ->addCssClass('field-number')
             ->setDefaultColumns(3)
-            ->setCustomOption(self::OPTION_ALLOW_INFINITY, false)
             ->setCustomOption(self::OPTION_NUM_DECIMALS, null)
             ->setCustomOption(self::OPTION_ROUNDING_MODE, \NumberFormatter::ROUND_HALFUP)
             ->setCustomOption(self::OPTION_STORED_AS_STRING, false);
+    }
+
+    public function setNumDecimals(int $num): self
+    {
+        if ($num < 0) {
+            throw new \InvalidArgumentException(sprintf('The argument of the "%s()" method must be 0 or higher (%d given).', __METHOD__, $num));
+        }
+
+        $this->setCustomOption(self::OPTION_NUM_DECIMALS, $num);
+        return $this;
     }
 
     public function step(float $step) { return $this->stepUp($step)->stepDown($step); }
@@ -42,22 +50,6 @@ final class StockField implements FieldInterface
     public function stepDown(float $stepDown) 
     {
         $this->setFormTypeOption("stepDown", $stepDown);
-        return $this;
-    }
-    
-    public function setNumDecimals(int $num): self
-    {
-        if ($num < 0) {
-            throw new \InvalidArgumentException(sprintf('The argument of the "%s()" method must be 0 or higher (%d given).', __METHOD__, $num));
-        }
-
-        $this->setCustomOption(self::OPTION_NUM_DECIMALS, $num);
-        return $this;
-    }
-
-    public function setAllowInfinity(bool $nullable = true)
-    {
-        $this->setCustomOption(self::OPTION_ALLOW_INFINITY, $nullable);
         return $this;
     }
 
