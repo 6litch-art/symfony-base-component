@@ -55,12 +55,15 @@ $(document).on("DOMContentLoaded", function () {
             $(btnUp).off("click");
             $(btnUp).on("click", function() 
             { 
-                var val = parseInt($(input).val());
-                if (isNaN(val))
-                    val = 0;
+                var stepUp = parseInt($(input).attr("data-stock-up")) ?? 1;
+                if (stepUp == 0) stepUp = 1;
 
-                if (val < parseInt($(input).attr("max")) || !$(input).attr("max"))
-                    val++;
+                var val = parseInt($(input).val());
+                if (isNaN(val)) val = 0;
+                if (val < parseInt($(input).attr("data-stock-max")) || !$(input).attr("data-stock-max"))
+                    val = val + Math.abs(stepUp);
+                if (val > parseInt($(input).attr("data-stock-max")) && $(input).attr("data-stock-max"))
+                    val = parseInt($(input).attr("data-stock-max"));
 
                 $(input).val(val);
             });
@@ -68,11 +71,15 @@ $(document).on("DOMContentLoaded", function () {
             $(btnDown).off("click");
             $(btnDown).on("click", function() 
             {
+                var stepDown = parseInt($(input).attr("data-stock-down")) ?? 1;
+                if (stepDown == 0) stepDown = 1;
+
                 var val = parseInt($(input).val());
-                if (isNaN(val))
-                    val = 0;
-                if (val > parseInt($(input).attr("min")) || !$(input).attr("min"))
-                    val--;
+                if (isNaN(val)) val = 0;
+                if (val > parseInt($(input).attr("data-stock-min")) || !$(input).attr("data-stock-min"))
+                    val = val - Math.abs(stepDown);
+                if (val < parseInt($(input).attr("data-stock-min")) && $(input).attr("data-stock-min"))
+                    val = parseInt($(input).attr("data-stock-min"));
 
                 $(input).val(val);
             });
@@ -83,48 +90,6 @@ $(document).on("DOMContentLoaded", function () {
                 if ($(input).val()) stockValue = $(input).val();
                 if ($(input).val() == "") setUnlimitedState(input);
             });
-
-            // var label = $('label[for="' + stockify.target.id + '"]');
-
-            // var targetCurrentState = o($(stockify.target).val(), {
-            //     remove: /[^A-Za-z0-9\s-]/g,
-            //     lower: !0,
-            //     strict: !0
-            // });
-
-            // if(targetCurrentState != stockify.currentState) stockify.unlock();
-
-            // stockify.target.setAttribute("data-required", stockify.target.getAttribute("required") || "");
-            // var isTargetRequired = (stockify.locked ? stockify.field.getAttribute("required") : stockify.target.getAttribute("data-required")) == "required";
-            // if (isTargetRequired) {
-            //     label.addClass("required");
-            //     stockify.target.setAttribute("required", true);
-            // } else {
-            //     label.removeClass("required");
-            //     stockify.target.removeAttribute("required");
-            // }
-
-            // stockify.lockButton.addEventListener("click", function () {
-
-            //     if(stockify.locked) stockify.updateValue();
-
-            //     var label = $('label[for="' + stockify.target.id + '"]');
-            //     var isTargetRequired = (stockify.locked ? stockify.field.getAttribute("required") : stockify.target.getAttribute("data-required")) == "required";
-            //     if (isTargetRequired) {
-            //         label.addClass("required");
-            //         stockify.target.setAttribute("required", true);
-            //     } else {
-            //         label.removeClass("required");
-            //         stockify.target.removeAttribute("required");
-            //     }
-
-            // });
-
-            // $(stockify.target).on('input', function() {
-
-            //     if(!stockify.locked) return;
-            //     stockify.updateValue();
-            // });
         }))
     });
 

@@ -1,6 +1,6 @@
 $(document).on("DOMContentLoaded", function () {
 
-    $(document).on("load.form_type.collection", function () {
+    $(document).on("load.collection_type", function () {
 
         var updateCollectionItemCssClasses = function (e) {
 
@@ -119,5 +119,5 @@ $(document).on("DOMContentLoaded", function () {
         });
     });
 
-    $(document).trigger("load.form_type.collection");
+    $(document).trigger("load.collection_type");
 });
