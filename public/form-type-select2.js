@@ -65,12 +65,11 @@ $(document).on("DOMContentLoaded", function () {
                 }
             }
 
-//            dataAdapter: CustomData
-
             //
             // Pre-populated data
+            $(field).empty();
             $(field).val(select2["selected"] || []).trigger("change");
-
+            
             var parent = parent || $(field).parent();
             $(field).select2(select2).on("select2:unselecting", function(e) {
             
