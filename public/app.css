@@ -25,7 +25,7 @@ textarea { min-height:150px !important; }
 
 .form-entity > .form-group:first-child { margin-bottom: 0em; }
 
-.form-translatable .nav-tabs label { padding:0; }
+.form-translatable .nav-tabs label { padding:0; cursor:pointer;}
 .form-translatable .tab-pane > div { margin-bottom: 1.5em; }
 .form-translatable .tab-pane > div:first-child { padding: 0.5em 0 0 0; }
 .form-translatable .tab-pane > div:last-child { margin-bottom: 0; }
@@ -80,9 +80,9 @@ textarea { min-height:150px !important; }
     padding:1em 1em 0em 1em;
 }
 
+.form-collection[data-num-items="0"] .form-collection-add-button { border-top: 0 !important ; }
 .form-collection-add-button {
 
-    border-top: 1px solid lightgrey;
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
     border-bottom-left-radius: 4px !important;
@@ -112,7 +112,6 @@ textarea { min-height:150px !important; }
 .form-collection-items,
 .form-collection-items > .form-group { border:0; padding: 0 !important; }
 
-.form-collection-items .form-collection-item { border-bottom: 1px solid lightgrey;}
 .accordion-body { margin:0; padding:0; }
 .form-collection-items .accordion-item .form-control > div span,
 .form-collection-items .accordion-item .form-control > div label,
@@ -217,9 +216,9 @@ textarea { min-height:150px !important; }
     padding:1em 1em 0em 1em;
 }
 
+.form-array[data-num-items="0"] .form-array-add-button { border-top: 0 !important ; }
+
 .form-array-add-button i { margin-right:0.25em;}
-
-
 .form-array-add-button
 {
     border-top-left-radius: 0px !important;
@@ -653,6 +652,12 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .select2-results__option.loading-results { order:1 !important; }
 .select2-results__option--load-more { order:0 !important; }
 .select2-selection--multiple .select2-selection__clear { top:0 !important; right: 1.6em !important; }
+.select2-selection__clear {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+}
 .select2-selection--multiple .select2-selection__choice { margin-top: 0.35em !important; }
 .select2-selection__choice { display:flex; justify-content: center; }
 .select2-selection__entry i { min-width:20px; margin-right:0.1em; }

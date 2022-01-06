@@ -35,7 +35,7 @@ $(document).on("DOMContentLoaded", function () {
                 var i = o.dataset.formTypeNamePlaceholder,
                     n = new RegExp(i + "__label__", "g"),
                     a = new RegExp(i, "g"),
-                    s = o.dataset.prototype.replace(n, ++l).replace(a, l);
+                    s = o.dataset.prototype.replace(n, l).replace(a, l++);
                 
                 o.dataset.numItems = l;
 

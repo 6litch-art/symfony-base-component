@@ -65,6 +65,8 @@ $(document).on("DOMContentLoaded", function () {
                 }
             }
 
+//            dataAdapter: CustomData
+
             //
             // Pre-populated data
             $(field).val(select2["selected"] || []).trigger("change");
