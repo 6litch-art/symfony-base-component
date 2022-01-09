@@ -106,13 +106,13 @@ $(document).on("DOMContentLoaded", function () {
 
                 if(!openClick) {
 
-                    // let container = $(parent).after(field).find(".select2.select2-container")[0];
+                    let container = $(field.nextElementSibling).find(".select2.select2-container")[0];
                     let results = $(document.body).find(".select2-results")[0];
                     let target = e.target;
 
                     if(!select2["closeOnSelect"]) {
 
-                        do { if (target == results) return; } 
+                        do { if (target == container || target == results) return; } 
                         while ((target = target.parentNode));
                     }
 
@@ -124,10 +124,10 @@ $(document).on("DOMContentLoaded", function () {
 
             var sortable = el.getAttribute("data-select2-sortable") || false;
             if(sortable) {
-                
-                var choices = $(parent).after(el).find("ul.select2-selection__rendered");
+
+                var choices = $(el.nextElementSibling).find("ul.select2-selection__rendered");
                     choices.sortable({containment: 'parent', update: function() { 
-                        
+
                         var selectElement = $("#"+el.getAttribute("data-select2-field"));
                         var orderBy = selectElement.parent().find("ul.select2-selection__rendered").children("li[title]").map(function(i, obj){
                             return this.getAttribute("title");
