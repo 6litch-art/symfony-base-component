@@ -67,7 +67,7 @@ $(document).on("DOMContentLoaded", function () {
 
             //
             // Pre-populated data
-            $(field).empty();
+            if(select2["data"].length != 0) $(field).empty();
             $(field).val(select2["selected"] || []).trigger("change");
             
             var parent = parent || $(field).parent();

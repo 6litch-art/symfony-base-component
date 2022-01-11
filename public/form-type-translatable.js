@@ -26,7 +26,7 @@ $(document).on("DOMContentLoaded", function () {
             var allLocales = requiredLocales.concat(optionalLocales);
 
             var submitFn = function (event) {
-
+                // console.log("xxx");
                 if($(this).data("xcheck")) return;
 
                 var requiredFields          = {};
