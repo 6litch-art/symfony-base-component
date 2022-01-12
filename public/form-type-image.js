@@ -10,7 +10,10 @@ $(document).on("DOMContentLoaded", function () {
             var ajaxPost       = el.getAttribute("data-image-ajaxPost");
             var postDeletePath = el.getAttribute("data-image-postDeletePath");
 
-            var cropper        = $(el).data("image-cropper") || null;
+            var lightboxOptions = $(el).data("image-lightbox") || null;
+            if (lightboxOptions) lightbox.option(lightboxOptions);
+
+            var cropper        = $(el).data("image-cropper") || null;
             if (cropper) {
 
                 var imageCropper;

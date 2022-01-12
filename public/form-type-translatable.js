@@ -3,9 +3,11 @@ $(document).on("DOMContentLoaded", function () {
     $(document).on("load.form_type.translatable", function () {
 
         var submitButtons = document.querySelectorAll('button[type="submit"]');
+    
         document.querySelectorAll("form .form-translatable").forEach(function (e) {
-
+            
             var form = e.closest("form");
+
             var formButtons = form.querySelectorAll('button[type="submit"]');
             var navTabs = $(e).find(".nav-tabs");
 
@@ -18,15 +20,16 @@ $(document).on("DOMContentLoaded", function () {
 
             var requiredLocales = [];
             var optionalLocales = [];
+
             $(navTabs).find("button").each(function() {
                 if( $(this).find("label").hasClass("required") ) requiredLocales.push(this.getAttribute("aria-controls"));
                 else optionalLocales.push(this.getAttribute("aria-controls"));
             });
-
+            
             var allLocales = requiredLocales.concat(optionalLocales);
 
             var submitFn = function (event) {
-                // console.log("xxx");
+
                 if($(this).data("xcheck")) return;
 
                 var requiredFields          = {};
@@ -59,7 +62,7 @@ $(document).on("DOMContentLoaded", function () {
                     }
                 });
 
-                if(form.checkValidity()) {
+                if(form.checkValidity() || allLocales.length == 0) {
                     $(this).data("xcheck", true);
                     return $(this).click();
                 }
@@ -100,8 +103,10 @@ $(document).on("DOMContentLoaded", function () {
                 return false;
             };
 
-            $(buttons).off("click.translatable.submit");
-            $(buttons).on("click.translatable.submit", submitFn);
+            if(allLocales.length > 0) {
+                $(buttons).off("click.translatable.submit");
+                $(buttons).on("click.translatable.submit", submitFn);
+            }
         });
     });
 
