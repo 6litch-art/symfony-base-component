@@ -1,7 +1,9 @@
 .lightbox {
-    top: 10% !important;
-    max-height: 80% !important;
-    position:fixed !important;
+    position: fixed;
+    left: calc((50vw - 50%) * -1) !important;
+    top: 5% !important;
+    max-height:75% !important;
+    transform: translate(calc(50vw - 50%)) !important;
 }
 
 figure { margin: 0 !important; }

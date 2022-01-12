@@ -10,6 +10,9 @@ $(document).on("DOMContentLoaded", function () {
             var id       = el.getAttribute("data-file-field");
             var dropzone = $(el).data('file-dropzone');
 
+            var lightboxOptions = $(el).data("file-lightbox") || null;
+            if (lightboxOptions) lightbox.option(lightboxOptions);
+
             var entityIdList = $("#"+id+"_dropzone").data("entity-id") ?? [];
             function updateMetadata(el = $("#"+id), nFiles)
             {
@@ -63,7 +66,7 @@ $(document).on("DOMContentLoaded", function () {
                             var uuid = path.substring(path.lastIndexOf('/') + 1);
 
                             var entityId = entityIdList[uuid] ?? null;
-                            var mock = {status: 'existing', name: '#'+id, entityId: entityId, uuid: uuid, type: blob.type, size: blob.size};
+                            var mock = {status: 'existing', name: '#'+id, path:path, entityId: entityId, uuid: uuid, type: blob.type, size: blob.size};
 
                             editor.files.push(mock);
                             
@@ -175,6 +178,9 @@ $(document).on("DOMContentLoaded", function () {
                         if(file.status == "existing") {
 
                             $(preview).data("uuid", file.uuid);
+
+                            var span = $(preview).find(".dz-size")[0];
+                            span.innerHTML = "<a href="+file.path+" data-lightbox='lightbox-"+id+"'>"+ span.innerHTML + "</a>";
 
                             if(file.entityId !== null) {
                                 var span = $(preview).find(".dz-filename > span")[0];
