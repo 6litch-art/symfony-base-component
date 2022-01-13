@@ -79,7 +79,7 @@ $(document).on("DOMContentLoaded", function () {
 
                             var formTranslations = $(this).closest(".form-translatable");
                             var id = formTranslations.attr("id") + "_" + locale;
-                            
+
                             var invalidRequiredField = $('[id^="'+id+'_"]:required:invalid');
                             if (invalidRequiredField.length) {
 
@@ -116,7 +116,7 @@ $(document).on("DOMContentLoaded", function () {
                     });
 
                     if(!focusTriggered)
-                        console.error(this," is invalid, but no focus triggered..");
+                        form.reportValidity();
 
                     return false;
                 };

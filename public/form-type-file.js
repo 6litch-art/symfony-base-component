@@ -226,14 +226,25 @@ $(document).on("DOMContentLoaded", function () {
 
             } else {
 
-                $('#'+id+'_deleteBtn').on('click', function() {
-                    $('#'+id+'_raw').val('');
-                    $('#'+id+'_deleteBtn').css('display', 'none');
+                var fileType  = $('#'+id+'_file');
+                var rawType   = $('#'+id+'_raw');
+                var deleteBtn = $('#'+id+'_deleteBtn');
+
+                if (fileType.attr("required") === "required" && fileType.val() === '') 
+                    rawType.attr("required", "required")
+
+                deleteBtn.on('click', function() {
+
+                    rawType.val('');
+                    deleteBtn.css('display', 'none');
+
+                    if (fileType.attr("required") === "required") 
+                        rawType.attr("required", "required")
                 });
                 
-                $('#'+id+'_raw').on('change', function() {
-                    if( $('#'+id+'_raw').val() !== '') $('#'+id+'_deleteBtn').css('display', 'block');
-                    else $('#'+id+'_deleteBtn').css('display', 'none');
+                rawType.on('change', function() {
+                    if( rawType.val() !== '') deleteBtn.css('display', 'block');
+                    else deleteBtn.css('display', 'none');
                 });
             }
 
