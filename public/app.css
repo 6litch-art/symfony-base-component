@@ -72,6 +72,11 @@ textarea { min-height:150px !important; }
 .form-translatable .tab-pane { padding: 0.5em 0em; }
 .form-translatable .tab-content { border-bottom: var(--border-width) solid var(--border-color); }
 .form-translatable { padding:0 !important; }
+.form-translatable .nav-link.active
+{
+    background-color: white;
+    border-bottom: 1px solid white;
+}
 
 .form-entity > .form-group:first-child { padding-top: 0 ; }
 .form-entity > div { margin-bottom: 1.5em; }
