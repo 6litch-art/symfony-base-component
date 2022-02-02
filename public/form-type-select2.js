@@ -18,7 +18,8 @@ $(document).on("DOMContentLoaded", function () {
                     dataAttribute = key + "=\"" + value+"\" ";
                 });
 
-                return $('<span class=\"select2-selection__entry\" '+dataAttribute+'>' + (option.html ? option.html : (option.icon ? '<span><i class=\"fa-fw '+option.icon+'\"></i></span>  ' : '') + option.text + '</span>')); 
+                var tab = field.data("tabulation") || "1.75em";
+                return $('<span style="margin-left:calc('+tab+' * '+option["depth"]+')" class=\"select2-selection__entry\" '+dataAttribute+'>' + (option.html ? option.html : (option.icon ? '<span><i class=\"fa-fw '+option.icon+'\"></i></span>  ' : '') + option.text + '</span>')); 
             };
 
             var select2 = JSON.parse(el.getAttribute("data-select2-options")) || {};
@@ -142,6 +143,5 @@ $(document).on("DOMContentLoaded", function () {
         }));
     });
 
-    $(document).trigger("load.form_type.select2");
     $(document).trigger("load.form_type.select2");
 });

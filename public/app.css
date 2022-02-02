@@ -54,12 +54,12 @@ textarea { min-height:150px !important; }
     margin:0.5em 0;
 }
 
-.has-error input {
+.has-error .form-control, .has-error input, .has-error select, .has-error .select2-selection {
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23cd3c63'%3E%3Ccircle cx='6' cy='6' r='4.5'/%3E%3Cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3E%3Ccircle cx='6' cy='8.2' r='.6' fill='%23cd3c63' stroke='none'/%3E%3C/svg%3E");
     background-position: right calc(.375em + .1875rem) center;
     background-repeat: no-repeat;
     background-size: calc(.75em + .375rem) calc(.75em + .375rem);
-    border-color: #cd3c63;
+    border-color: #cd3c63 !important;
     padding-right: calc(1.5em + .75rem);
 }
 
@@ -709,9 +709,10 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .select2-selection__choice { display:flex; justify-content: center; }
 .select2-selection__entry i { min-width:20px; margin-right:0.1em; }
 .select2-selection__entry { margin:0 0.25em; }
+.select2-selection__choice .select2-selection__entry { margin:0 0.25em !important; }
 
 .select2-selection--vertical .select2-selection__choice  { width:calc(100% - 40px); display:flex; justify-content: start !important; }
-.select2-selection--vertical .select2-search--inline  { display: none !important; }
+/* .select2-selection--vertical .select2-search--inline  { display: none !important; } */
 
 form input[type="submit"] { margin-top:0.75em; }
 form input[type="reset"]  { margin-top:0.75em; }
