@@ -155,7 +155,9 @@ $(document).on("DOMContentLoaded", function () {
                     }, {
                         key: "unlock",
                         value: function () {
+                            
                             this.locked = !1, this.lockButtonIcon.classList.replace("fa-lock", "fa-lock-open"), this.field.removeAttribute("readonly")
+                            this.field.value = this.currentSlug;
                         }
                     }, {
                         key: "lock",
@@ -220,6 +222,10 @@ $(document).on("DOMContentLoaded", function () {
                             slugger.target.removeAttribute("required");
                         }
 
+                    });
+
+                    $(slugger.field).on('input', function() {
+                        slugger.currentSlug = this.value;
                     });
 
                     $(slugger.target).on('input', function() {
