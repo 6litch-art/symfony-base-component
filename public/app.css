@@ -4,9 +4,9 @@
 .locale li { font-weight: normal; }
 .locale li.active { font-weight: bold; }
 
+
 .locale-dropdown .dropdown-item { padding: 0.5em; }
 .locale-dropdown .dropdown-item .country-flag { margin-right:0.25em; }
-.locale-dropdown .dropdown-menu { padding:0.25em 0 !important; margin-top:2em !important; }
 .locale-dropdown .dropdown-menu li { padding: 0.25em 0.5em 0.25em 0.5em !important; }
 .locale-dropdown button i { margin-right:0.25em; }
 .locale-dropdown button
@@ -16,20 +16,7 @@
     justify-content:center;
 }
 
-.locale-dropdown .dropdown-toggle:focus
-{
-    box-shadow: none !important;
-}
-
-.locale-dropdown .dropdown-menu
-{
-    transition: .25s, transform .25s ease;
-    -moz-transition: .25s, transform .25s ease;
-    -webkit-transition: .25s, transform .25s ease;
-}
-
 .locale-dropdown .actions .action-icon { top: 0 !important;}
-.locale-dropdown .dropdown-menu.show { opacity: 1; }
 
 .lightbox {
     position: fixed;
