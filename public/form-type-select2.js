@@ -5,7 +5,6 @@ $(document).on("DOMContentLoaded", function () {
         document.querySelectorAll("[data-select2-field]").forEach((function (el) {
 
             var field = $("#"+el.getAttribute("data-select2-field"));
-
             var defaultTemplate = function(option, that) { 
 
                 dataAttribute = "";
@@ -18,8 +17,17 @@ $(document).on("DOMContentLoaded", function () {
                     dataAttribute = key + "=\"" + value+"\" ";
                 });
 
-                var tab = field.data("tabulation") || "1.75em";
-                return $('<span style="margin-left:calc('+tab+' * '+option["depth"]+')" class=\"select2-selection__entry\" '+dataAttribute+'>' + (option.html ? option.html : (option.icon ? '<span><i class=\"fa-fw '+option.icon+'\"></i></span>  ' : '') + option.text + '</span>')); 
+                var tab   = field.data("tabulation") || "1.75em";
+                var depth = option["depth"] || 0;
+
+                var href  = field.data("select2-href") || undefined;
+                    href = option.id && href !== undefined ? href.replace("{0}", option.id) : undefined;
+
+                return $('<span style="margin-left:calc('+tab+' * '+depth+')" class=\"select2-selection__entry\" '+dataAttribute+'><span>' + 
+                            (option.html ? option.html : (option.icon ? '<i style="text-align: center; width: 1.25em;" class=\"'+option.icon+'\"></i> ' : '') + 
+                            (option.text) + "</span>" +
+                            (href ? '<span style="margin-left:1em"><a href="'+href+'"><i style="text-align: center; width: 1.25em;" class=\"fas fa-external-link-square-alt\"></i></span>' : '') +
+                        '</span>')); 
             };
 
             var select2 = JSON.parse(el.getAttribute("data-select2-options")) || {};
@@ -65,6 +73,22 @@ $(document).on("DOMContentLoaded", function () {
                     });
                 }
             }
+
+            // Multiplicity option !
+            // query: function(query) {
+            //     var data = { results: []};
+            //     for (var i = 0; i < fruits.length; i++) {
+            //         data.results.push({"id": fruits[i] + "/" + counter, "text": fuits[i]});
+            //     }
+            //     counter += 1;
+            //     query.callback(data);
+            // },
+            // formatSelection: function(item) {
+            //     return item.text; // display apple, pear, ...
+            // },
+            // formatResult: function(item) {
+            //     return item.id; // display apple/1, pear/2, ... Return item.text to see apple, pear, ...
+            // },
 
             //
             // Pre-populated data

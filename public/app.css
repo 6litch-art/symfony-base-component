@@ -1,8 +1,8 @@
-.locale { display:flex; list-style: none; }
-.locale li { padding: 0 0.25em !important; }
-.locale li:first-child { border:0; }
-.locale li { font-weight: normal; }
-.locale li.active { font-weight: bold; }
+.locale-dropdown .locale { display:flex; list-style: none; }
+.locale-dropdown .locale li { padding: 0 0.25em !important; }
+.locale-dropdown .locale li:first-child { border:0; }
+.locale-dropdown .locale li { font-weight: normal; }
+.locale-dropdown .locale li.active { font-weight: bold; }
 
 
 .locale-dropdown .dropdown-item { padding: 0.5em; }
@@ -681,6 +681,20 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .select2-container { display: block !important; }
 .select2-results__options { display:flex; flex-direction: column; }
 .select2-results__option { order:-1; }
+.select2-results__option .select2-selection__entry { 
+    display:flex; 
+    justify-content:space-between;
+    flex-direction:row; 
+}
+
+.select2-results__option--highlighted a { color:white !important; }
+.select2-selection--hide { display: none !important; }
+.select2-selection.select2-selection--wrap
+{
+    border: 1px solid #ced4da !important;
+    border-radius: 0.25rem !important; 
+}
+
 .select2-results__option.loading-results { order:1 !important; }
 .select2-results__option--load-more { order:0 !important; }
 .select2-selection--multiple .select2-selection__clear { line-height:0 !important; top:0 !important; right: 1.6em !important; }
@@ -696,8 +710,8 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .select2-selection__choice { display:flex; justify-content: center; }
 .select2-selection__entry i { min-width:20px; margin-right:0.1em; }
 .select2-selection__entry { margin:0 0.25em; }
-.select2-selection__choice .select2-selection__entry { margin:0 0.25em !important; }
 
+.select2-selection__choice .select2-selection__entry { margin:0 0.25em !important; }
 .select2-selection--vertical .select2-selection__choice  { width:calc(100% - 40px); display:flex; justify-content: start !important; }
 /* .select2-selection--vertical .select2-search--inline  { display: none !important; } */
 
