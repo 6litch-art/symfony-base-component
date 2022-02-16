@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ImageType extends FileType
+class CropperType extends FileType
 {
     public function getBlockPrefix(): string { return 'imageupload'; }
     public function getParent() : ?string { return FileType::class; }
@@ -17,13 +17,9 @@ class ImageType extends FileType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'thumbnail'   => "bundles/base/images.svg",
-
             'cropper'     => null,
             'cropper-js'  => $this->baseService->getParameterBag("base.vendor.cropperjs.javascript"),
             'cropper-css' => $this->baseService->getParameterBag("base.vendor.cropperjs.stylesheet"),
-            
-            'mime_types'  => ["image/*"]
         ]);
 
         $resolver->setAllowedTypes("cropper", ['null', 'array']);
@@ -37,11 +33,6 @@ class ImageType extends FileType
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        if(!($view->vars["accept"] ?? false) ) 
-             $view->vars["accept"] = "image/*";
-
-        $view->vars["thumbnail"] = $this->baseService->getAsset($options["thumbnail"]);
-
         $view->vars["cropper"] = null;
         if(is_array($options["cropper"])) {
 
@@ -54,6 +45,6 @@ class ImageType extends FileType
             $view->vars["cropper"]  = json_encode($options["cropper"]);
         }
 
-        $this->baseService->addHtmlContent("javascripts:body", "bundles/base/form-type-image.js");
+        $this->baseService->addHtmlContent("javascripts:body", "bundles/base/form-type-cropper.js");
     }
 }
