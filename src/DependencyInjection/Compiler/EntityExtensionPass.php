@@ -2,23 +2,23 @@
 
 namespace Base\DependencyInjection\Compiler;
 
-use Base\Service\IconService;
+use Base\Database\Annotation\EntityExtension;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class IconProviderPass implements CompilerPassInterface
+class EntityExtensionPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
         // always first check if the primary service is defined
-        if (!$container->has(IconService::class))
+        if (!$container->has(EntityExtension::class))
             return;
 
-        $definition = $container->findDefinition(IconService::class);
+        $definition     = $container->findDefinition(EntityExtension::class);
+        $taggedServices = $container->findTaggedServiceIds('base.entity_extension');
 
-        $taggedServices = $container->findTaggedServiceIds('base.icon_provider');
         foreach ($taggedServices as $id => $tags)
-            $definition->addMethodCall('addProvider', [new Reference($id)]);
+            $definition->addMethodCall('addExtension', [new Reference($id)]);
     }
 }
