@@ -182,10 +182,11 @@ $(document).on("DOMContentLoaded", function () {
                             var span = $(preview).find(".dz-size")[0];
                             span.innerHTML = "<a href="+file.path+" data-lightbox='lightbox-"+id+"'>"+ span.innerHTML + "</a>";
 
-                            if(file.entityId !== null) {
+                            var _href = $("#"+id+"_dropzone").data("file-href");
+                            if(file.entityId !== null && _href) {
+
                                 var span = $(preview).find(".dz-filename > span")[0];
-                                    span.innerHTML = "<a href="+$("#"+id+"_dropzone").data("file-href"  )
-                                                                                    .replace("{0}", file.entityId)+">"+ span.innerHTML + "</a>";
+                                    span.innerHTML = "<a href="+_href.replace("{0}", file.entityId)+">"+ span.innerHTML + "</a>";
                             }
                         }
                     });

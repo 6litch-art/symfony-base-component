@@ -5,8 +5,8 @@ namespace Base\Controller\Dashboard\Crud\Layout;
 use Base\Field\TranslationField;
 
 use Base\Controller\Dashboard\AbstractCrudController;
-use Base\Field\SlugField;
-use Base\Field\Type\QuillType;
+use Base\Field\CropperField;
+use Base\Field\ImageField;
 
 class SettingCrudController extends AbstractCrudController
 {
@@ -16,12 +16,8 @@ class SettingCrudController extends AbstractCrudController
     {
         return parent::configureFields($pageName, function () {
 
-            yield SlugField::new('path');
-
-            yield TranslationField::new("label")->renderAsHtml();
-            yield TranslationField::new("help" )->renderAsHtml()->setRequired(false)
-                    ->setFields(["help" => ["form_type" => QuillType::class]])
-                    ->setExcludedFields("value");
+            yield ImageField::new('source');
+            yield CropperField::new('crops');
 
         }, $args);
     }

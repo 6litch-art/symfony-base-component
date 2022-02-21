@@ -159,7 +159,7 @@ $(document).on("DOMContentLoaded", function () {
                         });
 
                         orderBy.each(i => {
-                            const item = Array.from(selectElement.children()).find(x => x.innerText === orderBy[i]);
+                            const item = Array.from(selectElement.find("option")).find(x => x.innerText === orderBy[i]);
                             if (item) item.parentElement.appendChild(item);
                         });
                     }});
