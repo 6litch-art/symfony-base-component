@@ -14,6 +14,7 @@ $(document).on("DOMContentLoaded", function () {
 
             var amount       = $("#"+id).val();
             var scale        = $(e).data("scale-field") || 0;
+            var target       = $("#"+$(e).data("target-field"));
             var baseExchange = 1;
             
             function str2num(amount, scale) {
