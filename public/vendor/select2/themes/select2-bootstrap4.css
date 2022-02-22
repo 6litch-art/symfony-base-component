@@ -1,7 +1,3 @@
-.select2-container--bootstrap4 .select2-selection--single {
-  height: calc(1.5em + 0.75rem + 4px) !important;
-}
-
 .select2-container--bootstrap4 .select2-selection--single .select2-selection__placeholder {
   color: #757575;
   line-height: calc(1.5em + 0.75rem);
