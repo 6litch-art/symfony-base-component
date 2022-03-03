@@ -697,7 +697,8 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 
 .select2-results__option.loading-results { order:1 !important; }
 .select2-results__option--load-more { order:0 !important; }
-.select2-selection--multiple .select2-selection__clear { line-height:0 !important; top:0 !important; right: 1.6em !important; }
+.select2-container--bootstrap4 .select2-selection--multiple .select2-selection__rendered { padding-right: 25px !important; }
+.select2-selection--multiple .select2-selection__clear { line-height:0 !important; top:0 !important; right: 0.75em !important; }
 .select2-selection__clear {
     display: flex !important;
     align-items: center !important;
