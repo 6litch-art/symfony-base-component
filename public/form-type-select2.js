@@ -151,18 +151,23 @@ $(document).on("DOMContentLoaded", function () {
             if(sortable) {
 
                 var choices = $(el.nextElementSibling).find("ul.select2-selection__rendered");
-                    choices.sortable({containment: 'parent', update: function() { 
+                    choices.sortable({
+                        containment: 'parent',
+                        swapThreshold: 0.50,
+                        animation: 150,
+                        update: function() {
 
-                        var selectElement = $("#"+el.getAttribute("data-select2-field"));
-                        var orderBy = selectElement.parent().find("ul.select2-selection__rendered").children("li[title]").map(function(i, obj){
-                            return this.getAttribute("title");
-                        });
+                            var selectElement = $("#"+el.getAttribute("data-select2-field"));
+                            var orderBy = selectElement.parent().find("ul.select2-selection__rendered").children("li[title]").map(function(i, obj){
+                                return this.getAttribute("title");
+                            });
 
-                        orderBy.each(i => {
-                            const item = Array.from(selectElement.find("option")).find(x => x.innerText === orderBy[i]);
-                            if (item) item.parentElement.appendChild(item);
-                        });
-                    }});
+                            orderBy.each(i => {
+                                const item = Array.from(selectElement.find("option")).find(x => x.innerText === orderBy[i]);
+                                if (item) item.parentElement.appendChild(item);
+                            });
+                        },
+                    });
             }
         }));
     });

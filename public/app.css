@@ -677,6 +677,18 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 }
 
 /* Additional customization for select2 */
+
+.select2-ghost
+{
+    background-color: #C8EBFB !important;
+}
+
+.select2-selected
+{
+        background-color: green !important;
+        border: solid green 1px !important;
+        z-index: 1 !important;
+}
 .select2-selection { padding:0em !important; }
 .select2-container { display: block !important; }
 .select2-results__options { display:flex; flex-direction: column; }
@@ -730,10 +742,12 @@ form .btn[type="reset"]   { margin-top:0.75em; }
 .field-form_row.col-xl-12, .field-form_row.col-xxl-12
 { border-bottom: var(--border-width) solid var(--border-color); }
 
-.input-group-text { height:100%; }
+.input-group-text { height:100%; background-color:#F0F0F0; }
 .input-group-text .btn,
 .input-group-text .btn:not(:disabled):not(.disabled):not(.btn-link):hover,
 .input-group-text .btn:not(:disabled):not(.disabled):not(.btn-link):focus { background-color:transparent; border:0; box-shadow:none; height:100%; padding:1px; margin:0; }
+
+.select2-selection--multiple .select2-selection__choice { background-color: #FDFDFD; }
 
 .form-stock .input-group-text { padding-top:5px; }
 .form-stock input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
