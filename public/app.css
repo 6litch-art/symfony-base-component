@@ -480,7 +480,7 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .ql-editor h4 { margin: 0.5em 3.00em !important; }
 .ql-editor h5 { margin: 0.5em 4.00em !important; }
 .ql-editor h6 { margin: 0.5em 5.00em !important; }
-.ql-editor p  { margin: 0.0em 5.00em !important; }
+.ql-editor p  { margin: 0.0em 0.00em !important; }
 
 .avatarupload .deleteBtn > i:hover { color:#A00A; }
 .avatarupload .deleteBtn > i {
