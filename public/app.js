@@ -70,3 +70,17 @@ setCookie("user", getUser(), 30*24*3600, true);
 window.addEventListener('resize', function(event) {
     setCookie("user", getUser(), 30*24*3600);
 });
+
+window.addEventListener('load', function(event) {
+
+    $("[type=submit]").click(function() {
+
+        const style = getComputedStyle(document.body);
+        
+        var el = $(".has-error");
+        if(el.length) return $([document.documentElement, document.body]).animate({scrollTop: $(el[0]).offset().top - parseInt(style["scroll-padding-top"])});
+
+        var el = $(":invalid");
+        if(el.length) return $([document.documentElement, document.body]).animate({scrollTop: $(el[el.length-1]).offset().top - parseInt(style["scroll-padding-top"])});
+    });
+});
