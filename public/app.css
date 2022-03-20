@@ -403,8 +403,8 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 125px;
-    width: 125px;
+    min-height: 125px;
+    min-width: 125px;
     margin-right: 1em;
 
     border-radius: 1em;
