@@ -42,19 +42,12 @@ function setCookie(name, value, expires, reloadIfNotSet = false, path = "/")
     if (cookie == null) reload = reloadIfNotSet;
     
     if(typeof value == "object") value = JSON.stringify(value);
-    
-    try {
-    
-        document.cookie = name + "=" + value +
-                        ";path=" + path +
-                        ";expires = " + expires.toGMTString() + "; SameSite=None; Secure";
+    try { document.cookie = name + "=" + value +
+                      ";path=" + path +
+                      ";expires = " + expires.toGMTString() + "; SameSite=None;";
+    } catch (e) { console.error(e); }
 
-        if(reload) location.reload();
-
-    } catch (e) {
-
-        console.error(e);
-    }
+    if(reload) location.reload();
 }
 
 function getUser()
