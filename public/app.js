@@ -42,10 +42,20 @@ function setCookie(name, value, expires, reloadIfNotSet = false, path = "/")
     if (cookie == null) reload = reloadIfNotSet;
     
     if(typeof value == "object") value = JSON.stringify(value);
+
     try { document.cookie = name + "=" + value +
-                      ";path=" + path +
-                      ";expires = " + expires.toGMTString() + "; SameSite=None;";
-    } catch (e) { console.error(e); }
+        ";path=" + path +
+        ";expires = " + expires.toGMTString() + "; SameSite=Strict; secure";
+    } catch (e) { 
+
+        try { document.cookie = name + "=" + value +
+            ";path=" + path +
+            ";expires = " + expires.toGMTString() + "; SameSite=Strict;";
+        } catch (e) { 
+            console.error(e);
+            reload = false; 
+        }
+    }
 
     if(reload) location.reload();
 }
