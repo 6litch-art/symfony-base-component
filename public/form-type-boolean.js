@@ -15,15 +15,28 @@ $(document).on("DOMContentLoaded", function () {
                 var checkbox = $(this);
                 if (onConfirmation) {
                     onConfirmation = false;
+
                     return true;
                 }
 
-                if ((checkbox.checked && onCheck) || (!checkbox.checked && onUncheck)) {
+                if ((checkbox.prop("checked") && onCheck) || (!checkbox.prop("checked") && onUncheck)) {
 
                     $('#'+id+'-modal').modal('show');
                     e.preventDefault();
                     return false;
                 }
+                
+                var checkboxBak = !checkbox.prop("checked");
+                fetch(checkbox.data("toggle-url") + "&newValue=" + checkbox.prop("checked").toString(), {
+                    method: "PATCH",
+                    headers: { "X-Requested-With": "XMLHttpRequest" }
+                }).then((function (t) {
+                    checkbox.removeClass("invalid-feedback d-block");
+                })).then((function () {})).catch((function () {
+                    console.log("ARG", checkboxBak);
+                    checkbox.prop("checked", checkboxBak).addClass("invalid-feedback d-block");
+                    console.log(checkbox.prop("checked"));
+                }));
             });
 
             $("#"+id+"-confirm").on("click", function (e) {

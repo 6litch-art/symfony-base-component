@@ -694,6 +694,15 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     margin:0 5px;
 }
 
+.form-switch .form-check-input.invalid-feedback:not(:checked) {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='rgb(255, 0, 0, 0.3)'/%3E%3C/svg%3E") !important;
+}
+.form-switch .form-check-input.invalid-feedback:checked {
+    background-color: #F008;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='rgb(255, 255, 255, 1)'/%3E%3C/svg%3E");
+    border-color: #F003;
+}
+
 .form-switch .form-check-input:checked {
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='rgb(255, 255, 255, 1)'/%3E%3C/svg%3E");
 }
