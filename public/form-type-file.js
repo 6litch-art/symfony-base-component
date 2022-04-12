@@ -43,6 +43,13 @@ $(document).on("DOMContentLoaded", function () {
                 var sortable = $(el).data("file-sortable");
                 var ajax     = el.getAttribute("data-file-ajax");
                 
+                // Initialize existing pictures
+                var val = $('#'+id).val();
+
+                // Hide loading spinner if no value
+                nVal = (!val || val.length === 0 ? 0 : val.split('|').length);
+                if(nVal === 0) $("#"+id+"_loader").hide();
+
                 dropzone["init"] = function() {
 
                     // Initialize existing pictures
@@ -180,7 +187,7 @@ $(document).on("DOMContentLoaded", function () {
                             $(preview).data("uuid", file.uuid);
 
                             var span = $(preview).find(".dz-size")[0];
-                            span.innerHTML = "<a href="+file.path+" data-lightbox='lightbox-"+id+"'>"+ span.innerHTML + "</a>";
+                                span.innerHTML = "<a href="+file.path+" data-lightbox='lightbox-"+id+"' loading='lazy'>"+ span.innerHTML + "</a>";
 
                             var _href = $("#"+id+"_dropzone").data("file-href");
                             if(file.entityId !== null && _href) {
@@ -220,7 +227,9 @@ $(document).on("DOMContentLoaded", function () {
                     });
                 };
 
-                let editor = new Dropzone("#"+id+"_dropzone", dropzone);
+                let editor = $("#"+id+"_dropzone")[0].dropzone;
+                if (editor === undefined)
+                    editor = new Dropzone("#"+id+"_dropzone", dropzone);
 
                 if(sortable)
                     var sortable = new Sortable(document.getElementById(id+'_dropzone'), {draggable: '.dz-preview'});
