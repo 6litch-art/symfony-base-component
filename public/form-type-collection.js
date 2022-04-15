@@ -98,6 +98,7 @@ $(document).on("DOMContentLoaded", function () {
                 var r = o.querySelector(d);
 
                 r.insertAdjacentHTML("beforeend", s);
+
                 updateCollectionItemCssClasses(o);
                 var m = r.querySelectorAll(".form-collection-item"),
                     u = m[m.length - 1];
@@ -119,8 +120,9 @@ $(document).on("DOMContentLoaded", function () {
         document.querySelectorAll("button.form-collection-add-button").forEach(addAction);
         document.querySelectorAll("button.form-collection-delete-button").forEach(deleteAction);
 
-        $(document).off("collection.item-added collection.item-removed");
-        $(document).on ("collection.item-added collection.item-removed", function() {
+        $(document).off("collection.item-added");
+        $(document).on ("collection.item-added", function() {
+
             $(document).trigger("load.form_type");
             $(document).trigger("load.collection_type");
         });
