@@ -1,5 +1,7 @@
 $(document).on("DOMContentLoaded", function () {
 
+    var localCache = {};
+
     $(document).on("load.form_type.select2", function () {
 
         document.querySelectorAll("[data-select2-field]").forEach((function (el) {
@@ -48,11 +50,13 @@ $(document).on("DOMContentLoaded", function () {
                 var firstCall = true;
                 var typingDelay = select2["ajax"]["delay"] || 0;
                 var debounceFn = true;
-                
-                select2["ajax"]["delay"] = 0;
-                select2["ajax"]["transport"] = function (params, success) {
 
-                    params["delay"] = (firstCall ? 0 : typingDelay);
+                select2["ajax"]["delay"] = 0;
+                select2["ajax"]["transport"] = function (options, success) {
+
+                    //
+                    // Compute debouncing (to avoid frequent requests)
+                    options["delay"] = (firstCall ? 0 : typingDelay);
 
                     function debounce(t, fn) {
                         
@@ -60,11 +64,29 @@ $(document).on("DOMContentLoaded", function () {
                         debounceFn = setTimeout(fn, t);
                     }
 
-                    return debounce(params["delay"], function() {
+                    return debounce(options["delay"], function() {
                         
+                        //
+                        // Try to calling cache 
+                        var term = options.data.term || '';
+                        if(options.cache) {
+                        
+                            if (term in localCache) {
+
+                                return localCache[term].done(success).done(function(e) {
+
+                                    $(e.results).each(function() {
+                                        dropdown.push(this.id);
+                                    });
+                                });
+                            }
+                        }
+
+                        //
+                        // Default call with ajax request
                         dropdown = [];
                         firstCall = false;
-                        return $.ajax(params).done(success).done(function(e) {
+                        return localCache[term] = $.ajax(options).done(success).done(function(e) {
 
                             $(e.results).each(function() {
                                  dropdown.push(this.id);
