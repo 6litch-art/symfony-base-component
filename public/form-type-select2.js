@@ -67,30 +67,22 @@ $(document).on("DOMContentLoaded", function () {
                     return debounce(options["delay"], function() {
                         
                         //
-                        // Try to calling cache 
+                        // Retrieve cache if exists
                         var term = options.data.term || '';
-                        if(options.cache) {
+                        var page = options.data.page || '';
+                        var index = field.attr("id")+":"+term+":"+page;
                         
-                            if (term in localCache) {
-
-                                return localCache[term].done(success).done(function(e) {
-
-                                    $(e.results).each(function() {
-                                        dropdown.push(this.id);
-                                    });
-                                });
-                            }
-                        }
-
+                        if(options.cache && index in localCache) response = localCache[index];
+                        else response = localCache[index] = $.ajax(options);
+                        
                         //
                         // Default call with ajax request
                         dropdown = [];
                         firstCall = false;
-                        return localCache[term] = $.ajax(options).done(success).done(function(e) {
 
-                            $(e.results).each(function() {
-                                 dropdown.push(this.id);
-                            });
+                        response.done(success).done(function(e) {
+
+                            $(e.results).each(() => dropdown.push(this.id));
                         });
                     });
                 }

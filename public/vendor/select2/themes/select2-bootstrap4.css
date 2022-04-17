@@ -211,10 +211,10 @@ form.was-validated select:valid~.select2-container--bootstrap4 .select2-selectio
 .select2-container--bootstrap4 .select2-selection__clear {
   height:13px;
   width:13px;
-
+/* 
   background-position: center center !important;
   background-color: #ced4da;
-  color: #f8f9fa;
+  color: #f8f9fa; */
 
   margin-top: 0.75em;
   border-radius:100%;

@@ -54,7 +54,6 @@ img, svg {
   white-space: pre-wrap;
   word-wrap: break-word;
   background-color:#FFF;
-  border-radius:1em;
 }
 .ql-editor > * {
   cursor: text;
