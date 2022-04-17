@@ -457,7 +457,7 @@ body.ea-edit .content-header, body.ea-new .content-header {
 }
 
 .responsive-menu { padding:1.25em; }
-.logo img { height:95%; width:95%; object-fit:contain; margin:auto; }
+.logo img { height:95%; width:95%; object-fit:contain; margin:auto; border-radius: var(--border-radius); }
 .logo, .responsive-logo {
     
     background-color: #FFF5;
@@ -694,9 +694,11 @@ fieldset .sidebar-menu li {
     padding:0.25em 0em 0.25em 0!important;
 }
 
-ul.sidebar-menu a {
-    color: var(--sidebar-menu-color);
-}
+#main-menu .menu .submenu a:hover { color: var(--sidebar-menu-submenu-color) !important; }
+#main-menu .menu .menu-item-contents { color: var(--sidebar-menu-color) !important; }
+#main-menu .menu .menu-item-contents:hover { color: var(--sidebar-menu-submenu-color) !important; }
+ul.sidebar-menu a:hover { color: var(--sidebar-menu-submenu-color); }
+ul.sidebar-menu a { color: var(--sidebar-menu-color); }
 
 .field-avatar .image-avatar i, img.image-avatar
 {

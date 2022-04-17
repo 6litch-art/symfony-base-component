@@ -424,7 +424,7 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 }
 
 .imageupload .fileupload:first-child { margin-left: 0; }
-.imageupload .alt { margin-bottom: 1em; display:flex; align-items:center; flex-direction: row-reverse; }
+.imageupload .alt { margin-bottom: 1em; padding:0; display:flex; align-items:center; flex-direction: row-reverse; }
 .imageupload .alt span { margin: 0 0.75em; }
 .imageupload .alt span label { padding: 0; }
 .imageupload .imageupload-field {
@@ -846,7 +846,7 @@ form .btn[type="reset"]   { margin-top:0.75em; }
 .form-attribute { padding:0 !important; border:0; }
 
 .form-attribute .form-attribute-items > .form-control { border: 0; }
-.form-attribute .form-attribute-items .form-group { padding: 0.5em 0; }
+.form-attribute .form-attribute-items > .form-group { padding: 0.5em 0; }
 .form-attribute .form-attribute-items
 {
     margin-top:-5px;
