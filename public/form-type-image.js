@@ -127,7 +127,7 @@ $(document).on("DOMContentLoaded", function () {
            
             var lightboxOptions = $(el).data("image-lightbox") || null;
             $('#'+id+'_figcaption').on('click', function() {
-                if (lightboxOptions) $('#'+id+'_lightbox').click();
+                if (lightboxOptions) $('#'+id+'_lightboxlink').click();
                 else $('#'+id+'_raw').click();
             });
 

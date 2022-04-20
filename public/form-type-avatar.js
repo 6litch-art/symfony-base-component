@@ -6,7 +6,7 @@ $(document).on("DOMContentLoaded", function () {
 
             var id = el.getAttribute("data-avatar-field");
 
-            var cropper = el.getAttribute("data-avatar-cropper") || null;
+            var cropper = el.getAttribute("data-avatar-cropper") || null;
             if (cropper) {
 
                 document.getElementById(id+"_file").addEventListener("change", function() {
