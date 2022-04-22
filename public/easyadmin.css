@@ -137,7 +137,8 @@ form fieldset
 .form-entity > div { margin-bottom: 0em !important; }
 
 
-.select2-container .select2-selection--single { height: 38px !important; }
+.select2-container .select2-selection--single,
+.select2-container .select2-selection--multiple { min-height: 37px !important; }
 
 
 .form-switch {
@@ -220,7 +221,6 @@ span[data-toggle="tooltip"]
 .select2-selection.select2-selection--wrap,
 .select2-container--bootstrap4 .select2-selection {
     background-color: var(--body-bg) !important;
-    border: 1px solid var(--sidebar-border-color) !important;
 }
 
 .select2-container--bootstrap4 .select2-selection
@@ -311,7 +311,7 @@ body.ea-edit .content-header, body.ea-new .content-header {
     padding-left: 3em;
 }
 
-
+.dropdown-appearance .dropdown-appearance-button { cursor:pointer; }
 .locale-dropdown .dropdown-toggle { color: var(--dropdown-appearance-icon-color); }
 .alert .btn-close {
 
@@ -319,7 +319,7 @@ body.ea-edit .content-header, body.ea-new .content-header {
     left: 1em;
 
     font-size: 8pt;
-    margin-top: 0.4em;
+    margin-top: 0.3em;
     margin-left: 0.2em;
 }
 
@@ -502,7 +502,7 @@ ul.sidebar-menu {
 .accordion-button { background-color: var(--sidebar-bg) !important; }
 .form-collection { border: 1px solid var(--content-top-border-color) !important; }
 .form-collection-add-button:hover { background-color: var(--button-bg) !important; }
-.btn-close { height: auto; }
+
 .dropzone { border: 0.5px solid var(--content-top-border-color) !important; }
 .dropzone .dz-preview .dz-image {border: 0.5px solid var(--content-top-border-color); }
 

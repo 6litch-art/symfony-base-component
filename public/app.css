@@ -43,7 +43,7 @@ textarea { min-height:150px !important; }
 
 .select2-container .select2-selection--multiple .select2-selection__rendered { padding-left:5px; }
 
-form.was-validated select:valid ~ .select2-container--bootstrap4 .select2-selection,
+form.was-validated select:valid ~ .select2-selection,
 .form-control.is-valid, .was-validated .form-control:not(.form-check-input):valid {
     border-color: #198754;
     color:#198754;
@@ -54,7 +54,7 @@ form.was-validated select:valid ~ .select2-container--bootstrap4 .select2-select
     background-size: calc(.75em + .375rem) calc(.75em + .375rem);
 }
 
-form.was-validated select:invalid ~ .select2-container--bootstrap4 .select2-selection,
+form.was-validated select:invalid ~ .select2-selection,
 .form-control.is-invalid, .was-validated .form-control:not(.form-check-input):invalid {
     border-color: #dc3545;
     color:#dc3545;

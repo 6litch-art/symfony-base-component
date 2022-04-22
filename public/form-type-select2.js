@@ -13,10 +13,10 @@ $(document).on("DOMContentLoaded", function () {
                 $(option["data"]).each(function(key, value) {
 
                     var value = option["data"][key];
-                    if (value !== undefined)
-                        value = value.replace(/"/g, '\\"');
-                    
-                    dataAttribute = key + "=\"" + value+"\" ";
+                    if(value === undefined) return;
+
+                    value = value.replace(/"/g, '\\"');                    
+                    dataAttribute += key + "=\"" + value+"\" ";
                 });
 
                 var tab   = field.data("tabulation") || "1.75em";
@@ -32,18 +32,49 @@ $(document).on("DOMContentLoaded", function () {
                         '</span>')); 
             };
 
+            var data = function (args) { return {term: args.term, page: args.page || 1}; }
+            var processResults = function(data) {
+
+                if(select2["multivalue"]) {
+
+                    dropdown = [];
+
+                    var selected = $(field).val()
+                    var selectedOccurences = selected.reduce(function (acc, curr) {
+                        return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
+                    }, {});
+
+                    $(data.results).each(function() {
+                        
+                        id = this.id;
+                        entry = data.results.filter(e => e.id == id)[0];
+
+                        occurence = parseInt(selectedOccurences[id]);
+                        if(occurence) {
+
+                            limit = Number.isInteger(select2["multivalue"]) ? occurence < select2["multivalue"] : select2["multivalue"];
+                            ext = (occurence > 0 && limit  ? "/" + (occurence+1) : "");
+                            entry.id = this.id + ext;
+                        }
+
+                        dropdown.push(entry);
+                    });
+
+                    data.results = dropdown;
+                }
+
+                return data;
+            }
+
             var select2 = JSON.parse(el.getAttribute("data-select2-options")) || {};
                 select2["template"]          = "template"          in select2 ? Function('return ' + select2["template"]         )() : defaultTemplate;
                 select2["templateResult"]    = "templateResult"    in select2 ? Function('return ' + select2["templateResult"]   )() : defaultTemplate;
                 select2["templateSelection"] = "templateSelection" in select2 ? Function('return ' + select2["templateSelection"])() : defaultTemplate;
 
-            var dropdown = [];
             if("ajax" in select2) {
 
-                if("data" in select2["ajax"])
-                    select2["ajax"]["data"] = Function('return ' + select2["ajax"]["data"])();
-                if("processResults" in select2["ajax"])
-                    select2["ajax"]["processResults"] = Function('return ' + select2["ajax"]["processResults"])();
+                select2["ajax"]["data"] = "data" in select2["ajax"] ? Function('return ' + select2["ajax"]["data"])() : data;
+                select2["ajax"]["processResults"] = "processResults" in select2["ajax"] ? Function('return ' + select2["ajax"]["processResults"])() : processResults;
 
                 //
                 // Debounce option (instead of delay..)
@@ -80,35 +111,24 @@ $(document).on("DOMContentLoaded", function () {
                         dropdown = [];
                         firstCall = false;
 
-                        response.done(success).done(function(e) {
+                        return response.done(success).done(function(data) {
+                            
+                            // Select all [not working :-(]
+                            // $(document).on("keyup.select2", ".select2-search__field", function (e) {
 
-                            $(e.results).each(() => dropdown.push(this.id));
+                            //     if (e.keyCode === 65 && e.ctrlKey )
+                            //         $(field).val(data.results.map((o) => o.id)).trigger("change");
+                            // });
                         });
                     });
                 }
             }
 
-            // Multiplicity option !
-            // query: function(query) {
-            //     var data = { results: []};
-            //     for (var i = 0; i < fruits.length; i++) {
-            //         data.results.push({"id": fruits[i] + "/" + counter, "text": fuits[i]});
-            //     }
-            //     counter += 1;
-            //     query.callback(data);
-            // },
-            // formatSelection: function(item) {
-            //     return item.text; // display apple, pear, ...
-            // },
-            // formatResult: function(item) {
-            //     return item.id; // display apple/1, pear/2, ... Return item.text to see apple, pear, ...
-            // },
-
             //
             // Pre-populated data
             if(select2["data"].length != 0) $(field).empty();
             $(field).val(select2["selected"] || []).trigger("change");
-            
+
             var parent = parent || $(field).parent();
             $(field).select2(select2).on("select2:unselecting", function(e) {
             
@@ -121,20 +141,10 @@ $(document).on("DOMContentLoaded", function () {
                     $(this).select2('close');
                 }
 
-                // Select all not working .....
-                // $(document).on("keyup.select2", ".select2-search__field", function (e) {
-                //     if (e.keyCode === 65 && e.ctrlKey ) selectAllSelect2($(this));
-                // }.bind(this));
-
-                // function selectAllSelect2(that) {
-              
-                //     select2.val(dropdown || []).trigger("change");
-                // }
-    
             }).on("select2:close", function(e) {
                 
                 $(this).focusout();
-                $(document).off("select2:keyup");
+                $(document).off("keyup.select2");
             });
 
             dropdown = $(field).select2("data");
@@ -145,7 +155,7 @@ $(document).on("DOMContentLoaded", function () {
 
                 if(!openClick) {
 
-                    let container = $(field.nextElementSibling).find(".select2.select2-container")[0];
+                    let container = $(".select2-container").last();
                     let results = $(document.body).find(".select2-results")[0];
                     let target = e.target;
 
