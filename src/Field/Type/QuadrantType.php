@@ -8,9 +8,9 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AvatarType extends ImageType
+class QuadrantType extends ImageType
 {
-    public function getBlockPrefix(): string { return 'avatar'; }
+    public function getBlockPrefix(): string { return 'quadrant'; }
     public function getParent() : ?string { return ImageType::class; }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -25,7 +25,7 @@ class AvatarType extends ImageType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if($options["multiple"])
-            throw new InvalidArgumentException("There can be only one picture for avatar type, please disable 'multiple' option");
+            throw new InvalidArgumentException("There can be only one picture for quadrant type, please disable 'multiple' option");
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)
@@ -37,14 +37,14 @@ class AvatarType extends ImageType
         // - <id>_raw  = file,
         // - <id>_file = hidden,
         // - <id>_deleteBtn = btn "x",
-        // - <id>_deleteAvatarBtn = btn "x",
+        // - <id>_deleteQuadrantBtn = btn "x",
         // - <id>_figcaption = btn "+"
         // - dropzone: <id>_dropzone = btn "x",
         // - cropper: <id>_modal     = modal
         // - cropper: <id>_cropper   = cropper
         // - cropper: <id>_thumbnail = thumbnail
         //
-        $view->vars['avatar'] = $view->vars['files'][0] ?? null;
+        $view->vars['quadrant'] = $view->vars['files'][0] ?? null;
         $view->vars['files']  = [];
 
         if(!($view->vars["accept"] ?? false) ) 
@@ -53,6 +53,6 @@ class AvatarType extends ImageType
         $view->vars["thumbnail"] = $options["thumbnail"];
         $view->vars["cropper"] = ($options["cropper"] !== null);
 
-        $this->baseService->addHtmlContent("javascripts:body", "bundles/base/form-type-avatar.js");
+        $this->baseService->addHtmlContent("javascripts:body", "bundles/base/form-type-quadrant.js");
     }
 }
