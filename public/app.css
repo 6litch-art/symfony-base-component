@@ -4,7 +4,9 @@
 .locale-dropdown .locale li { font-weight: normal; }
 .locale-dropdown .locale li.active { font-weight: bold; }
 
-
+.badge { display: inline-flex; }
+.badge > span:before { border-right:1px solid black; padding:0 0.25em 0 0.5em; }
+.badge > span:first-child:before { border-right:0px; padding:0; }
 .locale-dropdown .dropdown-item { padding: 0.5em; }
 .locale-dropdown .dropdown-item .country-flag { margin-right:0.5em; }
 .locale-dropdown .dropdown-menu li { padding: 0.25em 0.5em 0.25em 0.5em !important; }
@@ -393,7 +395,7 @@ form.was-validated select:invalid ~ .select2-selection,
     z-index:11;
     background-color: rgba(255,255,255,.4);
     border-radius: 3px;
-    padding: 0 .4em;
+    padding: 0.1em .4em;
     color:#000;
     text-decoration: none;
     margin-bottom: -2em;
@@ -488,7 +490,7 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 
 .imageupload figure > img {
     object-fit: cover;
-    height:110%;
+    height:115%;
 }
 
 .avatarupload input[type="file"] { display: none; }
@@ -504,6 +506,8 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     width: 120px;
     height: 120px;
     overflow: hidden;
+
+    padding: 0.5em;
 }
 
 
@@ -864,3 +868,9 @@ form .btn[type="reset"]   { margin-top:0.75em; }
 }
 
 .badge-danger { padding:0 0.5em !important; }
+
+/* Font awesome additional angles.. */
+.fa-rotate-22p5  { -webkit-transform: rotate(22.5deg); transform: rotate(22.5deg); }
+.fa-rotate-45    { -webkit-transform: rotate(45deg  ); transform: rotate(45deg  ); }
+.fa-rotate-67p5  { -webkit-transform: rotate(67.5deg); transform: rotate(67.5deg); }
+.fa-rotate-90    { -webkit-transform: rotate(90deg  ); transform: rotate(90deg  ); }

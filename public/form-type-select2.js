@@ -113,7 +113,7 @@ $(document).on("DOMContentLoaded", function () {
 
                         return response.done(success).done(function(data) {
                             
-                            // Select all [not working :-(]
+                            // Select all entries [not working :-(]
                             // $(document).on("keyup.select2", ".select2-search__field", function (e) {
 
                             //     if (e.keyCode === 65 && e.ctrlKey )

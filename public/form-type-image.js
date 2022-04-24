@@ -15,6 +15,8 @@ $(document).on("DOMContentLoaded", function () {
 
                 var imageCropper;
                 var imageBlob;
+                
+                console.log(cropper);
 
                 // Image processing
                 $('#'+id+'_modal').on('shown.bs.modal', function () { 
@@ -127,13 +129,14 @@ $(document).on("DOMContentLoaded", function () {
            
             var lightboxOptions = $(el).data("image-lightbox") || null;
             $('#'+id+'_figcaption').on('click', function() {
-                if (lightboxOptions) $('#'+id+'_lightboxlink').click();
-                else $('#'+id+'_raw').click();
+
+                if (lightboxOptions) $('#'+id+'_lightbox').trigger("click");
+                else $('#'+id+'_raw').trigger("click");
             });
 
             $('#'+id+'_deleteBtn').on('click', function() {
                 $('#'+id+'_thumbnail')[0].src = thumbnail;
-                $('#'+id+'_raw').change();
+                $('#'+id+'_raw').trigger("change");
             });
 
         }));
