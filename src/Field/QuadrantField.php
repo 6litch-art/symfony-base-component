@@ -2,13 +2,12 @@
 
 namespace Base\Field;
 
-use Base\Field\Type\AvatarType;
+use Base\Field\Type\QuadrantType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\TextAlign;
 use EasyCorp\Bundle\EasyAdminBundle\Contracts\Field\FieldInterface;
-
 use EasyCorp\Bundle\EasyAdminBundle\Field\FieldTrait;
 
-class AvatarField extends ImageField implements FieldInterface
+final class QuadrantField implements FieldInterface
 {
     use FieldTrait;
 
@@ -20,13 +19,19 @@ class AvatarField extends ImageField implements FieldInterface
             ->setProperty($propertyName)
             ->setLabel($label)
             ->setTemplateName('crud/field/file')
-            ->setFormType(AvatarType::class)
+            ->setFormType(QuadrantType::class)
             ->addCssClass('field-file')
             ->addCssClass('file-widget')
-            ->setTemplatePath('@EasyAdmin/crud/field/file.html.twig')
+            ->setTemplatePath('@EasyAdmin/crud/field/select.html.twig')
             ->setTextAlign(TextAlign::CENTER)
             ->setColumns(2)
-            ->setFormTypeOptionIfNotSet("data_class", null)
-            ->setCustomOption(self::OPTION_RENDER_FORMAT, "avatar");
+            ->setFormTypeOptionIfNotSet("data_class", null);
     }
+
+    public function allowDelete(bool $allowDelete = true): self
+    {
+        $this->setFormTypeOption("allow_delete", $allowDelete);
+        return $this;
+    }
+
 }
