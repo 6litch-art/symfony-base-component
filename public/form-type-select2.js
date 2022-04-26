@@ -103,9 +103,15 @@ $(document).on("DOMContentLoaded", function () {
                         var page = options.data.page || '';
                         var index = field.attr("id")+":"+term+":"+page;
                         
+                        var response = undefined;
                         if(options.cache && index in localCache) response = localCache[index];
-                        else response = localCache[index] = $.ajax(options);
-                        
+                        else {
+
+                            $.ajax(options).done(function (_response) {
+                                response = localCache[index] = _response;
+                            });
+                        }
+
                         //
                         // Default call with ajax request
                         dropdown = [];
@@ -148,7 +154,7 @@ $(document).on("DOMContentLoaded", function () {
             });
 
             dropdown = $(field).select2("data");
-            
+
             var openClick = false;
             $(field).on("select2:opening", function() { openClick = true; });
             $(window).on("click", function(e) {

@@ -30,6 +30,7 @@
 
 textarea { min-height:150px !important; }
 .form-group { padding:0.5em 0em; }
+.form-association .form-group { padding:0em 0em; }
 .form-control, .input-group-text { padding: .425rem .75rem; }
 .form-collection-items.form-control { padding: 0; }
 .form-control:not(input):not(textarea):not(select) { background-color:transparent; }
@@ -874,3 +875,40 @@ form .btn[type="reset"]   { margin-top:0.75em; }
 .fa-rotate-45    { -webkit-transform: rotate(45deg  ); transform: rotate(45deg  ); }
 .fa-rotate-67p5  { -webkit-transform: rotate(67.5deg); transform: rotate(67.5deg); }
 .fa-rotate-90    { -webkit-transform: rotate(90deg  ); transform: rotate(90deg  ); }
+
+/* Decorations */
+.btn-matrix2 { margin: 20px 0; max-width: 500px; }
+.btn-matrix2 > .btn:first-child { border-bottom-left-radius: 0; }
+.btn-matrix2 > .btn:last-child { border-top-right-radius: 0; }
+.btn-matrix2 > .btn { width: 50%; }
+.btn-matrix2 > .btn:nth-child(2n+2+1) { clear: left; margin-left: 0; }
+.btn-matrix2 > .btn:nth-child(n+2+1) { margin-top: -1px; }
+.btn-matrix2 > .btn:nth-child(2) { border-top-right-radius: 4px !important; }
+.btn-matrix2 > .btn:nth-last-child(2) { border-bottom-left-radius: 4px !important; }
+
+.btn-matrix3 { margin: 20px 0; max-width: 500px; }
+.btn-matrix3 > .btn:first-child { border-bottom-left-radius: 0; }
+.btn-matrix3 > .btn:last-child { border-top-right-radius: 0; }
+.btn-matrix3 > .btn { width: 33%; }
+.btn-matrix3 > .btn:nth-child(3n+3+1) { clear: left; margin-left: 0; }
+.btn-matrix3 > .btn:nth-child(n+3+1) { margin-top: -1px; }
+.btn-matrix3 > .btn:nth-child(3) { border-top-right-radius: 4px !important; }
+.btn-matrix3 > .btn:nth-last-child(3) { border-bottom-left-radius: 4px !important; }
+
+.btn-matrix4 { margin: 20px 0; max-width: 500px; }
+.btn-matrix4 > .btn:first-child { border-bottom-left-radius: 0; }
+.btn-matrix4 > .btn:last-child { border-top-right-radius: 0; }
+.btn-matrix4 > .btn { width: 25%; }
+.btn-matrix4 > .btn:nth-child(4n+4+1) { clear: left; margin-left: 0; }
+.btn-matrix4 > .btn:nth-child(n+4+1) { margin-top: -1px; }
+.btn-matrix4 > .btn:nth-child(4) { border-top-right-radius: 4px !important; }
+.btn-matrix4 > .btn:nth-last-child(4) { border-bottom-left-radius: 4px !important; }
+
+.btn-matrix5 { margin: 20px 0; max-width: 500px; }
+.btn-matrix5 > .btn:first-child { border-bottom-left-radius: 0; }
+.btn-matrix5 > .btn:last-child { border-top-right-radius: 0; }
+.btn-matrix5 > .btn { width: 20%; }
+.btn-matrix5 > .btn:nth-child(5n+5+1) { clear: left; margin-left: 0; }
+.btn-matrix5 > .btn:nth-child(n+5+1) { margin-top: -1px; }
+.btn-matrix5 > .btn:nth-child(5) { border-top-right-radius: 4px !important; }
+.btn-matrix5 > .btn:nth-last-child(5) { border-bottom-left-radius: 4px !important; }
