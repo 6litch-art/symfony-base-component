@@ -11,7 +11,7 @@ use Base\Database\Traits\TranslationTrait;
  * @ORM\Entity()
  */
 
-class TagTranslation implements TranslationInterface
+class TaxonTranslation implements TranslationInterface
 {
     use TranslationTrait;
 
