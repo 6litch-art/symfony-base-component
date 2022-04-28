@@ -124,7 +124,7 @@ form fieldset
 }
 .ea .content-wrapper .form-attribute-items .form-collection-items > .form-group { padding:0.5em 0;}
 
-.form-errors { margin: 1em 0.5em !important;}
+.form-errors { width: 100%;}
 .ea .content-wrapper .form-collection-items > .form-group { padding-top:0em; padding-bottom:0em; }
 .ea-edit-form > .form-group, .ea-new-form > .form-group  { padding: 1em 0.5em; }
 .ea-edit-form > .form-group > .form-entity, .ea-new-form > .form-group > .form-entity  { padding: 0em 0em !important; }
@@ -516,6 +516,7 @@ ul.sidebar-menu {
 .ql-snow .ql-fill, .ql-snow .ql-stroke.ql-fill ,
 .ql-snow .ql-stroke { stroke: var(--form-label-color) !important; }
 .ql-snow .ql-picker { color: var(--form-label-color) !important; }
+.ql-editor.ql-blank::before { color: var(--form-label-color) !important; }
 .ql-editor 
 { 
     background-color: var(--body-bg) !important;
@@ -536,8 +537,13 @@ ul.sidebar-menu {
     padding: 0 !important;
 }
 
+input.form-control
+{
+    background-color: var(--button-bg) !important;
+    color: var(--button-color) !important;
+}
 .select2-container .select2-dropdown,
-.select2-container .select2-selection--multiple .select2-selection__choice,
+.select2-selection--single .select2-selection__choice,
 .select2-selection--multiple .select2-selection__choice { 
     background-color: var(--button-bg) !important;
     border: 1px solid var(--sidebar-border-color) !important;
@@ -709,9 +715,9 @@ fieldset .sidebar-menu li {
 
 #main-menu .menu .submenu a:hover { color: var(--sidebar-menu-submenu-color) !important; }
 #main-menu .menu .menu-item-contents { color: var(--sidebar-menu-color) !important; }
-#main-menu .menu .menu-item-contents:hover { color: var(--sidebar-menu-submenu-color) !important; }
-ul.sidebar-menu a:hover { color: var(--sidebar-menu-submenu-color); }
-ul.sidebar-menu a { color: var(--sidebar-menu-color); }
+
+ul.sidebar-menu a{ color: var(--sidebar-menu-color); }
+ul.sidebar-menu a:hover { color: var(--sidebar-menu-submenu-color) !important; }
 
 .field-avatar .image-avatar i, img.image-avatar
 {

@@ -42,6 +42,7 @@ textarea { min-height:150px !important; }
     border-radius: 10px;
     padding:0.75em;
     margin:0.5em 0;
+    width:100%;
 }
 
 .select2-container .select2-selection--multiple .select2-selection__rendered { padding-left:5px; }
@@ -790,7 +791,6 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .select2-selection--hide { display: none !important; }
 .select2-selection.select2-selection--wrap
 {
-    border: 1px solid #ced4da;
     border-radius: 0.25rem !important; 
 }
 

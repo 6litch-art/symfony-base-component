@@ -82,6 +82,7 @@ $(document).on("DOMContentLoaded", function () {
                 var typingDelay = select2["ajax"]["delay"] || 0;
                 var debounceFn = true;
 
+                var preventRequest = false;
                 select2["ajax"]["delay"] = 0;
                 select2["ajax"]["transport"] = function (options, success) {
 
@@ -107,9 +108,11 @@ $(document).on("DOMContentLoaded", function () {
                         if(options.cache && index in localCache) response = localCache[index];
                         else {
 
-                            $.ajax(options).done(function (_response) {
-                                response = localCache[index] = _response;
-                            });
+                            preventRequest = true
+                            response = $.ajax(options)
+                                        .done((_response) => localCache[index] = _response)
+                                        .fail(() => delete localCache[index])
+                                        .then(() => preventRequest = false);
                         }
 
                         //
