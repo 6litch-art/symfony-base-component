@@ -166,7 +166,6 @@ form fieldset
 span[data-toggle="tooltip"]
 {
     position: relative;
-    top: 1px;
 }
 
 .basicLightbox img { max-height: 90vh !important; } 
