@@ -11,8 +11,6 @@ $(document).on("DOMContentLoaded", function () {
             var btnDown = $("#"+id+"-down");
             var btnUp = $("#"+id+"-up");
 
-            var icon  = $(btn).find("i");
-
             var numberValue = $(input).val() || 0;
             if(numberValue === 0) $(input).val(0);
 
@@ -26,7 +24,9 @@ $(document).on("DOMContentLoaded", function () {
                     val = val + Math.abs(parseFloat($(input).attr("data-number-up") ?? 1));
                 if (val > parseFloat($(input).attr("data-number-max")) &&  $(input).attr("data-number-max"))
                     val = parseFloat($(input).attr("data-number-max"));
+
                 $(input).val(val);
+                $(input).trigger("input");
             });
             
             $(btnDown).off("click");
@@ -42,11 +42,12 @@ $(document).on("DOMContentLoaded", function () {
                 if (val < parseFloat($(input).attr("data-number-min")) &&  $(input).attr("data-number-min"))
                     val = parseFloat($(input).attr("data-number-min"));
 
-                    $(input).val(val);
+                $(input).val(val);
+                $(input).trigger("input");
             });
             
-            $(input).off("change");
-            $(input).on("change", function() {
+            $(input).off("input.number");
+            $(input).on("input.number", function() {
 
                 if ($(input).val()) numberValue = $(input).val();
                 if ($(input).val() == "") setUnlimitedState(input);

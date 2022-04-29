@@ -82,9 +82,8 @@ $(document).on("DOMContentLoaded", function () {
                 var typingDelay = select2["ajax"]["delay"] || 0;
                 var debounceFn = true;
 
-                var preventRequest = false;
                 select2["ajax"]["delay"] = 0;
-                select2["ajax"]["transport"] = function (options, success) {
+                select2["ajax"]["transport"] = function (options, success, failure) {
 
                     //
                     // Compute debouncing (to avoid frequent requests)
@@ -99,28 +98,26 @@ $(document).on("DOMContentLoaded", function () {
                     return debounce(options["delay"], function() {
                         
                         //
+                        // Default call with ajax request
+                        dropdown = [];
+                        firstCall = false;
+
+                        //
                         // Retrieve cache if exists
                         var term = options.data.term || '';
                         var page = options.data.page || '';
                         var index = field.attr("id")+":"+term+":"+page;
                         
-                        var response = undefined;
-                        if(options.cache && index in localCache) response = localCache[index];
-                        else {
+                        if(options.cache && index in localCache)
+                            return success(localCache[index]);
 
-                            preventRequest = true
-                            response = $.ajax(options)
-                                        .done((_response) => localCache[index] = _response)
-                                        .fail(() => delete localCache[index])
-                                        .then(() => preventRequest = false);
-                        }
+                        return $.ajax(options)
+                                    .done((_response) => localCache[index] = _response)
+                                    .done(success)
+                                    .fail(() => delete localCache[index])
+                                    .fail(failure);
 
-                        //
-                        // Default call with ajax request
-                        dropdown = [];
-                        firstCall = false;
-
-                        return response.done(success).done(function(data) {
+                            /*[......].done(function(data) {
                             
                             // Select all entries [not working :-(]
                             // $(document).on("keyup.select2", ".select2-search__field", function (e) {
@@ -128,7 +125,7 @@ $(document).on("DOMContentLoaded", function () {
                             //     if (e.keyCode === 65 && e.ctrlKey )
                             //         $(field).val(data.results.map((o) => o.id)).trigger("change");
                             // });
-                        });
+                        });*/
                     });
                 }
             }
