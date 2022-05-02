@@ -1,4 +1,5 @@
-.form-group { padding:0; }
+.form-group { padding:auto; }
+.form-collection-items .accordion-item .form-control > .form-group { padding: 1em;}
 
 .locale-dropdown .locale { display:flex; list-style: none; }
 .locale-dropdown .locale li { padding: 0 0.25em !important; }
@@ -52,7 +53,7 @@ form.was-validated select:valid ~ .select2-selection,
 .form-control.is-valid, .was-validated .form-control:not(.form-check-input):valid {
     border-color: #198754;
     color:#198754;
-    padding-right: calc(1.5em + .75rem);
+    padding-right: calc(1.5em + 2.75rem);
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right calc(.375em + .1875rem) center;
@@ -151,13 +152,14 @@ form.was-validated select:invalid ~ .select2-selection,
     box-shadow: none;
 }
 
-.form-collection-items .accordion-item .form-control > div span { min-width: 15%; text-align:right; }
+.form-collection-items .accordion-item .form-control > div span { min-width: 20%; text-align:right; }
 .form-collection-items .accordion-item .form-control > div input { flex-grow: 1; }
 .form-collection-items .accordion-item .form-control > div {
     display: flex;
     align-items: flex-start;
     justify-content:center;
-    flex-direction: row;
+    /* flex-direction: row; */
+    flex-direction: column;
 }
 
 .form-collection-items .accordion-item .form-control
@@ -459,6 +461,8 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     justify-content: center;
 }
 
+.hidden  { display: none; }
+
 .form-cropper img { object-fit:fill; max-width:100%; }
 .form-cropper { display:flex; flex-direction:row; width:100%; }
 .form-cropper .form-group { display:flex; flex-direction:column; }
@@ -466,13 +470,6 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     width:50%;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-}
-
-.fileupload .deleteBtn {
-    position: relative;
-    z-index: 2;
-    width: 0px;
-    right: 25px;
 }
 
 .fileupload input {
@@ -791,6 +788,11 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
         border: solid green 1px !important;
         z-index: 1 !important;
 }
+
+
+.select2-container .select2-selection--single,
+.select2-container .select2-selection--multiple { min-height: 37px ; height:auto; }
+
 .select2-selection { padding:0em !important; }
 .select2-container { display: block !important; }
 .select2-results__options { display:flex; flex-direction: column; }
