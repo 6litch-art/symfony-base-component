@@ -136,13 +136,15 @@ form fieldset
 .form-translatable .tab-pane > div:last-child { padding-bottom: 1.5em !important; }
 .form-entity > div { margin-bottom: 0em !important; }
 
+
+.select2-container .select2-selection--single,
+.select2-container .select2-selection--multiple { min-height: 37px !important; }
+
+
 .form-switch {
     padding:12px 0;
     margin:0;
 }
-
-.input-group > input.last { border-radius: var(--border-radius) !important; }
-.input-group-text { border: 1px solid var(--sidebar-border-color); }
 
 .content-header {
     padding: 1em 2.5em 1em 2.5em !important;
@@ -665,9 +667,6 @@ fieldset {
 .form-control:disabled, .form-control[readonly] {
     background-color: var(--sidebar-bg);
 }
-
-.lb-outerContainer { background-color: #FFFD !important; }
-.lb-loader { opacity: 0.75; }
 
 input.form-control:not(.form-check-input), textarea.form-control, select.form-control
 {
