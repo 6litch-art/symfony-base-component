@@ -5,35 +5,35 @@ $(document).on("DOMContentLoaded", function () {
         document.querySelectorAll("[data-avatar-field]").forEach(function (el) {
 
             var id = el.getAttribute("data-avatar-field");
-
+            
             var cropper = el.getAttribute("data-avatar-cropper") || null;
             if (cropper) {
-
-                document.getElementById(id+"_file").addEventListener("change", function() {
-
-                    var display = (document.getElementById(id+"_file").value !== "") ? "flex" : "none";
-                    document.getElementById(id+"_deleteBtn2").style.display = display;
+           
+                $("#"+id+"_file").on("change.avatar", function() {
+            
+                    var display = $("#"+id+"_file").value !== "" ? "flex" : "none";
+                    $("#"+id+"_deleteBtn2").css("display", display);
                 });
 
             } else {
 
-                document.getElementById(id+"_raw").addEventListener("change", function() {
+                $("#"+id+"_raw").on("change.avatar", function() {
 
-                    var display = (document.getElementById(id+"_raw").value !== "") ? "flex" : "none";
-                    document.getElementById(id+"_deleteBtn2").style.display = display;
+                    var display = $("#"+id+"_raw").value !== "" ? "flex" : "none";
+                    $("#"+id+"_deleteBtn2").css("display", display);
                 });
             }
 
-            document.getElementById(id+"_deleteBtn2").addEventListener("click", function() {
+            $("#"+id+"_deleteBtn2").on("click.avatar", function() {
 
-                document.getElementById(id+"_raw").value = '';
-                document.getElementById(id+"_deleteBtn").click();
+                $("#"+id+"_raw").value = '';
+                $("#"+id+"_deleteBtn").click();
             });
 
-            document.getElementById(id+"_deleteBtn").addEventListener("click", function() {
+            $("#"+id+"_deleteBtn").on("click.avatar", function() {
 
-                document.getElementById(id+"_raw").value = '';
-                document.getElementById(id+"_deleteBtn2").style.display = 'none';
+                $("#"+id+"_raw").value = '';
+                $("#"+id+"_deleteBtn2").css("display", "none");
             });
         
         });

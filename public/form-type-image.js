@@ -3,11 +3,26 @@ $(document).on("DOMContentLoaded", function () {
 
     $(document).on("load.form_type.image", function () {
 
+        function formatBytes(bytes, decimals = 2) {
+            if (bytes === 0) return '0B';
+        
+            const k = 1024;
+            const dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+        
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + sizes[i];
+        }
+        
         document.querySelectorAll("[data-image-field]").forEach((function (el) {
 
-            var id             = el.getAttribute("data-image-field");
-            var thumbnail      = el.getAttribute("data-image-thumbnail");
-            var ajaxUrl       = el.getAttribute("data-image-ajax");
+            var id              = el.getAttribute("data-image-field");
+            var thumbnail       = el.getAttribute("data-image-thumbnail");
+            var ajaxUrl         = el.getAttribute("data-image-ajax");
+            var maxSize         = el.getAttribute("data-image-maxsize");
+            var maxSizeFeedback = el.getAttribute("data-image-maxsize[feedback]");
+            var uploadFailed    = el.getAttribute("data-image-uploadFailed");
 
             var modal          = $(el).data("image-modal") || {};
             $('#'+id+'_modal').modal(modal);
@@ -16,7 +31,6 @@ $(document).on("DOMContentLoaded", function () {
             if (cropper) {
 
                 var imageCropper;
-                var imageBlob;
 
                 // Image processing
                 $('#'+id+'_modal').on('shown.bs.modal', function () { 
@@ -34,12 +48,6 @@ $(document).on("DOMContentLoaded", function () {
                 $('.'+id+'_modalClose').on('click', function () {
 
                     $('#'+id+'_modal').modal('hide');
-                    if(imageBlob !== undefined) {
-
-                        $('#'+id+'_file').val(imageBlob);
-                        $('#'+id+'_thumbnail').val(imageBlob);
-                    }
-                    
                     $('#'+id+'_raw').val("");
                 });
 
@@ -49,61 +57,68 @@ $(document).on("DOMContentLoaded", function () {
                 });
 
                 $('#'+id+'_modalSave').on('click', function () {
-                    
-                    $('#'+id+'_modal').modal('hide');
+
                     if (imageCropper) {
 
-                        var canvas = imageCropper.getCroppedCanvas({width: 160, height: 160});
-                        $('#'+id+'_thumbnail')[0].src = canvas.toDataURL();
-
+                        var canvas = imageCropper.getCroppedCanvas();
                         canvas.toBlob(function (blob) {
 
+                            if(blob.size > maxSize) {
+                                $('#'+id+'_modal_feedback').html(maxSizeFeedback.replace("{0}", formatBytes(blob.size)));
+                                return false;
+                            }
+
                             var formData = new FormData();
-
-                            // Remove previously uploaded image (during form session)
-                            var file = $('#'+id+'_file').val();
-                            var uuid = file.substring(file.lastIndexOf('/') + 1);
-                            if(file !== '') $.post(ajaxUrl+"/"+uuid+"/delete");
-
-                            formData.append('file', blob, $('#'+id+'_raw').val());
-                            imageBlob = blob;
-
-                            $.ajax(ajaxUrl, {
+                                formData.append('file', blob, $('#'+id+'_raw').val());
+                           
+                            return $.ajax(ajaxUrl, {
                                 method: 'POST',
                                 data: formData,
                                 processData: false,
                                 contentType: false,
 
                                 success: function (file) { 
+
+                                    var file = $('#'+id+'_file').val();
+                                    var uuid = file.substring(file.lastIndexOf('/') + 1);
+                                    if(file !== '') $.post(ajaxUrl+"/"+uuid+"/delete");
+
+                                    $('#'+id+'_modal').modal('hide');
+                                    $('#'+id+'_file').val(blob);
+                                    $('#'+id+'_thumbnail')[0].src = canvas.toDataURL();
                                     $('#'+id+'_file').val(file.uuid).trigger('change');
+                                    console.log($('#'+id+'_file'));
                                     $('#'+id+'_raw').val("");
                                 },
 
-                                error: function (file) { $('#'+id+'_thumbnail')[0].src = thumbnail; },
+                                error: function (file) { 
+                                    $('#'+id+'_thumbnail')[0].src = thumbnail; 
+                                    $('#'+id+'_modal_feedback').html(uploadFailed);
+                                },
                                 complete: function () { },
                             });
                         });
                     }
                 });
 
-                $('#'+id+'_thumbnail').on('click', function() {
+                $('#'+id+'_thumbnail').on('click.image', function() {
                     if($('#'+id+'_raw').val() === '') $('#'+id+'_raw').click();
                     else $('#'+id+'_modal').modal("show");
                 });
 
-                $('#'+id+'_deleteBtn').on('click', function() {
+                $('#'+id+'_deleteBtn').on('click.image', function() {
                     $('#'+id+'_thumbnail')[0].src = thumbnail;
                     $('#'+id+'_raw').val('');
                     $('#'+id+'_raw').change();
                 });
 
-                $('#'+id+'_raw').on('change', function() {
+                $('#'+id+'_raw').on('change.image', function(e) {
 
                     if( $('#'+id+'_raw').val() !== '') {
 
                         $('#'+id+'_modal').modal("show"); 
                         $('#'+id+'_figcaption').css('display', 'none');
-                        $('#'+id+'_cropper')[0].src = URL.createObjectURL(event.target.files[0]);
+                        $('#'+id+'_cropper')[0].src = URL.createObjectURL(e.target.files[0]);
 
                     } else {
 
@@ -115,16 +130,16 @@ $(document).on("DOMContentLoaded", function () {
 
             } else {
 
-                $('#'+id+'_thumbnail').on('click', function() {
+                $('#'+id+'_thumbnail').on('click.image', function() {
                     $('#'+id+'_raw').click();
                 });
 
-                $('#'+id+'_raw').on('change', function() {
+                $('#'+id+'_raw').on('change.image', function(e) {
 
                     if( $('#'+id+'_raw').val() !== '') {
 
                         $('#'+id+'_figcaption').css('display', 'none');
-                        $('#'+id+'_thumbnail')[0].src = URL.createObjectURL(event.target.files[0]);
+                        $('#'+id+'_thumbnail')[0].src = URL.createObjectURL(e.target.files[0]);
 
                     } else {
 
@@ -136,13 +151,13 @@ $(document).on("DOMContentLoaded", function () {
             }
 
             var lightboxOptions = $(el).data("image-lightbox") || null;
-            $('#'+id+'_figcaption').on('click', function() {
+            $('#'+id+'_figcaption').on('click.image', function() {
 
                 if (lightboxOptions) $('#'+id+'_lightbox').trigger("click");
                 else $('#'+id+'_raw').trigger("click");
             });
 
-            $('#'+id+'_deleteBtn').on('click', function() {
+            $('#'+id+'_deleteBtn').on('click.image', function() {
                 $('#'+id+'_thumbnail')[0].src = thumbnail;
                 $('#'+id+'_raw').trigger("change");
             });

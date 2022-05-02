@@ -7,7 +7,6 @@ $(document).on("DOMContentLoaded", function () {
             var id = $(e).data("number-field");
             var input = $("#"+id);
 
-            var btn   = $("#"+id+"-btn");
             var btnDown = $("#"+id+"-down");
             var btnUp = $("#"+id+"-up");
 
@@ -20,9 +19,9 @@ $(document).on("DOMContentLoaded", function () {
                 var val = parseFloat($(input).val());
                 if (isNaN(val))
                     val = 0;
-                if (val < parseFloat($(input).attr("data-number-max")) || !$(input).attr("data-number-max"))
+                if (val < parseFloat($(input).attr("data-number-max")) || !$(input).attr("data-number-max") === undefined)
                     val = val + Math.abs(parseFloat($(input).attr("data-number-up") ?? 1));
-                if (val > parseFloat($(input).attr("data-number-max")) &&  $(input).attr("data-number-max"))
+                if (val > parseFloat($(input).attr("data-number-max")) &&  $(input).attr("data-number-max") === undefined)
                     val = parseFloat($(input).attr("data-number-max"));
 
                 $(input).val(val);
@@ -36,10 +35,10 @@ $(document).on("DOMContentLoaded", function () {
                 if (isNaN(val))
                     val = 0;
 
-                if (val > parseFloat($(input).attr("data-number-min")) || !$(input).attr("data-number-min"))
+                if (val > parseFloat($(input).attr("data-number-min")) || $(input).attr("data-number-min") === undefined)
                     val = val - Math.abs(parseFloat($(input).attr("data-number-down") ?? 1));
 
-                if (val < parseFloat($(input).attr("data-number-min")) &&  $(input).attr("data-number-min"))
+                if (val < parseFloat($(input).attr("data-number-min")) &&  $(input).attr("data-number-min") === undefined)
                     val = parseFloat($(input).attr("data-number-min"));
 
                 $(input).val(val);

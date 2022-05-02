@@ -35,23 +35,25 @@ $(document).on("DOMContentLoaded", function () {
                 var scaleY = Math.round($("#"+id+"_scaleY").val());
                 var scaleX = Math.round($("#"+id+"_scaleX").val());
 
-                if(x < 0) width = width+Math.abs(x);
-                if(y < 0) height = height+Math.abs(y);
+                data = cropper.getData();
+                x0 = Math.round(data["x"]);
+                y0 = Math.round(data["y"]);
 
-                data = {
-                    "x": x,
-                    "y": y,
-                    "width": width,
-                    "height": height,
-                    "rotate": rotate,
-                    "scaleY": scaleY,
-                    "scaleX": scaleX,
-                };
+                if(x < 0) width = width + Math.abs(x-x0);
+                if(y < 0) height = height + Math.abs(y-y0);
 
+                data["x"]      = x;
+                data["y"]      = y;
+                data["width"]  = width;
+                data["height"] = height;
+                data["rotate"] = rotate;
+                data["scaleY"] = scaleY;
+                data["scaleX"] = scaleX;
+                
                 cropper.setData(data);
 
-                if(Math.round(cropper.getData()["x"]) !== x) data["width"] = data["width"] - Math.abs(x);
-                if(Math.round(cropper.getData()["y"]) !== y) data["height"] = data["height"] - Math.abs(y);
+                if(Math.round(cropper.getData()["x"]) !== x) data["width"] = data["width"] - Math.abs(x-x0);
+                if(Math.round(cropper.getData()["y"]) !== y) data["height"] = data["height"] - Math.abs(y-x0);
                 cropper.setData(data);
             }
 
