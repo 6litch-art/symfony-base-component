@@ -13,6 +13,10 @@ html, body { scroll-padding-top: 11em; }
 
 .field-association.form-group { padding: 0 !important; }
 
+.btn-danger {
+    color: rgba(var(--button-danger-color),var(--bs-text-opacity)) !important;
+    background-color: var(--button-danger-bg) !important;
+}
 @media (max-width: 992px)
 {
     .text-center { text-align:left !important; }

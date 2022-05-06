@@ -21,7 +21,15 @@
 }
 
 .locale-dropdown .actions .action-icon { top: 0 !important;}
+.form-collection-link-button,
+.form-collection-delete-button {  padding-left:4px; }
 
+.form-collection-buttons i { font-size:14pt; }
+.form-collection-buttons {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
 .lightbox {
     position: fixed;
     left: calc((50vw - 50%) * -1) !important;
@@ -466,7 +474,7 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 
 .form-cropper .cropper-container { border-top-left-radius: 4px; }
 .form-cropper .cropper button { margin:0.5em 0.1em; }
-.form-cropper .cropper .aspect-ratios { padding:0.5em 1em; }
+.form-cropper .cropper .cropper-actions { padding:0.5em 1em; }
 .form-cropper .cropper .loader {
 
     display:flex;
@@ -475,6 +483,7 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     align-items:flex-start;
     
 }
+
 .form-cropper .cropper { 
 
     border-radius: 0;
@@ -593,6 +602,7 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 }
 
 
+.btn-matrix i { font-size: 13pt; }
 .form-quill { margin-bottom:75px; }
 .ql-editor h1:first-of-type { margin: 0.00em    !important; }
 .ql-editor h1 { margin: 1.0em 0.00em 0.5em 0.00 !important; }

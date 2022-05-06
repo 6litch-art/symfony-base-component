@@ -5,8 +5,7 @@ $(document).on("DOMContentLoaded", function () {
         document.querySelectorAll("[data-quadrant-field]").forEach((function (e) {
 
             var id    = $(e).data("quadrant-field");
-            var value = $(e).data("quadrant-value");
-
+            var value = $(e).val();
             $("#"+id+"_matrix button").each(function(k) {
             
                 // If button already initialized.. just skip

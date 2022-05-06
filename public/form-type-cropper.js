@@ -1,15 +1,18 @@
 
 $(document).on("DOMContentLoaded", function () {
 
+    var cropperSource = {};
     $(document).on("load.form_type.cropper", function () {
-        
-        
+
         document.querySelectorAll("[data-cropper-field]").forEach((function (el) {
 
             var cropper;
             var cropperOptions = JSON.parse(el.getAttribute("data-cropper") || "");
 
-            var id      = el.getAttribute("data-cropper-field");
+            var id    = el.getAttribute("data-cropper-field");
+            var pivot = $("#"+el.getAttribute("data-cropper-pivot"));
+            var positions = JSON.parse(el.getAttribute("data-cropper-positions"));
+
             var image = document.querySelector("#"+id+"_image");
             var naturalWidth, naturalHeight;
             
@@ -17,7 +20,7 @@ $(document).on("DOMContentLoaded", function () {
                
                 $("#"+id+"_loader").remove()
                 $("#"+id+"_image").removeClass("hidden");
-                $("#"+id+"_aspectRatios").removeClass("hidden");
+                $("#"+id+"_actions").removeClass("hidden");
             };
 
             var updateCropper = function() {
@@ -54,7 +57,7 @@ $(document).on("DOMContentLoaded", function () {
             }
 
             // Make sure the form is within boundaries
-            var defaultCrop = function(event) {
+            var moveCropper = function(event) {
 
                 $("#"+id+"_x").val(Math.round(event.detail.x));
                 $("#"+id+"_y").val(Math.round(event.detail.y));
@@ -65,7 +68,7 @@ $(document).on("DOMContentLoaded", function () {
                 $("#"+id+"_scaleY").val(Math.round(event.detail.scaleY));
             };
 
-            cropperOptions["crop"] = "crop" in cropperOptions ? Function('return ' + cropperOptions["crop"])() : defaultCrop;
+            cropperOptions["crop"] = "crop" in cropperOptions ? Function('return ' + cropperOptions["crop"])() : moveCropper;
             cropperOptions["build"] = "build" in cropperOptions ? Function('return ' + cropperOptions["build"])() : updateCropper;
             cropperOptions["ready"] = "ready" in cropperOptions ? Function('return ' + cropperOptions["ready"])() : initCropper;
 
@@ -91,15 +94,27 @@ $(document).on("DOMContentLoaded", function () {
                 return data;
             }
 
+            var undo;
             var reader = new FileReader();
                 reader.onloadend = e => {
 
                     image.src = e.target.result;
                     image.onload = function () {
 
+                        //
+                        // Set initial dimensions
+                        width = $("#"+id+"_width" ).val();
                         naturalWidth  = parseInt(image.width);
+                        $("#"+id+"_width" ).val(width > 0 ? width : naturalWidth);
+
+                        height = $("#"+id+"_height" ).val();
                         naturalHeight = parseInt(image.height);
+                        $("#"+id+"_height" ).val(height > 0 ? height : naturalHeight);
+                        
+                        //
+                        // Extract data out of fields
                         cropperOptions["data"] = extractData();
+                        undo = cropperOptions["data"];
 
                         cropper = new Cropper(image, cropperOptions);
 
@@ -111,28 +126,90 @@ $(document).on("DOMContentLoaded", function () {
                         $("#"+id+"_scaleY").off("input.cropper").on("input.cropper", updateCropper);
                         $("#"+id+"_rotate").off("input.cropper").on("input.cropper", updateCropper);
 
-                        $("#"+id+"_aspectRatios button") 
+                        $("#"+id+"_actions button[data-aspect-ratio]") 
                             .off("click.cropper")
                             .on("click.cropper", function() { // Do not inline (this)
+
                                 cropper.setAspectRatio(parseFloat($(this).data("aspect-ratio")));
+                                
+                                var offset = positions[$(pivot).val()] || "center center";
+                                var data = extractData();
+                                console.log($(pivot));
+                                var x0 = 0, y0 = 0;
+                                console.log(offset);
+                                switch(offset) {
+                                    case "center center": break;
+                                    case "center left":
+                                        x0 -= data["width"]/2;
+                                        break;
+                                    case "center right":
+                                        x0 += data["width"]/2;
+                                        break;
+                                    case "top center":
+                                        y0 -= data["height"]/2;
+                                        break;
+                                    case "bottom center":
+                                        y0 += data["height"]/2;
+                                        break;
+
+                                    case "top left":
+                                        x0 -= data["width"]/2;
+                                        y0 -= data["height"]/2;
+                                        break;
+                                    case "top right":
+                                        x0 += data["width"]/2;
+                                        y0 -= data["height"]/2;
+                                        break;
+                                    case "bottom left":
+                                        x0 -= data["width"]/2;
+                                        y0 += data["height"]/2;
+                                        break;
+                                    case "bottom right":
+                                        x0 += data["width"]/2;
+                                        y0 += data["height"]/2;
+                                        break;
+                                }
+
+                                console.log(data, x0,y0);
+                                data["x"] += x0;
+                                data["y"] += y0;
+
+                                cropper.setData(data);
+                            });
+
+                        $("#"+id+"_actions button[data-cropper-reset]") 
+                            .off("click.cropper")
+                            .on("click.cropper", function() { // Do not inline (this)
+
+                                if(!$(this).data("cropper-reset")) return;
+                                cropper.setAspectRatio("NAN");
+                                cropper.setData(undo);
                             });
                     };
                 }
 
-                if(image.src.startsWith("data:")) return ;
+                if(image.src.startsWith("data:")) return;
 
-                var xhr = new XMLHttpRequest();
-                    xhr.open('GET', image.src, true);
-                    xhr.responseType = 'blob';
-                    xhr.onload = function(e) { reader.readAsDataURL(this.response); }
-                    xhr.send();
+                if(image.src in cropperSource) reader.readAsDataURL(cropperSource[image.src]);
+                else {
+
+                    var xhr = new XMLHttpRequest();
+                        xhr.open('GET', image.src, true);
+                        xhr.responseType = 'blob';
+                        xhr.onload = function(e) { 
+
+                            cropperSource[image.src] = this.response;
+                            reader.readAsDataURL(cropperSource[image.src]);
+                        }
+                        xhr.send();
+                }
 
                 //
                 // Fix refresh of cropper container on resize...
-                let doIt
+                let doIt;
                 window.addEventListener('resize', () => {
                     clearTimeout(doIt);
-                    cropper.disable()
+                    if(cropper) cropper.disable()
                     doIt = setTimeout(() => {
                         cropper.enable()
                     }, 100);
