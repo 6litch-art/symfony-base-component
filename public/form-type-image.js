@@ -58,6 +58,8 @@ $(document).on("DOMContentLoaded", function () {
 
                 $('#'+id+'_modalSave').on('click', function () {
 
+                    $('.'+id+'_modalClose').prop("disabled", true);
+                    $('#'+id+'_modalSave').prop("disabled", true);
                     if (imageCropper) {
 
                         var canvas = imageCropper.getCroppedCanvas();
@@ -79,23 +81,28 @@ $(document).on("DOMContentLoaded", function () {
 
                                 success: function (file) { 
 
-                                    var file = $('#'+id+'_file').val();
-                                    var uuid = file.substring(file.lastIndexOf('/') + 1);
-                                    if(file !== '') $.post(ajaxUrl+"/"+uuid+"/delete");
-
+                                    var prevFile = $('#'+id+'_file').val();
+                                    var prevUuid = prevFile.substring(prevFile.lastIndexOf('/') + 1);
+                                    if(prevFile !== '') $.post(ajaxUrl+"/"+prevUuid+"/delete");
+                                    
                                     $('#'+id+'_modal').modal('hide');
-                                    $('#'+id+'_file').val(blob);
+
                                     $('#'+id+'_thumbnail')[0].src = canvas.toDataURL();
                                     $('#'+id+'_file').val(file.uuid).trigger('change');
-                                    console.log($('#'+id+'_file'));
                                     $('#'+id+'_raw').val("");
+
+                                    $('.'+id+'_modalClose').prop("disabled", false);
+                                    $('#'+id+'_modalSave').prop("disabled", false);                
                                 },
 
-                                error: function (file) { 
+                                error: function () { 
                                     $('#'+id+'_thumbnail')[0].src = thumbnail; 
                                     $('#'+id+'_modal_feedback').html(uploadFailed);
+                                    $('.'+id+'_modalClose').prop("disabled", false);
+                                    $('#'+id+'_modalSave').prop("disabled", false);                
                                 },
-                                complete: function () { },
+                                complete: function () { 
+                                },
                             });
                         });
                     }

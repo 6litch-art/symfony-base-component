@@ -36,19 +36,30 @@ $(document).on("DOMContentLoaded", function () {
     
                 $("#"+id+"_metadata").html(counter+" "+counterMax);
             }
-            
+
+            function fetchUUID (uuid) {
+
+                return new Promise(function (resolve, reject) {
+
+                    var xhr = new XMLHttpRequest();
+                        xhr.open("GET", ajax+"/"+uuid);
+                        xhr.responseType = 'blob';
+                        xhr.onloadend = function (e) {
+
+                            if (xhr.status >= 200 && xhr.status < 300) resolve({path:e.target.responseURL, uuid:uuid, blob:e.target.response});
+                            else reject({ status: xhr.status, statusText: xhr.statusText});
+                        };
+
+                        xhr.onerror = function () { reject({status: xhr.status,statusText: xhr.statusText}); };
+                        xhr.send();
+                });
+            }
+
             if(dropzone) {
 
                 var el       = document.getElementById(id+"_dropzone");
                 var sortable = $(el).data("file-sortable");
                 var ajax     = el.getAttribute("data-file-ajax");
-                
-                // Initialize existing pictures
-                var val = $('#'+id).val();
-
-                // Hide loading spinner if no value
-                nVal = (!val || val.length === 0 ? 0 : val.split('|').length);
-                if(nVal === 0) $("#"+id+"_loader").hide();
 
                 dropzone["init"] = function() {
 
@@ -56,16 +67,21 @@ $(document).on("DOMContentLoaded", function () {
                     var val = $('#'+id).val();
                         val = (!val || val.length === 0 ? [] : val.split('|'));
 
+                    // Hide loading spinner if no value
+                    if(val.length === 0) $("#"+id+"_loader").hide();
+
                     var arr = [];
                     $.each(val, function(key, path) { 
-                        arr.push(fetch(path).then(p => p.blob()).then(function(blob) {
-                            return {path:path, blob: blob};
-                        })); 
+
+                        const isUUID = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
+                        if(isUUID.test(path)) arr.push({path:ajax+"/"+path}); 
+                        else arr.push({path:path});
                     });
 
                     Promise.all(arr).then(function(val){
+
                         $.each(val, function(key,file) {
-                            
+
                             var path = file.path;
                             
                             var blob = file.blob;
@@ -73,7 +89,7 @@ $(document).on("DOMContentLoaded", function () {
                             var uuid = path.substring(path.lastIndexOf('/') + 1);
 
                             var entityId = entityIdList[uuid] ?? null;
-                            var mock = {status: 'existing', name: '#'+id, path:path, entityId: entityId, uuid: uuid, type: blob.type, size: blob.size};
+                            var mock = {status: 'existing', name: '#'+id, path:path, entityId: entityId, uuid: uuid};
 
                             editor.files.push(mock);
                             
@@ -85,7 +101,7 @@ $(document).on("DOMContentLoaded", function () {
                     });
 
                     this.on('error', function(file, response) {
-                        
+
                         var errorMessage = $(file.previewElement).find(".dz-error-message");
                         if (errorMessage.length == 0) return;
 
@@ -187,7 +203,8 @@ $(document).on("DOMContentLoaded", function () {
                             $(preview).data("uuid", file.uuid);
 
                             var span = $(preview).find(".dz-size")[0];
-                                span.innerHTML = "<a href="+file.path+" data-lightbox='lightbox-"+id+"' loading='lazy'>"+ span.innerHTML + "</a>";
+                            if(file.size === undefined) span.innerHTML = $("#"+id+"_dropzone").data("file-iconify");
+                            span.innerHTML = "<a href="+file.path+" data-lightbox='lightbox-"+id+"' loading='lazy'>"+ span.innerHTML + "</a>";
 
                             var _href = $("#"+id+"_dropzone").data("file-href");
                             if(file.entityId !== null && _href) {

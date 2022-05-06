@@ -1,5 +1,3 @@
-
-
 window.addEventListener('DOMContentLoaded', function(event) {
 
     function getUser()
@@ -27,6 +25,8 @@ window.addEventListener('DOMContentLoaded', function(event) {
     CookieConsent.setCookie("necessary", "user", getUser(), 30*24*3600, true);
     window.addEventListener('resize', () => CookieConsent.setCookie("necessary", "user", getUser(), 30*24*3600));
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => CookieConsent.setCookie("necessary", "user", getUser(), 30*24*3600));
+
+    Clipboard.ready();
 });
 
 //
