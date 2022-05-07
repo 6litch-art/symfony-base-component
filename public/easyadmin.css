@@ -479,8 +479,44 @@ body.ea-edit .content-header, body.ea-new .content-header {
 
 .responsive-menu { padding:1.25em; }
 .logo img { height:95%; width:95%; object-fit:cover; margin:auto; border-radius: var(--border-radius); }
-.logo, .responsive-logo {
+
+.logo .logo-overlay:hover { 
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	background-color:#FFF2;
+    opacity:1;
+}
+
+.login-wrapper button { border-radius: var(--border-radius) !important; padding:0.4em 0.5em;}
+.login-wrapper .field-button { 
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-wrapper hr { margin:2em 0;}
+.login-wrapper .remember-me {
+    display:flex;
+    padding-left:1em;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo .logo-overlay { 
     
+    transition:all 0.5s;
+    opacity:0;
+    position:absolute; 
+    display:flex;
+    justify-content: center; 
+    align-items:center;
+    width:100%;
+    height:100%;
+    
+}
+
+.logo, .responsive-logo {
+
+    position:relative;
     background-color: #FFF5;
     border-radius: var(--border-radius);
     
@@ -507,7 +543,7 @@ ul.sidebar-menu {
 .form-translatable .nav-link.active {
     background-color: transparent !important;
     border-color:var(--content-top-border-color);
-    border-bottom: 1px solid var(--sidebar-bg);
+    border-bottom: 1px solid var(--body-bg);
 }
 .imageupload figure {
 

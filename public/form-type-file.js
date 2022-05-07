@@ -8,30 +8,33 @@ $(document).on("DOMContentLoaded", function () {
         document.querySelectorAll("[data-file-field]").forEach((function (el) {
 
             var id       = el.getAttribute("data-file-field");
-            var dropzone = $(el).data('file-dropzone');
+
+            var dropzone    = $(el).data('file-dropzone');
+            var dropzoneEl  = $("#"+id+"_dropzone");
+            var entryIdList = dropzoneEl.data("entry-id") ?? [];
+            var pathLink    = dropzoneEl.data("file-path") ?? {};
 
             var lightboxOptions = $(el).data("file-lightbox") || null;
             if (lightboxOptions) lightbox.option(lightboxOptions);
-
-            var entityIdList = $("#"+id+"_dropzone").data("entity-id") ?? [];
+            
             function updateMetadata(el = $("#"+id), nFiles)
             {
                 var id = $(el).attr("id");
                 
-                var maxFiles = parseInt($("#"+id+"_dropzone").data("file-max-files")) || undefined;
+                var maxFiles = parseInt(dropzoneEl.data("file-max-files")) || undefined;
                 var remainingFiles = maxFiles - nFiles;
 
                 var counter = "";
-                     if(nFiles < 1) counter = $("#"+id+"_dropzone").data("file-counter[none]"    ).replace("{0}", nFiles);
-                else if(nFiles < 2) counter = $("#"+id+"_dropzone").data("file-counter[singular]").replace("{0}", nFiles);
-                else                counter = $("#"+id+"_dropzone").data("file-counter[plural]"  ).replace("{0}", nFiles);
+                     if(nFiles < 1) counter = dropzoneEl.data("file-counter[none]"    ).replace("{0}", nFiles);
+                else if(nFiles < 2) counter = dropzoneEl.data("file-counter[singular]").replace("{0}", nFiles);
+                else                counter = dropzoneEl.data("file-counter[plural]"  ).replace("{0}", nFiles);
     
                 var counterMax = "";
                 if(!isNaN(maxFiles)) { 
     
-                         if(remainingFiles < 1) counterMax = $("#"+id+"_dropzone").data("file-counter-max[none]"    ).replace("{0}", remainingFiles);
-                    else if(remainingFiles < 2) counterMax = $("#"+id+"_dropzone").data("file-counter-max[singular]").replace("{0}", remainingFiles);
-                    else                        counterMax = $("#"+id+"_dropzone").data("file-counter-max[plural]"  ).replace("{0}", remainingFiles);
+                         if(remainingFiles < 1) counterMax = dropzoneEl.data("file-counter-max[none]"    ).replace("{0}", remainingFiles);
+                    else if(remainingFiles < 2) counterMax = dropzoneEl.data("file-counter-max[singular]").replace("{0}", remainingFiles);
+                    else                        counterMax = dropzoneEl.data("file-counter-max[plural]"  ).replace("{0}", remainingFiles);
                 }
     
                 $("#"+id+"_metadata").html(counter+" "+counterMax);
@@ -88,8 +91,8 @@ $(document).on("DOMContentLoaded", function () {
                             var id = parseInt(key)+1;
                             var uuid = path.substring(path.lastIndexOf('/') + 1);
 
-                            var entityId = entityIdList[uuid] ?? null;
-                            var mock = {status: 'existing', name: '#'+id, path:path, entityId: entityId, uuid: uuid};
+                            var entryId = entryIdList[uuid] ?? null;
+                            var mock = {status: 'existing', name: '#'+id, path:path, entryId: entryId, uuid: uuid};
 
                             editor.files.push(mock);
                             
@@ -203,14 +206,14 @@ $(document).on("DOMContentLoaded", function () {
                             $(preview).data("uuid", file.uuid);
 
                             var span = $(preview).find(".dz-size")[0];
-                            if(file.size === undefined) span.innerHTML = $("#"+id+"_dropzone").data("file-iconify");
-                            span.innerHTML = "<a href="+file.path+" data-lightbox='lightbox-"+id+"' loading='lazy'>"+ span.innerHTML + "</a>";
+                                span.innerHTML  = dropzoneEl.data("file-search").replaceAll("{0}", pathLink[file.uuid] || file.path);
+                                span.innerHTML += dropzoneEl.data("file-clipboard").replaceAll("{0}", pathLink[file.uuid] || file.path);
 
-                            var _href = $("#"+id+"_dropzone").data("file-href");
-                            if(file.entityId !== null && _href) {
+                            var _href = dropzoneEl.data("file-href");
+                            if(file.entryId !== null && _href) {
 
                                 var span = $(preview).find(".dz-filename > span")[0];
-                                    span.innerHTML = "<a href="+_href.replace("{0}", file.entityId)+">"+ span.innerHTML + "</a>";
+                                    span.innerHTML = "<a href="+_href.replace("{0}", file.entryId)+">"+ span.innerHTML + "</a>";
                             }
                         }
                     });
@@ -244,7 +247,7 @@ $(document).on("DOMContentLoaded", function () {
                     });
                 };
 
-                let editor = $("#"+id+"_dropzone")[0].dropzone;
+                let editor = dropzoneEl[0].dropzone;
                 if (editor === undefined)
                     editor = new Dropzone("#"+id+"_dropzone", dropzone);
 

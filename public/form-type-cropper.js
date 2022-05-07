@@ -134,7 +134,9 @@ $(document).on("DOMContentLoaded", function () {
                                 
                                 var offset = positions[$(pivot).val()] || "center center";
                                 var data = extractData();
+
                                 console.log($(pivot));
+
                                 var x0 = 0, y0 = 0;
                                 console.log(offset);
                                 switch(offset) {
@@ -170,10 +172,9 @@ $(document).on("DOMContentLoaded", function () {
                                         break;
                                 }
 
-                                console.log(data, x0,y0);
                                 data["x"] += x0;
                                 data["y"] += y0;
-
+                                console.log(x0,y0);
                                 cropper.setData(data);
                             });
 
@@ -211,7 +212,7 @@ $(document).on("DOMContentLoaded", function () {
                     clearTimeout(doIt);
                     if(cropper) cropper.disable()
                     doIt = setTimeout(() => {
-                        cropper.enable()
+                        if(cropper) cropper.enable()
                     }, 100);
                 })
         }));

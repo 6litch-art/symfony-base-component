@@ -25,7 +25,11 @@
 .form-collection-delete-button {  padding-left:4px; }
 
 .form-collection-buttons i { font-size:14pt; }
-.form-collection-buttons {
+
+.form-collection-buttons > *:first-child { margin-left:0; }
+.form-collection-buttons > * { margin-left:0.25em; }
+.form-collection-buttons > button { margin-left:0.5em; }
+.form-collection-buttons, .form-collection-buttons > * {
     display:flex;
     justify-content:center;
     align-items:center;
@@ -159,8 +163,17 @@ form.was-validated select:invalid ~ .select2-selection,
     box-shadow: none;
 }
 
-.dropzone .dz-preview .dz-details i { color:#FFFA; }
-.dropzone .dz-preview .dz-details a { text-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.4); }
+.dropzone .dz-preview .dz-details i:hover { color:#EEEA; }
+.dropzone .dz-preview .dz-details i {
+    color:#eff1fa;
+    cursor:pointer;
+}
+
+.dropzone .dz-preview .dz-details { padding: 1em 1em;}
+.dropzone .dz-preview .dz-details a { 
+    text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4) !important; 
+    cursor:pointer;
+}
 
 
 .form-collection-items .accordion-item .form-cropper-fields > div span { min-width: 15%; text-align:right; }
@@ -427,7 +440,8 @@ form.was-validated select:invalid ~ .select2-selection,
 
 .dropzone .dz-preview .dz-remove:hover
 {
-    text-decoration: none !important;
+    text-decoration: underline !important;
+    color: #dc2626;
 }
 
 .nav-tabs { padding-top:1em; }
@@ -632,7 +646,6 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     height: inherit;
     border-radius: inherit;
     opacity: 0;
-    background-color: var(--body-bg);
     transition: all ease-in-out .3s;
 
     width: 100%;
@@ -642,7 +655,10 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 
 .imageupload figcaption:hover {
     opacity: 1;
-    background-color: rgba(0, 0, 0, .2);
+    
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	background-color:#FFF2;
 }
 
 .imageupload figcaption {
@@ -651,8 +667,10 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     justify-content: center;
 }
 
-.imageupload figcaption>i {
-    color: #FFFA;
+.imageupload figcaption i {
+    color: #FFF;
+
+    text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4) !important;
 }
 
 .avatarupload .form-filesize
@@ -871,10 +889,10 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .select2-selection--vertical .select2-selection__choice  { width:calc(100% - 40px); display:flex; justify-content: start !important; }
 /* .select2-selection--vertical .select2-search--inline  { display: none !important; } */
 
-form input[type="submit"] { margin-top:0.75em; }
+/* form input[type="submit"] { margin-top:0.75em; }
 form input[type="reset"]  { margin-top:0.75em; }
 form .btn[type="submit"]  { margin-top:0.75em; }
-form .btn[type="reset"]   { margin-top:0.75em; }
+form .btn[type="reset"]   { margin-top:0.75em; } */
 
 .field-form_row {display:block !important; }
 .field-form_row >* {display:none !important; }

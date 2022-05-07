@@ -13,19 +13,17 @@ $(document).on("DOMContentLoaded", function () {
             $("#"+id).on("click", function (e) {
 
                 var checkbox = $(this);
-                if (onConfirmation) {
-                    onConfirmation = false;
+                if (onConfirmation) onConfirmation = false;
+                else {
 
-                    return true;
+                    if ((checkbox.prop("checked") && onCheck) || (!checkbox.prop("checked") && onUncheck)) {
+
+                        $('#'+id+'-modal').modal('show');
+                        e.preventDefault();
+                        return false;
+                    }
                 }
 
-                if ((checkbox.prop("checked") && onCheck) || (!checkbox.prop("checked") && onUncheck)) {
-
-                    $('#'+id+'-modal').modal('show');
-                    e.preventDefault();
-                    return false;
-                }
-                
                 var checkboxBak = !checkbox.prop("checked");
                 fetch(checkbox.data("toggle-url") + "&newValue=" + checkbox.prop("checked").toString(), {
                     method: "PATCH",
@@ -33,9 +31,7 @@ $(document).on("DOMContentLoaded", function () {
                 }).then((function (t) {
                     checkbox.removeClass("invalid-feedback d-block");
                 })).then((function () {})).catch((function () {
-                    console.log("ARG", checkboxBak);
                     checkbox.prop("checked", checkboxBak).addClass("invalid-feedback d-block");
-                    console.log(checkbox.prop("checked"));
                 }));
             });
 
@@ -44,8 +40,7 @@ $(document).on("DOMContentLoaded", function () {
                 $('#'+id+'-modal').modal('hide');
                 onConfirmation = true;
 
-                var checkbox = $("#"+id)[0];
-                    checkbox.click();
+                $("#"+id).trigger("click");
             });
         }));
     });
