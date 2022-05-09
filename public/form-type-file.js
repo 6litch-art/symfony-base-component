@@ -40,24 +40,6 @@ $(document).on("DOMContentLoaded", function () {
                 $("#"+id+"_metadata").html(counter+" "+counterMax);
             }
 
-            function fetchUUID (uuid) {
-
-                return new Promise(function (resolve, reject) {
-
-                    var xhr = new XMLHttpRequest();
-                        xhr.open("GET", ajax+"/"+uuid);
-                        xhr.responseType = 'blob';
-                        xhr.onloadend = function (e) {
-
-                            if (xhr.status >= 200 && xhr.status < 300) resolve({path:e.target.responseURL, uuid:uuid, blob:e.target.response});
-                            else reject({ status: xhr.status, statusText: xhr.statusText});
-                        };
-
-                        xhr.onerror = function () { reject({status: xhr.status,statusText: xhr.statusText}); };
-                        xhr.send();
-                });
-            }
-
             if(dropzone) {
 
                 var el       = document.getElementById(id+"_dropzone");
@@ -87,7 +69,6 @@ $(document).on("DOMContentLoaded", function () {
 
                             var path = file.path;
                             
-                            var blob = file.blob;
                             var id = parseInt(key)+1;
                             var uuid = path.substring(path.lastIndexOf('/') + 1);
 

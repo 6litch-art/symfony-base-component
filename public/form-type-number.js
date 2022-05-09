@@ -12,13 +12,17 @@ $(document).on("DOMContentLoaded", function () {
             var stepUp = $(e).data("number-up");
             var stepDown = $(e).data("number-down");
             
+            var keyUp = $(e).data("number-keyup");
+            var keyDown = $(e).data("number-keydown");
+            
             var throttleDown =  $(e).data("number-down-throttle");
             var throttleUp   =  $(e).data("number-up-throttle");
             
             var btnDown = $("#"+id+"-down");
             var btnUp = $("#"+id+"-up");
 
-            var intervalUp, intervalDown;
+            var invervalBtnUp, invervalBtnDown;
+            var intervalKeyUp, intervalKeyDown;
 
             var numberValue = $(input).val() || 0;
             if(numberValue === 0) $(input).val(0);
@@ -53,22 +57,52 @@ $(document).on("DOMContentLoaded", function () {
                 $(input).trigger("input");
             };
 
+            // $(window).off("keydown.number."+id);
+            // $(window).on("keydown.number."+id, function (e) {
+
+            //     var code = (e.keyCode ? e.keyCode : e.which);
+            //     if (code == 38 && keyUp && $("#"+id+':focus').length) {
+                
+            //         onClickUp();
+            //         if(throttleUp)
+            //             intervalKeyUp = setInterval(onClickUp, throttleUp); 
+
+            //     } else if (code == 38 && keyUp && $("#"+id+':focus').length) {
+            
+            //         onClickDown();
+            //         if(throttleDown)
+            //             intervalKeyDown = setInterval(onClickDown, throttleDown); 
+            //     }
+
+            // }).on('keyup.number.'+id, function() {
+
+            //     var code = (e.keyCode ? e.keyCode : e.which);
+            //     if (code == 38 && keyUp && $("#"+id+':focus').length && intervalKeyUp) 
+            //         clearInterval(intervalKeyUp);
+            //     if (code == 39 && keyDown && $("#"+id+':focus').length && intervalKeyDown) 
+            //         clearInterval(intervalKeyDown);
+            // });
+
             $(btnUp).off("mousedown.number mouseup.number mouseleave.number touchstart.number touchend.number touchcancel.number");
             $(btnUp).on("mousedown.number touchstart.number", function() {
+
                 onClickUp();
-                if(throttleUp) intervalUp = setInterval(onClickUp, throttleUp); 
+                if(throttleUp)
+                    invervalBtnUp = setInterval(onClickUp, throttleUp); 
 
             }).on('mouseup.number mouseleave.number touchend.number touchcancel.number', function() {
-                 if(intervalUp) clearInterval(intervalUp); 
+                 if(invervalBtnUp) clearInterval(invervalBtnUp); 
             });
             
             $(btnDown).off("mousedown.number mouseup.number mouseleave.number touchstart.number touchend.number touchcancel.number");
             $(btnDown).on("mousedown.number touchstart.number", function() {
+                
                 onClickDown();
-                if(throttleDown) intervalDown = setInterval(onClickDown, throttleDown); 
+                if(throttleDown)
+                    invervalBtnDown = setInterval(onClickDown, throttleDown); 
 
             }).on('mouseup.number mouseleave.number touchend.number touchcancel.number', function() { 
-                if(intervalDown) clearInterval(intervalDown);
+                if(invervalBtnDown) clearInterval(invervalBtnDown);
             });
 
             $(input).off("input.number");
@@ -77,7 +111,7 @@ $(document).on("DOMContentLoaded", function () {
                 if ($(input).val()) numberValue = $(input).val();
                 if ($(input).val() == "") setUnlimitedState(input);
             });
-        }))
+        }));
     });
 
     $(document).trigger("load.form_type.number");

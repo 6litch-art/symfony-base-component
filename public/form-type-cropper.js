@@ -9,6 +9,9 @@ $(document).on("DOMContentLoaded", function () {
             var cropper;
             var cropperOptions = JSON.parse(el.getAttribute("data-cropper") || "");
 
+            var errMsg = el.getAttribute("data-cropper-err"); // NOT IMPLEMENTED YET.
+            var labelId    = el.getAttribute("data-cropper-label");
+
             var id    = el.getAttribute("data-cropper-field");
             var pivot = $("#"+el.getAttribute("data-cropper-pivot"));
             var positions = JSON.parse(el.getAttribute("data-cropper-positions"));
@@ -26,33 +29,36 @@ $(document).on("DOMContentLoaded", function () {
             var updateCropper = function() {
 
                 // Expand on negative value
-                data = cropper.getData();
+                
+                var data  = cropper.getData();
+                var x  = ($("#"+id+"_x").val());
+                var x0 = (data["x"]);
+                
+                var width = $("#"+id+"_width").val();
+                if(x < 0) width = Math.round(width) + Math.abs(x-x0);
 
-                var x  = Math.round($("#"+id+"_x").val());
-                var x0 = Math.round(data["x"]);
+                var y  = ($("#"+id+"_y").val());
+                var y0 = (data["y"]);
 
-                var width = Math.round($("#"+id+"_width").val());
-                if(x < 0) width = width + Math.abs(x-x0);
-
-                var y  = Math.round($("#"+id+"_y").val());
-                var y0 = Math.round(data["y"]);
-
-                var height = Math.round($("#"+id+"_height").val());
-                if(y < 0) height = height + Math.abs(y-y0);
+                var height = $("#"+id+"_height").val();
+                if(y  < 0) height = Math.round(height) + Math.abs(y-y0);
 
                 data = extractData();
                 data["width"]  = width;
                 data["height"] = height;
+
                 cropper.setData(data);
 
                 // Squeeze action 
-                if(Math.round(cropper.getData()["x"]) !== x && x > 0)
+                if(Math.round(cropper.getData()["x"]) != Math.round(x) && x > 0)
                     data["width"]  = x > naturalWidth  ? 0 : data["width"]  - Math.abs(x-x0);
-                if(Math.round(cropper.getData()["y"]) !== y && y > 0) 
-                    data["height"] = y > naturalHeight ? 0 : data["height"] - Math.abs(y-y0);
 
+                if(Math.round(cropper.getData()["y"]) != Math.round(y) && y > 0) 
+                    data["height"] = y > naturalHeight ? 0 : data["height"] - Math.abs(y-y0);
+                    
                 data["width"]  = Math.min(data["width"], naturalWidth);
                 data["height"] = Math.min(data["height"], naturalHeight);
+
                 cropper.setData(data);
             }
 
@@ -74,13 +80,13 @@ $(document).on("DOMContentLoaded", function () {
 
             function extractData()
             {
-                var x   = Math.round($("#"+id+"_x").val());
-                var y    = Math.round($("#"+id+"_y").val());
-                var width  = Math.round($("#"+id+"_width").val());
-                var height = Math.round($("#"+id+"_height").val());
-                var rotate = Math.round($("#"+id+"_rotate").val());
-                var scaleY = Math.round($("#"+id+"_scaleY").val());
-                var scaleX = Math.round($("#"+id+"_scaleX").val());
+                var x   = ($("#"+id+"_x").val());
+                var y    = ($("#"+id+"_y").val());
+                var width  = ($("#"+id+"_width").val());
+                var height = ($("#"+id+"_height").val());
+                var rotate = ($("#"+id+"_rotate").val());
+                var scaleY = ($("#"+id+"_scaleY").val());
+                var scaleX = ($("#"+id+"_scaleX").val());
 
                 var data = {};
                     data["x"]      = Math.max(0, Math.min(x     , naturalWidth));
@@ -105,11 +111,11 @@ $(document).on("DOMContentLoaded", function () {
                         // Set initial dimensions
                         width = $("#"+id+"_width" ).val();
                         naturalWidth  = parseInt(image.width);
-                        $("#"+id+"_width" ).val(width > 0 ? width : naturalWidth);
+                        $("#"+id+"_width" ).val(width > 0 && width < naturalWidth ? width : naturalWidth);
 
                         height = $("#"+id+"_height" ).val();
                         naturalHeight = parseInt(image.height);
-                        $("#"+id+"_height" ).val(height > 0 ? height : naturalHeight);
+                        $("#"+id+"_height" ).val(height > 0 && height < naturalHeight ? height : naturalHeight);
                         
                         //
                         // Extract data out of fields
@@ -126,55 +132,57 @@ $(document).on("DOMContentLoaded", function () {
                         $("#"+id+"_scaleY").off("input.cropper").on("input.cropper", updateCropper);
                         $("#"+id+"_rotate").off("input.cropper").on("input.cropper", updateCropper);
 
-                        $("#"+id+"_actions button[data-aspect-ratio]") 
+                        aspectRatioButtons = $("#"+id+"_actions button[data-aspect-ratio]");
+                        aspectRatioButtons
                             .off("click.cropper")
                             .on("click.cropper", function() { // Do not inline (this)
 
                                 cropper.setAspectRatio(parseFloat($(this).data("aspect-ratio")));
-                                
                                 var offset = positions[$(pivot).val()] || "center center";
-                                var data = extractData();
+                                var data = cropper.getData();
 
-                                console.log($(pivot));
+                                var label = $("#"+labelId);
+                                var labelReplaceable = false;
+                                aspectRatioButtons.each(function(i, btn) {
+                                    if(labelReplaceable) return;
+                                    labelReplaceable = btn.innerText == label.val() || !label.val();
+                                });
 
-                                var x0 = 0, y0 = 0;
-                                console.log(offset);
+                                if(labelReplaceable) label.val(this.innerText).change();
+
                                 switch(offset) {
                                     case "center center": break;
-                                    case "center left":
-                                        x0 -= data["width"]/2;
+                                    case "center top":
+                                        data["y"] = 0;
                                         break;
-                                    case "center right":
-                                        x0 += data["width"]/2;
+                                    case "center bottom":
+                                        data["y"] = naturalHeight-data["height"];
                                         break;
-                                    case "top center":
-                                        y0 -= data["height"]/2;
+                                    case "left center":
+                                        data["x"] = 0;
                                         break;
-                                    case "bottom center":
-                                        y0 += data["height"]/2;
+                                    case "right center":
+                                        data["x"] = naturalWidth-data["width"];
                                         break;
 
-                                    case "top left":
-                                        x0 -= data["width"]/2;
-                                        y0 -= data["height"]/2;
+                                    case "left top":
+                                        data["x"] = 0;
+                                        data["y"] = 0;
                                         break;
-                                    case "top right":
-                                        x0 += data["width"]/2;
-                                        y0 -= data["height"]/2;
+                                    case "right bottom":
+                                        data["x"] = naturalWidth-data["width"];
+                                        data["y"] = naturalHeight-data["height"];
                                         break;
-                                    case "bottom left":
-                                        x0 -= data["width"]/2;
-                                        y0 += data["height"]/2;
+                                    case "right top":
+                                        data["x"] = naturalWidth-data["width"];
+                                        data["y"] = 0;
                                         break;
-                                    case "bottom right":
-                                        x0 += data["width"]/2;
-                                        y0 += data["height"]/2;
+                                    case "left bottom":
+                                        data["x"] = 0;
+                                        data["y"] = naturalHeight-data["height"];
                                         break;
                                 }
 
-                                data["x"] += x0;
-                                data["y"] += y0;
-                                console.log(x0,y0);
                                 cropper.setData(data);
                             });
 
@@ -182,7 +190,6 @@ $(document).on("DOMContentLoaded", function () {
                             .off("click.cropper")
                             .on("click.cropper", function() { // Do not inline (this)
 
-                                if(!$(this).data("cropper-reset")) return;
                                 cropper.setAspectRatio("NAN");
                                 cropper.setData(undo);
                             });
@@ -191,19 +198,37 @@ $(document).on("DOMContentLoaded", function () {
 
                 if(image.src.startsWith("data:")) return;
 
-                if(image.src in cropperSource) reader.readAsDataURL(cropperSource[image.src]);
-                else {
+                //
+                // Optimized image loading.
+                function loadCropper(image) {
 
-                    var xhr = new XMLHttpRequest();
-                        xhr.open('GET', image.src, true);
-                        xhr.responseType = 'blob';
-                        xhr.onload = function(e) { 
+                    cropperSource[image.src] = cropperSource[image.src] || new Promise(function (resolve, reject) {
+        
+                        var xhr = new XMLHttpRequest();
+                            xhr.open('GET', image.src, true);
+                            xhr.responseType = 'blob';
+                            xhr.onloadend = function (e) {
+                                
+                                if (xhr.status >= 200 && xhr.status < 300) resolve({status:xhr.status, statusText: xhr.statusText, response:this.response});
+                                else reject({ status: xhr.status, statusText: xhr.statusText});
+                            };
 
-                            cropperSource[image.src] = this.response;
-                            reader.readAsDataURL(cropperSource[image.src]);
-                        }
-                        xhr.send();
+                            xhr.onerror = function () { reject({status: xhr.status,statusText: xhr.statusText}); };
+                            xhr.send();
+                    });
                 }
+                
+                loadCropper(image);
+                
+                cropperSource[image.src]
+                .then( (xhr) => reader.readAsDataURL(xhr.response) );
+                    /*.catch(function(xhr) { // CATCH ISSUE LOADING IMAGE.. TO DO LATER IF REQUIRED
+
+                        $("#"+id+"_loader").html(errMsg);
+                        $("#"...).on(function() {
+                            loadCropper(image);
+                        })
+                    });*/
 
                 //
                 // Fix refresh of cropper container on resize...

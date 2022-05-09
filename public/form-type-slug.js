@@ -177,7 +177,7 @@ $(document).on("DOMContentLoaded", function () {
                         key: "listenTarget",
                         value: function () {
                             var e = this;
-                            this.target.addEventListener("keyup", (function (t) {
+                            this.target.addEventListener("change", (function (t) {
                                 "readonly" === e.field.getAttribute("readonly") && e.updateValue()
                             }))
                         }
@@ -224,11 +224,11 @@ $(document).on("DOMContentLoaded", function () {
 
                     });
 
-                    $(slugger.field).on('input', function() {
+                    $(slugger.field).on('input change keyup', function() {
                         slugger.currentSlug = this.value;
                     });
 
-                    $(slugger.target).on('input', function() {
+                    $(slugger.target).on('input change keyup', function() {
 
                         if(!slugger.locked) return;
                         slugger.updateValue();
