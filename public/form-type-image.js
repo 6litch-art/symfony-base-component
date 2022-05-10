@@ -91,18 +91,16 @@ $(document).on("DOMContentLoaded", function () {
                                     $('#'+id+'_file').val(file.uuid).trigger('change');
                                     $('#'+id+'_raw').val("");
 
-                                    $('.'+id+'_modalClose').prop("disabled", false);
-                                    $('#'+id+'_modalSave').prop("disabled", false);                
+                                    $('.'+id+'_modalClose').removeProp("disabled");
+                                    $('#'+id+'_modalSave').removeProp("disabled");                
                                 },
 
                                 error: function () { 
                                     $('#'+id+'_thumbnail')[0].src = thumbnail; 
                                     $('#'+id+'_modal_feedback').html(uploadFailed);
-                                    $('.'+id+'_modalClose').prop("disabled", false);
-                                    $('#'+id+'_modalSave').prop("disabled", false);                
-                                },
-                                complete: function () { 
-                                },
+                                    $('.'+id+'_modalClose').removeProp("disabled");
+                                    $('#'+id+'_modalSave').removeProp("disabled");                
+                                }
                             });
                         });
                     }

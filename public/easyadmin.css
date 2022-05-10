@@ -715,14 +715,19 @@ fieldset {
     border: var(--border-width) var(--border-style) var(--content-top-border-color);
 }
 
-.form-control:disabled, .form-control[readonly] {
+input.form-control:not(.form-check-input), textarea.form-control, select.form-control
+{
+    background-color: var(--body-bg);
+}
+input.form-control:not(.form-check-input):disabled,
+input.form-control:not(.form-check-input)[readonly],
+textarea.form-control:disabled, textarea.form-control[readonly], 
+select.form-control:disabled, select.form-control[readonly]
+{
     background-color: var(--sidebar-bg);
 }
 
-input.form-control:not(.form-check-input), textarea.form-control, select.form-control
-{
-    background-color: var(--body-bg) !important;
-}
+
 .form-control
 {
     background-color: var(--sidebar-bg);
