@@ -135,6 +135,10 @@ $(document).on("DOMContentLoaded", function () {
             if(select2["data"].length != 0) $(field).empty();
             $(field).val(select2["selected"] || []).trigger("change");
 
+            //
+            // Apply required option
+            select2["containerCssClass"] = function(e) { return $(e).attr('required') ? 'required' : ''; }
+
             var parent = parent || $(field).parent();
             $(field).select2(select2).on("select2:unselecting", function(e) {
             

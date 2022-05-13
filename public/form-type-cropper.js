@@ -10,7 +10,6 @@ $(document).on("DOMContentLoaded", function () {
             var cropperOptions = JSON.parse(el.getAttribute("data-cropper") || "");
 
             var errMsg = el.getAttribute("data-cropper-err"); // NOT IMPLEMENTED YET.
-            var labelId    = el.getAttribute("data-cropper-label");
 
             var id    = el.getAttribute("data-cropper-field");
             var pivot = $("#"+el.getAttribute("data-cropper-pivot"));
@@ -132,59 +131,68 @@ $(document).on("DOMContentLoaded", function () {
                         $("#"+id+"_scaleY").off("input.cropper").on("input.cropper", updateCropper);
                         $("#"+id+"_rotate").off("input.cropper").on("input.cropper", updateCropper);
 
-                        aspectRatioButtons = $("#"+id+"_actions button[data-aspect-ratio]");
-                        aspectRatioButtons
-                            .off("click.cropper")
-                            .on("click.cropper", function() { // Do not inline (this)
+                        var aspectRatioButtons = $("#"+id+"_actions button[data-aspect-ratio]");
+                            aspectRatioButtons
+                                .off("click.cropper")
+                                .on("click.cropper", function() { // Do not inline (this)
 
-                                cropper.setAspectRatio(parseFloat($(this).data("aspect-ratio")));
-                                var offset = positions[$(pivot).val()] || "center center";
-                                var data = cropper.getData();
+                                    cropper.setAspectRatio(parseFloat($(this).data("aspect-ratio")));
+                                    var offset = positions[$(pivot).val()] || "center center";
+                                    var data = cropper.getData();
 
-                                var label = $("#"+labelId);
-                                var labelReplaceable = false;
-                                aspectRatioButtons.each(function(i, btn) {
-                                    if(labelReplaceable) return;
-                                    labelReplaceable = btn.innerText == label.val() || !label.val();
+                                    var labelId = $(this).data("labelledby");
+                                    var label = $("#" + labelId);
+
+                                    var labelReplaceable = false;
+                                    if (label.length) {
+
+                                        aspectRatioButtons.each(function(i, btn) {
+
+                                            if(labelReplaceable) return;
+                                            if($(btn).data("labelledby") !== labelId) return;
+
+                                            labelReplaceable = $(btn).data("labelledby-value").toLowerCase() == label.val().toLowerCase() || !label.val();
+                                        });
+                                    }
+
+                                    if (labelReplaceable)
+                                        label.val($(this).data("labelledby-value")).change();
+
+                                    switch(offset) {
+                                        case "center center": break;
+                                        case "center top":
+                                            data["y"] = 0;
+                                            break;
+                                        case "center bottom":
+                                            data["y"] = naturalHeight-data["height"];
+                                            break;
+                                        case "left center":
+                                            data["x"] = 0;
+                                            break;
+                                        case "right center":
+                                            data["x"] = naturalWidth-data["width"];
+                                            break;
+
+                                        case "left top":
+                                            data["x"] = 0;
+                                            data["y"] = 0;
+                                            break;
+                                        case "right bottom":
+                                            data["x"] = naturalWidth-data["width"];
+                                            data["y"] = naturalHeight-data["height"];
+                                            break;
+                                        case "right top":
+                                            data["x"] = naturalWidth-data["width"];
+                                            data["y"] = 0;
+                                            break;
+                                        case "left bottom":
+                                            data["x"] = 0;
+                                            data["y"] = naturalHeight-data["height"];
+                                            break;
+                                    }
+
+                                    cropper.setData(data);
                                 });
-
-                                if(labelReplaceable) label.val(this.innerText).change();
-
-                                switch(offset) {
-                                    case "center center": break;
-                                    case "center top":
-                                        data["y"] = 0;
-                                        break;
-                                    case "center bottom":
-                                        data["y"] = naturalHeight-data["height"];
-                                        break;
-                                    case "left center":
-                                        data["x"] = 0;
-                                        break;
-                                    case "right center":
-                                        data["x"] = naturalWidth-data["width"];
-                                        break;
-
-                                    case "left top":
-                                        data["x"] = 0;
-                                        data["y"] = 0;
-                                        break;
-                                    case "right bottom":
-                                        data["x"] = naturalWidth-data["width"];
-                                        data["y"] = naturalHeight-data["height"];
-                                        break;
-                                    case "right top":
-                                        data["x"] = naturalWidth-data["width"];
-                                        data["y"] = 0;
-                                        break;
-                                    case "left bottom":
-                                        data["x"] = 0;
-                                        data["y"] = naturalHeight-data["height"];
-                                        break;
-                                }
-
-                                cropper.setData(data);
-                            });
 
                         $("#"+id+"_actions button[data-cropper-reset]") 
                             .off("click.cropper")

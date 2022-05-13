@@ -450,7 +450,7 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .tab-pane { padding:1em; }
 .input-group-text { height: 100%; }
 
-.required:after {
+input.required:after, textarea.required:after, select.required:after {
     bottom: 4px;
     color: #dc2626;
     content: "•";
@@ -566,6 +566,13 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     flex-basis: unset;
 }
 
+.imageupload figcaption:hover {
+    opacity: 1;
+    
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+	background-color:#FFF2;
+}
 .imageupload figure > img {
     object-fit: cover;
     height:115%;
@@ -880,7 +887,7 @@ img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
     font-size:11pt !important;
     line-height:0 !important;
 }
-.select2-selection--multiple .select2-selection__choice { margin-top: 0.35em !important; }
+
 .select2-selection__choice { display:flex; justify-content: center; }
 .select2-selection__entry i { min-width:20px; margin-right:0.1em; }
 .select2-selection__entry { margin:0 0.25em; }

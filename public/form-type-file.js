@@ -180,7 +180,7 @@ $(document).on("DOMContentLoaded", function () {
 
                         var previewList = $('#'+id+'_dropzone .dz-preview');
                         var preview = $(previewList)[previewList.length-1];
-                        
+                        console.log(_href);
                         // Add UUID to preview for existing files (these are not triggering "success" event)
                         if(file.status == "existing") {
 
@@ -189,10 +189,12 @@ $(document).on("DOMContentLoaded", function () {
                             var span = $(preview).find(".dz-size")[0];
                                 span.innerHTML  = dropzoneEl.data("file-search").replaceAll("{0}", pathLink[file.uuid] || file.path);
                                 span.innerHTML += dropzoneEl.data("file-clipboard").replaceAll("{0}", pathLink[file.uuid] || file.path);
+                                span.innerHTML += dropzoneEl.data("file-clipboard").replaceAll("{0}", pathLink[file.uuid] || file.path);
+                                span.innerHTML += dropzoneEl.data("file-clipboard").replaceAll("{0}", pathLink[file.uuid] || file.path);
 
                             var _href = dropzoneEl.data("file-href");
                             if(file.entryId !== null && _href) {
-
+                                
                                 var span = $(preview).find(".dz-filename > span")[0];
                                     span.innerHTML = "<a href="+_href.replace("{0}", file.entryId)+">"+ span.innerHTML + "</a>";
                             }
