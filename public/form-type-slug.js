@@ -199,7 +199,6 @@ $(document).on("DOMContentLoaded", function () {
                     var label = $('label[for="' + slugger.target.id + '"]');
                     var keep   = $(slugger.field).data("slug-keep") ?? "";
                     var lower  = JSON.parse($(slugger.field).data("slug-lower") ?? "true");
-                    var lock  = JSON.parse($(slugger.field).data("slug-lock") ?? null);
                     var strict =  JSON.parse($(slugger.field).data("slug-strict") ?? "true");
 
                     var targetCurrentSlug = o($(slugger.target).val(), {
@@ -208,9 +207,7 @@ $(document).on("DOMContentLoaded", function () {
                         strict: strict
                     });
 
-                         if(lock === false) slugger.unlock();
-                    else if(lock === true ) slugger.lock();
-                    else if(targetCurrentSlug != slugger.currentSlug) slugger.unlock();
+                    if(targetCurrentSlug != slugger.currentSlug) slugger.unlock();
 
                     slugger.target.setAttribute("data-required", slugger.target.getAttribute("required") || "");
                     var isTargetRequired = (slugger.locked ? slugger.field.getAttribute("required") : slugger.target.getAttribute("data-required")) == "required";
@@ -222,25 +219,21 @@ $(document).on("DOMContentLoaded", function () {
                         slugger.target.removeAttribute("required");
                     }
 
-                    if(lock !== null) $(slugger.lockButton).prop("disabled", true);
-                    else {
-                        
-                        slugger.lockButton.addEventListener("click", function () {
+                    slugger.lockButton.addEventListener("click", function () {
 
-                            if(slugger.locked) slugger.updateValue();
+                        if(slugger.locked) slugger.updateValue();
 
-                            var label = $('label[for="' + slugger.target.id + '"]');
-                            var isTargetRequired = (slugger.locked ? slugger.field.getAttribute("required") : slugger.target.getAttribute("data-required")) == "required";
-                            if (isTargetRequired) {
-                                label.addClass("required");
-                                slugger.target.setAttribute("required", true);
-                            } else {
-                                label.removeClass("required");
-                                slugger.target.removeAttribute("required");
-                            }
+                        var label = $('label[for="' + slugger.target.id + '"]');
+                        var isTargetRequired = (slugger.locked ? slugger.field.getAttribute("required") : slugger.target.getAttribute("data-required")) == "required";
+                        if (isTargetRequired) {
+                            label.addClass("required");
+                            slugger.target.setAttribute("required", true);
+                        } else {
+                            label.removeClass("required");
+                            slugger.target.removeAttribute("required");
+                        }
 
-                        });
-                    }
+                    });
 
                     $(slugger.field).on('input change keyup', function() {
                         slugger.currentSlug = this.value;

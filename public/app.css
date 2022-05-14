@@ -168,13 +168,21 @@ form.was-validated select:invalid ~ .select2-selection,
     color:#eff1fa;
     cursor:pointer;
 }
+.dropzone .dz-preview .dz-details {
+    display: flex;
+    height: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1em 1em;
+    font-size:12pt;
+}
 
-.dropzone .dz-preview .dz-details { padding: 1em 1em;}
+.dropzone .dz-preview .dz-details .fa-trash-alt { color: #F008; }
 .dropzone .dz-preview .dz-details a { 
     text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4) !important; 
     cursor:pointer;
 }
-
 
 .form-collection-items .accordion-item .form-cropper-fields > div span { min-width: 15%; text-align:right; }
 .form-collection-items .accordion-item .form-cropper-fields > div input { flex-grow: 1; }

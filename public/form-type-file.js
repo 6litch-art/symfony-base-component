@@ -186,18 +186,18 @@ $(document).on("DOMContentLoaded", function () {
 
                             $(preview).data("uuid", file.uuid);
 
-                            var span = $(preview).find(".dz-size")[0];
+                            var _href = dropzoneEl.data("file-href");
+                            var span = $(preview).find(".dz-details")[0];
                                 span.innerHTML  = dropzoneEl.data("file-search").replaceAll("{0}", pathLink[file.uuid] || file.path);
                                 span.innerHTML += dropzoneEl.data("file-clipboard").replaceAll("{0}", pathLink[file.uuid] || file.path);
-                                span.innerHTML += dropzoneEl.data("file-clipboard").replaceAll("{0}", pathLink[file.uuid] || file.path);
-                                span.innerHTML += dropzoneEl.data("file-clipboard").replaceAll("{0}", pathLink[file.uuid] || file.path);
+                                span.innerHTML += dropzoneEl.data("file-href").replaceAll("{0}", pathLink[file.uuid] || file.path);
+                                span.innerHTML += dropzoneEl.data("file-delete").replaceAll("{0}", pathLink[file.uuid] || file.path);
 
-                            var _href = dropzoneEl.data("file-href");
-                            if(file.entryId !== null && _href) {
+                            // if(file.entryId !== null && _href) {
                                 
-                                var span = $(preview).find(".dz-filename > span")[0];
-                                    span.innerHTML = "<a href="+_href.replace("{0}", file.entryId)+">"+ span.innerHTML + "</a>";
-                            }
+                            //     var span = $(preview).find(".dz-filename > span")[0];
+                            //         span.innerHTML = "<a href="+_href.replace("{0}", file.entryId)+">"+ span.innerHTML + "</a>";
+                            // }
                         }
                     });
 

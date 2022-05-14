@@ -550,12 +550,14 @@ ul.sidebar-menu {
     border-bottom:0;
 }
 
+form .row > div.form-group { padding: 1em 0;}
+form .row button[type="submit"] { margin: 1em 0; }
+
+a.btn.text-danger { color: white !important; background-color: rgba(var(--bs-danger-rgb),var(--bs-text-opacity))!important; }
+.dropzone .dz-preview .dz-details .fa-trash-alt { color: rgba(var(--bs-danger-rgb),var(--bs-text-opacity))!important; }
+
 .ea-dark-scheme .form-switch .form-check-input:checked, .ea-dark-scheme .form-switch .form-check-input:checked { border-color:unset !important; }
-
-.ea-dark-scheme .form-switch .form-check-input:checked, .ea-dark-scheme .form-switch .form-check-input:checked {
-
-    background-color: var(--form-switch-checked-bg);
-}
+.ea-dark-scheme .form-switch .form-check-input:checked, .ea-dark-scheme .form-switch .form-check-input:checked { background-color: var(--form-switch-checked-bg); }
 
 .accordion-button:not(.collapsed) { color: var(--form-label-color) !important; }
 .accordion-button { background-color: var(--sidebar-bg) !important; }
