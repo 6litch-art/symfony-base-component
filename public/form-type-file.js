@@ -45,6 +45,7 @@ $(document).on("DOMContentLoaded", function () {
                 var el       = document.getElementById(id+"_dropzone");
                 var sortable = $(el).data("file-sortable");
                 var ajax     = el.getAttribute("data-file-ajax");
+                var paths    = JSON.parse(el.getAttribute("data-file-paths"));
 
                 dropzone["init"] = function() {
 
@@ -59,7 +60,7 @@ $(document).on("DOMContentLoaded", function () {
                     $.each(val, function(key, path) { 
 
                         const isUUID = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
-                        if(isUUID.test(path)) arr.push({path:ajax+"/"+path}); 
+                        if(isUUID.test(path)) arr.push({path: paths[path] ?? ajax+"/"+path, uuid:path}); 
                         else arr.push({path:path});
                     });
 
@@ -70,7 +71,7 @@ $(document).on("DOMContentLoaded", function () {
                             var path = file.path;
                             
                             var id = parseInt(key)+1;
-                            var uuid = path.substring(path.lastIndexOf('/') + 1);
+                            var uuid = file.uuid ?? path.substring(path.lastIndexOf('/') + 1);
 
                             var entryId = entryIdList[uuid] ?? null;
                             var mock = {status: 'existing', name: '#'+id, path:path, entryId: entryId, uuid: uuid};
@@ -180,18 +181,32 @@ $(document).on("DOMContentLoaded", function () {
 
                         var previewList = $('#'+id+'_dropzone .dz-preview');
                         var preview = $(previewList)[previewList.length-1];
-                        console.log(_href);
+                        console.log(file);
+
                         // Add UUID to preview for existing files (these are not triggering "success" event)
                         if(file.status == "existing") {
 
                             $(preview).data("uuid", file.uuid);
 
-                            var _href = dropzoneEl.data("file-href");
-                            var span = $(preview).find(".dz-details")[0];
-                                span.innerHTML  = dropzoneEl.data("file-search").replaceAll("{0}", pathLink[file.uuid] || file.path);
+                            var span = $(preview).find(".dz-size")[0];
+                                span.innerHTML  = dropzoneEl.data("file-lightbox").replaceAll("{0}", pathLink[file.uuid] || file.path);
                                 span.innerHTML += dropzoneEl.data("file-clipboard").replaceAll("{0}", pathLink[file.uuid] || file.path);
-                                span.innerHTML += dropzoneEl.data("file-href").replaceAll("{0}", pathLink[file.uuid] || file.path);
-                                span.innerHTML += dropzoneEl.data("file-delete").replaceAll("{0}", pathLink[file.uuid] || file.path);
+
+                            var _href = dropzoneEl.data("file-href");
+                            if(file.entryId !== null && _href) {
+
+                                var span = $(preview).find(".dz-filename > span")[0];
+                                    span.innerHTML = "<a href="+_href.replace("{0}", file.entryId)+">"+ span.innerHTML + "</a>";
+                            }
+                            // $(preview).data("uuid", file.uuid);
+
+                            // var _href = dropzoneEl.data("file-href");
+
+                            // var span = $(preview).find(".dz-details")[0];
+                            //     span.innerHTML  = dropzoneEl.data("file-lightbox").replaceAll("{0}", pathLink[file.uuid] || file.path);
+                            //     // span.innerHTML += dropzoneEl.data("file-clipboard").replaceAll("{0}", pathLink[file.uuid] || file.path);
+                            //     // span.innerHTML += dropzoneEl.data("file-href").replaceAll("{0}", pathLink[file.uuid] || file.path);
+                            //     // span.innerHTML += dropzoneEl.data("file-delete").replaceAll("{0}", pathLink[file.uuid] || file.path);
 
                             // if(file.entryId !== null && _href) {
                                 

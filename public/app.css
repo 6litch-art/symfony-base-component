@@ -44,7 +44,6 @@
 
 textarea { min-height:150px !important; }
 .form-entity > .form-control { padding: 0; }
-.form-control, .input-group-text { padding: .425rem .75rem; }
 .form-collection-items.form-control { padding: 0; }
 .form-control:not(input):not(textarea):not(select) { background-color:transparent; }
 .form-errors ul { margin:0; }

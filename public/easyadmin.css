@@ -145,9 +145,13 @@ form fieldset
 .form-entity > div { margin-bottom: 0em !important; }
 
 
+.input-group,
+.input-group-append,
+input[type="file"]::file-selector-button,
 .select2-container .select2-selection--single, 
 .select2-container .select2-selection--multiple { min-height: 38px !important; }
 
+.input-group-text { height:auto !important; }
 .form-switch {
     padding:12px 0;
     margin:0;
@@ -403,10 +407,7 @@ body.ea-edit .content-header, body.ea-new .content-header {
 .actions .action-icon 
 {
     font-size:14pt !important;
-    top:7px;
     position:relative;
-    padding-bottom:10px;
-
 }
 
 .ea-detail .thumbnail-avatar, .ea-detail .thumbnail-image {
