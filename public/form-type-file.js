@@ -12,9 +12,18 @@ $(document).on("DOMContentLoaded", function () {
             var dropzone    = $(el).data('file-dropzone');
             var dropzoneEl  = $("#"+id+"_dropzone");
             var entryIdList = dropzoneEl.data("entry-id") ?? [];
-            var pathLink    = dropzoneEl.data("file-path") ?? {};
 
-            var lightboxOptions = $(el).data("file-lightbox") || null;
+            var pathLinks = dropzoneEl.data("file-path-links") ?? {};
+            var clippable      = dropzoneEl.data("file-clippable"      ) ?? {};
+            var downloadLinks  = dropzoneEl.data("file-download-links" ) ?? {};
+
+            var lightboxPattern  = dropzoneEl.data("file-lightbox"  ) ?? "";
+            var downloadPattern  = dropzoneEl.data("file-download"  ) ?? "";
+            var clipboardPattern = dropzoneEl.data("file-clipboard" ) ?? "";
+            var gotoPattern      = dropzoneEl.data("file-goto"      ) ?? "";
+            var deletePattern    = dropzoneEl.data("file-delete"    ) ?? "";
+            
+            var lightboxOptions = $(el).data("file-lightbox-options") || null;
             if (lightboxOptions) lightbox.option(lightboxOptions);
             
             function updateMetadata(el = $("#"+id), nFiles)
@@ -42,12 +51,28 @@ $(document).on("DOMContentLoaded", function () {
 
             if(dropzone) {
 
+                Dropzone.confirm = function (question, accepted, rejected) { // Only the last dropzone modal is used...
+
+                    $('#'+id+'-text').html(question);
+                    $('#'+id+'-modal').modal('show');
+                    $("#"+id+"-dismiss").on("click", function (e) {
+                        $('#'+id+'-modal').modal('hide');
+                    });
+
+                    $("#"+id+"-confirm").on("click", function (e) {
+            
+                        $('#'+id+'-modal').modal('hide');
+                        accepted();
+                    });
+                };
+
                 var el       = document.getElementById(id+"_dropzone");
                 var sortable = $(el).data("file-sortable");
                 var ajax     = el.getAttribute("data-file-ajax");
-                var paths    = JSON.parse(el.getAttribute("data-file-paths"));
+                
+                var paths       = JSON.parse(el.getAttribute("data-file-path-links")) ?? {};
 
-                dropzone["init"] = function() {
+                dropzone.init = function() {
 
                     // Initialize existing pictures
                     var val = $('#'+id).val();
@@ -181,39 +206,46 @@ $(document).on("DOMContentLoaded", function () {
 
                         var previewList = $('#'+id+'_dropzone .dz-preview');
                         var preview = $(previewList)[previewList.length-1];
-                        console.log(file);
 
                         // Add UUID to preview for existing files (these are not triggering "success" event)
                         if(file.status == "existing") {
 
+                            $(preview).find(".dz-filename").remove();
+                            $(preview).find(".dz-size").remove();
+                            $(preview).find(".dz-remove").remove();
+    
                             $(preview).data("uuid", file.uuid);
+                            $(preview).find(".dz-details").append($("<div class='dz-tools'></div>"));
 
-                            var span = $(preview).find(".dz-size")[0];
-                                span.innerHTML  = dropzoneEl.data("file-lightbox").replaceAll("{0}", pathLink[file.uuid] || file.path);
-                                span.innerHTML += dropzoneEl.data("file-clipboard").replaceAll("{0}", pathLink[file.uuid] || file.path);
-
-                            var _href = dropzoneEl.data("file-href");
-                            if(file.entryId !== null && _href) {
-
-                                var span = $(preview).find(".dz-filename > span")[0];
-                                    span.innerHTML = "<a href="+_href.replace("{0}", file.entryId)+">"+ span.innerHTML + "</a>";
-                            }
-                            // $(preview).data("uuid", file.uuid);
-
-                            // var _href = dropzoneEl.data("file-href");
-
-                            // var span = $(preview).find(".dz-details")[0];
-                            //     span.innerHTML  = dropzoneEl.data("file-lightbox").replaceAll("{0}", pathLink[file.uuid] || file.path);
-                            //     // span.innerHTML += dropzoneEl.data("file-clipboard").replaceAll("{0}", pathLink[file.uuid] || file.path);
-                            //     // span.innerHTML += dropzoneEl.data("file-href").replaceAll("{0}", pathLink[file.uuid] || file.path);
-                            //     // span.innerHTML += dropzoneEl.data("file-delete").replaceAll("{0}", pathLink[file.uuid] || file.path);
-
-                            // if(file.entryId !== null && _href) {
+                            var span = $(preview).find(".dz-details .dz-tools")[0];
+                                if(clippable[file.uuid] ?? false) span.innerHTML += clipboardPattern.replaceAll("{0}", pathLinks[file.uuid] || file.path);
+                                else span.innerHTML += "<i class='blank-space'></i>";
                                 
-                            //     var span = $(preview).find(".dz-filename > span")[0];
-                            //         span.innerHTML = "<a href="+_href.replace("{0}", file.entryId)+">"+ span.innerHTML + "</a>";
-                            // }
+                            span.innerHTML += downloadPattern.replaceAll("{0}", downloadLinks[file.uuid] || file.path);
+                            span.innerHTML += lightboxPattern.replaceAll("{0}", pathLinks[file.uuid] || file.path);
+
+                            // "Go to" or "delete" action
+                            var _href = dropzoneEl.data("file-href");
+                            if(!file.entryId && deletePattern)
+                                span.innerHTML += deletePattern;
+                            else if(file.entryId && _href) 
+                                span.innerHTML += gotoPattern.replaceAll("{0}", _href).replaceAll("{0}", file.entryId);
+                            else 
+                                span.innerHTML += "<i class='blank-space'></i>";
                         }
+
+                        // Replacement remove button
+                        var _this = this;
+                        $(preview).find("[data-dz-remove]").click(function () {
+                            if (_this.options.dictRemoveFileConfirmation) {
+                                return Dropzone.confirm(_this.options.dictRemoveFileConfirmation, function () {
+                                    return _this.removeFile(file);
+                                });
+                            } else {
+                                return _this.removeFile(file);
+                            }
+                       });
+
                     });
 
                     function getImage(fileUUID)
@@ -230,25 +262,28 @@ $(document).on("DOMContentLoaded", function () {
                     
                     // Sortable drag-and-drop
                     Array.prototype.insert = function(i,...rest) { this.splice(i,0,...rest); return this; }
+                    if(sortable) {
+                  
+                        this.on('dragend', function() {
 
-                    this.on('dragend', function() {
+                            var queue = [];
+                            var that = this;
+                            $('#'+id+'_dropzone .dz-preview').each(function(file) {
 
-                        var queue = [];
-                        var that = this;
-                        $('#'+id+'_dropzone .dz-preview').each(function(file) {
+                                var file = findByUUID(that.files, $(this).data("uuid"));
+                                if (file) queue.push(file.uuid);
+                            });
 
-                            var file = findByUUID(that.files, $(this).data("uuid"));
-                            if (file) queue.push(file.status === "existing" ? file.dataURL : file.uuid);
+                            console.log(queue);
+                            $('#'+id).val(queue.join('|'));
                         });
-
-                        $('#'+id).val(queue.join('|'));
-                    });
+                    }
                 };
 
-                let editor = dropzoneEl[0].dropzone;
+                var editor = dropzoneEl[0].dropzone;
                 if (editor === undefined)
                     editor = new Dropzone("#"+id+"_dropzone", dropzone);
-
+                
                 if(sortable)
                     var sortable = new Sortable(document.getElementById(id+'_dropzone'), {draggable: '.dz-preview'});
 

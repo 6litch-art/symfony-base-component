@@ -37,23 +37,18 @@ window.addEventListener('load', function(event) {
     $("[type=submit]").click(function() {
 
         const style = getComputedStyle(document.body);
-
+        
         var form = $(".has-error").closest("form.needs-validation");
+        if(!form.length) form = $(this).closest("form.needs-validation");
 
         if (!this.checkValidity()) {
             event.preventDefault()
             event.stopPropagation()
         }
 
-        var el = $(".has-error");
-        if(el.length) return $([document.documentElement, document.body]).animate(
+        var el = $(":invalid, .has-error").not("form");
+        if (el.length) return $([document.documentElement, document.body]).animate(
             {scrollTop: $(el[0]).offset().top - parseInt(style["scroll-padding-top"])},
-            function() { form.addClass('was-validated'); }
-        );
-
-        var el = $(":invalid");
-        if(el.length) return $([document.documentElement, document.body]).animate(
-            {scrollTop: $(el[el.length-1]).offset().top - parseInt(style["scroll-padding-top"])},
             function() { form.addClass('was-validated'); }
         );
     });
