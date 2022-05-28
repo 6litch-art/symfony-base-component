@@ -1,6 +1,9 @@
 $(document).on("DOMContentLoaded", function () {
 
     var localCache = {};
+    function is_dict(v) {
+        return typeof v==='object' && v!==null && !(v instanceof Array) && !(v instanceof Date);
+    }
 
     $(document).on("load.form_type.select2", function () {
 
@@ -25,10 +28,22 @@ $(document).on("DOMContentLoaded", function () {
                 var href  = field.data("select2-href") || undefined;
                     href = option.id && href !== undefined ? href.replace("{0}", option.id) : undefined;
 
+                if(!is_dict(option.icon)) option.icon = {'class': option.icon};
+                
+                iconAttributes = "";
+                $(Object.keys(option["icon"])).each(function(i, key) {
+
+                    var value = option["icon"][key];
+                    if (value === undefined || value === null) return;
+
+                    value = value.replace(/"/g, '\\"');                    
+                    iconAttributes += key + "=\"" + value+"\" ";
+                });
+
                 return $('<span style="margin-left:calc('+tab+' * '+depth+')" class=\"select2-selection__entry\" '+dataAttribute+'><span>' + 
-                            (option.html ? option.html : (option.icon ? '<i style="text-align: center; width: 1.25em;" class=\"'+option.icon+'\"></i> ' : '') + 
+                            (option.html ? option.html : (iconAttributes ? '<i '+ iconAttributes + '></i> ' : '') + 
                             (option.text) + "</span>" +
-                            (href ? '<span style="margin-left:1em"><a href="'+href+'"><i style="text-align: center; width: 1.25em;" class=\"fas fa-external-link-square-alt\"></i></span>' : '') +
+                            (href ? '<span><a target="_blank" href="'+href+'"><i class=\"fas fa-external-link-square-alt\"></i></span>' : '') +
                         '</span>')); 
             };
 
@@ -134,6 +149,10 @@ $(document).on("DOMContentLoaded", function () {
             // Pre-populated data
             if(select2["data"].length != 0) $(field).empty();
             $(field).val(select2["selected"] || []).trigger("change");
+
+            //
+            // Apply required option
+            select2["containerCssClass"] = function(e) { return $(e).attr('required') ? 'required' : ''; }
 
             var parent = parent || $(field).parent();
             $(field).select2(select2).on("select2:unselecting", function(e) {
