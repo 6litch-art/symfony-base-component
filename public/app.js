@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', function(event) {
     function getUser()
     {
         var opts = Intl.DateTimeFormat().resolvedOptions();
-        
+
         return {
             time:new Date(),
             timezone:opts.timeZone,
@@ -37,7 +37,7 @@ window.addEventListener('load', function(event) {
     $("[type=submit]").click(function() {
 
         const style = getComputedStyle(document.body);
-        
+
         var form = $(".has-error").closest("form.needs-validation");
         if(!form.length) form = $(this).closest("form.needs-validation");
 

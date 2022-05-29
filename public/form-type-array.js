@@ -24,19 +24,19 @@ $(document).on("DOMContentLoaded", function () {
 
             $(e).off("click.array.add-entry");
             $(e).on("click.array.add-entry", function () {
-                    
+
                 var o = e.closest("[data-array-field]");
-                
+
                 var l = parseInt(o.dataset.numItems),
                     c = e.parentElement.querySelector(".array-empty");
-                
+
                 null !== c && (c.outerHTML = '<div class="form-array-items"></div>');
-                
+
                 var i = o.dataset.formTypeNamePlaceholder,
                     n = new RegExp(i + "__label__", "g"),
                     a = new RegExp(i, "g"),
                     s = o.dataset.prototype.replace(n, l).replace(a, l++);
-                
+
                 o.dataset.numItems = l;
 
                 var d = ".form-array-items";
@@ -55,9 +55,9 @@ $(document).on("DOMContentLoaded", function () {
                 $(document).trigger("array.item-added");
             });
         });
-        
+
         document.querySelectorAll("button.form-array-delete-button").forEach((function (e) {
-            
+
             $(e).off("click.array.remove-entry");
             $(e).on("click.array.remove-entry", (function () {
 
@@ -65,18 +65,18 @@ $(document).on("DOMContentLoaded", function () {
                 var f = e.closest(".form-array-item");
 
                 $(o).find(f).on('hidden.bs.collapse', function() {
-                    
+
                     $(this).remove();
                     var l = o.dataset.numItems = $(o).find(".form-array-item").length;
                     if (l == 0) {
-    
+
                         var arrayItems = $(o).find(".form-array-items")[0] || undefined;
                         if (arrayItems)
                             arrayItems.insertAdjacentHTML("beforebegin", o.dataset.emptyArray)
-                        
+
                         $(arrayItems).remove();
                     }
-    
+
                     $(document).trigger("array.item-removed");
                     updateArrayItemCssClasses(o);
                 });
@@ -87,7 +87,7 @@ $(document).on("DOMContentLoaded", function () {
                     if (collapsed) $(this).trigger("hidden.bs.collapse");
                     else $(this).find(".accordion-button").trigger("click");
                 });
-                
+
                 $(o).find(f).collapse("hide");
             }));
         }));

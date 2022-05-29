@@ -22,14 +22,14 @@ $(document).on("DOMContentLoaded", function () {
             var clipboardPattern = dropzoneEl.data("file-clipboard" ) ?? "";
             var gotoPattern      = dropzoneEl.data("file-goto"      ) ?? "";
             var deletePattern    = dropzoneEl.data("file-delete"    ) ?? "";
-            
+
             var lightboxOptions = $(el).data("file-lightbox-options") || null;
             if (lightboxOptions) lightbox.option(lightboxOptions);
-            
+
             function updateMetadata(el = $("#"+id), nFiles)
             {
                 var id = $(el).attr("id");
-                
+
                 var maxFiles = parseInt(dropzoneEl.data("file-max-files")) || undefined;
                 var remainingFiles = maxFiles - nFiles;
 
@@ -37,15 +37,15 @@ $(document).on("DOMContentLoaded", function () {
                      if(nFiles < 1) counter = dropzoneEl.data("file-counter[none]"    ).replace("{0}", nFiles);
                 else if(nFiles < 2) counter = dropzoneEl.data("file-counter[singular]").replace("{0}", nFiles);
                 else                counter = dropzoneEl.data("file-counter[plural]"  ).replace("{0}", nFiles);
-    
+
                 var counterMax = "";
-                if(!isNaN(maxFiles)) { 
-    
+                if(!isNaN(maxFiles)) {
+
                          if(remainingFiles < 1) counterMax = dropzoneEl.data("file-counter-max[none]"    ).replace("{0}", remainingFiles);
                     else if(remainingFiles < 2) counterMax = dropzoneEl.data("file-counter-max[singular]").replace("{0}", remainingFiles);
                     else                        counterMax = dropzoneEl.data("file-counter-max[plural]"  ).replace("{0}", remainingFiles);
                 }
-    
+
                 $("#"+id+"_metadata").html(counter+" "+counterMax);
             }
 
@@ -60,7 +60,7 @@ $(document).on("DOMContentLoaded", function () {
                     });
 
                     $("#"+id+"-confirm").on("click", function (e) {
-            
+
                         $('#'+id+'-modal').modal('hide');
                         accepted();
                     });
@@ -69,7 +69,7 @@ $(document).on("DOMContentLoaded", function () {
                 var el       = document.getElementById(id+"_dropzone");
                 var sortable = $(el).data("file-sortable");
                 var ajax     = el.getAttribute("data-file-ajax");
-                
+
                 var paths       = JSON.parse(el.getAttribute("data-file-path-links")) ?? {};
 
                 dropzone.init = function() {
@@ -82,10 +82,10 @@ $(document).on("DOMContentLoaded", function () {
                     if(val.length === 0) $("#"+id+"_loader").hide();
 
                     var arr = [];
-                    $.each(val, function(key, path) { 
+                    $.each(val, function(key, path) {
 
                         const isUUID = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
-                        if(isUUID.test(path)) arr.push({path: paths[path] ?? ajax+"/"+path, uuid:path}); 
+                        if(isUUID.test(path)) arr.push({path: paths[path] ?? ajax+"/"+path, uuid:path});
                         else arr.push({path:path});
                     });
 
@@ -94,7 +94,7 @@ $(document).on("DOMContentLoaded", function () {
                         $.each(val, function(key,file) {
 
                             var path = file.path;
-                            
+
                             var id = parseInt(key)+1;
                             var uuid = file.uuid ?? path.substring(path.lastIndexOf('/') + 1);
 
@@ -102,7 +102,7 @@ $(document).on("DOMContentLoaded", function () {
                             var mock = {status: 'existing', name: '#'+id, path:path, entryId: entryId, uuid: uuid};
 
                             editor.files.push(mock);
-                            
+
                             if(path === "") path = "./bundles/base/images.svg";
                             editor.displayExistingFile(mock, path);
 
@@ -127,7 +127,7 @@ $(document).on("DOMContentLoaded", function () {
 
                         var previewList = $('#'+id+'_dropzone .dz-preview');
                         var preview = $(previewList)[previewList.length-1];
-                        if(file.status !== "existing") 
+                        if(file.status !== "existing")
                             $(preview).data("uuid", file.uuid = file.serverId['uuid']);
 
                         var val = $('#'+id).val();
@@ -148,8 +148,8 @@ $(document).on("DOMContentLoaded", function () {
                             if(files[_i].status == "existing") {
 
                                 var img = getImage(files[_i].uuid);
-                                if(img !== undefined) { 
-                                
+                                if(img !== undefined) {
+
                                     if(files[_i].size === file.size && img.src.toString() === dataURL)
                                         return file;
                                 }
@@ -184,7 +184,7 @@ $(document).on("DOMContentLoaded", function () {
 
                     this.on('removedfile', function(file) {
 
-                        // Max files must be updated based on existing files 
+                        // Max files must be updated based on existing files
                         if (file.status == 'existing' && editor.options.maxFiles != null) editor.options.maxFiles += 1;
                         else if (file.serverId) $.post(ajax+"/"+file.serverId['uuid']+'/delete');
 
@@ -193,12 +193,12 @@ $(document).on("DOMContentLoaded", function () {
                             val = val.map(path => {
                                 return path.substring(path.lastIndexOf('/') + 1);
                             });
-            
+
                         const index = val.indexOf((file.serverId ? file.serverId['uuid'] : file.uuid));
                         if (index > -1) val.splice(index, 1);
-                        
+
                         $('#'+id).val(val.join('|'));
-                        
+
                         updateMetadata(this.id, val.length);
                     });
 
@@ -207,20 +207,24 @@ $(document).on("DOMContentLoaded", function () {
                         var previewList = $('#'+id+'_dropzone .dz-preview');
                         var preview = $(previewList)[previewList.length-1];
 
+                        console.log(($(preview).find(".dz-image")));
+
                         // Add UUID to preview for existing files (these are not triggering "success" event)
                         if(file.status == "existing") {
 
                             $(preview).find(".dz-filename").remove();
                             $(preview).find(".dz-size").remove();
                             $(preview).find(".dz-remove").remove();
-    
+
                             $(preview).data("uuid", file.uuid);
+
                             $(preview).find(".dz-details").append($("<div class='dz-tools'></div>"));
 
                             var span = $(preview).find(".dz-details .dz-tools")[0];
+                                span.innerHTML = "";
                                 if(clippable[file.uuid] ?? false) span.innerHTML += clipboardPattern.replaceAll("{0}", pathLinks[file.uuid] || file.path);
                                 else span.innerHTML += "<i class='blank-space'></i>";
-                                
+
                             span.innerHTML += downloadPattern.replaceAll("{0}", downloadLinks[file.uuid] || file.path);
                             span.innerHTML += lightboxPattern.replaceAll("{0}", pathLinks[file.uuid] || file.path);
 
@@ -228,9 +232,9 @@ $(document).on("DOMContentLoaded", function () {
                             var _href = dropzoneEl.data("file-href");
                             if(!file.entryId && deletePattern)
                                 span.innerHTML += deletePattern;
-                            else if(file.entryId && _href) 
+                            else if(file.entryId && _href)
                                 span.innerHTML += gotoPattern.replaceAll("{0}", _href).replaceAll("{0}", file.entryId);
-                            else 
+                            else
                                 span.innerHTML += "<i class='blank-space'></i>";
                         }
 
@@ -259,11 +263,11 @@ $(document).on("DOMContentLoaded", function () {
 
                         return image;
                     }
-                    
+
                     // Sortable drag-and-drop
                     Array.prototype.insert = function(i,...rest) { this.splice(i,0,...rest); return this; }
                     if(sortable) {
-                  
+
                         this.on('dragend', function() {
 
                             var queue = [];
@@ -283,7 +287,7 @@ $(document).on("DOMContentLoaded", function () {
                 var editor = dropzoneEl[0].dropzone;
                 if (editor === undefined)
                     editor = new Dropzone("#"+id+"_dropzone", dropzone);
-                
+
                 if(sortable)
                     var sortable = new Sortable(document.getElementById(id+'_dropzone'), {draggable: '.dz-preview'});
 
@@ -293,7 +297,7 @@ $(document).on("DOMContentLoaded", function () {
                 var rawType   = $('#'+id+'_raw');
                 var deleteBtn = $('#'+id+'_deleteBtn');
 
-                if (fileType.attr("required") === "required" && fileType.val() === '') 
+                if (fileType.attr("required") === "required" && fileType.val() === '')
                     rawType.attr("required", "required")
 
                 deleteBtn.on('click', function() {
@@ -301,10 +305,10 @@ $(document).on("DOMContentLoaded", function () {
                     rawType.val('');
                     deleteBtn.css('display', 'none');
 
-                    if (fileType.attr("required") === "required") 
+                    if (fileType.attr("required") === "required")
                         rawType.attr("required", "required")
                 });
-                
+
                 rawType.on('change', function() {
                     if( rawType.val() !== '') deleteBtn.css('display', 'block');
                     else deleteBtn.css('display', 'none');

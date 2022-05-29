@@ -3,7 +3,7 @@ $(document).on("DOMContentLoaded", function () {
     $(document).on("load.form_type.quill", function () {
 
         document.querySelectorAll("[data-quill-field]").forEach((function (el) {
-            
+
             var id = el.getAttribute("data-quill-field");
 
             var editorId = id+"_editor";

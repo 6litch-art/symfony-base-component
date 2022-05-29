@@ -1,7 +1,7 @@
 jQuery(function($) {
 
     var _oldShow = $.fn.show;
-  
+
     $.fn.show = function(speed, oldCallback) {
       return $(this).each(function() {
         var obj         = $(this),
@@ -11,10 +11,10 @@ jQuery(function($) {
               }
               obj.trigger('afterShow');
             };
-  
+
         // you can trigger a before show if you want
         obj.trigger('beforeShow');
-  
+
         // now use the old function to show the element passing the new callback
         _oldShow.apply(obj, [speed, newCallback]);
       });
@@ -64,9 +64,9 @@ $(document).on("DOMContentLoaded", function () {
             $(e).find(".accordion-button")
                 .bind('beforeShow', function() {  alert('beforeShow');})
                 .bind('afterShow', function() {  alert('afterShow');})
-            
+
         }
-        
+
         var deleteAction = function (e) {
 
             $(e).off("click.collection.remove-entry");
@@ -80,14 +80,14 @@ $(document).on("DOMContentLoaded", function () {
                     $(this).remove();
                     var l = o.dataset.numItems = $(o).find(".form-collection-item").length;
                     if (l == 0) {
-    
+
                         var collectionItems = $(o).find(".form-collection-items")[0] || undefined;
                         if (collectionItems)
                             collectionItems.insertAdjacentHTML("beforebegin", o.dataset.emptyCollection)
-                        
+
                         $(collectionItems).remove();
                     }
-    
+
                     $(document).trigger("collection.item-removed");
                     updateCollectionItemCssClasses(o);
                 });
@@ -98,7 +98,7 @@ $(document).on("DOMContentLoaded", function () {
                     if (collapsed) $(this).trigger("hidden.bs.collapse");
                     else $(this).find(".accordion-button").trigger("click");
                 });
-                
+
                 $(o).find(f).collapse("hide");
             }));
         };
@@ -107,19 +107,19 @@ $(document).on("DOMContentLoaded", function () {
 
             $(e).off("click.collection.add-entry");
             $(e).on("click.collection.add-entry", function () {
-                    
+
                 var o = e.closest("[data-collection-field]");
-                
+
                 var l = parseInt(o.dataset.numItems),
                     c = e.parentElement.querySelector(".collection-empty");
-                
+
                 null !== c && (c.outerHTML = '<div class="form-collection-items"></div>');
-                
+
                 var i = o.dataset.formTypeNamePlaceholder,
                     n = new RegExp(i + "__label__", "g"),
                     a = new RegExp(i, "g"),
                     s = o.dataset.prototype.replace(n, l).replace(a, l++);
-                
+
                 o.dataset.numItems = l;
 
                 var d = ".form-collection-items";

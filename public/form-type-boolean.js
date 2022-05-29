@@ -3,7 +3,7 @@ $(document).on("DOMContentLoaded", function () {
     $(document).on("load.form_type.boolean", function () {
 
         document.querySelectorAll("[data-boolean-field]").forEach((function (el) {
-            
+
             var id = el.getAttribute("data-boolean-field");
             var onCheck        = el.getAttribute("data-boolean-confirmation-check") ?? false;
             var onUncheck      = el.getAttribute("data-boolean-confirmation-uncheck") ?? false;

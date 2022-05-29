@@ -5,16 +5,16 @@ $(document).on("DOMContentLoaded", function () {
 
         function formatBytes(bytes, decimals = 2) {
             if (bytes === 0) return '0B';
-        
+
             const k = 1024;
             const dm = decimals < 0 ? 0 : decimals;
             const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        
+
             const i = Math.floor(Math.log(bytes) / Math.log(k));
-        
+
             return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + sizes[i];
         }
-        
+
         document.querySelectorAll("[data-image-field]").forEach((function (el) {
 
             var id              = el.getAttribute("data-image-field");
@@ -26,21 +26,21 @@ $(document).on("DOMContentLoaded", function () {
 
             var modal          = $(el).data("image-modal") || {};
             $('#'+id+'_modal').modal(modal);
-            
+
             var cropper = el.getAttribute("data-image-cropper") ? JSON.parse(el.getAttribute("data-image-cropper")) : undefined;
             if (cropper) {
 
                 var imageCropper;
 
                 // Image processing
-                $('#'+id+'_modal').on('shown.bs.modal', function () { 
-                    imageCropper = new Cropper($('#'+id+'_cropper')[0], cropper); 
-                }).on('hidden.bs.modal', function () { 
-                    imageCropper.destroy(); 
+                $('#'+id+'_modal').on('shown.bs.modal', function () {
+                    imageCropper = new Cropper($('#'+id+'_cropper')[0], cropper);
+                }).on('hidden.bs.modal', function () {
+                    imageCropper.destroy();
                 });
 
                 $('#'+id+'_deleteBtn').on('click', function () {
-                
+
                     var file = $('#'+id+'_file').val();
                     if(file !== '') $.post(ajaxUrl+"/"+file+"/delete");
                 });
@@ -77,14 +77,14 @@ $(document).on("DOMContentLoaded", function () {
 
                             var formData = new FormData();
                                 formData.append('file', blob, $('#'+id+'_raw').val());
-                           
+
                             return $.ajax(ajaxUrl, {
                                 method: 'POST',
                                 data: formData,
                                 processData: false,
                                 contentType: false,
 
-                                success: function (file) { 
+                                success: function (file) {
 
                                     var prevFile = $('#'+id+'_file').val();
                                     var prevUuid = prevFile.substring(prevFile.lastIndexOf('/') + 1);
@@ -102,7 +102,7 @@ $(document).on("DOMContentLoaded", function () {
 
                                 error: function () {
 
-                                    $('#'+id+'_thumbnail')[0].src = thumbnail; 
+                                    $('#'+id+'_thumbnail')[0].src = thumbnail;
                                     $('#'+id+'_modal_feedback').html(uploadFailed);
                                     $('#'+id+'_modalClose').removeAttr("disabled");
                                     $('#'+id+'_modalSave').removeAttr("disabled");
@@ -127,7 +127,7 @@ $(document).on("DOMContentLoaded", function () {
 
                     if( $('#'+id+'_raw').val() !== '') {
 
-                        $('#'+id+'_modal').modal("show"); 
+                        $('#'+id+'_modal').modal("show");
                         $('#'+id+'_figcaption').css('display', 'none');
                         $('#'+id+'_cropper')[0].src = URL.createObjectURL(e.target.files[0]);
 

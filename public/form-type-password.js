@@ -3,9 +3,9 @@ $(document).on("DOMContentLoaded", function () {
     $(document).on("load.form_type.password", function () {
 
         document.querySelectorAll("[data-password-field]").forEach(function (el) {
-            
+
             var id = el.getAttribute("data-password-field");
-            
+
             var plainPassword = $("#"+id+"_plain");
             var plainPasswordRepeater = $("#"+id+"_plain_repeater");
             var revealer = $("#"+id+"_revealer");
@@ -20,23 +20,24 @@ $(document).on("DOMContentLoaded", function () {
             var allowEmpty       = el.getAttribute("data-password-allow-empty");
             var passwordMatchStr = el.getAttribute("data-password-match[feedback]");
 
-            function checkStrength(strength) { 
-                plainPassword[0].setCustomValidity(strength >= minStrength ? "" : minStrengthStr); 
+            function checkStrength(strength) {
+                plainPassword[0].setCustomValidity(strength >= minStrength ? "" : minStrengthStr);
                 return strength >= minStrength;
             }
 
-            function checkLength() { 
+            function checkLength() {
                 plainPassword[0].setCustomValidity(((allowEmpty && plainPassword.val().length == 0 ) || plainPassword.val().length >= minLength) ? "" : minLengthStr);
                 return (allowEmpty && plainPassword.val().length == 0 ) || plainPassword.val().length >= minLength;
             }
 
-            function checkMatch() { 
+            function checkMatch() {
+                if(!plainPasswordRepeater.length) return "";
                 plainPasswordRepeater[0].setCustomValidity(plainPassword.val() != plainPasswordRepeater.val() ? passwordMatchStr : "");
                 return plainPassword.val() != plainPasswordRepeater.val() ? passwordMatchStr : "";
             }
 
             if (checkStrength(0) )
-            if (checkLength() ) 
+            if (checkLength() )
                 checkMatch();
 
             var strength;
@@ -49,9 +50,9 @@ $(document).on("DOMContentLoaded", function () {
 
                     var ith = details.find("li > i")[i];
                     if(!strengthList[i].test(plainPassword.val())) {
-                    
+
                         $(ith).removeClass("fa-check-circle check").addClass("fa-times-circle uncheck");
-                    
+
                     } else {
 
                         $(ith).removeClass("fa-times-circle uncheck").addClass("fa-check-circle check")
@@ -64,7 +65,7 @@ $(document).on("DOMContentLoaded", function () {
                     $("#"+id+"_strength_"+i).removeClass().addClass("strength strength_"+strength);
 
                 if(plainPassword.val().length) {
-                    
+
                     $("#"+id+"_details p.strength-label").html(
                         strengthLabel.replaceAll("{force}", strength)
                                      .replaceAll("{label}", el.getAttribute("data-password-strength-name["+(strength-1)+"]"))
@@ -78,7 +79,7 @@ $(document).on("DOMContentLoaded", function () {
                 }
 
                 if (checkStrength(strength) )
-                if (checkLength() ) 
+                if (checkLength() )
                     checkMatch();
             });
 

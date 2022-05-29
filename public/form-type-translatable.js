@@ -4,7 +4,7 @@ $(document).on("DOMContentLoaded", function () {
 
         const isEmpty = (value) => value == undefined || !value.trim().length;
         var submitButtons = document.querySelectorAll('button[type="submit"]');
-    
+
         var forms = $(document.querySelectorAll("form .form-translatable .nav-tabs")).closest("form");
             forms.each(function (e) {
 
@@ -24,7 +24,7 @@ $(document).on("DOMContentLoaded", function () {
                     if( $(this).find("label").hasClass("required") ) requiredLocales.push(this.getAttribute("aria-controls"));
                     else optionalLocales.push(this.getAttribute("aria-controls"));
                 });
-                
+
                 var allLocales = requiredLocales.concat(optionalLocales);
 
                 var submitFn = function (event) {
@@ -42,7 +42,7 @@ $(document).on("DOMContentLoaded", function () {
 
                             var formTranslations = $(this).closest(".form-translatable");
                             var id = formTranslations.attr("id") + "_" + locale;
-                            
+
                             allEmptyFields[locale] = true;
                             $('[id^="'+id+'_"]').each(function() { return allEmptyFields[locale] = allEmptyFields[locale] && isEmpty(this.value); });
 
@@ -52,7 +52,7 @@ $(document).on("DOMContentLoaded", function () {
 
                                 invalidRequired[locale] = invalidRequiredField;
                                 if(allEmptyFields[locale]) {
-            
+
                                     requiredFields[locale] = $('[id^="'+id+'_"][required]');
                                     requiredFields[locale].removeAttr("required");
                                     requiredFields[locale].parent().removeClass("has-error");
@@ -70,7 +70,7 @@ $(document).on("DOMContentLoaded", function () {
                         $(this).data("xcheck", true);
                         return $(this).click();
                     }
-                    
+
                     var focusTriggered = false;
                     $(allLocales).each(function() {
 
@@ -84,7 +84,7 @@ $(document).on("DOMContentLoaded", function () {
                             if (invalidRequiredField.length) {
 
                                 if(locale in optionalLocales && allEmptyFields[locale]) return;
-                                
+
                                 var tabPane = $(invalidRequiredField.closest(".tab-pane"));
                                 var navItem = navTabs.children()[tabPane.index()];
 
@@ -95,7 +95,7 @@ $(document).on("DOMContentLoaded", function () {
                                     if (navButton.hasClass("active")) invalidRequiredField[0].reportValidity();
                                     else {
 
-                                        navButton.one('shown.bs.tab', function() { 
+                                        navButton.one('shown.bs.tab', function() {
                                             invalidRequiredField[0].reportValidity();
                                         }).tab("show");
                                     }

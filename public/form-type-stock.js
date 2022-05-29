@@ -53,8 +53,8 @@ $(document).on("DOMContentLoaded", function () {
             });
 
             $(btnUp).off("click");
-            $(btnUp).on("click", function() 
-            { 
+            $(btnUp).on("click", function()
+            {
                 var stepUp = parseInt($(input).attr("data-stock-up")) ?? 1;
                 if (stepUp == 0) stepUp = 1;
 
@@ -67,9 +67,9 @@ $(document).on("DOMContentLoaded", function () {
 
                 $(input).val(val);
             });
-            
+
             $(btnDown).off("click");
-            $(btnDown).on("click", function() 
+            $(btnDown).on("click", function()
             {
                 var stepDown = parseInt($(input).attr("data-stock-down")) ?? 1;
                 if (stepDown == 0) stepDown = 1;
@@ -83,7 +83,7 @@ $(document).on("DOMContentLoaded", function () {
 
                 $(input).val(val);
             });
-            
+
             $(input).off("change");
             $(input).on("change", function() {
 

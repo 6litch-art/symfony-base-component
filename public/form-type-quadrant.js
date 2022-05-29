@@ -7,7 +7,7 @@ $(document).on("DOMContentLoaded", function () {
             var id    = $(e).data("quadrant-field");
             var value = $(e).val();
             $("#"+id+"_matrix button").each(function(k) {
-            
+
                 // If button already initialized.. just skip
                 if($("#"+id+"_matrix button.maintain").length) return;
 

@@ -5,12 +5,12 @@ $(document).on("DOMContentLoaded", function () {
         document.querySelectorAll("[data-avatar-field]").forEach(function (el) {
 
             var id = el.getAttribute("data-avatar-field");
-            
+
             var cropper = el.getAttribute("data-avatar-cropper") || null;
             if (cropper) {
-           
+
                 $("#"+id+"_file").on("change.avatar", function() {
-            
+
                     var display = $("#"+id+"_file").value !== "" ? "flex" : "none";
                     $("#"+id+"_deleteBtn2").css("display", display);
                 });
@@ -35,7 +35,7 @@ $(document).on("DOMContentLoaded", function () {
                 $("#"+id+"_raw").value = '';
                 $("#"+id+"_deleteBtn2").css("display", "none");
             });
-        
+
         });
 
     });

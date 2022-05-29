@@ -10,7 +10,7 @@ $(document).on("DOMContentLoaded", function () {
         document.querySelectorAll("[data-select2-field]").forEach((function (el) {
 
             var field = $("#"+el.getAttribute("data-select2-field"));
-            var defaultTemplate = function(option, that) { 
+            var defaultTemplate = function(option, that) {
 
                 dataAttribute = "";
                 $(option["data"]).each(function(key, value) {
@@ -18,7 +18,7 @@ $(document).on("DOMContentLoaded", function () {
                     var value = option["data"][key];
                     if(value === undefined) return;
 
-                    value = value.replace(/"/g, '\\"');                    
+                    value = value.replace(/"/g, '\\"');
                     dataAttribute += key + "=\"" + value+"\" ";
                 });
 
@@ -29,22 +29,22 @@ $(document).on("DOMContentLoaded", function () {
                     href = option.id && href !== undefined ? href.replace("{0}", option.id) : undefined;
 
                 if(!is_dict(option.icon)) option.icon = {'class': option.icon};
-                
+
                 iconAttributes = "";
                 $(Object.keys(option["icon"])).each(function(i, key) {
 
                     var value = option["icon"][key];
                     if (value === undefined || value === null) return;
 
-                    value = value.replace(/"/g, '\\"');                    
+                    value = value.replace(/"/g, '\\"');
                     iconAttributes += key + "=\"" + value+"\" ";
                 });
 
-                return $('<span style="margin-left:calc('+tab+' * '+depth+')" class=\"select2-selection__entry\" '+dataAttribute+'><span>' + 
-                            (option.html ? option.html : (iconAttributes ? '<i '+ iconAttributes + '></i> ' : '') + 
+                return $('<span style="margin-left:calc('+tab+' * '+depth+')" class=\"select2-selection__entry\" '+dataAttribute+'><span>' +
+                            (option.html ? option.html : (iconAttributes ? '<i '+ iconAttributes + '></i> ' : '') +
                             (option.text) + "</span>" +
                             (href ? '<span><a target="_blank" href="'+href+'"><i class=\"fas fa-external-link-square-alt\"></i></span>' : '') +
-                        '</span>')); 
+                        '</span>'));
             };
 
             var data = function (args) { return {term: args.term, page: args.page || 1}; }
@@ -60,7 +60,7 @@ $(document).on("DOMContentLoaded", function () {
                     }, {});
 
                     $(data.results).each(function() {
-                        
+
                         id = this.id;
                         entry = data.results.filter(e => e.id == id)[0];
 
@@ -105,13 +105,13 @@ $(document).on("DOMContentLoaded", function () {
                     options["delay"] = (firstCall ? 0 : typingDelay);
 
                     function debounce(t, fn) {
-                        
+
                         if(typeof(debounceFn) != "undefined") clearTimeout(debounceFn);
                         debounceFn = setTimeout(fn, t);
                     }
 
                     return debounce(options["delay"], function() {
-                        
+
                         //
                         // Default call with ajax request
                         dropdown = [];
@@ -122,7 +122,7 @@ $(document).on("DOMContentLoaded", function () {
                         var term = options.data.term || '';
                         var page = options.data.page || '';
                         var index = field.attr("id")+":"+term+":"+page;
-                        
+
                         if(options.cache && index in localCache)
                             return success(localCache[index]);
 
@@ -133,7 +133,7 @@ $(document).on("DOMContentLoaded", function () {
                                     .fail(failure);
 
                             /*[......].done(function(data) {
-                            
+
                             // Select all entries [not working :-(]
                             // $(document).on("keyup.select2", ".select2-search__field", function (e) {
 
@@ -156,18 +156,18 @@ $(document).on("DOMContentLoaded", function () {
 
             var parent = parent || $(field).parent();
             $(field).select2(select2).on("select2:unselecting", function(e) {
-            
+
                 $(this).data('state', 'unselected');
-            
+
             }).on("select2:open", function(e) {
 
                 if ($(this).data('state') === 'unselected') {
-                    $(this).removeData('state'); 
+                    $(this).removeData('state');
                     $(this).select2('close');
                 }
 
             }).on("select2:close", function(e) {
-                
+
                 $(this).focusout();
                 $(document).off("keyup.select2");
             });
@@ -186,7 +186,7 @@ $(document).on("DOMContentLoaded", function () {
 
                     if(!select2["closeOnSelect"]) {
 
-                        do { if (target == container || target == results) return; } 
+                        do { if (target == container || target == results) return; }
                         while ((target = target.parentNode));
                     }
 
