@@ -824,7 +824,7 @@ input.required:after, textarea.required:after, select.required:after {
 
 .form-check .form-check-input.form-switch {
     width: 2.5em !important;
-    margin: auto 0.25em;
+    margin: auto 0.5em;
 }
 .form-check {
 	display: flex !important;
