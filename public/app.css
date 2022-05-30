@@ -822,9 +822,13 @@ input.required:after, textarea.required:after, select.required:after {
     color:#dc2626;
 }
 
+.form-check .form-check-input.form-switch {
+    width: 2.5em !important;
+    margin: auto 0.25em;
+}
 .form-check {
-    display: flex;
-    align-items:center;
+	display: flex !important;
+	align-items: center !important;
 }
 
 .btn-matrix i { font-size: 13pt; }
@@ -1052,8 +1056,7 @@ input.required:after, textarea.required:after, select.required:after {
 .alert .title { font-weight:bold; }
 .alert .message { margin-left:5px;}
 .input-group button, .input-group button:active, .input-group button:focus, .input-group button:hover {
-    height: 100% !important;
-    margin-top: 0px;
+    height:auto;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
 }
