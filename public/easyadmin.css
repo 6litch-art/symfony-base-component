@@ -232,11 +232,15 @@ input[type="file"]::file-selector-button,
 .select2-container .select2-selection--single,
 .select2-container .select2-selection--multiple { min-height: 38px !important; }
 
+.page-login { max-height:100vh; }
 .modal-body {
     display: flex;
     align-items: flex-end;
     flex-direction: column;
 }
+.form-check .form-check-input { margin-left: 0.5em; }
+.form-check span { height: 29px; }
+
 .login-wrapper .input-group button, .login-wrapper .input-group button:active, .login-wrapper .input-group button:focus, .login-wrapper .input-group button:hover
 {
     height:auto;

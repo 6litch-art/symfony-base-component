@@ -18,6 +18,8 @@
     justify-content:center;
 }
 
+.form-switch:first-child { padding-left:0; }
+
 hr { margin: 0.5rem 0; }
 .locale-dropdown .actions .action-icon { top: 0 !important;}
 .form-collection-link-button,
@@ -828,7 +830,7 @@ input.required:after, textarea.required:after, select.required:after {
 }
 .form-check {
 	display: flex !important;
-	align-items: center !important;
+	align-items: flex-end !important;
 }
 
 .btn-matrix i { font-size: 13pt; }
