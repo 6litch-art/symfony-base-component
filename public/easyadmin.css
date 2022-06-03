@@ -237,8 +237,11 @@ input[type="file"]::file-selector-button,
     align-items: flex-end;
     flex-direction: column;
 }
+.login-wrapper .input-group button, .login-wrapper .input-group button:active, .login-wrapper .input-group button:focus, .login-wrapper .input-group button:hover
+{
+    height:auto;
+}
 .modal .btn-close { color: var(--text-color-dark); }
-.input-group-text { height:auto !important; }
 .form-checkbox input {
 
     display:flex;
