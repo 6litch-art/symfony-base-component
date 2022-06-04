@@ -516,8 +516,10 @@ body.ea-edit .content-header, body.ea-new .content-header {
     display: flex !important;
     align-items: center;
     justify-content: center;
-    max-height: 105%;
-    max-width: unset;
+    object-fit: cover;
+    min-height: 100%;
+    min-width: 100%;
+
     padding: 0;
 }
 
