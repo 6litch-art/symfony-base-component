@@ -147,7 +147,7 @@ $(document).on("DOMContentLoaded", function () {
 
             //
             // Pre-populated data
-            if(select2["data"].length != 0) $(field).empty();
+            // if(select2["data"].length != 0) $(field).empty();
             $(field).val(select2["selected"] || []).trigger("change");
 
             //

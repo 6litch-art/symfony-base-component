@@ -24,8 +24,9 @@ $(document).on("DOMContentLoaded", function () {
             var invervalBtnUp, invervalBtnDown;
             var intervalKeyUp, intervalKeyDown;
 
-            var numberValue = $(input).val() || 0;
-            if(numberValue === 0) $(input).val(0);
+            // Do not necessarily display by default..
+            // var numberValue = $(input).val() || 0;
+            // if(numberValue === 0) $(input).val(0);
 
             var onClickUp = function() {
 

@@ -10,6 +10,11 @@ html, body { scroll-padding-top: 11em; }
     box-shadow: none !important;
     outline: none !important;
 }
+.input-group button, .input-group button:active, .input-group button:focus, .input-group button:hover
+{
+    margin-top:0;
+    height:100%;
+}
 .with-background .form-translatable .nav-link.active { border-bottom: 1px solid var(--sidebar-bg); }
 .form-password-block .form-password-details
 {
@@ -225,12 +230,6 @@ form fieldset
 .form-translatable .tab-pane > div { padding-bottom: 0em !important; }
 .form-translatable .tab-pane > div:last-child { padding-bottom: 1.5em !important; }
 .form-entity > div { margin-bottom: 0em !important; }
-
-.input-group,
-.input-group-append,
-input[type="file"]::file-selector-button,
-.select2-container .select2-selection--single,
-.select2-container .select2-selection--multiple { min-height: 38px !important; }
 
 .page-login { max-height:100vh; }
 .modal-body {
@@ -919,7 +918,8 @@ ul.sidebar-menu a:hover { color: var(--sidebar-menu-submenu-color) !important; }
 .form-array .form-array-inline{ border:1px solid var(--sidebar-bg) !important; }
 .form-attribute .form-attribute-items { border:  1px solid var(--sidebar-border-color) !important; }
 .content-header .page-actions { max-width:60%; flex-wrap:wrap; justify-content:flex-end; }
-.content-header .page-actions .btn { margin:0.5em; }
+.content-header .page-actions .btn-group { margin:0.25em; }
+.content-header .page-actions .btn { margin:0.25em 0; }
 
 @media (max-width: 992px) {
 

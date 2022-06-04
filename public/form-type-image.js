@@ -162,7 +162,7 @@ $(document).on("DOMContentLoaded", function () {
             }
 
             var lightboxOptions = $(el).data("image-lightbox") || null;
-            $('#'+id+'_figcaption').on('click.image', function() {
+            $('#'+id+'_preview').on('click.image', function() {
 
                 if (lightboxOptions) $('#'+id+'_lightbox').trigger("click");
                 else $('#'+id+'_raw').trigger("click");

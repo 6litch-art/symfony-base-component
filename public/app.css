@@ -43,8 +43,6 @@ hr { margin: 0.5rem 0; }
     transform: translate(calc(50vw - 50%)) !important;
 }
 
-input:not(.form-check-input).form-control { min-height:38px !important; }
-
 textarea { min-height:150px !important; }
 .form-entity > .form-control { padding: 0; }
 .form-collection-items.form-control { padding: 0; }
@@ -330,6 +328,17 @@ form.was-validated select:invalid ~ .select2-selection,
     flex: 1;
     padding: 0.45rem 14px !important;
 }
+
+input:not(.form-check-input).form-control { min-height:38px; }
+input[type="file"]:not(.form-check-input).form-control { height: 38px !important; }
+.imageupload .deleteBtn { height: 38px !important; }
+.imageupload input { padding-right: 0px !important; }
+.input-group,
+.input-group-append,
+.input[type="file"]::file-selector-button,
+.form-control::-webkit-file-upload-button, .form-control::file-selector-button,
+.select2-container .select2-selection--single,
+.select2-container .select2-selection--multiple { min-height: 38px !important; }
 
 .collection-empty .accordion-button:after { display: none }
 .collection-empty .accordion-button input { margin-right: 2em; }
@@ -729,7 +738,7 @@ input.required:after, textarea.required:after, select.required:after {
 
 .hidden { display:none; }
 .fileupload input {
-    padding-right: 30px !important;
+    padding-right: 30px;
 }
 .fileupload input.last {
     border-top-right-radius: 4px !important;
@@ -777,7 +786,8 @@ input.required:after, textarea.required:after, select.required:after {
 }
 .imageupload figure > img {
     object-fit: cover;
-    height:115%;
+    min-height: calc(120px + 5%);
+    min-width: calc(120px + 5%);
 }
 
 .avatarupload input[type="file"] { display: none; }
@@ -843,9 +853,9 @@ input.required:after, textarea.required:after, select.required:after {
 .ql-editor h5 { margin: 0.5em 4.00em !important; }
 .ql-editor h6 { margin: 0.5em 5.00em !important; }
 
-.form-attribute .form-group { padding:0; }
-.form-quadrant .form-group { padding:0; }
-.form-cropper .form-group { padding:0.25em; }
+.form-attribute .form-group,
+.form-quadrant .form-group,
+.form-cropper .form-group { padding:0em; }
 
 .avatarupload .deleteBtn > i:hover { color:#A00A; }
 .avatarupload .deleteBtn > i {
@@ -868,9 +878,31 @@ input.required:after, textarea.required:after, select.required:after {
     opacity: 0;
     transition: all ease-in-out .3s;
 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
     width: 100%;
     height: 100%;
     z-index: 2;
+}
+
+.imageupload figcaption .figwrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    height:100px;
+}
+
+.imageupload figcaption span {
+    height: 50px;
+    width: 50px;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    font-size:2.5em;
 }
 
 .imageupload figcaption:hover {
@@ -921,7 +953,7 @@ input.required:after, textarea.required:after, select.required:after {
 }
 
 .form-translatable > .form-control { padding: 1em 0; border:0; }
-.form-collection .form-collection-items > .form-group:last-child:not(:first-child) { border-bottom: 1px solid rgba(0, 0, 0, .125);}
+/* .form-collection .form-collection-items > .form-group:last-child:not(:first-child) { border-bottom: 1px solid rgba(0, 0, 0, .125);} */
 .accordion.form-array-item.collapse.show { border-bottom: 0; }
 .accordion-button {
     background-color: #eff1fa;
@@ -1133,7 +1165,6 @@ form .btn[type="reset"]   { margin-top:0.75em; } */
 .field-form_row.col-xl-12, .field-form_row.col-xxl-12
 { border-bottom: var(--border-width) solid var(--border-color); }
 
-.input-group-text { height:100%; }
 .input-group-text .btn,
 .input-group-text .btn:not(:disabled):not(.disabled):not(.btn-link):hover,
 .input-group-text .btn:not(:disabled):not(.disabled):not(.btn-link):focus { background-color:transparent; border:0; box-shadow:none; height:100%; padding:1px; margin:0; }

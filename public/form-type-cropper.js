@@ -23,6 +23,14 @@ $(document).on("DOMContentLoaded", function () {
                 $("#"+id+"_actions").removeClass("hidden");
             };
 
+            $("#"+id+"_x"     ).prop("disabled", true);
+            $("#"+id+"_y"     ).prop("disabled", true);
+            $("#"+id+"_width" ).prop("disabled", true);
+            $("#"+id+"_height").prop("disabled", true);
+            $("#"+id+"_scaleX").prop("disabled", true);
+            $("#"+id+"_scaleY").prop("disabled", true);
+            $("#"+id+"_rotate").prop("disabled", true);
+
             var updateCropper = function() {
 
                 // Expand on negative value
@@ -83,8 +91,8 @@ $(document).on("DOMContentLoaded", function () {
 
             function extractData()
             {
-                var x   = ($("#"+id+"_x").val());
-                var y    = ($("#"+id+"_y").val());
+                var x      = ($("#"+id+"_x").val());
+                var y      = ($("#"+id+"_y").val());
                 var width  = ($("#"+id+"_width").val());
                 var height = ($("#"+id+"_height").val());
                 var rotate = ($("#"+id+"_rotate").val());
@@ -112,13 +120,20 @@ $(document).on("DOMContentLoaded", function () {
 
                         //
                         // Set initial dimensions
-                        width = $("#"+id+"_width" ).val();
                         naturalWidth  = parseInt(image.width);
-                        $("#"+id+"_width" ).val(width > 0 && width < naturalWidth ? width : naturalWidth);
-
-                        height = $("#"+id+"_height" ).val();
                         naturalHeight = parseInt(image.height);
-                        $("#"+id+"_height" ).val(height > 0 && height < naturalHeight ? height : naturalHeight);
+
+                        var x0      = $("#"+id+"_x0"     ).val();
+                        $("#"+id+"_x"     ).val(Math.round(     x0 <= 1 ?      x0 * naturalWidth  : x0     ));
+
+                        var y0      = $("#"+id+"_y0"     ).val();
+                        $("#"+id+"_y"     ).val(Math.round(     y0 <= 1 ?      y0 * naturalHeight : y0     ));
+
+                        var width0  = $("#"+id+"_width0" ).val();
+                        $("#"+id+"_width" ).val(Math.round( width0 <= 1 ?  width0 * naturalWidth  : width0 ));
+
+                        var height0 = $("#"+id+"_height0").val();
+                        $("#"+id+"_height").val(Math.round(height0 <= 1 ? height0 * naturalHeight : height0));
 
                         //
                         // Extract data out of fields
@@ -126,7 +141,6 @@ $(document).on("DOMContentLoaded", function () {
                         undo = cropperOptions["data"];
 
                         cropper = new Cropper(image, cropperOptions);
-
                         $("#"+id+"_x"     ).off("input.cropper").on("input.cropper", updateCropper);
                         $("#"+id+"_y"     ).off("input.cropper").on("input.cropper", updateCropper);
                         $("#"+id+"_width" ).off("input.cropper").on("input.cropper", updateCropper);
@@ -205,6 +219,14 @@ $(document).on("DOMContentLoaded", function () {
 
                                 cropper.setData(data);
                             });
+
+                        $("#"+id+"_x"     ).removeAttr("disabled");
+                        $("#"+id+"_y"     ).removeAttr("disabled");
+                        $("#"+id+"_width" ).removeAttr("disabled");
+                        $("#"+id+"_height").removeAttr("disabled");
+                        $("#"+id+"_scaleX").removeAttr("disabled");
+                        $("#"+id+"_scaleY").removeAttr("disabled");
+                        $("#"+id+"_rotate").removeAttr("disabled");
 
                         $("#"+id+"_actions button[data-cropper-reset]")
                             .off("click.cropper")

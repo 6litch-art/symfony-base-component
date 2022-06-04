@@ -221,12 +221,12 @@ $(document).on("DOMContentLoaded", function () {
                             $(preview).find(".dz-details").append($("<div class='dz-tools'></div>"));
 
                             var span = $(preview).find(".dz-details .dz-tools")[0];
-                                span.innerHTML = "";
-                                if(clippable[file.uuid] ?? false) span.innerHTML += clipboardPattern.replaceAll("{0}", pathLinks[file.uuid] || file.path);
-                                else span.innerHTML += "<i class='blank-space'></i>";
+
+                            span.innerHTML = lightboxPattern.replaceAll("{0}", pathLinks[file.uuid] || file.path);
+                            if(clippable[file.uuid] ?? false) span.innerHTML += clipboardPattern.replaceAll("{0}", pathLinks[file.uuid] || file.path);
+                            else span.innerHTML += "<i class='blank-space'></i>";
 
                             span.innerHTML += downloadPattern.replaceAll("{0}", downloadLinks[file.uuid] || file.path);
-                            span.innerHTML += lightboxPattern.replaceAll("{0}", pathLinks[file.uuid] || file.path);
 
                             // "Go to" or "delete" action
                             var _href = dropzoneEl.data("file-href");
