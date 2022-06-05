@@ -22,7 +22,12 @@ window.addEventListener('DOMContentLoaded', function(event) {
     //
     // Save user information
     CookieConsent.ready();
+    console.log("ok");
     CookieConsent.setCookie("necessary", "user", getUser(), 30*24*3600, true);
+    CookieConsent.setCookie(undefined, "locale"  , getUser()["locale"]   ?? null, 30*24*3600, true);
+    console.log("ok");
+    CookieConsent.setCookie(undefined, "timezone", getUser()["timezone"] ?? null, 30*24*3600, true);
+
     window.addEventListener('resize', () => CookieConsent.setCookie("necessary", "user", getUser(), 30*24*3600));
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => CookieConsent.setCookie("necessary", "user", getUser(), 30*24*3600));
 
