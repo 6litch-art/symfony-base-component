@@ -124,16 +124,16 @@ $(document).on("DOMContentLoaded", function () {
                         naturalHeight = parseInt(image.height);
 
                         var x0      = $("#"+id+"_x0"     ).val();
-                        $("#"+id+"_x"     ).val(Math.round(     x0 <= 1 ?      x0 * naturalWidth  : x0     ));
-
                         var y0      = $("#"+id+"_y0"     ).val();
-                        $("#"+id+"_y"     ).val(Math.round(     y0 <= 1 ?      y0 * naturalHeight : y0     ));
-
                         var width0  = $("#"+id+"_width0" ).val();
-                        $("#"+id+"_width" ).val(Math.round( width0 <= 1 ?  width0 * naturalWidth  : width0 ));
-
                         var height0 = $("#"+id+"_height0").val();
-                        $("#"+id+"_height").val(Math.round(height0 <= 1 ? height0 * naturalHeight : height0));
+
+                        var isEmpty = !x0 && !y0 && !width0 && ! height0;
+                        $("#"+id+"_x"     ).val(isEmpty ? 0             : Math.round(     x0 <= 1 ?      x0 * naturalWidth  : x0     ));
+                        $("#"+id+"_y"     ).val(isEmpty ? 0             : Math.round(     y0 <= 1 ?      y0 * naturalHeight : y0     ));
+                        $("#"+id+"_width" ).val(isEmpty ? naturalWidth  : Math.round( width0 <= 1 ?  width0 * naturalWidth  : width0 ));
+                        $("#"+id+"_height").val(isEmpty ? naturalHeight : Math.round(height0 <= 1 ? height0 * naturalHeight : height0));
+
 
                         //
                         // Extract data out of fields
