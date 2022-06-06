@@ -128,7 +128,7 @@ $(document).on("DOMContentLoaded", function () {
                         var width0  = $("#"+id+"_width0" ).val();
                         var height0 = $("#"+id+"_height0").val();
 
-                        var isEmpty = !x0 && !y0 && !width0 && ! height0;
+                        var isEmpty = (x0 == 0 && y0 == 0 && width0 == 0 && height0 == 0);
                         $("#"+id+"_x"     ).val(isEmpty ? 0             : Math.round(     x0 <= 1 ?      x0 * naturalWidth  : x0     ));
                         $("#"+id+"_y"     ).val(isEmpty ? 0             : Math.round(     y0 <= 1 ?      y0 * naturalHeight : y0     ));
                         $("#"+id+"_width" ).val(isEmpty ? naturalWidth  : Math.round( width0 <= 1 ?  width0 * naturalWidth  : width0 ));
