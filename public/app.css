@@ -25,6 +25,9 @@ hr { margin: 0.5rem 0; }
 .form-collection-link-button,
 .form-collection-delete-button {  padding-left:4px; }
 
+.field-raw > input:focus { border: 1px solid var(--sidebar-border-color) !important;  }
+
+
 .form-collection-buttons i { font-size:14pt; }
 
 .form-collection-buttons > *:first-child { margin-left:0; }
@@ -280,7 +283,7 @@ form.was-validated select:invalid ~ .select2-selection,
     color: #dc2626;
 }
 
-.form-collection-items .accordion-item .form-cropper-fields > div span { min-width: 15%; text-align:right; }
+.form-collection-items .accordion-item .form-cropper-fields > div span { min-width: 80px; text-align:right; }
 .form-collection-items .accordion-item .form-cropper-fields > div input { flex-grow: 1; }
 .form-collection-items .accordion-item .form-cropper-fields > div {
     display: flex;
@@ -382,6 +385,8 @@ input[type="file"]:not(.form-check-input).form-control { height: 38px !important
 .form-switch.inline {
     display: flex;
     align-items: center;
+    flex-direction: row;
+    align-items: flex-end;
 }
 
 .form-switch.inline > span label {
@@ -658,7 +663,7 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection, form.was-va
 img.country-flag { margin-right:2px;max-height:18px;vertical-align:text-top }
 .nav-link { background-color:transparent; }
 .tab-pane { padding:1em; }
-.input-group-text { height: 100%; }
+.input-group-text { height: 100%; min-height: 38px; }
 
 input.required:after, textarea.required:after, select.required:after {
     bottom: 4px;
@@ -687,11 +692,13 @@ input.required:after, textarea.required:after, select.required:after {
     min-height: 50%;
 }
 
+.fileupload .field .field-url { margin-top:0.25em; }
+
 .fileupload .field {
 
     flex-grow: 1;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -779,11 +786,11 @@ input.required:after, textarea.required:after, select.required:after {
 
 .imageupload figcaption:hover {
     opacity: 1;
-
 	backdrop-filter: blur(5px);
 	-webkit-backdrop-filter: blur(5px);
-	background-color:#FFF2;
+	background-color:#AAA2;
 }
+
 .imageupload figure > img {
     object-fit: cover;
     min-height: calc(120px + 5%);
@@ -838,9 +845,18 @@ input.required:after, textarea.required:after, select.required:after {
     width: 2.5em !important;
     margin: auto 0.5em;
 }
+.form-check.form-switch:not(.inline) span
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -3px;
+    margin-bottom: 3px;
+}
 .form-check {
-	display: flex !important;
-	align-items: flex-end !important;
+    display: flex !important;
+    align-items: flex-start;
+    flex-direction: column;
 }
 
 .btn-matrix i { font-size: 13pt; }
@@ -857,8 +873,13 @@ input.required:after, textarea.required:after, select.required:after {
 .form-quadrant .form-group,
 .form-cropper .form-group { padding:0em; }
 
+.avatarupload .deleteBtn {
+}
 .avatarupload .deleteBtn > i:hover { color:#A00A; }
 .avatarupload .deleteBtn > i {
+
+    width: 30px;
+    height: 30px;
 
     cursor: pointer;
     color: #000A;

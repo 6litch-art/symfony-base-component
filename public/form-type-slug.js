@@ -61,11 +61,12 @@ $(document).on("DOMContentLoaded", function () {
                                 replacement: r
                             } : r || {}).locale] || {},
                             i = void 0 === r.replacement ? "-" : r.replacement,
-                            
+
                             a = n.normalize().split("").reduce((function (t, n) {
-                                return t + (o[n] || e[n] || n).replace(r.remove || /[^\w\s$*_+~.()'"!\-@]+/g, "")
+                                var i = o[n] || e[n] || n;
+                                return i === r && (i = " "), t + i.replace(n.remove || /[^\w\s$*_+~.()'"!\-:@]+/g, "")
                             }), "").trim().replace(new RegExp("[\\s" + i + "]+", "g"), i);
- 
+
                         return r.lower && (a = a.toLowerCase()), r.strict && (a = a.replace(new RegExp("[^a-zA-Z0-9" + i + "]", "g"), "").replace(new RegExp("[\\s" + i + "]+", "g"), i)), a
                     }
                     return n.extend = function (t) {
@@ -82,49 +83,10 @@ $(document).on("DOMContentLoaded", function () {
                 }
                 var o = n("NmYn");
                 o.extend({
-                    $: "",
-                    "%": "",
-                    "&": "",
-                    "<": "",
-                    ">": "",
-                    "|": "",
-                    "¢": "",
-                    "£": "",
-                    "¤": "",
-                    "¥": "",
-                    "₠": "",
-                    "₢": "",
-                    "₣": "",
-                    "₤": "",
-                    "₥": "",
-                    "₦": "",
-                    "₧": "",
-                    "₨": "",
-                    "₩": "",
-                    "₪": "",
-                    "₫": "",
-                    "€": "",
-                    "₭": "",
-                    "₮": "",
-                    "₯": "",
-                    "₰": "",
-                    "₱": "",
-                    "₲": "",
-                    "₳": "",
-                    "₴": "",
-                    "₵": "",
-                    "₸": "",
-                    "₹": "",
-                    "₽": "",
-                    "₿": "",
-                    "∂": "",
-                    "∆": "",
-                    "∑": "",
-                    "∞": "",
-                    "♥": "",
-                    "元": "",
-                    "円": "",
-                    "﷼": ""
+                    $: "", "%": "", "&": "", "<": "", ">": "", "|": "",
+                    "¢": "", "£": "", "¤": "", "¥": "", "₠": "", "₢": "", "₣": "", "₤": "", "₥": "", "₦": "",
+                    "₧": "", "₨": "", "₩": "", "₪": "", "₫": "", "€": "", "₭": "", "₮": "", "₯": "", "₰": "", "₱": "", "₲": "",
+                    "₳": "", "₴": "", "₵": "", "₸": "", "₹": "", "₽": "", "₿": "", "∂": "", "∆": "", "∑": "", "∞": "", "♥": "", "元": "", "円": "", "﷼": ""
                 });
                 var i = function () {
                     "use strict";
@@ -138,7 +100,7 @@ $(document).on("DOMContentLoaded", function () {
                     return t = e, (n = [{
                         key: "setTargetElement",
                         value: function () {
-                            if (this.target = document.getElementById(this.field.dataset.target), null === this.target) throw 'Wrong target specified for slug widget ("'.concat(this.field.dataset.target, '").')
+                            this.target = document.getElementById($(this.field).data("slug-target"));
                         }
                     }, {
                         key: "appendLockButton",
@@ -158,7 +120,7 @@ $(document).on("DOMContentLoaded", function () {
                     }, {
                         key: "unlock",
                         value: function () {
-                            
+
                             this.locked = !1, this.lockButtonIcon.classList.replace("fa-lock", "fa-lock-open"), this.field.removeAttribute("readonly")
                             this.field.value = this.currentSlug;
                         }
@@ -169,14 +131,14 @@ $(document).on("DOMContentLoaded", function () {
                         }
                     }, {
                         key: "updateValue",
-                        value: function () {
+                        value: function (value = undefined) {
 
                             var keep   = $(this.field).data("slug-keep") ?? "";
                             var lower  = JSON.parse($(this.field).data("slug-lower") ?? "true");
                             var strict = JSON.parse($(this.field).data("slug-strict") ?? "true");
-        
-                            this.field.value = o(this.target.value, {
-                                remove: new RegExp("[^A-Za-z0-9\s"+keep+"-]", "g"),
+
+                            this.field.value = o(value ?? this.target.value, {
+                                remove: new RegExp("[^A-Za-z0-9\s"+keep+"]", "g"),
                                 lower: lower,
                                 strict: strict
                             })
@@ -192,27 +154,23 @@ $(document).on("DOMContentLoaded", function () {
                     }]) && r(t.prototype, n), i && r(t, i), e
                 }();
 
-                document.querySelectorAll("[data-slug-field]").forEach((function (e) {
+                document.querySelectorAll("[data-slug-target]").forEach((function (e) {
 
                     // On slug change
                     var slugger = new i(e);
-                    var label = $('label[for="' + slugger.target.id + '"]');
-                    var keep   = $(slugger.field).data("slug-keep") ?? "";
-                    var lower  = JSON.parse($(slugger.field).data("slug-lower") ?? "true");
-                    var lock  = JSON.parse($(slugger.field).data("slug-lock") ?? null);
-                    var strict =  JSON.parse($(slugger.field).data("slug-strict") ?? "true");
+                    var label   = slugger.target ? $('label[for="' + slugger.target.id + '"]') : undefined;
+                    var keep    = $(slugger.field).data("slug-keep") ?? "";
+                    var lower   = JSON.parse($(slugger.field).data("slug-lower") ?? "true");
+                    var lock    = JSON.parse($(slugger.field).data("slug-lock") ?? null) && slugger.target != undefined;
+                    var strict  =  JSON.parse($(slugger.field).data("slug-strict") ?? "true");
 
-                    var targetCurrentSlug = o($(slugger.target).val(), {
-                        remove: new RegExp("[^A-Za-z0-9\s"+keep+"-]", "g"),
-                        lower: lower,
-                        strict: strict
-                    });
+                    var targetCurrentSlug = slugger.target != undefined ? $(slugger.target).val() : $(slugger.field).val();
+                    slugger.updateValue(targetCurrentSlug);
 
-                         if(lock === false) slugger.unlock();
+                         if(lock === false ) slugger.unlock();
                     else if(lock === true ) slugger.lock();
                     else if(targetCurrentSlug != slugger.currentSlug) slugger.unlock();
 
-                    slugger.target.setAttribute("data-required", slugger.target.getAttribute("required") || "");
                     var isTargetRequired = (slugger.locked ? slugger.field.getAttribute("required") : slugger.target.getAttribute("data-required")) == "required";
                     if (isTargetRequired) {
                         label.addClass("required");
@@ -224,7 +182,7 @@ $(document).on("DOMContentLoaded", function () {
 
                     if(lock !== null) $(slugger.lockButton).prop("disabled", true);
                     else {
-                        
+
                         slugger.lockButton.addEventListener("click", function () {
 
                             if(slugger.locked) slugger.updateValue();
@@ -243,7 +201,7 @@ $(document).on("DOMContentLoaded", function () {
                     }
 
                     $(slugger.field).on('input change keyup', function() {
-                        slugger.currentSlug = this.value;
+                        slugger.updateValue(this.value);
                     });
 
                     $(slugger.target).on('input change keyup', function() {
