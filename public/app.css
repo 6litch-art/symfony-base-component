@@ -756,7 +756,7 @@ input.required:after, textarea.required:after, select.required:after {
     display: flex;
     flex-direction: row;
     align-items: start;
-    margin-right:1em;
+    /* margin-right:1em; */
 }
 
 .imageupload figure img { border-radius: 4px; }
