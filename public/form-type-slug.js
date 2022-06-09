@@ -133,11 +133,17 @@ $(document).on("DOMContentLoaded", function () {
                         key: "updateValue",
                         value: function (value = undefined) {
 
+                            this.field.value = this.compute(value)
+                        }
+                    }, {
+                        key: "compute",
+                        value: function (value = undefined) {
+
                             var keep   = $(this.field).data("slug-keep") ?? "";
                             var lower  = JSON.parse($(this.field).data("slug-lower") ?? "true");
                             var strict = JSON.parse($(this.field).data("slug-strict") ?? "true");
 
-                            this.field.value = o(value ?? this.target.value, {
+                            return o(value ?? this.target.value, {
                                 remove: new RegExp("[^A-Za-z0-9\s"+keep+"]", "g"),
                                 lower: lower,
                                 strict: strict
@@ -159,17 +165,15 @@ $(document).on("DOMContentLoaded", function () {
                     // On slug change
                     var slugger = new i(e);
                     var label   = slugger.target ? $('label[for="' + slugger.target.id + '"]') : undefined;
-                    var keep    = $(slugger.field).data("slug-keep") ?? "";
-                    var lower   = JSON.parse($(slugger.field).data("slug-lower") ?? "true");
                     var lock    = JSON.parse($(slugger.field).data("slug-lock") ?? null) && slugger.target != undefined;
-                    var strict  =  JSON.parse($(slugger.field).data("slug-strict") ?? "true");
 
                     var targetCurrentSlug = slugger.target != undefined ? $(slugger.target).val() : $(slugger.field).val();
                     slugger.updateValue(targetCurrentSlug);
 
                          if(lock === false ) slugger.unlock();
                     else if(lock === true ) slugger.lock();
-                    else if(targetCurrentSlug != slugger.currentSlug) slugger.unlock();
+                    else if(slugger.compute(targetCurrentSlug) == slugger.currentSlug) slugger.lock();
+                    else slugger.unlock();
 
                     var isTargetRequired = (slugger.locked ? slugger.field.getAttribute("required") : slugger.target.getAttribute("data-required")) == "required";
                     if (isTargetRequired) {

@@ -201,12 +201,12 @@ $(document).on("DOMContentLoaded", function () {
 
                 var choices = $(el.nextElementSibling).find("ul.select2-selection__rendered");
                     choices.sortable({
-                        start: function(e, ui){
-                            ui.placeholder.height(ui.item.height());
-                        },
                         containment: 'parent',
                         swapThreshold: 0.50,
                         animation: 150,
+                        start: function(e, ui){
+                            ui.placeholder.height(ui.item.height());
+                        },
                         update: function() {
 
                             var selectElement = $("#"+el.getAttribute("data-select2-field"));
