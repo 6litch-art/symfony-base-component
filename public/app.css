@@ -1170,12 +1170,7 @@ input.required:after, textarea.required:after, select.required:after {
 
 .select2-selection__choice .select2-selection__entry { margin:0 0.25em !important; }
 .select2-selection--vertical .select2-selection__choice  { width:calc(100% - 40px); display:flex; justify-content: start !important; }
-/* .select2-selection--vertical .select2-search--inline  { display: none !important; } */
-
-/* form input[type="submit"] { margin-top:0.75em; }
-form input[type="reset"]  { margin-top:0.75em; }
-form .btn[type="submit"]  { margin-top:0.75em; }
-form .btn[type="reset"]   { margin-top:0.75em; } */
+.select2-selection--vertical.select2-selection--multiple .select2-selection__choice  { padding:0.35em !important; }
 
 .field-form_row {display:block !important; }
 .field-form_row >* {display:none !important; }
