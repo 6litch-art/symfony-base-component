@@ -591,6 +591,23 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection, form.was-va
     margin: 0 8px 0 4px
 }
 
+.dz-overlay {
+
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content: center;
+}
+
+.dz-overlay .loader-spinner {
+    border: 3px solid #f3f3f3; /* Light grey */
+    border-top: 3px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 0.75s linear infinite;
+}
+
 
 .loader .loader-spinner { margin-right: 0.5em;}
 .loader {
@@ -599,7 +616,7 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection, form.was-va
     flex-direction:row;
     align-items:center;
 }
-.loader-spinner {
+.loader .loader-spinner {
     border: 2px solid #f3f3f3; /* Light grey */
     border-top: 2px solid #3498db; /* Blue */
     border-radius: 50%;
@@ -638,6 +655,19 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection, form.was-va
 :root
 {
     --text-muted: var(--gray-500);
+}
+
+.dropzone .dz-overlay
+{
+    background-color:#eff1fa;
+    position:absolute;
+    top:0;
+    left:0;
+    border-radius: 20px;
+    z-index:20;
+
+    width:100%;
+    height:100%;
 }
 
 .dropzone .dz-preview .dz-image
@@ -823,15 +853,14 @@ input.required:after, textarea.required:after, select.required:after {
 {
     position: absolute;
     z-index:2;
-    left: 100px;
-    top:0;
-    height: 0px;
-    width: 0px;
+    left: 85px;
+    top: 0;
+    height: 30px;
+    width: 30px;
     line-height: 0.5;
     display: flex;
     justify-content: center;
     align-items: start;
-    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.4);
 }
 
 .form-errors ul {
@@ -1117,7 +1146,14 @@ input.required:after, textarea.required:after, select.required:after {
 }
 
 /* Additional customization for select2 */
-
+.modal-dialog { max-width:525px; }
+.modal-footer .form-text
+{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
 .select2-ghost
 {
     background-color: #C8EBFB !important;

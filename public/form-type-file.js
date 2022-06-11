@@ -136,6 +136,7 @@ $(document).on("DOMContentLoaded", function () {
                         val.push(file.serverId['uuid']);
                         $('#'+id).val(val.join('|'));
 
+                        $(preview).find(".dz-overlay").remove();
                         updateMetadata(this.id, val.length);
                     });
 
@@ -178,6 +179,8 @@ $(document).on("DOMContentLoaded", function () {
 
                     this.on("thumbnail", function(file, dataURL) {
 
+                        $(file.previewTemplate).find(".dz-overlay").remove();
+
                         var duplicateFile = findDuplicates(this.files, file, dataURL);
                         if (duplicateFile) this.removeFile(duplicateFile);
                     });
@@ -207,7 +210,7 @@ $(document).on("DOMContentLoaded", function () {
                         var previewList = $('#'+id+'_dropzone .dz-preview');
                         var preview = $(previewList)[previewList.length-1];
 
-                        console.log(($(preview).find(".dz-image")));
+                        $(preview).append($("<div class='dz-overlay dz-loader'><span class='loader-spinner'></span></div>"));
 
                         // Add UUID to preview for existing files (these are not triggering "success" event)
                         if(file.status == "existing") {
@@ -278,7 +281,6 @@ $(document).on("DOMContentLoaded", function () {
                                 if (file) queue.push(file.uuid);
                             });
 
-                            console.log(queue);
                             $('#'+id).val(queue.join('|'));
                         });
                     }

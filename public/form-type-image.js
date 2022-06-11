@@ -68,7 +68,7 @@ $(document).on("DOMContentLoaded", function () {
                         var canvas = imageCropper.getCroppedCanvas();
                         canvas.toBlob(function (blob) {
 
-                            if(8*blob.size > maxSize) {
+                            if(blob.size > maxSize) {
                                 $('#'+id+'_modal_feedback').html(maxSizeFeedback.replace("{0}", formatBytes(blob.size)));
                                 $('#'+id+'_modalClose').removeAttr("disabled");
                                 $('#'+id+'_modalSave').removeAttr("disabled");
@@ -85,7 +85,6 @@ $(document).on("DOMContentLoaded", function () {
                                 contentType: false,
 
                                 success: function (file) {
-
                                     var prevFile = $('#'+id+'_file').val();
                                     var prevUuid = prevFile.substring(prevFile.lastIndexOf('/') + 1);
                                     if(prevFile !== '') $.post(ajaxUrl+"/"+prevUuid+"/delete");
@@ -108,13 +107,17 @@ $(document).on("DOMContentLoaded", function () {
                                     $('#'+id+'_modalSave').removeAttr("disabled");
                                 }
                             });
-                        }, mimeType);
+                        }, mimeType, 1);
                     }
                 });
 
                 $('#'+id+'_thumbnail').on('click.image', function() {
                     if($('#'+id+'_raw').val() === '') $('#'+id+'_raw').click();
                     else $('#'+id+'_modal').modal("show");
+                });
+
+                $('#'+id+'_figcaption').on('click.image', function() {
+                    $('#'+id+'_raw').click();
                 });
 
                 $('#'+id+'_deleteBtn').on('click.image', function() {

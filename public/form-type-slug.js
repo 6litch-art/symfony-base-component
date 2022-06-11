@@ -58,9 +58,9 @@ $(document).on("DOMContentLoaded", function () {
                         if ("string" != typeof n) throw new Error("slugify: string argument expected");
 
                         var o = t[(r = "string" == typeof r ? {
-                                replacement: r
+                            separator: r
                             } : r || {}).locale] || {},
-                            i = void 0 === r.replacement ? "-" : r.replacement,
+                            i = void 0 === r.separator ? "-" : r.separator,
 
                             a = n.normalize().split("").reduce((function (t, n) {
                                 var i = o[n] || e[n] || n;
@@ -142,11 +142,13 @@ $(document).on("DOMContentLoaded", function () {
                             var keep   = $(this.field).data("slug-keep") ?? "";
                             var lower  = JSON.parse($(this.field).data("slug-lower") ?? "true");
                             var strict = JSON.parse($(this.field).data("slug-strict") ?? "true");
+                            var separator = $(this.field).data("slug-separator") ?? "-";
 
                             return o(value ?? this.target.value, {
                                 remove: new RegExp("[^A-Za-z0-9\s"+keep+"]", "g"),
                                 lower: lower,
-                                strict: strict
+                                strict: strict,
+                                separator : separator
                             })
                         }
                     }, {

@@ -240,7 +240,11 @@ form fieldset
     flex-direction: column;
 }
 .form-check .form-check-input { margin-left: 0.5em; }
-.form-check span { height: 29px; }
+.form-check span {
+    justify-content: center;
+display: flex;
+align-items: center;
+ height: 29px; }
 
 .login-wrapper .input-group button, .login-wrapper .input-group button:active, .login-wrapper .input-group button:focus, .login-wrapper .input-group button:hover
 {

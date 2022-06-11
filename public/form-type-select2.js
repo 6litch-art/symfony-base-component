@@ -22,7 +22,7 @@ $(document).on("DOMContentLoaded", function () {
                     dataAttribute += key + "=\"" + value+"\" ";
                 });
 
-                var tab   = field.data("tabulation") || "1.75em";
+                var tab   = field.data("select2-tabulation") || "1.75em";
                 var depth = option["depth"] || 0;
 
                 var href  = field.data("select2-href") || undefined;
@@ -47,9 +47,20 @@ $(document).on("DOMContentLoaded", function () {
                         '</span>'));
             };
 
-            var data = function (args) { return {term: args.term, page: args.page || 1}; }
+            var page = "1.0";
+            var data = function (args)
+            {
+                var lastTerm = $(field).attr("last-search");
+                $(this).removeAttr("last-search");
+
+                var term = $(field).parent().find('input.select2-search__field').val();
+
+                return {term: lastTerm || term || args.term, page: page};
+            }
+
             var processResults = function(data) {
 
+                page = data["pagination"]["page"] || page;
                 if(select2["multivalue"]) {
 
                     dropdown = [];
@@ -99,6 +110,25 @@ $(document).on("DOMContentLoaded", function () {
 
                 select2["ajax"]["delay"] = 0;
                 select2["ajax"]["transport"] = function (options, success, failure) {
+
+                    if(options.data.term == $(field).parent().find('input.select2-search__field').val()) {
+
+                        //
+                        // Retrieve cache if exists
+                        var term = options.data.term || '';
+                        var page = options.data.page || '';
+                        var index = field.attr("id")+":"+term+":"+page;
+
+                        if(options.cache && index in localCache)
+                            return success(localCache[index]);
+
+                        page = 1;
+
+                    } else {
+
+                        // Prevent loosing last search..
+                        $(field).attr("last-search",  $(field).parent().find('input.select2-search__field').val());
+                    }
 
                     //
                     // Compute debouncing (to avoid frequent requests)
@@ -161,6 +191,10 @@ $(document).on("DOMContentLoaded", function () {
 
             }).on("select2:open", function(e) {
 
+                // Put back previous value
+                $(field).parent().find('input.select2-search__field').focus().val($(this).attr("last-search"));
+
+                page = "1.0";
                 if ($(this).data('state') === 'unselected') {
                     $(this).removeData('state');
                     $(this).select2('close');
@@ -170,7 +204,16 @@ $(document).on("DOMContentLoaded", function () {
 
                 $(this).focusout();
                 $(document).off("keyup.select2");
+
+                page = "1.0";
+
+            }).on("select2:closing", function(e) {
+
+                $(this).attr("last-search", $(field).parent().find('input.select2-search__field').val());
             });
+
+            $(field).parent().find('input.select2-search__field').off();
+            $(field).parent().find('input.select2-search__field').on("input", function() { page = "1.0"; });
 
             dropdown = $(field).select2("data");
 
