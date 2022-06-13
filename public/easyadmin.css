@@ -104,6 +104,15 @@ html, body { scroll-padding-top: 11em; }
     box-shadow:none !important;
 }
 
+.field-form_row {display:block !important; }
+.field-form_row >* {display:none !important; }
+.field-form_row.form-group {
+    margin: 0 0 1em 0;
+    padding:0.5em 0.5em !important;
+    border-bottom: var(--border-width) solid var(--content-top-border-color);;
+
+}
+
 .dropdown .actions .action-icon { top: 0 !important;}
 .d-inline .dropdown-toggle:not(root-allowed):after
 {

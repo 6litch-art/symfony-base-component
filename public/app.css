@@ -1208,15 +1208,6 @@ input.required:after, textarea.required:after, select.required:after {
 .select2-selection--vertical .select2-selection__choice  { width:calc(100% - 40px); display:flex; justify-content: start !important; }
 .select2-selection--vertical.select2-selection--multiple .select2-selection__choice  { padding:0.35em !important; }
 
-.field-form_row {display:block !important; }
-.field-form_row >* {display:none !important; }
-.field-form_row.form-group { margin:1em 0; padding:0.5em 0.5em !important; }
-
-.field-form_row.col-xs-12, .field-form_row.col-sm-12,
-.field-form_row.col-md-12, .field-form_row.col-lg-12,
-.field-form_row.col-xl-12, .field-form_row.col-xxl-12
-{ border-bottom: var(--border-width) solid var(--border-color); }
-
 .input-group-text .btn,
 .input-group-text .btn:not(:disabled):not(.disabled):not(.btn-link):hover,
 .input-group-text .btn:not(:disabled):not(.disabled):not(.btn-link):focus { background-color:transparent; border:0; box-shadow:none; height:100%; padding:1px; margin:0; }

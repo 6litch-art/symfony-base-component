@@ -1,6 +1,14 @@
 $(document).on("DOMContentLoaded", function () {
 
     $(document).on("load.form_type.slug", function () {
+        function trim (s, c) {
+            if (c === "]") c = "\\]";
+            if (c === "^") c = "\\^";
+            if (c === "\\") c = "\\\\";
+            return s.replace(new RegExp(
+              "^[" + c + "]+|[" + c + "]+$", "g"
+            ), "");
+          }
 
         ! function (e) {
             var t = {};
@@ -144,12 +152,12 @@ $(document).on("DOMContentLoaded", function () {
                             var strict = JSON.parse($(this.field).data("slug-strict") ?? "true");
                             var separator = $(this.field).data("slug-separator") ?? "-";
 
-                            return o(value ?? this.target.value, {
+                            return trim(o(value ?? this.target.value, {
                                 remove: new RegExp("[^A-Za-z0-9\s"+keep+"]", "g"),
                                 lower: lower,
                                 strict: strict,
                                 separator : separator
-                            })
+                            }), separator)
                         }
                     }, {
                         key: "listenTarget",
