@@ -890,7 +890,6 @@ select.form-control:disabled, select.form-control[readonly]
 .content-header-icon
 {
     background: var(--body-bg);
-    box-shadow: inset -1px 0 0 var(--sidebar-border-color);
     border: var(--border-width) var(--border-style) var(--content-top-border-color);
 }
 
