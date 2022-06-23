@@ -227,7 +227,7 @@ form fieldset
     flex-direction: column;
 }
 .form-check .form-check-input { margin-left: 0.5em; }
-.form-check span {
+.form-check .form-checkbox span {
     justify-content: center;
     display: flex;
     align-items: center;
@@ -363,8 +363,15 @@ span[data-toggle="tooltip"]
 }
 
 .datagrid .field-boolean .form-switch input { top:0px; }
-
-.datagrid td > span { white-space: nowrap; }
+.datagrid td { white-space: nowrap; }
+.datagrid td > span.badges .badge+.badge { margin-left:0.25em;}
+.datagrid td > span.badges
+{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-around;
+    align-items: center;
+}
 
 .content-header-title h1 { color: var(--form-panel-header-color); }
 .content-header-title { color: var(--button-secondary-color); }
@@ -384,23 +391,6 @@ span[data-toggle="tooltip"]
     transform-origin:top;
     opacity:1;
 }
-
-.badge { padding:0.4em 0.5em; }
-
-.badge div            { margin-right:0.35em; padding-right:0.5em; border-right:1.5px solid; }
-.badge div:last-child:not(:first-child) { margin-left:0.15em; }
-.badge div:last-child { border-right:none; margin-right:0; padding-right:0em; }
-
-.badge .label:first-child { margin-right:0.35em; padding-right:0.5em; border-right:1.5px solid; }
-.badge .label:last-child  { margin-left:0.35em; padding-left:0.5em; border-left:1.5px solid; }
-.badge > * {
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    font-size:10pt;
-}
-.badge > i:first-child,
-.badge > a:first-child i { font-size:13pt; margin-right:0.25em; }
 
 .nav-link {
     position: relative;
@@ -886,6 +876,13 @@ select.form-control:disabled, select.form-control[readonly]
     width: 100%;
 }
 
+.thumbnail-avatar i
+{
+    width: auto;
+    height: auto;
+    top: 0.5px;
+    position: relative;
+}
 
 .content-header-icon
 {

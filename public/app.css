@@ -7,6 +7,30 @@
 .badge { display: inline-flex; }
 .badge > span:before { border-right:1px solid black; padding:0 0.25em 0 0.5em; }
 .badge > span:first-child:before { border-right:0px; padding:0; }
+.badge { padding:0.4em 0.5em; }
+
+.badge div            { margin-right:0.35em; padding-right:0.5em; border-right:1.5px solid; }
+.badge div:last-child:not(:first-child) { margin-left:0.15em; }
+.badge div:last-child { border-right:none; margin-right:0; padding-right:0em; }
+
+.badge .label:first-child { margin-right:0.35em; padding-right:0.5em; border-right:1.5px solid; }
+.badge .label:last-child  { margin-left:0.35em; padding-left:0.5em; border-left:1.5px solid; }
+
+.label-wrapper a { font-size:11pt; }
+.badge > * {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-size:10pt;
+}
+.badge:not(.label) > i:first-child,
+.badge:not(.label) > a:first-child i { font-size:13pt; margin-right:0.25em; }
+
+.badge+.badge { margin-left:0; }
+.field-boolean .badge { min-width:auto; }
+form .label-wrapper .badge { margin-left:0.25em; padding-right:0.5em; }
+form .label-wrapper { padding: 0 0 8px; }
+
 .locale-dropdown .dropdown-item { padding: 0.5em; }
 .locale-dropdown .dropdown-item .country-flag { margin-right:0.5em; }
 .locale-dropdown .dropdown-menu li { padding: 0.25em 0.5em 0.25em 0.5em !important; }
@@ -284,7 +308,7 @@ form.was-validated select:invalid ~ .select2-selection,
     color: #dc2626;
 }
 
-.form-collection-items .accordion-item .form-cropper-fields > div span { min-width: 80px; text-align:right; }
+.form-collection-items .accordion-item .form-cropper-fields > div > span { min-width: 110px; text-align:right; }
 .form-collection-items .accordion-item .form-cropper-fields > div input { flex-grow: 1; }
 .form-collection-items .accordion-item .form-cropper-fields > div {
     display: flex;
@@ -310,7 +334,7 @@ form.was-validated select:invalid ~ .select2-selection,
     padding: 0;
 }
 
-.form-collection-items .accordion-item .form-control > div label { margin-right:1em; }
+.form-collection-items .accordion-item .form-control > div .label-wrapper { margin-right:1em; }
 
 .form-collection-items .accordion-item .accordion-body .form-widget { flex: 1 }
 .form-collection-items .accordion-button,
@@ -875,7 +899,7 @@ input.required:after, textarea.required:after, select.required:after {
     width: 2.5em !important;
     margin: auto 0.5em;
 }
-.form-check.form-switch:not(.inline) span
+.form-check.form-switch:not(.inline) .form-checkbox span
 {
     display: flex;
     justify-content: center;
