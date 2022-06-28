@@ -262,6 +262,7 @@ form fieldset legend { font-size: 11pt; }
 {
     height:auto;
 }
+.datagrid td.actions .btn-label { font-size:14pt; opacity:0.75; }
 .modal .btn-close { color: var(--text-color-dark); }
 .form-checkbox input {
 
