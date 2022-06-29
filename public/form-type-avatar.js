@@ -24,6 +24,10 @@ $(document).on("DOMContentLoaded", function () {
                 });
             }
 
+            $('#'+id+'_figcaption').on('click.avatar', function() {
+                $('#'+id+'_raw').click();
+            });
+
             $("#"+id+"_deleteBtn2").on("click.avatar", function() {
 
                 $("#"+id+"_raw").value = '';

@@ -116,10 +116,6 @@ $(document).on("DOMContentLoaded", function () {
                     else $('#'+id+'_modal').modal("show");
                 });
 
-                $('#'+id+'_figcaption').on('click.image', function() {
-                    $('#'+id+'_raw').click();
-                });
-
                 $('#'+id+'_deleteBtn').on('click.image', function() {
                     $('#'+id+'_thumbnail')[0].src = thumbnail;
                     $('#'+id+'_raw').val('');
