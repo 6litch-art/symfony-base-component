@@ -26,6 +26,7 @@
 .badge:not(.label) > i:first-child,
 .badge:not(.label) > a:first-child i { font-size:13pt; margin-right:0.25em; }
 
+.badge:empty { display:none; }
 .badge+.badge { margin-left:0; }
 .field-boolean .badge { min-width:auto; }
 form .label-wrapper .badge { margin-left:0.25em; padding-right:0.5em; }
