@@ -516,6 +516,7 @@ body.ea-edit .content-header, body.ea-new .content-header {
     justify-content:center;
 
     object-fit:cover;
+    background-color: #FFF5;
 }
 
 .datagrid tr:hover .lightbox-thumbnail img { border-color:transparent !important; }

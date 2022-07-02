@@ -921,8 +921,8 @@ input.required:after, textarea.required:after, select.required:after {
 }
 .form-check {
     display: flex !important;
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: center;
+    flex-direction: row;
 }
 
 .btn-matrix i { font-size: 13pt; }
