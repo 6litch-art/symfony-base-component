@@ -53,10 +53,18 @@ pre {
 
 .invisible { opacity:0 }
 .countdown-item { min-width:40px;}
-.countdown { transition: opacity 1s ease-in; display:flex; flex-direction:row; }
+.countdown { 
+    transition: opacity 1s ease-in; 
+    display:flex; 
+    flex-direction:row; 
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
 .countdown-group { display:flex; flex-direction:row; }
 .countdown-block .countdown-separator { display:none }
-.countdown-block .countdown-group { flex-direction:column; margin-right:1em }
+.countdown-block .countdown-group { flex-direction:column; justify-content:space-between; margin:0 0.5em; }
+.countdown-block .countdown-group:empty { display:none }
 .countdown-block .countdown-group:last-child { margin-right:0em }
 
 .blink:not(.prevent) { animation: blinker 1s ease-in infinite ; }
