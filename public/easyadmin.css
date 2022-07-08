@@ -16,6 +16,8 @@ html, body { scroll-padding-top: 11em; }
     height:100%;
 }
 
+.form-group label, .form-group legend.col-form-label { padding: 0; }
+.form-check .form-check-input { margin: auto 0.5em; }
 .bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover { background-color: var(--button-bg); }
 .bootstrap-datetimepicker-widget.dropdown-menu.top::after { border-top: 6px solid var(--dropdown-bg); }
 

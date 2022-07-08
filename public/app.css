@@ -23,6 +23,34 @@
     justify-content: center;
 }
 
+pre::before {
+    background-color: #fd5e57;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px #fd5e57, 20px 0 0 2px #febc2e, 40px 0 0 2px #29c83f;
+    content: "";
+    display: block;
+    height: 7px;
+    left: 8px;
+    position: absolute;
+    top: -18px;
+    width: 7px;
+}
+
+pre {
+    margin: 1em 0.25em 1em 0.25em !important;
+    padding: 0.75em 1em !important;
+    line-height: 1.6em;
+    color: #FFF;
+    white-space: pre-wrap;
+    background-color: #002b37;
+    border: 4px solid #555;
+    border-top: 30px solid #555;
+    border-radius: 0.5em;
+    position: relative;
+    overflow: unset;
+    min-width: 70px;
+}
+
 .invisible { opacity:0 }
 .countdown-item { min-width:40px;}
 .countdown { transition: opacity 1s ease-in; display:flex; flex-direction:row; }
