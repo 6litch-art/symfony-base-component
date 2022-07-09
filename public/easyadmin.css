@@ -15,6 +15,12 @@ html, body { scroll-padding-top: 11em; }
     margin-top:0;
     height:100%;
 }
+
+.form-group label, .form-group legend.col-form-label { padding: 0; }
+.form-check .form-check-input { margin: auto 0.5em; }
+.bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover { background-color: var(--button-bg); }
+.bootstrap-datetimepicker-widget.dropdown-menu.top::after { border-top: 6px solid var(--dropdown-bg); }
+
 .with-background .form-translatable .nav-link.active { border-bottom: 1px solid var(--sidebar-bg); }
 .form-password-block .form-password-details
 {
@@ -131,13 +137,12 @@ fieldset .form-group { padding: 0; }
 form fieldset .badge.badge-secondary { background-color: var(--sidebar-bg); }
 form fieldset
 {
-    padding: 0 2em !important;
+    padding: 0 2em;
     margin: 1em 0 !important;
 }
 
 .page-wrapper fieldset { height: 100%; }
-form fieldset { padding: 0; }
-.content-body fieldset { padding: 1em 0.5em 0.5em 1em; }
+.content-body fieldset { padding: 1em 0.5em 1.25em 1em; }
 
 form fieldset legend { font-size: 11pt; }
 .datagrid .lightbox-association img { filter: blur(2px); }
@@ -187,6 +192,7 @@ form fieldset legend { font-size: 11pt; }
     height: 30px;
     max-width: 30px;
     width: auto;
+    background-color: #FFF5;
 }
 
 .online-user-wrapper li:hover { opacity:1; }
@@ -518,6 +524,11 @@ body.ea-edit .content-header, body.ea-new .content-header {
     object-fit:cover;
 }
 
+.user-menu-wrapper.user-is-impersonated a.user-details, .user-menu-wrapper.user-is-impersonated a.user-details:hover {
+    color: var(--user-name-color);
+    font-weight: normal;
+}
+
 .datagrid tr:hover .lightbox-thumbnail img { border-color:transparent !important; }
 .ea-detail .lightbox-thumbnail img, .datagrid .lightbox-thumbnail img {
     max-height: 105%;
@@ -613,7 +624,15 @@ body.ea-edit .content-header, body.ea-new .content-header {
 }
 
 .responsive-menu { padding:1.25em; }
-.logo img { height:95%; width:95%; object-fit:cover; margin:auto; border-radius: var(--border-radius); }
+.logo img 
+{ 
+    background-color: #FFF5;
+    height:95%; width:95%; 
+    object-fit:cover; 
+    margin:auto; 
+    border-radius: var(--border-radius);
+    border: 1px solid var(--content-top-border-color) !important;
+}
 
 .logo .logo-overlay:hover {
 	backdrop-filter: blur(5px);
@@ -653,7 +672,6 @@ body.ea-edit .content-header, body.ea-new .content-header {
 .logo, .responsive-logo {
 
     position:relative;
-    background-color: #FFF5;
     border-radius: var(--border-radius);
 
     max-height: 200px !important;
