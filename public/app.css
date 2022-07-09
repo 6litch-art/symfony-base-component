@@ -23,6 +23,10 @@
     justify-content: center;
 }
 
+form .label-wrapper {
+    padding: 8px 0;
+}
+
 .label-wrapper .badge > * { font-size:10pt; }
 .label-wrapper .badge:not(.label) > i:first-child,
 .label-wrapper .badge:not(.label) > a:first-child i { font-size:13pt; }
