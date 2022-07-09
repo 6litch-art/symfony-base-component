@@ -137,13 +137,12 @@ fieldset .form-group { padding: 0; }
 form fieldset .badge.badge-secondary { background-color: var(--sidebar-bg); }
 form fieldset
 {
-    padding: 0 2em !important;
+    padding: 0 2em;
     margin: 1em 0 !important;
 }
 
 .page-wrapper fieldset { height: 100%; }
-form fieldset { padding: 0; }
-.content-body fieldset { padding: 1em 0.5em 0.5em 1em; }
+.content-body fieldset { padding: 1em 0.5em 1.25em 1em; }
 
 form fieldset legend { font-size: 11pt; }
 .datagrid .lightbox-association img { filter: blur(2px); }

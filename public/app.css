@@ -80,9 +80,13 @@ pre {
 .badge:empty { display:none; }
 .badge+.badge { margin-left:0; }
 .field-boolean .badge { min-width:auto; }
-form .label-wrapper .badge { margin-left:0.25em; padding-right:0.5em; }
-form .label-wrapper { padding: 8px 0; }
 form .data-help { margin-left: 2px; }
+form .label-wrapper .badge { margin-left:0.25em; padding-right:0.5em; }
+form .label-wrapper {
+    padding: 0;
+    margin-top: 2em;
+}
+
 
 .locale-dropdown .dropdown-item { padding: 0.5em; }
 .locale-dropdown .dropdown-item .country-flag { margin-right:0.5em; }
@@ -162,7 +166,6 @@ form.was-validated select:invalid ~ .select2-selection,
     margin-right: unset;
     margin-top: unset;
 }
-
 
 .form-switch .form-check-input { background-position: 0% !important; background-size: contain !important; padding-right: unset !important; }
 .form-switch .form-check-input:checked { background-position: 100% !important; background-size: contain !important; padding-right: unset !important; }
