@@ -82,10 +82,7 @@ pre {
 .field-boolean .badge { min-width:auto; }
 form .data-help { margin-left: 2px; }
 form .label-wrapper .badge { margin-left:0.25em; padding-right:0.5em; }
-
-form .label-wrapper {
-    padding: 8px 0;
-}
+form .label-wrapper { padding: 8px 0; }
 
 .locale-dropdown .dropdown-item { padding: 0.5em; }
 .locale-dropdown .dropdown-item .country-flag { margin-right:0.5em; }
@@ -106,7 +103,6 @@ hr { margin: 0.5rem 0; }
 .form-collection-delete-button {  padding-left:4px; }
 
 .field-raw > input:focus { border: 1px solid var(--sidebar-border-color) !important;  }
-
 
 .form-collection-buttons i { font-size:14pt; }
 
