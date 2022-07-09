@@ -21,10 +21,61 @@
     display:flex;
     align-items: center;
     justify-content: center;
-    font-size:10pt;
 }
+
+pre::before {
+    background-color: #fd5e57;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px #fd5e57, 20px 0 0 2px #febc2e, 40px 0 0 2px #29c83f;
+    content: "";
+    display: block;
+    height: 7px;
+    left: 8px;
+    position: absolute;
+    top: -18px;
+    width: 7px;
+}
+
+pre {
+    margin: 1em 0.25em 1em 0.25em !important;
+    padding: 0.75em 1em !important;
+    line-height: 1.6em;
+    color: #FFF;
+    white-space: pre-wrap;
+    background-color: #002b37;
+    border: 4px solid #555;
+    border-top: 30px solid #555;
+    border-radius: 0.5em;
+    position: relative;
+    overflow: unset;
+    min-width: 70px;
+}
+
+.invisible { opacity:0 }
+.countdown-item { min-width:40px;}
+.countdown { 
+    transition: opacity 1s ease-in; 
+    display:flex; 
+    flex-direction:row; 
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.countdown-group { display:flex; flex-direction:row; }
+.countdown-block .countdown-separator { display:none }
+.countdown-block .countdown-group { flex-direction:column; justify-content:space-between; margin:0 0.5em; }
+.countdown-block .countdown-group:empty { display:none }
+.countdown-block .countdown-group:last-child { margin-right:0em }
+
+.blink:not(.prevent) { animation: blinker 1s ease-in infinite ; }
+@keyframes blinker { 0% { opacity: 0  } 50% { opacity: 1  } 100% { opacity: 0} }
+
+.label-wrapper .badge > * { font-size:10pt; }
+.label-wrapper .badge:not(.label) > i:first-child,
+.label-wrapper .badge:not(.label) > a:first-child i { font-size:13pt; }
+
 .badge:not(.label) > i:first-child,
-.badge:not(.label) > a:first-child i { font-size:13pt; margin-right:0.25em; }
+.badge:not(.label) > a:first-child i { margin-right:0.25em; }
 
 .badge:empty { display:none; }
 .badge+.badge { margin-left:0; }
@@ -109,10 +160,11 @@ form.was-validated select:invalid ~ .select2-selection,
     background-repeat: no-repeat;
 }
 
-.form-switch.inline .form-checkbox
-{
-    padding: 0;
-    margin-top: 20px;
+.bootstrap-datetimepicker-widget.dropdown-menu { padding:1em; }
+.bootstrap-datetimepicker-widget.dropdown-menu.top::before { border-top-color: transparent; }
+.bootstrap-datetimepicker-widget.dropdown-menu .datepicker-days i {
+    margin-right: unset;
+    margin-top: unset;
 }
 
 .form-switch .form-check-input { background-position: 0% !important; background-size: contain !important; padding-right: unset !important; }
@@ -925,11 +977,11 @@ input.required:after, textarea.required:after, select.required:after {
     margin-top: -3px;
     margin-bottom: 3px;
 }
-/* .form-check {
+.form-check {
     display: flex !important;
-    align-items: flex-start;
-    flex-direction: column;
-} */
+    align-items: center;
+    flex-direction: row;
+}
 
 .btn-matrix i { font-size: 13pt; }
 .form-quill { margin-bottom:75px; }
