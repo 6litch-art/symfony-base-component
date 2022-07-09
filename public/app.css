@@ -23,6 +23,10 @@
     justify-content: center;
 }
 
+form .label-wrapper {
+    padding: 8px 0;
+}
+
 pre::before {
     background-color: #fd5e57;
     border-radius: 50%;
