@@ -23,10 +23,6 @@
     justify-content: center;
 }
 
-form .label-wrapper {
-    padding: 8px 0;
-}
-
 pre::before {
     background-color: #fd5e57;
     border-radius: 50%;
@@ -57,10 +53,10 @@ pre {
 
 .invisible { opacity:0 }
 .countdown-item { min-width:40px;}
-.countdown { 
-    transition: opacity 1s ease-in; 
-    display:flex; 
-    flex-direction:row; 
+.countdown {
+    transition: opacity 1s ease-in;
+    display:flex;
+    flex-direction:row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
@@ -85,12 +81,16 @@ pre {
 .badge+.badge { margin-left:0; }
 .field-boolean .badge { min-width:auto; }
 form .data-help { margin-left: 2px; }
-form .label-wrapper .badge { margin-left:0.25em; padding-right:0.5em; }
-form .label-wrapper {
-    padding: 0;
-    margin-top: 2em;
+form .label-wrapper .badge
+{
+    margin-left:0.25em; padding-right:0.5em;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
+form .label-wrapper {
+    padding: 8px 0;
+}
 
 .locale-dropdown .dropdown-item { padding: 0.5em; }
 .locale-dropdown .dropdown-item .country-flag { margin-right:0.5em; }
@@ -429,7 +429,7 @@ input:not(.form-check-input).form-control { min-height:38px; }
 input[type="file"]:not(.form-check-input).form-control { height: 38px !important; }
 .imageupload .deleteBtn { height: 38px !important; }
 .imageupload input { padding-right: 0px !important; }
-.input-group,
+.input-group:not(.dropdown),
 .input-group-append,
 .input[type="file"]::file-selector-button,
 .form-control::-webkit-file-upload-button, .form-control::file-selector-button,
@@ -981,8 +981,15 @@ input.required:after, textarea.required:after, select.required:after {
     margin-top: -3px;
     margin-bottom: 3px;
 }
-.form-check {
+.form-check
+{
     display: flex !important;
+    align-items: start;
+    flex-direction: column;
+}
+
+.form-check.inline
+{
     align-items: center;
     flex-direction: row;
 }
@@ -1289,6 +1296,7 @@ input.required:after, textarea.required:after, select.required:after {
     margin-left: 3px;
 }
 
+.select2-container--disabled .select2-selection__clear { display:none !important; }
 .select2-selection--multiple .select2-selection__clear { line-height:0 !important; top:0 !important; right: 0.75em !important; }
 .select2-selection__clear {
     display: flex !important;
