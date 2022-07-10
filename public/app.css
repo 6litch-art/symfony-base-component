@@ -197,8 +197,12 @@ form.was-validated select:invalid ~ .select2-selection,
 
 .form-translatable .form-collection > div { margin-bottom: .5em; }
 
-.form-collection .collection-empty { margin-bottom: 0em !important; }
 .form-collection-items { border: 0; margin-bottom: 0em !important; }
+.form-collection .collection-empty .form-text { margin: 0.6em 1.25em; font-size: 10pt; }
+.form-collection .collection-empty {
+    border-bottom: 1px solid var(--border-secondary-color);
+    margin-bottom: 0em !important;
+}
 
 .form-collection-items .form-collection { margin-bottom: 0.5em; }
 .form-collection-items label:empty { display: none }
