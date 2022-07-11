@@ -81,7 +81,12 @@ pre {
 .badge+.badge { margin-left:0; }
 .field-boolean .badge { min-width:auto; }
 form .data-help { margin-left: 2px; }
-form .label-wrapper .badge { margin-left:0.25em; padding-right:0.5em; }
+form .label-wrapper .badge
+{
+    margin-left:0.25em; padding-right:0.5em;
+    margin-top: auto;
+    margin-bottom: auto;
+}
 
 form .label-wrapper {
     padding: 8px 0;
@@ -192,8 +197,12 @@ form.was-validated select:invalid ~ .select2-selection,
 
 .form-translatable .form-collection > div { margin-bottom: .5em; }
 
-.form-collection .collection-empty { margin-bottom: 0em !important; }
 .form-collection-items { border: 0; margin-bottom: 0em !important; }
+.form-collection .collection-empty .form-text { margin: 0.6em 1.25em; font-size: 10pt; }
+.form-collection .collection-empty {
+    border-bottom: 1px solid var(--border-secondary-color);
+    margin-bottom: 0em !important;
+}
 
 .form-collection-items .form-collection { margin-bottom: 0.5em; }
 .form-collection-items label:empty { display: none }
@@ -424,7 +433,7 @@ input:not(.form-check-input).form-control { min-height:38px; }
 input[type="file"]:not(.form-check-input).form-control { height: 38px !important; }
 .imageupload .deleteBtn { height: 38px !important; }
 .imageupload input { padding-right: 0px !important; }
-.input-group,
+.input-group:not(.dropdown),
 .input-group-append,
 .input[type="file"]::file-selector-button,
 .form-control::-webkit-file-upload-button, .form-control::file-selector-button,
@@ -976,8 +985,15 @@ input.required:after, textarea.required:after, select.required:after {
     margin-top: -3px;
     margin-bottom: 3px;
 }
-.form-check {
+.form-check
+{
     display: flex !important;
+    align-items: start;
+    flex-direction: column;
+}
+
+.form-check.inline
+{
     align-items: center;
     flex-direction: row;
 }
@@ -1284,6 +1300,7 @@ input.required:after, textarea.required:after, select.required:after {
     margin-left: 3px;
 }
 
+.select2-container--disabled .select2-selection__clear { display:none !important; }
 .select2-selection--multiple .select2-selection__clear { line-height:0 !important; top:0 !important; right: 0.75em !important; }
 .select2-selection__clear {
     display: flex !important;
