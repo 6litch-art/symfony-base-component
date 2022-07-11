@@ -249,7 +249,13 @@ form fieldset legend { font-size: 11pt; }
     align-items: flex-end;
     flex-direction: column;
 }
-.form-check .form-check-input { margin-left: 0.5em; }
+
+.form-check .form-check-input { margin-left: 0.5em; margin-top: 0px; }
+.form-check:not(.inline) .form-check-input { margin-top: 10px; }
+
+.form-control:focus {
+    background-color: var(--body-bg);
+}
 .form-check .form-checkbox span {
     justify-content: center;
     display: flex;
@@ -552,9 +558,9 @@ body.ea-edit .content-header, body.ea-new .content-header {
     align-items: center;
     justify-content: center;
     object-fit: cover;
+    background-color: #FFF5;
     min-height: 105%;
     min-width: 105%;
-
     padding: 0;
 }
 
