@@ -259,6 +259,17 @@ form.was-validated select:invalid ~ .select2-selection,
     box-shadow: none;
 }
 
+.bs-tooltip-auto[data-popper-placement^="right"], .bs-tooltip-end
+{
+    padding:0.6em 0.5em;
+    margin:-2px 0 !important;
+}
+.bs-tooltip-auto[data-popper-placement^="left"], .bs-tooltip-end
+{
+    padding:0.6em 0.5em;
+    margin:-2px 0 !important;
+}
+
 .dropzone .dz-preview .dz-details .dz-filename { display:none; }
 .dropzone .dz-preview .dz-details i:hover { color:#EEEA; }
 .dropzone .dz-preview .dz-details .dz-tools {

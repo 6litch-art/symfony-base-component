@@ -20,6 +20,7 @@ html, body { scroll-padding-top: 11em; }
 .form-check .form-check-input { margin: auto 0.5em; }
 .bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover { background-color: var(--button-bg); }
 .bootstrap-datetimepicker-widget.dropdown-menu.top::after { border-top: 6px solid var(--dropdown-bg); }
+textarea:focus { background-color: var(--body-bg) !important; }
 
 .with-background .form-translatable .nav-link.active { border-bottom: 1px solid var(--sidebar-bg); }
 .form-password-block .form-password-details
@@ -249,13 +250,7 @@ form fieldset legend { font-size: 11pt; }
     align-items: flex-end;
     flex-direction: column;
 }
-
-.form-check .form-check-input { margin-left: 0.5em; margin-top: 0px; }
-.form-check:not(.inline) .form-check-input { margin-top: 10px; }
-
-.form-control:focus {
-    background-color: var(--body-bg);
-}
+.form-check .form-check-input { margin-left: 0.5em; }
 .form-check .form-checkbox span {
     justify-content: center;
     display: flex;
@@ -356,12 +351,6 @@ span[data-toggle="tooltip"]
     align-items:center;
 }
 
-.select2-container--bootstrap4.select2-container--disabled .select2-selection,
-.select2-container--bootstrap4.select2-container--disabled.select2-container--focus .select2-selection {
-    background-color: var(--button-secondary-bg) !important;
-    border-color: var(--sidebar-bg) !important;
-}
-
 .dropdown-menu
 {
     margin:0.75em 0 !important;
@@ -385,11 +374,11 @@ span[data-toggle="tooltip"]
 }
 
 .select2-selection.select2-selection--wrap,
-.select2-container--bootstrap4 .select2-selection {
-    background-color: var(--body-bg) !important;
+.select2-container .select2-selection {
+    background-color: var(--body-bg);
 }
 
-.select2-container--bootstrap4 .select2-selection
+.select2-container .select2-selection
 {
     border: 1px solid var(--sidebar-border-color)
 }
@@ -558,9 +547,9 @@ body.ea-edit .content-header, body.ea-new .content-header {
     align-items: center;
     justify-content: center;
     object-fit: cover;
-    background-color: #FFF5;
     min-height: 105%;
     min-width: 105%;
+
     padding: 0;
 }
 
@@ -793,6 +782,18 @@ input.form-control
     color: var(--button-color) !important;
 }
 
+.select2-container.select2-container--disabled .select2-dropdown,
+.select2-container.select2-container--disabled .select2-selection__choice,
+.select2-container.select2-container--disabled .select2-selection__choice__remove
+{
+    color: var(--sidebar-menu-header-color) !important;
+}
+
+.select2-container.select2-container--disabled .select2-selection,
+.select2-container.select2-container--disabled.select2-container--focus .select2-selection {
+    background-color: var(--sidebar-bg);
+    border-color: var(--sidebar-border-color);
+}
 
 ul.sidebar-menu a { white-space: nowrap; }
 .content-header-icon {
@@ -898,7 +899,6 @@ select.form-control:disabled, select.form-control[readonly]
 {
     background-color: var(--sidebar-bg);
 }
-textarea:focus { background-color: var(--body-bg) !important; }
 
 
 .input-group-text { border: 1px solid var(--sidebar-border-color); }
@@ -946,11 +946,11 @@ textarea:focus { background-color: var(--body-bg) !important; }
     border: var(--border-width) var(--border-style) var(--content-top-border-color);
 }
 
-.select2-container--bootstrap4 .select2-dropdown .select2-results__option[aria-selected="true"] {
+.select2-container .select2-dropdown .select2-results__option[aria-selected="true"] {
     background-color: var(--body-bg);
 }
 
-.select2-container--bootstrap4 .select2-results__option--highlighted, .select2-container--bootstrap4 .select2-results__option--highlighted.select2-results__option[aria-selected="true"] {
+.select2-container .select2-results__option--highlighted, .select2-container .select2-results__option--highlighted.select2-results__option[aria-selected="true"] {
     background-color: #007bff;
 }
 fieldset .sidebar-menu li {
