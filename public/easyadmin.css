@@ -898,6 +898,7 @@ select.form-control:disabled, select.form-control[readonly]
 {
     background-color: var(--sidebar-bg);
 }
+textarea:focus { background-color: var(--body-bg) !important; }
 
 
 .input-group-text { border: 1px solid var(--sidebar-border-color); }
