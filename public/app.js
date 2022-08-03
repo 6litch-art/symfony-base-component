@@ -28,12 +28,15 @@ window.addEventListener('DOMContentLoaded', function(event) {
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => CookieConsent.setCookie("user", "necessary", getUser(), 30*24*3600));
 
     Clipboard.ready();
-    
+
 });
 
 //
 // Apply bootstrap form validation
+// Lightbox configuration and countdown function
 window.addEventListener('load', function(event) {
+
+    lightbox.option({'wrapAround': true});
 
     $("form.needs-validation input").on("invalid", (e) => e.preventDefault() );
     $("[type=submit]").click(function() {
@@ -59,13 +62,13 @@ window.addEventListener('load', function(event) {
     {
         // Set the date we're counting down to
         var timestamp = new Date(timestamp).getTime();
-       
+
         // Update the count down every 1 second
         var x = setInterval(function() {
-    
+
             // Get today's date and time
             var now = Math.floor(new Date().getTime()/1000);
-    
+
             // Find the distance between now and the count down date
             var countdown = timestamp - now;
 
@@ -126,26 +129,26 @@ window.addEventListener('load', function(event) {
                 elSecondsUnit.removeClass("blink").addClass(oldSecondsUnit != elSecondsUnit.html() ? "blink" : "");
 
             if(years < 1) {
-                
+
                 var grYears   = $(elYears).closest(".countdown-group");
                 grYears.html("");
                 if(months < 1) {
-                
+
                     var grMonths  = $(elMonths).closest(".countdown-group");
                         grMonths.html("");
 
                     if(days < 1) {
-                
+
                         var grDays    = $(elDays).closest(".countdown-group");
                             grDays.html("");
 
                         if(hours < 1) {
-                
+
                             var grHours   = $(elHours).closest(".countdown-group");
                                 grHours.html("");
 
                             if(minutes < 1) {
-                
+
                                 var grMinutes = $(elMinutes).closest(".countdown-group");
                                     grMinutes.html("");
 
@@ -166,13 +169,13 @@ window.addEventListener('load', function(event) {
 
             // If the count down is finished, write some text
             if (countdown < 1) {
-    
+
                 clearInterval(x);
                 // if(reload) location.reload();
             }
 
             $(el).removeClass("invisible");
-            
+
         }, 1000);
     }
 

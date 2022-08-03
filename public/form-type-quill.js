@@ -7,7 +7,7 @@ $(document).on("DOMContentLoaded", function () {
             var id = el.getAttribute("data-quill-field");
 
             var editorId = id+"_editor";
-            if ($('#'+editorId).hasClass("ql-container")) // Quill editor already loaded (avoid toolbar duplicate)
+            if ($('#'+editorId).hasClass("ql-container")) // Quill editor already loaded (avoid toolbar duplication)
                 $('#'+editorId).parent().find(".ql-toolbar").remove();
 
             var quill = JSON.parse(el.getAttribute("data-quill-options")) || {};

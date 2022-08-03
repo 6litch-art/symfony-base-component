@@ -22,6 +22,7 @@
     align-items: center;
     justify-content: center;
 }
+.line-through { text-decoration:line-through; }
 
 pre::before {
     background-color: #fd5e57;
@@ -887,7 +888,7 @@ input.required:after, textarea.required:after, select.required:after {
 }
 
 
-.hidden { display:none; }
+.hidden { display:none !important; }
 .fileupload input {
     padding-right: 30px;
 }
