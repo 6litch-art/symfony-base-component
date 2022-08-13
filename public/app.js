@@ -70,19 +70,20 @@ window.addEventListener('load', function(event) {
             var now = Math.floor(new Date().getTime()/1000);
 
             // Find the distance between now and the count down date
-            var countdown = timestamp - now;
+            var  countdown = timestamp - now;
+            var _countdown = countdown;
 
             // Time calculations for days, hours, minutes and seconds
-            seconds   = countdown % 60;
-            countdown = Math.floor(countdown/60);
-            minutes   = countdown % 60;
-            countdown = Math.floor(countdown/60);
-            hours     = countdown % 24;
-            countdown = Math.floor(countdown/24);
-            days      = countdown % 30;
-            countdown = Math.floor(countdown/30);
-            months    = countdown % 12;
-            years     = Math.floor(countdown/12);
+            seconds   = _countdown % 60;
+            _countdown = Math.floor(_countdown/60);
+            minutes   = _countdown % 60;
+            _countdown = Math.floor(_countdown/60);
+            hours     = _countdown % 24;
+            _countdown = Math.floor(_countdown/24);
+            days      = _countdown % 30;
+            _countdown = Math.floor(_countdown/30);
+            months    = _countdown % 12;
+            years     = Math.floor(_countdown/12);
 
             var elYears       = $(el).find(".countdown-years");
             var oldYears = elYears.html();
@@ -165,7 +166,6 @@ window.addEventListener('load', function(event) {
                     }
                 }
             }
-
 
             // If the count down is finished, write some text
             if (countdown < 1) {
