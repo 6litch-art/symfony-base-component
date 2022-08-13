@@ -72,10 +72,10 @@ $(document).on("DOMContentLoaded", function () {
 
                             a = n.normalize().split("").reduce((function (t, n) {
                                 var i = o[n] || e[n] || n;
-                                return i === r && (i = " "), t + i.replace(n.remove || /[^\w\s$*_+~.()'"!\-:@]+/g, "")
+                                return i === r && (i = " "), t + i.replace(n.remove || /[^\w\s$*_+~\.()'"!\-:@]+/g, "")
                             }), "").trim().replace(new RegExp("[\\s" + i + "]+", "g"), i);
 
-                        return r.lower && (a = a.toLowerCase()), r.strict && (a = a.replace(new RegExp("[^a-zA-Z0-9" + i + "]", "g"), "").replace(new RegExp("[\\s" + i + "]+", "g"), i)), a
+                            return r.lower && (a = a.toLowerCase()), r.strict && (a = a.replace(new RegExp("[^a-zA-Z0-9" + i + "]", "g"), "").replace(new RegExp("[\\s" + i + "]+", "g"), i)), a
                     }
                     return n.extend = function (t) {
                         for (var n in t) e[n] = t[n]
@@ -152,8 +152,12 @@ $(document).on("DOMContentLoaded", function () {
                             var strict = JSON.parse($(this.field).data("slug-strict") ?? "true");
                             var separator = $(this.field).data("slug-separator") ?? "-";
 
+                            function escapeRegExp(text) {
+                                return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+                            }
+
                             return trim(o(value ?? this.target.value, {
-                                remove: new RegExp("[^A-Za-z0-9\s"+keep+"]", "g"),
+                                remove: new RegExp("[^A-Za-z0-9\s"+escapeRegExp(keep)+escapeRegExp(separator)+"]", "g"),
                                 lower: lower,
                                 strict: strict,
                                 separator : separator
@@ -210,7 +214,6 @@ $(document).on("DOMContentLoaded", function () {
                                 label.removeClass("required");
                                 slugger.target.removeAttribute("required");
                             }
-
                         });
                     }
 
