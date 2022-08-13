@@ -893,10 +893,12 @@ fieldset {
     border: var(--border-width) var(--border-style) var(--content-top-border-color);
 }
 
+input.form-control:not(.form-check-input):focus, textarea.form-control:focus, select.form-control:focus,
 input.form-control:not(.form-check-input), textarea.form-control, select.form-control
 {
     background-color: var(--body-bg);
 }
+
 input.form-control:not(.form-check-input):disabled,
 input.form-control:not(.form-check-input)[readonly],
 textarea.form-control:disabled, textarea.form-control[readonly],
