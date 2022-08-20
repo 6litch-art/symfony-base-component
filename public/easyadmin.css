@@ -22,11 +22,6 @@ html, body { scroll-padding-top: 11em; }
 .bootstrap-datetimepicker-widget.dropdown-menu.top::after { border-top: 6px solid var(--dropdown-bg); }
 textarea:focus { background-color: var(--body-bg) !important; }
 
-body:not(.ea-content-width-full) .content-wrapper, body:not(.ea-content-width-full) .page-wrapper
-{
-    max-width:calc(var(--body-max-width) - var(--sidebar-max-width));
-}
-
 .with-background .form-translatable .nav-link.active { border-bottom: 1px solid var(--sidebar-bg); }
 .form-password-block .form-password-details
 {
@@ -902,6 +897,10 @@ input.form-control:not(.form-check-input):focus, textarea.form-control:focus, se
 input.form-control:not(.form-check-input), textarea.form-control, select.form-control
 {
     background-color: var(--body-bg);
+}
+
+.ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-options {
+    border-color: var(--body-bg);
 }
 
 input.form-control:not(.form-check-input):disabled,
