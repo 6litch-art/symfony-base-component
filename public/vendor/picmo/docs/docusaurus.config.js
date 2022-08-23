@@ -64,7 +64,7 @@ const config = {
             position: 'right',
             label: 'API'
           },
-          {to: '/blog', label: 'Blog', position: 'right'},
+          {to: '/blog', label: 'Article', position: 'right'},
           {
             target: '_blank',
             position: 'right',

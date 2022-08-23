@@ -446,7 +446,7 @@ input[type="file"]:not(.form-check-input).form-control { height: 38px !important
 .imageupload .deleteBtn { height: 38px !important; }
 .imageupload input { padding-right: 0px !important; }
 .input-group:not(.dropdown),
-.input-group-append,
+/* .input-group-append, */
 .input[type="file"]::file-selector-button,
 .form-control::-webkit-file-upload-button, .form-control::file-selector-button,
 .select2-container .select2-selection--single,
