@@ -85,6 +85,9 @@ textarea:focus { background-color: var(--body-bg) !important; }
     transform:translate3d(39px, 10px, 0px);
 }
 
+.ea-dark-scheme .ql-html { filter: invert(100%); }
+.ea-dark-scheme .ql-toolbar.ql-toolbar-html-only { background-color: #ADADAD33; }
+
 .locale-dropdown .dropdown-toggle:focus { box-shadow:none !important;}
 .locale-dropdown .dropdown-toggle i { margin:0; }
 
