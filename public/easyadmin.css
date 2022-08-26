@@ -86,7 +86,7 @@ textarea:focus { background-color: var(--body-bg) !important; }
 }
 
 .ea-dark-scheme .ql-html { filter: invert(100%); }
-.ea-dark-scheme .ql-toolbar.ql-toolbar-html-only { background-color: #ADADAD33; }
+.ea-dark-scheme .ql-toolbar.ql-toolbar-html-only { background-color: #f8fafc33; }
 
 .locale-dropdown .dropdown-toggle:focus { box-shadow:none !important;}
 .locale-dropdown .dropdown-toggle i { margin:0; }
@@ -450,7 +450,7 @@ span[data-toggle="tooltip"]
 
 body.ea-edit .content-header, body.ea-new .content-header {
     top: 0px;
-    padding: 1em 2.5em 1em 2.5em !important;
+    padding: 2em 2.5em 1.5em 2.5em !important;
     background-color:white;
 }
 
