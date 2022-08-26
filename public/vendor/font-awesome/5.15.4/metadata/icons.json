@@ -4943,7 +4943,7 @@
       "solid"
     ],
     "unicode": "f781",
-    "label": "Blog",
+    "label": "Article",
     "voted": true,
     "svg": {
       "solid": {
@@ -4976,7 +4976,7 @@
       "brands"
     ],
     "unicode": "f37c",
-    "label": "Blogger",
+    "label": "Articleger",
     "voted": false,
     "svg": {
       "brands": {
@@ -5009,7 +5009,7 @@
       "brands"
     ],
     "unicode": "f37d",
-    "label": "Blogger B",
+    "label": "Articleger B",
     "voted": false,
     "svg": {
       "brands": {

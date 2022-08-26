@@ -1833,7 +1833,7 @@ blind:
 blog:
   changes:
     - 5.6.0
-  label: Blog
+  label: Article
   search:
     terms:
       - journal
@@ -1851,7 +1851,7 @@ blog:
 blogger:
   changes:
     - 5.0.0
-  label: Blogger
+  label: Articleger
   search:
     terms: []
   styles:
@@ -1861,7 +1861,7 @@ blogger:
 blogger-b:
   changes:
     - 5.0.0
-  label: Blogger B
+  label: Articleger B
   search:
     terms: []
   styles:
