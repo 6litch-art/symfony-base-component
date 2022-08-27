@@ -6,6 +6,9 @@ $(document).on("DOMContentLoaded", function () {
 
             var id = el.getAttribute("data-quill-field");
 
+            var placeholder = el.getAttribute("data-quill-placeholder");
+            var placeholderHTML = el.getAttribute("data-quill-placeholder");
+
             var editorId = id+"_editor";
             if ($('#'+editorId).hasClass("ql-container")) // Quill editor already loaded (avoid toolbar duplication)
                 $('#'+editorId).parent().find(".ql-toolbar").remove();
@@ -19,22 +22,46 @@ $(document).on("DOMContentLoaded", function () {
                     handlers: {
                         'html': function() {
 
-                            disableHTML = !disableHTML;
+                            var quillEditor = $("#"+editorId).find(".ql-editor");
+                            var quillToolbar = $("#"+editorId).parent().find(".ql-toolbar");
+
                             if(disableHTML) {
 
-                                quillContent = $("#"+editorId).find(".ql-editor").html();
-                                $("#"+editorId).find(".ql-editor").text(quillContent);
-                                $("#"+editorId).parent().find(".ql-toolbar").toggleClass("ql-toolbar-html-only");
+                                quillContent = quillEditor.text();
+                                quillEditor.html(quillContent);
+                                quillToolbar.toggleClass("ql-toolbar-html-only");
+                                if(placeholder) quillEditor.css("placeholder", placeholder);
 
                             } else {
 
-                                quillContent = $("#"+editorId).find(".ql-editor").text();
-                                $("#"+editorId).find(".ql-editor").html(quillContent);
-                                $("#"+editorId).parent().find(".ql-toolbar").toggleClass("ql-toolbar-html-only");
+                                quillContent = quillEditor.html();
+                                if(quillContent == "<p><br></p>") quillContent = "";
+
+                                quillEditor.text(quillContent);
+                                quillToolbar.toggleClass("ql-toolbar-html-only");
+                                if(placeholderHTML) quillEditor.css("placeholder", placeholderHTML);
                             }
+
+                            disableHTML = !disableHTML;
                         }
                     }
                 };
+
+                // var Clipboard = Quill.import('modules/clipboard');
+                // var Delta = Quill.import('delta');
+
+                // class PlainClipboard extends Clipboard {
+                // convert(html = null) {
+                //     if (typeof html === 'string') {
+                //     this.container.innerHTML = html;
+                //     }
+                //     let text = this.container.innerText;
+                //     this.container.innerHTML = '';
+                //     return new Delta().insert(text);
+                // }
+                // }
+
+                // Quill.register('modules/clipboard', PlainClipboard, true);
 
             var quillEditor = new Quill('#'+editorId, quill);
                 quillEditor.on('text-change', function() {
@@ -43,6 +70,21 @@ $(document).on("DOMContentLoaded", function () {
                     document.getElementById(id).value = html;
                 });
 
+            $('#'+editorId).closest("form").on("submit.quill", function(e) {
+
+                var quillEditor = $("#"+editorId).find(".ql-editor");
+                var quillToolbar = $("#"+editorId).parent().find(".ql-toolbar");
+
+                if(!disableHTML) {
+
+                    quillContent = quillEditor.text();
+                    quillEditor.html(quillContent);
+                    quillToolbar.toggleClass("ql-toolbar-html-only");
+                    if(placeholder) quillEditor.css("placeholder", placeholder);
+
+                    disableHTML = !disableHTML;
+                }
+            });
 
             $('#'+editorId).find(".ql-editor").css("min-height", quill["height"]);
         }));
