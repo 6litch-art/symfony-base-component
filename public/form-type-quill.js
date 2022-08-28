@@ -37,7 +37,7 @@ $(document).on("DOMContentLoaded", function () {
             var quill = JSON.parse(el.getAttribute("data-quill-options")) || {};
 
                 // TBI: HTML replacement is in conflict with soft-break line..
-                // quill.modules.toolbar.push(["html"]);
+                quill.modules.toolbar.push(["html"]);
 
                 quill.modules.clipboard = { matchers: [['BR', lineBreakMatcher]] }
                 quill.modules.keyboard = {
