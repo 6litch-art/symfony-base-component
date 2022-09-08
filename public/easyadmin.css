@@ -708,7 +708,7 @@ ul.sidebar-menu {
 }
 
 .form-translatable .nav-link.active {
-    background-color: transparent !important;
+    background-color: transparent;
     border-color:var(--content-top-border-color);
     border-bottom: 1px solid var(--body-bg);
 }
