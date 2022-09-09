@@ -509,7 +509,7 @@ body.ea-edit .content-header, body.ea-new .content-header {
 }
 
 .content-body .flex-fill {
-    display:none;
+    visibility: hidden;
 }
 
 #navigation-toggler {
