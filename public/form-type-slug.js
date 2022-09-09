@@ -141,11 +141,14 @@ $(document).on("DOMContentLoaded", function () {
                         key: "updateValue",
                         value: function (value = undefined) {
 
+                            if(!this.target) return;
                             this.field.value = this.compute(value)
                         }
                     }, {
                         key: "compute",
                         value: function (value = undefined) {
+
+                            if(!this.target) return;
 
                             var keep   = $(this.field).data("slug-keep") ?? "";
                             var lower  = JSON.parse($(this.field).data("slug-lower") ?? "true");
@@ -167,6 +170,7 @@ $(document).on("DOMContentLoaded", function () {
                         key: "listenTarget",
                         value: function () {
                             var e = this;
+                            if(!this.target) return;
                             this.target.addEventListener("change", (function (t) {
                                 "readonly" === e.field.getAttribute("readonly") && e.updateValue()
                             }))
@@ -178,11 +182,18 @@ $(document).on("DOMContentLoaded", function () {
 
                     // On slug change
                     var slugger = new i(e);
+                    if(!slugger.target)
+                    {
+                        slugger.unlock();
+                        return;
+                    }
+
                     var label   = slugger.target ? $('label[for="' + slugger.target.id + '"]') : undefined;
                     var lock    = JSON.parse($(slugger.field).data("slug-lock") ?? null) && slugger.target != undefined;
 
                     var targetCurrentSlug = slugger.target != undefined ? $(slugger.target).val() : $(slugger.field).val();
                     slugger.updateValue(targetCurrentSlug);
+
 
                          if(lock === false ) slugger.unlock();
                     else if(lock === true ) slugger.lock();

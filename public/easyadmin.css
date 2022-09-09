@@ -509,7 +509,7 @@ body.ea-edit .content-header, body.ea-new .content-header {
 }
 
 .content-body .flex-fill {
-    display:none;
+    visibility: hidden;
 }
 
 #navigation-toggler {
@@ -708,7 +708,7 @@ ul.sidebar-menu {
 }
 
 .form-translatable .nav-link.active {
-    background-color: transparent !important;
+    background-color: transparent;
     border-color:var(--content-top-border-color);
     border-bottom: 1px solid var(--body-bg);
 }

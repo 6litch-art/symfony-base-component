@@ -525,7 +525,7 @@ input[type="file"]:not(.form-check-input).form-control { height: 38px !important
 .form-password .form-password-revealer
 {
     position: absolute;
-    right: 7px;
+    right: 38px;
     top: calc(50% - 9px);
     font-size:13pt;
     cursor:pointer;
