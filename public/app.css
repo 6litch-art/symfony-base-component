@@ -23,7 +23,9 @@
     justify-content: center;
 }
 .line-through { text-decoration:line-through; }
-
+.form-translatable .nav-link.active {
+    background-color: var(--sidebar-bg) !important;
+}
 pre::before {
     background-color: #fd5e57;
     border-radius: 50%;
