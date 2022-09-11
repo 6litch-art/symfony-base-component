@@ -251,12 +251,24 @@ form fieldset legend { font-size: 11pt; }
 .form-translatable .tab-pane > div:last-child { padding-bottom: 1.5em !important; }
 .form-entity > div { margin-bottom: 0em !important; }
 
+#main-menu .menu .menu-item:hover > a .menu-icon, #main-menu .menu .menu-item:hover > a { color: var(--sidebar-menu-active-item-color); }
+#main-menu .menu .menu-item:hover:not(.active) a .menu-item-label {  font-weight:400; }
+#main-menu .menu .menu-item:hover > a .menu-item-label { color: var(--sidebar-menu-active-item-color); }
+#main-menu .menu .menu-item .submenu-toggle-icon { position:relative; right: 6px; top:6px; }
+
+#main-menu .menu .menu-icon { margin-top: auto; margin-bottom: auto; }
+#main-menu .menu .menu-item.active {
+    padding-bottom: 5px;
+    margin: 5px 0;
+}
+
 .page-login { max-height:100vh; }
 .modal-body {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     flex-direction: column;
 }
+
 .form-check .form-check-input { margin-left: 0.5em; }
 .form-check .form-checkbox span {
     justify-content: center;
@@ -977,7 +989,6 @@ fieldset .sidebar-menu li {
 }
 
 #main-menu .menu .submenu a:hover { color: var(--sidebar-menu-submenu-color) !important; }
-#main-menu .menu .menu-item-contents { color: var(--sidebar-menu-color) !important; }
 
 ul.sidebar-menu a{ color: var(--sidebar-menu-color); }
 ul.sidebar-menu a:hover { color: var(--sidebar-menu-submenu-color) !important; }
