@@ -178,7 +178,6 @@ form fieldset legend { font-size: 11pt; }
 
 .menu-item-label {
     position:relative;
-    top:2px;
 }
 
 .ea-sidebar-width-compact #header-logo { visibility:hidden; }
@@ -254,20 +253,27 @@ form fieldset legend { font-size: 11pt; }
 #main-menu .menu .menu-item:hover > a .menu-icon, #main-menu .menu .menu-item:hover > a { color: var(--sidebar-menu-active-item-color); }
 #main-menu .menu .menu-item:hover:not(.active) a .menu-item-label {  font-weight:400; }
 #main-menu .menu .menu-item:hover > a .menu-item-label { color: var(--sidebar-menu-active-item-color); }
-#main-menu .menu .menu-item .submenu-toggle-icon { position:relative; right: 6px; top:6px; }
+#main-menu .menu .menu-item .submenu-toggler { flex-grow: 1;}
+#main-menu .menu .menu-item .submenu-toggle-icon { position:relative; right: 6px; }
 
 #main-menu .menu .menu-icon { margin-top: auto; margin-bottom: auto; }
-#main-menu .menu .menu-item.active {
-    padding-bottom: 5px;
-    margin: 5px 0;
+#main-menu .menu .menu-item-contents {
+    display:flex;
+    align-items:center;
 }
-
 .page-login { max-height:100vh; }
 .modal-body {
     display: flex;
     align-items: center;
     flex-direction: column;
 }
+
+#main-menu .menu .menu-item.active .menu-item-label { font-weight:400; }
+#main-menu .menu .menu-item.active > a > .menu-icon, #main-menu .menu .menu-item.active > a > .menu-item-label
+{
+    color:var(--sidebar-menu-active-item-color); font-weight:500;
+}
+
 
 .form-check .form-check-input { margin-left: 0.5em; }
 .form-check .form-checkbox span {
