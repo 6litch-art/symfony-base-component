@@ -1008,7 +1008,11 @@ ul.sidebar-menu a:hover { color: var(--sidebar-menu-submenu-color) !important; }
 .user-menu hr { display:none; }
 .actions a:last-child { margin-right:10px; }
 
-.form-collection:not(.form-group-row) { border:1px solid var(--sidebar-border-color) !important; }
+.form-collection-add-button { border-bottom:1px solid var(--sidebar-border-color) !important; }
+.form-collection {
+    border:1px solid var(--sidebar-border-color) !important;
+    border-bottom: 0 !important;
+}
 .form-array { border:1px solid var(--sidebar-bg) !important; }
 .form-array .form-array-inline{ border:1px solid var(--sidebar-bg) !important; }
 .form-attribute .form-attribute-items { border:  1px solid var(--sidebar-border-color) !important; }
