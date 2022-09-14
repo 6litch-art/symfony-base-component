@@ -1,5 +1,9 @@
 
 html, body { scroll-padding-top: 11em; }
+:root
+{
+    --select2-bg: var(--gray-100);
+}
 
 .row>* { padding-left:0 !important;}
 
@@ -22,9 +26,8 @@ html, body { scroll-padding-top: 11em; }
 .bootstrap-datetimepicker-widget.dropdown-menu.top::after { border-top: 6px solid var(--dropdown-bg); }
 textarea:focus { background-color: var(--body-bg) !important; }
 
-.page-item:not(:first-child) .page-link {
-    margin-left: auto;
-}
+.page-item:last-child .page-link { margin-right: 0.5em; }
+.page-item:not(:first-child) .page-link { margin-left: auto; }
 
 .with-background .form-translatable .nav-link.active { border-bottom: 1px solid var(--sidebar-bg); }
 .form-password-block .form-password-details
@@ -764,6 +767,7 @@ form .row button[type="submit"] { margin: 1em 0; }
 .dropzone .dz-preview .dz-image {border: 0.5px solid var(--content-top-border-color); }
 .dropzone .dz-preview .dz-image { background-color: var(--body-bg) !important; }
 
+.ql-container { background-color: #FFF !important; }
 .ql-container.ql-snow { border: 1px solid var(--sidebar-border-color) !important; }
 .ql-snow .ql-fill, .ql-snow .ql-stroke.ql-fill ,
 .ql-snow .ql-stroke { stroke: var(--form-label-color) !important; }
@@ -771,7 +775,8 @@ form .row button[type="submit"] { margin: 1em 0; }
 .ql-editor.ql-blank::before { color: var(--form-label-color) !important; }
 .ql-editor
 {
-    background-color: var(--body-bg) !important;
+    color:initial;
+    background-color: #FFF !important;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
 }
@@ -821,7 +826,7 @@ input.form-control
 
 .select2-container.select2-container--disabled .select2-selection,
 .select2-container.select2-container--disabled.select2-container--focus .select2-selection {
-    background-color: var(--sidebar-bg);
+    background-color: var(--select2-bg);
     border-color: var(--sidebar-border-color);
 }
 
@@ -983,7 +988,7 @@ select.form-control:disabled, select.form-control[readonly]
 }
 
 .select2-container .select2-dropdown .select2-results__option[aria-selected="true"] {
-    background-color: var(--body-bg);
+    background-color: var(--sidebar-bg);
 }
 
 .select2-container .select2-results__option--highlighted, .select2-container .select2-results__option--highlighted.select2-results__option[aria-selected="true"] {
