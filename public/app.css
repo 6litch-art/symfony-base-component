@@ -521,12 +521,13 @@ input[type="file"]:not(.form-check-input).form-control { height: 38px !important
     padding:0;
 }
 
+.form-password input { padding-right: 3em; }
 .form-password .form-password-revealer:hover { opacity:1; }
 .form-password .form-password-revealer
 {
     position: absolute;
-    right: 38px;
-    top: calc(50% - 9px);
+    right: 0.5em;
+    top: calc(50% - 0.45em);
     font-size:13pt;
     cursor:pointer;
     z-index:4;
@@ -574,7 +575,7 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection, form.was-va
 .form-password-block .form-password-details
 {
     border: 1px solid lightgrey;
-    border-right:0 !important;
+    border-right:0;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
     width:100%;
@@ -1404,7 +1405,11 @@ select.form-select2:empty { height: 38px; }
 .form-money a.dropdown-item { cursor: pointer; }
 .form-money input { text-align:right; }
 
-.form-attribute .select2 { width:100%; }
+.form-attribute .select2 { width:100% !important; }
+.form-attribute .select2 .select2-selection {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
 .form-attribute .form-attribute-items .tab-content { border-bottom: 0; }
 .form-attribute .form-attribute-items .tab-pane > div:last-child { padding-bottom: 0 !important; }
 .form-attribute { padding:0 !important; border:0; }
@@ -1420,7 +1425,6 @@ select.form-select2:empty { height: 38px; }
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
 }
-
 
 .form-attribute-dropdown
 {
@@ -1469,3 +1473,15 @@ select.form-select2:empty { height: 38px; }
 .btn-matrix6 > .btn:nth-last-child(6) { border-bottom-left-radius: 4px !important; }
 
 .invalid-image { color:red; }
+
+
+@media (max-width: 992px) {
+
+    .form-password-block { flex-direction: column; }
+    .form-password-block .form-password-details
+    {
+        max-width:100%;
+        border-right: 1px solid lightgrey;
+        border-bottom: 0 !important;
+    }
+}

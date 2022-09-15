@@ -33,10 +33,8 @@ textarea:focus { background-color: var(--body-bg) !important; }
 .form-password-block .form-password-details
 {
     border: 1px solid var(--sidebar-border-color) !important;
-    border-right:0 !important;
     border-top-left-radius: var(--border-radius);
     border-bottom-left-radius: var(--border-radius);
-    width:100%;
 }
 .form-password-block .form-password
 {
