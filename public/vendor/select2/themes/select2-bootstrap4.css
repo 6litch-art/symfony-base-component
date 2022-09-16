@@ -50,8 +50,6 @@
 }
 
 .select2-container--bootstrap4 .select2-selection--multiple .select2-selection__choice {
-  color: #343a40;
-  border: 1px solid #bdc6d0;
   border-radius: 0.2rem;
   padding: 0;
   padding-right: 5px;
@@ -173,7 +171,6 @@ form.was-validated select:valid~.select2-container--bootstrap4 .select2-selectio
 }
 
 .select2-container--bootstrap4 .select2-dropdown.select2-dropdown--above {
-  border-top: 1px solid #ced4da;
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
 }
@@ -211,7 +208,7 @@ form.was-validated select:valid~.select2-container--bootstrap4 .select2-selectio
 .select2-container--bootstrap4 .select2-selection__clear {
   height:13px;
   width:13px;
-/* 
+/*
   background-position: center center !important;
   background-color: #ced4da;
   color: #f8f9fa; */

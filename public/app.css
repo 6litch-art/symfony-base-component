@@ -239,7 +239,6 @@ form.was-validated select:invalid ~ .select2-selection,
 
 .form-collection
 {
-    border:1px solid lightgrey;
     border-radius: 4px;
     margin:0em 0 0.5em 0;
 }
@@ -582,7 +581,6 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection, form.was-va
 }
 .form-password-block .form-password
 {
-    border: 1px solid lightgrey;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
 }
@@ -758,7 +756,6 @@ select.is-valid ~ .select2-container--bootstrap4 .select2-selection, form.was-va
 
 .dropzone {
     border-radius: 1em;
-    border: 0.5px solid #ced4da ;
     flex-grow:1;
 }
 
@@ -927,10 +924,7 @@ input.required:after, textarea.required:after, select.required:after {
 
     border-radius: 4px;
     padding: 3px;
-    border: 0.5px solid #ced4da;
     overflow: hidden;
-
-    background-color:white;
 
     flex-basis: 125px;
 }
@@ -959,7 +953,6 @@ input.required:after, textarea.required:after, select.required:after {
 
 .imageupload figure {
     position: relative;
-    border: 1px solid white;
     transition: all ease-in-out .3s;
     cursor: pointer;
     box-sizing: border-box;
@@ -1345,7 +1338,7 @@ input.required:after, textarea.required:after, select.required:after {
         z-index: 1 !important;
 }
 .select2-selection { padding:0em !important; }
-.select2-container { display: block !important; }
+.select2-container { display: block !important; width: 100% !important; }
 .select2-results__options { display:flex; flex-direction: column; }
 .select2-results__option { order:-1; }
 .select2-results__option .select2-selection__entry {
@@ -1392,7 +1385,6 @@ input.required:after, textarea.required:after, select.required:after {
 .input-group-text .btn:not(:disabled):not(.disabled):not(.btn-link):hover,
 .input-group-text .btn:not(:disabled):not(.disabled):not(.btn-link):focus { background-color:transparent; border:0; box-shadow:none; height:100%; padding:1px; margin:0; }
 
-.select2-selection--multiple .select2-selection__choice { background-color: #FDFDFD; }
 .select2-selection__entry span:last-of-child { margin-left:1em; }
 .select2-selection__entry i { text-align: center; width: 1.25em; }
 
@@ -1411,8 +1403,8 @@ select.form-select2:empty { height: 38px; }
     border-bottom-right-radius: 0;
 }
 .form-attribute .form-attribute-items .tab-content { border-bottom: 0; }
-.form-attribute .form-attribute-items .tab-pane > div:last-child { padding-bottom: 0 !important; }
-.form-attribute { padding:0 !important; border:0; }
+.form-attribute .form-attribute-items .tab-pane > div:last-child { padding-bottom: 0; border:0; }
+.form-attribute { padding:0 !important; border:0 !important; }
 
 .form-attribute .form-attribute-items > .form-control { border: 0; }
 .form-attribute .form-attribute-items > .form-group { padding: 0.5em 0; }
@@ -1422,7 +1414,6 @@ select.form-select2:empty { height: 38px; }
     margin-right: -1px;
     padding: 1em;
     padding-bottom: calc(1em - 5px);
-    border: 1px solid #ced4da;
     border-radius: 0.25rem;
 }
 
@@ -1483,5 +1474,19 @@ select.form-select2:empty { height: 38px; }
         max-width:100%;
         border-right: 1px solid lightgrey;
         border-bottom: 0 !important;
+
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-bottom:0;
+    }
+
+    .form-password-block .form-password
+    {
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
     }
 }
