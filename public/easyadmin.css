@@ -944,13 +944,12 @@ select.form-control:disabled, select.form-control[readonly]
     background-color: var(--sidebar-bg);
 }
 
-.form-control {
-    border: var(--border-width) var(--border-style) var(--content-top-border-color);
-}
+.form-control { border: var(--border-width) var(--border-style) var(--content-top-border-color); }
 .form-control:focus {
     box-shadow: inset -1px 0 0 var(--sidebar-border-color);
     border: var(--border-width) var(--border-style) var(--content-top-border-color);
 }
+.form-collection-items.form-control { border: 0; }
 
 .thumbnail-avatar { border-radius:50%; }
 .ea-index .thumbnail-avatar, .ea-index .thumbnail-image {
