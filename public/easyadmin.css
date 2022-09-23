@@ -739,11 +739,7 @@ ul.sidebar-menu {
     border-color:var(--content-top-border-color);
     border-bottom: 1px solid var(--body-bg);
 }
-.imageupload figure {
-
-    border: 1px solid var(--content-top-border-color);
-    border-bottom:0;
-}
+.imageupload figure { border: 1px solid var(--content-top-border-color); }
 
 form .row > div.form-group { padding: 1em 0;}
 form .row button[type="submit"] { margin: 1em 0; }
