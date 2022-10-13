@@ -8,27 +8,21 @@ use Base\Validator\Constraints as AssertBase;
 /**
  * @AssertBase\NotBlank
  */
-class ThreadSearchModel extends AbstractModel
+class SecurityRegistrationModel extends AbstractModel
 {
-    public $parent_id;
+    /**
+     * @var string
+     */
+    public $email;
+
+    /**
+     * @var string
+     */
+    public $password;
     
     /**
-     * @var string
+     * @var bool
      */
-    public $generic;
+    public $agreeTerms;
 
-    /**
-     * @var string
-     */
-    public $title;
-
-    /**
-     * @var string
-     */
-    public $excerpt;
-
-    /**
-     * @var string
-     */
-    public $content;
 }

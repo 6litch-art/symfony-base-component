@@ -383,7 +383,7 @@ span[data-toggle="tooltip"]
 }
 .global-actions .dropdown-menu
 {
-    padding:1em;
+    padding:0 1em;
 }
 
 .navbar-custom-menu { height: 100%; }
@@ -632,7 +632,7 @@ body.ea-edit .content-header, body.ea-new .content-header {
 .ea-sidebar-width-compact .content-header { width: calc(100vw - 44px); }
 #header-logo
 {
-    margin-top:20px;
+    margin-top:45px;
 }
 .content-panel-footer { width: calc(100vw - var(--sidebar-max-width) - var(--lg-content-padding-right) - var(--lg-content-padding-left)); }
 .dropdown-locale
@@ -681,12 +681,13 @@ body.ea-edit .content-header, body.ea-new .content-header {
     opacity:1;
 }
 
-.login-wrapper button { border-radius: var(--border-radius); padding:0.4em 0.5em;}
+.login-wrapper button { border-radius: var(--border-radius) !important; padding:0.4em 0.5em;}
 .login-wrapper .field-button {
     display:flex;
     justify-content: center;
     align-items: center;
 }
+
 .login-wrapper hr { margin:2em 0;}
 .login-wrapper .remember-me {
     display:flex;
