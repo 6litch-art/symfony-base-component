@@ -51,11 +51,16 @@ window.addEventListener('load', function(event) {
             event.stopPropagation()
         }
 
-        var el = $(":invalid, .has-error").not("form");
-        if (el.length) return $([document.documentElement, document.body]).animate(
-            {scrollTop: $(el[0]).offset().top - parseInt(style["scroll-padding-top"])},
-            function() { form.addClass('was-validated'); }
-        );
+        var el = $(form).find(":invalid, .has-error");
+        if (el.length) {
+
+            return $([document.documentElement, document.body]).animate(
+                {scrollTop: $(el[0]).offset().top - parseInt(style["scroll-padding-top"])},
+                function() { 
+                    form.addClass('was-validated');
+                }
+            );
+        }
     });
 
     function countdown(el, timestamp, reload, message = "")
@@ -171,7 +176,7 @@ window.addEventListener('load', function(event) {
             if (countdown < 1) {
 
                 clearInterval(x);
-                // if(reload) location.reload();
+                if(reload) location.reload();
             }
 
             $(el).removeClass("invisible");

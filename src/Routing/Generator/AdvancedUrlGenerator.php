@@ -8,6 +8,7 @@ use Base\Security\RescueFormAuthenticator;
 use Base\Traits\BaseTrait;
 use Exception;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\CompiledUrlGenerator;
 use Symfony\Component\Routing\RequestContext;
@@ -65,15 +66,28 @@ class AdvancedUrlGenerator extends CompiledUrlGenerator
             }
         }
 
+        //
+        // Lookup for lang in current group
         $routeParameters = array_filter($routeParameters, fn($p) => $p !== null);
         if(!str_ends_with($routeName, ".".$this->getRouter()->getLang())) {
             try { return parent::generate($routeName.".".$this->getRouter()->getLang(), $routeParameters, $referenceType); }
-            catch (RouteNotFoundException $e) { }
+            catch (InvalidParameterException|RouteNotFoundException $e) { }
         }
 
         try { return sanitize_url(parent::generate($routeName, array_filter($routeParameters), $referenceType)); }
-        catch (RouteNotFoundException $e) { throw $e; }
+        catch (InvalidParameterException|RouteNotFoundException $e) { }
 
+        //
+        // Lookup for lang in default group
+        $routeGroups  = $this->getRouter()->getRouteGroups($routeName);
+        $routeDefaultName = first($routeGroups);
+        if(!str_ends_with($routeName, ".".$this->getRouter()->getLang())) {
+            try { return parent::generate($routeDefaultName.".".$this->getRouter()->getLang(), $routeParameters, $referenceType); }
+            catch (InvalidParameterException|RouteNotFoundException $e) { if(!$routeDefaultName) throw $e; }
+        }
+
+        try { return sanitize_url(parent::generate($routeDefaultName, array_filter($routeParameters), $referenceType)); }
+        catch (InvalidParameterException|RouteNotFoundException $e) { throw $e; }
     }
 
     public function resolveParameters(?array $routeParameters = null): ?array
@@ -151,7 +165,13 @@ class AdvancedUrlGenerator extends CompiledUrlGenerator
         try { $routeUrl = $this->resolveUrl($routeName, $routeParameters, $referenceType); }
         catch(Exception $e) {
 
-            if ($routeName == $routeDefaultName || $routeDefaultName === null) throw $e;
+            if (str_starts_with($routeName, "app_") ) {
+
+                $routeName = "base_".substr($routeName, 4);
+                try { $routeUrl = $this->resolveUrl($routeName, $routeParameters, $referenceType); }
+                catch(Exception $_) { throw $e; }
+
+            } else if ($routeName == $routeDefaultName || $routeDefaultName === null) throw $e;
 
             $routeName = $routeDefaultName;
             $routeUrl = $this->resolveUrl($routeName, $routeParameters, $referenceType);
@@ -175,32 +195,30 @@ class AdvancedUrlGenerator extends CompiledUrlGenerator
         return $routeUrl;
     }
 
-    public function format(string $url): string {
+    public function format(string $url): string
+    {
+        $permittedHosts   = array_search_by($this->getParameterBag()->get("base.router.permitted_hosts"), "locale", $this->getLocaleProvider()->getLocale());
+        $permittedHosts ??= array_search_by($this->getParameterBag()->get("base.router.permitted_hosts"), "locale", $this->getLocaleProvider()->getLang());
+        $permittedHosts ??= array_search_by($this->getParameterBag()->get("base.router.permitted_hosts"), "locale", $this->getLocaleProvider()->getDefaultLocale());
+        $permittedHosts ??= array_search_by($this->getParameterBag()->get("base.router.permitted_hosts"), "locale", $this->getLocaleProvider()->getDefaultLang());
+        $permittedHosts ??= array_search_by($this->getParameterBag()->get("base.router.permitted_hosts"), "locale", null) ?? [];
+        $permittedHosts = array_transforms(fn($k, $a): ?array => $a["env"] == $this->getRouter()->getEnvironment() ? [$k, $a["regex"]] : null, $permittedHosts);
+        if(!$this->getRouter()->keepMachine() && !$this->getRouter()->keepSubdomain())
+            $permittedHosts = "^$"; // Special case if both subdomain and machine are unallowed
 
         $parse = parse_url2($url);
-
-        $allowedSubdomain = false;
-
-        $permittedSubdomains   = array_search_by($this->getParameterBag()->get("base.router.permitted_subdomains"), "locale", $this->getLocaleProvider()->getLocale());
-        $permittedSubdomains ??= array_search_by($this->getParameterBag()->get("base.router.permitted_subdomains"), "locale", $this->getLocaleProvider()->getLang());
-        $permittedSubdomains ??= array_search_by($this->getParameterBag()->get("base.router.permitted_subdomains"), "locale", $this->getLocaleProvider()->getDefaultLocale());
-        $permittedSubdomains ??= array_search_by($this->getParameterBag()->get("base.router.permitted_subdomains"), "locale", $this->getLocaleProvider()->getDefaultLang());
-        $permittedSubdomains ??= array_search_by($this->getParameterBag()->get("base.router.permitted_subdomains"), "locale", null) ?? [];
-        $permittedSubdomains = array_transforms(fn($k, $a): ?array => $a["env"] == $this->getRouter()->getEnvironment() ? [$k, $a["regex"]] : null, $permittedSubdomains);
-        if(!$this->getRouter()->keepMachine() && !$this->getRouter()->keepSubdomain())
-            $permittedSubdomains = "^$"; // Special case if both subdomain and machine are unallowed
-
-        foreach($permittedSubdomains as $permittedSubdomain)
-            $allowedSubdomain |= preg_match("/".$permittedSubdomain."/", $parse["subdomain"] ?? null);
+        $allowedHost = false;
+        foreach($permittedHosts as $permittedHost)
+            $allowedHost |= preg_match("/".$permittedHost."/", $parse["host"] ?? null);
 
         // Special case for login form.. to be redirected to rescue authenticator if no access right
         $routeName = $this->getRouter()->getRouteName();
         if(!LoginFormAuthenticator::isSecurityRoute($routeName) && !RescueFormAuthenticator::isSecurityRoute($routeName))
         {
             // Special case for WWW subdomain
-            if(!array_key_exists("subdomain", $parse) && !array_key_exists("machine", $parse) && !$allowedSubdomain) {
+            if(!array_key_exists("subdomain", $parse) && !array_key_exists("machine", $parse) && !$allowedHost) {
                 $parse["subdomain"] = "www";
-            } else if( array_key_exists("subdomain", $parse) && !$allowedSubdomain) {
+            } else if( array_key_exists("subdomain", $parse) && !$allowedHost) {
 
                 if($parse["subdomain"] === "www") $parse = array_key_removes($parse, "subdomain");
                 else $parse["subdomain"] = "www";

@@ -17,7 +17,12 @@ class IconProvider
     {
         return $this->routeIcons[$route.".".$this->localeProvider->getLang()] 
             ?? $this->routeIcons[$route]
+
+            ?? $this->routeIcons[$route.".default.".$this->localeProvider->getLang()] 
+            ?? $this->routeIcons[$route.".default"]
+
             ?? $this->routeIcons[$route.".".$this->localeProvider->getDefaultLang()]
+            ?? $this->routeIcons[$route.".default.".$this->localeProvider->getDefaultLang()]
             ?? null;
     }
 
@@ -33,12 +38,13 @@ class IconProvider
         $this->routeIcons = $cacheRouteIcons !== null ? $cacheRouteIcons->get() : [];
         if($this->routeIcons === null) {
 
-            $this->routeIcons = array_transforms(function($route, $controller) use ($annotationReader) : ?array {
+            $this->routeIcons = array_transforms(function($route, $controller) use ($annotationReader, $router) : ?array {
 
                 $controller = $controller->getDefault("_controller");
                 if(!$controller) return null;
 
-                list($class, $method) = explode("::", $controller);
+                try { list($class, $method) = explode("::", $controller); }
+                catch(\ErrorException $e) { return null; } 
                 if(!class_exists($class)) return null;
 
                 $iconAnnotations = $annotationReader->getMethodAnnotations($class, [Iconize::class])[$method] ?? [];
@@ -89,17 +95,16 @@ class IconProvider
             $icon = $icon->__iconize() ?? $icon->__iconizeStatic();
         else if(($routeIcons = $this->getRouteIcons($icon)))
             $icon = $routeIcons;
-        
-        
-        if(is_array($icon))
-            return array_map(fn($i) => $this->iconify($i, $attributes), $icon);
+
+        if(is_array($icon)) 
+            return array_merge(...array_map(fn($i) => $this->iconify($i, $attributes), $icon));
 
         foreach($this->adapters as $provider) {
 
             if ($provider->supports($icon))
-                return $provider->iconify($icon, $attributes);
+                return [$provider->iconify($icon, $attributes)];
         }
 
-        return $icon;
+        return $this->iconify("fas fa-question-circle", $attributes) ?? null;
     }
 }
