@@ -964,10 +964,7 @@ input.required:after, textarea.required:after, select.required:after {
 }
 
 
-.avatarupload
-{
-    position:relative;
-}
+.avatarupload { position:relative; }
 .avatarupload .deleteBtn
 {
     position: absolute;
