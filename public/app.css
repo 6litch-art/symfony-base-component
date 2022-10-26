@@ -134,11 +134,14 @@ hr { margin: 0.5rem 0; }
     transform: translate(calc(50vw - 50%)) !important;
 }
 
+.form-control:focus {
+    box-shadow: none;
+}
 textarea { min-height:150px !important; }
 .form-entity > .form-control { padding: 0; }
 .form-collection-items.form-control { padding: 0; }
 .form-control:not(input):not(textarea):not(select) { background-color:transparent; }
-.form-errors ul { margin:0; }
+.form-errors ul { margin:0 !important; }
 .form-errors
 {
     background-color:lightpink;
@@ -147,6 +150,7 @@ textarea { min-height:150px !important; }
     padding:0.75em;
     margin:0.5em 0;
     width:100%;
+    border-radius: 5px !important;
 }
 
 .select2-container .select2-selection--multiple .select2-selection__rendered { padding-left:5px; }
@@ -961,6 +965,7 @@ input.required:after, textarea.required:after, select.required:after {
     overflow: hidden;
 
     padding: 0.5em;
+    background-color: #FFF;
 }
 
 
@@ -1307,7 +1312,6 @@ input.required:after, textarea.required:after, select.required:after {
 
 .trace-line .icon { top:auto; }
 .alert .title { font-weight:bold; }
-.alert .message { margin-left:5px;}
 .input-group button, .input-group button:active, .input-group button:focus, .input-group button:hover {
     /* height:auto; */
     border-top-left-radius: 0px;
