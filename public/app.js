@@ -152,7 +152,6 @@ window.addEventListener('load', function(event) {
     
             addToList: function(flashMessageElt) {
 
-                console.log("ADD TO LIST", flashMessageElt);
                 var message  = flashMessageElt.find(".message").text().trim();
                 var messages = $('#flash-messages').find(".message").map(function(){ return $.trim($(this).text()); }).toArray();
 
@@ -329,9 +328,6 @@ window.addEventListener('load', function(event) {
 
                                     var grSeconds = $(elSeconds).closest(".countdown-group");
                                         grSeconds.html("");
-
-
-                                    countdown.html(message);
                                 }
                             }
                         }
@@ -343,9 +339,13 @@ window.addEventListener('load', function(event) {
             if (countdown < 1) {
 
                 clearInterval(x);
-                if(reload) location.reload();
-            }
+                setTimeout(function() { 
 
+                    if(reload) location.reload();
+
+                }, 1000);
+            }
+            
             $(el).removeClass("invisible");
 
         }, 1000);
