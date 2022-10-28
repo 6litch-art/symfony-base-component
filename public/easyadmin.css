@@ -520,7 +520,7 @@ body.ea-edit .content-header, body.ea-new .content-header {
 
     display:flex;
     flex-direction:column;
-    padding-left: 3em;
+    padding-left: 3em !important;
 }
 
 .dropdown .dropdown-appearance-button { cursor:pointer; }
