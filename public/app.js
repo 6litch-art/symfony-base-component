@@ -336,7 +336,7 @@ window.addEventListener('load', function(event) {
             }
 
             // If the count down is finished, write some text
-            if (countdown < 1) {
+            if (countdown < 1 && _countdown > 0) {
 
                 clearInterval(x);
                 setTimeout(function() { 
