@@ -20,6 +20,11 @@ html, body { scroll-padding-top: 11em; }
     height:100%;
 }
 
+.ql-editor { 
+    text-align:inherit; 
+    white-space: pre-line;
+}
+
 .form-group label, .form-group legend.col-form-label { padding: 0; }
 .form-check .form-check-input { margin: auto 0.5em; }
 .bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover { background-color: var(--button-bg); }
