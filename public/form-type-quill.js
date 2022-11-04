@@ -20,13 +20,13 @@ $(document).on("DOMContentLoaded", function () {
 
             function lineBreakMatcher() {
                 var newDelta = new Delta();
-                newDelta.insert({'break': ''});
+                newDelta.insert({'break': '\n'});
                 return newDelta;
             }
 
             class SmartBreak extends Break {
                 length () { return 1 }
-                value  () { return '\n' }
+                value  () { return '' }
                 insertInto(parent, ref) { Embed.prototype.insertInto.call(this, parent, ref) }
             }
 
@@ -77,16 +77,27 @@ $(document).on("DOMContentLoaded", function () {
                             if(disableHTML) {
 
                                 quillContent = quillEditor.text();
+                                quillContent = quillContent.replaceAll(/<\/p>\n*/ig, "</p>");
+                                quillContent = quillContent.replaceAll(/<\/h([1-6])>\n*/ig, "</h$1>");
+                                quillContent = quillContent.replaceAll(/<\/pre>\n*/ig, "</pre>");
+                                quillContent = quillContent.replaceAll(/<br\s*\/?>/ig, "<br>\n");
                                 quillEditor.html(quillContent);
+                                quillEditor.toggleClass("ql-toolbar-html-only");
                                 quillToolbar.toggleClass("ql-toolbar-html-only");
                                 if(placeholder) quillEditor.css("placeholder", placeholder);
-
+                                
                             } else {
 
                                 quillContent = quillEditor.html();
                                 if(quillContent == "<p><br></p>") quillContent = "";
+                                quillContent = quillContent.replaceAll("\n", "<br>");
+                                quillContent = quillContent.replaceAll("</p>", "</p>\n\n");
+                                quillContent = quillContent.replaceAll("</pre>", "</pre>\n\n");
+                                quillContent = quillContent.replaceAll(/<\/h([1-6])>/ig, "</h$1>\n\n");
+
 
                                 quillEditor.text(quillContent);
+                                quillEditor.toggleClass("ql-toolbar-html-only");
                                 quillToolbar.toggleClass("ql-toolbar-html-only");
                                 if(placeholderHTML) quillEditor.css("placeholder", placeholderHTML);
                             }
@@ -127,11 +138,16 @@ $(document).on("DOMContentLoaded", function () {
                 }
 
                 quillContent = quillEditor.html();
+
                 if (quillContent == "<p><br></p>")
                     $("#"+id).attr("value", "");
             });
 
             $('#'+editorId).find(".ql-editor").css("min-height", quill["height"]);
+
+            var quillEditor = $("#"+editorId).find(".ql-editor");
+            var quillContent = quillEditor.html().replaceAll("<p><br></p>", "");
+                quillEditor.html(quillContent);
         }));
     });
 

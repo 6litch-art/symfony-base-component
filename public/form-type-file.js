@@ -233,24 +233,29 @@ $(document).on("DOMContentLoaded", function () {
 
                             // "Go to" or "delete" action
                             var _href = dropzoneEl.data("file-href");
-                            if(!file.entryId && deletePattern)
+                            if(file.entryId && deletePattern)
                                 span.innerHTML += deletePattern;
                             else if(file.entryId && _href)
                                 span.innerHTML += gotoPattern.replaceAll("{0}", _href).replaceAll("{0}", file.entryId);
                             else
-                                span.innerHTML += "<i class='blank-space'></i>";
+                                span.innerHTML += "<i class='blank-space'></i>";   
                         }
+
 
                         // Replacement remove button
                         var _this = this;
                         $(preview).find("[data-dz-remove]").click(function () {
-                            if (_this.options.dictRemoveFileConfirmation) {
-                                return Dropzone.confirm(_this.options.dictRemoveFileConfirmation, function () {
-                                    return _this.removeFile(file);
-                                });
-                            } else {
+
+                            if (!_this.options.dictRemoveFileConfirmation) 
                                 return _this.removeFile(file);
-                            }
+                            
+                            $(dropzoneEl).data("dz-select", file.uuid);
+                            return Dropzone.confirm(_this.options.dictRemoveFileConfirmation, function() {
+                                
+                                if(file.uuid != dropzoneEl.data("dz-select")) return false;
+                                _this.removeFile(file);
+
+                            });
                        });
 
                     });
