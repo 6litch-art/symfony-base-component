@@ -393,7 +393,7 @@ span[data-toggle="tooltip"]
 }
 
 .dropdown-menu .dropdown-header:first-child, .dropdown-menu .dropdown-item:first-child { padding: 4px 5px 0 5px; }
-.dropdown-menu .dropdown-header:first-child, .dropdown-menu .dropdown-item:last-child { padding: 0px 5px 4px 5px; }
+.dropdown-menu .dropdown-header:first-child, .dropdown-menu .dropdown-item:last-child { padding: 0px 5px 0px 5px; }
 .dropdown-menu .dropdown-header, .dropdown-menu .dropdown-item { padding: 2px 5px; }
 
 .user-menu-wrapper a.user-details, .user-menu-wrapper a.user-details:hover
