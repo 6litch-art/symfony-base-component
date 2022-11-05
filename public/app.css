@@ -1080,6 +1080,7 @@ input.required:after, textarea.required:after, select.required:after {
 {
   border-left: 5px solid var(--sidebar-border-color);
   max-width: 100vw;
+  padding-left:5px;
 }
 
 .ql-editor.ql-toolbar-html-only p
@@ -1202,6 +1203,9 @@ input.required:after, textarea.required:after, select.required:after {
         transition: none
     }
 }
+
+.form-errors:empty { margin: 0; }
+.form-errors { margin: 0.5em 0 0 0; }
 
 .form-translatable > .form-control { padding: 0; border:0; }
 .form-collection .form-collection-items .form-collection-item:not(.form-collection-item-last) { border-bottom: var(--border-width) solid var(--content-top-border-color) !important; }
