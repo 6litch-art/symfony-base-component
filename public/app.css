@@ -152,6 +152,11 @@ textarea { min-height:150px !important; }
     border-radius: 5px !important;
 }
 
+mark { 
+    border-radius:0.25em;
+    padding:0;
+}
+
 .select2-container .select2-selection--multiple .select2-selection__rendered { padding-left:5px; }
 
 .was-validated .form-group:not(.has-error) .ql-container,
@@ -197,7 +202,7 @@ form.was-validated select:invalid ~ .select2-selection,
 .form-translatable .tab-pane > div { margin-bottom: 1.5em; }
 .form-translatable .tab-pane > div:first-child { padding: 0.5em 0 0 0; }
 .form-translatable .tab-pane > div:last-child { margin-bottom: 0; }
-.form-translatable .tab-pane { padding: 0.5em 0em; }
+.form-translatable .tab-pane { padding: 0.5em 0em 1em 0; }
 .form-translatable .tab-content { border-bottom: var(--border-width) solid var(--border-color); }
 .form-translatable { padding:0 1em !important; }
 .form-translatable .nav-link.active { background-color: white; }
@@ -1407,7 +1412,8 @@ input.required:after, textarea.required:after, select.required:after {
 
 .select2-selection__choice { display:flex; justify-content: center; }
 .select2-selection__entry a > i { min-width:15px; margin-left:0.3em; }
-.select2-selection__entry { margin:0 0.25em; }
+.select2-selection__rendered > .select2-selection__entry { margin:0 0.25em !important; }
+
 
 .select2-selection__choice .select2-selection__entry { margin:0 0.25em !important; }
 .select2-selection--vertical .select2-selection__choice  { width:calc(100% - 40px); display:flex; justify-content: start !important; }

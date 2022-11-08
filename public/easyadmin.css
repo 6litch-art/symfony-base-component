@@ -250,6 +250,7 @@ form fieldset legend { font-size: 11pt; }
 .form-group > .form-group { padding:0; margin:0;}
 .form-errors { width: 100%;}
 .form-errors ul { margin-left:1em; }
+
 .ea .content-wrapper .form-collection-items > .form-group { padding-top:0em; padding-bottom:0em; }
 .ea-edit-form > .form-group, .ea-new-form > .form-group  { padding: 1em; }
 .ea-edit-form > .form-group > .form-entity, .ea-new-form > .form-group > .form-entity  { padding: 0em 0em; }
