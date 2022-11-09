@@ -225,33 +225,44 @@ $(document).on("DOMContentLoaded", function () {
 
                             var span = $(preview).find(".dz-details .dz-tools")[0];
 
+                            var counter = 1;
                             span.innerHTML = lightboxPattern.replaceAll("{0}", pathLinks[file.uuid] || file.path);
-                            if(clippable[file.uuid] ?? false) span.innerHTML += clipboardPattern.replaceAll("{0}", pathLinks[file.uuid] || file.path);
-                            else span.innerHTML += "<i class='blank-space'></i>";
 
-                            span.innerHTML += downloadPattern.replaceAll("{0}", downloadLinks[file.uuid] || file.path);
-
-                            // "Go to" or "delete" action
                             var _href = dropzoneEl.data("file-href");
-                            if(file.entryId && deletePattern)
+                            if(counter < 4 && deletePattern) {
                                 span.innerHTML += deletePattern;
-                            else if(file.entryId && _href)
-                                span.innerHTML += gotoPattern.replaceAll("{0}", _href).replaceAll("{0}", file.entryId);
-                            else
-                                span.innerHTML += "<i class='blank-space'></i>";   
-                        }
+                                counter++;
+                            }
 
+                            if(counter < 4 && file.entryId && _href) {
+                                span.innerHTML += gotoPattern.replaceAll("{0}", _href).replaceAll("{0}", file.entryId);
+                                counter++;
+                            }
+
+                            if(counter < 4 && (clippable[file.uuid] ?? false)) {
+                                span.innerHTML = clipboardPattern.replaceAll("{0}", pathLinks[file.uuid] || file.path) + span.innerHTML;
+                                counter++;
+                            }
+
+                            if(counter < 4) {
+                                span.innerHTML = downloadPattern.replaceAll("{0}", downloadLinks[file.uuid] || file.path) + span.innerHTML;
+                                counter++;
+                            }
+
+                            while(counter++ < 4)
+                                span.innerHTML += "<i class='blank-space'></i>";
+                        }
 
                         // Replacement remove button
                         var _this = this;
                         $(preview).find("[data-dz-remove]").click(function () {
 
-                            if (!_this.options.dictRemoveFileConfirmation) 
+                            if (!_this.options.dictRemoveFileConfirmation)
                                 return _this.removeFile(file);
-                            
+
                             $(dropzoneEl).data("dz-select", file.uuid);
                             return Dropzone.confirm(_this.options.dictRemoveFileConfirmation, function() {
-                                
+
                                 if(file.uuid != dropzoneEl.data("dz-select")) return false;
                                 _this.removeFile(file);
 

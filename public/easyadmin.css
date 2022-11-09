@@ -20,8 +20,8 @@ html, body { scroll-padding-top: 11em; }
     height:100%;
 }
 
-.ql-editor { 
-    text-align:inherit; 
+.ql-editor {
+    text-align:inherit;
     white-space: pre-line;
 }
 
@@ -465,7 +465,7 @@ body { color: var(--button-color); }
 .datagrid td.text-center > span.badges { justify-content: center;  }
 .datagrid td.text-right  > span.badges { justify-content: flex-end;  }
 
-.content-header-title h1 { 
+.content-header-title h1 {
     color: var(--form-panel-header-color);
     visibility: visible !important;
 }
@@ -656,10 +656,9 @@ body.ea-edit .content-header, body.ea-new .content-header {
     object-position:center center;
 }
 
-.form-collection-items .accordion-header {
-    min-height: 1.5em;
-}
-
+.form-collection-items .accordion-header { min-height: 1.5em; }
+.form-collection .collection-empty { border-bottom: 1px solid var(--border-secondary-color); }
+.form-collection-item:last-child { border-bottom: 1px solid var(--content-top-border-color); }
 .ea-detail .user-avatar i, .ea-detail .thumbnail-avatar i, .ea-detail .thumbnail-image i { font-size:150pt; }
 
 .list-pagination { padding: 15px 0 15px 15px; }
@@ -792,7 +791,7 @@ form .row button[type="submit"] { margin: 1em 0; }
 .accordion-button:not(.collapsed) { color: var(--form-label-color) !important; }
 .accordion-button { background-color: var(--sidebar-bg) !important; }
 .form-collection { border: 1px solid var(--content-top-border-color); }
-.form-collection-add-button:hover { background-color: var(--button-bg); }
+.form-collection-add-button:hover { background-color: #5768bc55; }
 .ts-control {
     background-color: transparent;
     border: 1px solid var(--content-top-border-color);
@@ -809,7 +808,7 @@ form .row button[type="submit"] { margin: 1em 0; }
 .ql-snow .ql-fill, .ql-snow .ql-stroke.ql-fill ,
 .ql-snow .ql-stroke { stroke: var(--form-label-color); }
 .ql-snow .ql-picker { color: var(--form-label-color); }
-.ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-label 
+.ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-label
 {
     border-color: 1px solid var(--content-top-border-color);
 }
@@ -822,7 +821,7 @@ form .row button[type="submit"] { margin: 1em 0; }
     background-color: #FFF;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
-    text-align:inherit; 
+    text-align:inherit;
     white-space: pre-line;
 }
 
@@ -845,7 +844,6 @@ form .row button[type="submit"] { margin: 1em 0; }
     align-content: center;
 }
 
-/* .form-collection-item:last-child { border-bottom: 1px solid var(--content-top-border-color); } */
 .form-collection-items.form-collection-no-add-button > .form-collection-item:last-child {
     border-bottom: 0;
 }

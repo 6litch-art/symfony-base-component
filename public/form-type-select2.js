@@ -10,7 +10,7 @@ $(document).on("DOMContentLoaded", function () {
         reg = new RegExp(search, 'gi');
         return text.replace(reg, function(str) {return '<mark>'+str+'</mark>'});
     }
-    
+
     $(document).on("load.form_type.select2", function () {
 
         document.querySelectorAll("[data-select2-field]").forEach((function (el) {
@@ -19,8 +19,8 @@ $(document).on("DOMContentLoaded", function () {
             var defaultTemplate = function(option) {
 
                 dataAttribute = "";
-                $(option["data"]).each(function(key, value) {
-
+                $(option["data"]).each(function(key, value)
+                {
                     var value = option["data"][key];
                     if(value === undefined) return;
 
@@ -28,6 +28,7 @@ $(document).on("DOMContentLoaded", function () {
                     dataAttribute += key + "=\"" + value+"\" ";
                 });
 
+                var highlight = field.data("select2-highlight") || true;
                 var tab   = field.data("select2-tabulation") || "1.75em";
                 var depth = option["depth"] || 0;
 
@@ -47,9 +48,9 @@ $(document).on("DOMContentLoaded", function () {
                 });
 
                 var term = $('body > .select2-container input.select2-search__field').val() || $(field).parent().find('input.select2-search__field').val();
-                if (term) option.text = highlight_search(option.text.replace("<mark>", "").replace("</mark>", ""), term);
+                option.text = option.text.replace("<mark>", "").replace("</mark>", "");
 
-                console.log(term, option.text);
+                if (highlight && term) option.text = highlight_search(option.text, term);
                 return $('<span style="margin-left:calc('+tab+' * '+depth+')" class=\"select2-selection__entry\" '+dataAttribute+'><span>' +
                             (option.html ? option.html : (iconAttributes ? '<i '+ iconAttributes + '></i> ' : '') + (option.text) + "</span>" +
                             (href ? '<span><a target="_blank" href="'+href+'"><i class=\"fas fa-external-link-square-alt\"></i></span>' : '') +
@@ -98,7 +99,7 @@ $(document).on("DOMContentLoaded", function () {
 
                 var flattenResults = [];
                 var flattenResultsFn = function() {
-    
+
                     if(Array.isArray(this)) $(this).each(flattenResultsFn);
                     else flattenResults.push(this);
                 }
@@ -130,7 +131,7 @@ $(document).on("DOMContentLoaded", function () {
 
                     var term = options.data.term || '';
                     var page = options.data.page || '';
-                    if(options.data.term == $('body > .select2-container input.select2-search__field').val() || $(field).parent().find('input.select2-search__field').val()) {
+                    if(options.data.term == ($('body > .select2-container input.select2-search__field').val() || $(field).parent().find('input.select2-search__field').val())) {
 
                         //
                         // Retrieve cache if exists
@@ -144,7 +145,7 @@ $(document).on("DOMContentLoaded", function () {
                     } else {
 
                         // Prevent loosing last search..
-                        $(field).attr("last-search", $('body > .select2-container input.select2-search__field').val() || $(field).parent().find('input.select2-search__field').val());
+                        $(field).attr("last-search", ($('body > .select2-container input.select2-search__field').val() || $(field).parent().find('input.select2-search__field').val()));
                     }
 
                     //
@@ -169,11 +170,10 @@ $(document).on("DOMContentLoaded", function () {
                         var index = field.attr("id")+":"+term+":"+page;
                         options.data.term = term;
                         options.data.page = page;
-                        
+
                         if(options.cache && index in localCache)
                             return success(localCache[index]);
-                        
-                            
+
                         return $.ajax(options)
                                     .done((_response) => localCache[index] = _response)
                                     .done(success)
@@ -211,6 +211,7 @@ $(document).on("DOMContentLoaded", function () {
 
                 // Put back previous value
                 $('body > .select2-container input.select2-search__field').focus().val($(this).attr("last-search"));
+                $(field).parent().find('input.select2-search__field').val($(this).attr("last-search"));
 
                 page = "1.0";
                 if ($(this).data('state') === 'unselected') {
@@ -232,6 +233,9 @@ $(document).on("DOMContentLoaded", function () {
 
             $('body > .select2-container input.select2-search__field').off();
             $('body > .select2-container input.select2-search__field').on("input", function() { page = "1.0"; });
+
+            $(field).parent().find('input.select2-search__field').off();
+            $(field).parent().find('input.select2-search__field').on("input", function() { page = "1.0"; });
 
             dropdown = $(field).select2("data");
 

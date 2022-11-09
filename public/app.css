@@ -152,7 +152,7 @@ textarea { min-height:150px !important; }
     border-radius: 5px !important;
 }
 
-mark { 
+mark {
     border-radius:0.25em;
     padding:0;
 }
@@ -256,7 +256,7 @@ form.was-validated select:invalid ~ .select2-selection,
 .form-collection[data-num-items="0"] .form-collection-add-button { border-top: 0 !important ; }
 .form-collection-add-button {
 
-    border-top-left-radius: 0px important;
+    border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
     border-bottom-left-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
@@ -1057,8 +1057,8 @@ input.required:after, textarea.required:after, select.required:after {
     flex-direction: row;
 }
 
-.ql-editor h1, .ql-editor h2, 
-.ql-editor h3, .ql-editor h4, 
+.ql-editor h1, .ql-editor h2,
+.ql-editor h3, .ql-editor h4,
 .ql-editor h5, .ql-editor h6 { color:inherit; }
 .ql-container { height:auto; }
 
