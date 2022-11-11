@@ -25,6 +25,7 @@ html, body { scroll-padding-top: 11em; }
     white-space: pre-line;
 }
 
+.dropdown-item.active, .dropdown-item:active { color:inherit; }
 .dropdown-item.active { background-color:var(--dropdown-settings-active-item-bg); }
 .dropdown-item { padding: 0.75em; }
 .dropdown-settings .dropdown-item.active { box-shadow: none; }
@@ -676,6 +677,8 @@ body.ea-edit .content-header, body.ea-new .content-header {
     color: var(--dropdown-appearance-icon-color);
     font-size: 16px;
 }
+.dropdown-menu .dropdown-header:first-child, .dropdown-menu .dropdown-item:last-child { padding: 7.5px 5px; }
+
 
 #navitation-toggler img {
     margin-top: 4px;

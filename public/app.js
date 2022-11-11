@@ -26,7 +26,7 @@ CookieConsent.setCookie("user", "necessary", getUser(), 30*24*3600, true);
 window.addEventListener('DOMContentLoaded', function(event) {
 
     CookieConsent.setCookie("user", "necessary", getUser(), 30*24*3600, true);
-    
+
     window.addEventListener('resize', () => CookieConsent.setCookie("user", "necessary", getUser(), 30*24*3600));
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => CookieConsent.setCookie("user", "necessary", getUser(), 30*24*3600));
 
@@ -48,15 +48,15 @@ window.addEventListener('load', function(event) {
         var methods = {
             init: function(options) {
 
-                
+
                 methods.settings = $.extend({}, $.fn.flashNotification.defaults, options);
                 methods.settings["container"] = $(this).length ? $(this)[0] : undefined;
-                
+
                 methods.display(".alert");
 
                 methods.listenIncomingMessages();
             },
-    
+
             reset: function(options) {
                 $(document).unbind('ajaxComplete');
             },
@@ -71,17 +71,17 @@ window.addEventListener('load', function(event) {
                     if(!xhr || xhr.getResponseHeader("Content-Type") != "application/json")
                         return;
 
-                    var data = $.parseJSON(xhr.responseText);    
+                    var data = $.parseJSON(xhr.responseText);
                     if (data.flashbag) {
                         var flashbag = data.flashbag;
-                        
+
                         var i;
                         if (flashbag.error) {
                             for (i = 0; i < flashbag.error.length; i++) {
                                 methods.addError(flashbag.error[i]);
                             }
                         }
-    
+
                         if (flashbag.success) {
                             for (i = 0; i < flashbag.success.length; i++) {
                                 methods.addSuccess(flashbag.success[i]);
@@ -93,7 +93,7 @@ window.addEventListener('load', function(event) {
                                 methods.addWarning(flashbag.warning[i]);
                             }
                         }
-    
+
                         if (flashbag.info) {
                             for (i = 0; i < flashbag.info.length; i++) {
                                 methods.addInfo(flashbag.info[i]);
@@ -104,31 +104,31 @@ window.addEventListener('load', function(event) {
                     }
                 });
             },
-    
+
             addSuccess: function(message) {
                 var flashMessageElt = methods.getBasicFlash(message).addClass('alert-success');
-    
+
                 methods.addToList(flashMessageElt);
             },
-    
+
             addError: function(message) {
                 var flashMessageElt = methods.getBasicFlash(message).addClass('alert-error');
-    
+
                 methods.addToList(flashMessageElt);
             },
-    
+
             addWarning: function(message) {
                 var flashMessageElt = methods.getBasicFlash(message).addClass('alert-warning');
-    
+
                 methods.addToList(flashMessageElt);
             },
-    
+
             addInfo: function(message) {
                 var flashMessageElt = methods.getBasicFlash(message).addClass('alert-info');
-    
+
                 methods.addToList(flashMessageElt);
             },
-    
+
             getBasicFlash: function(message) {
                 var flashMessageElt = $('<div></div>')
                     .hide()
@@ -136,10 +136,10 @@ window.addEventListener('load', function(event) {
                     .append($('<span class="message"></span>').html(message))
                     .append(methods.getCloseButton())
                 ;
-    
+
                 return flashMessageElt;
             },
-    
+
             getCloseButton: function()
             {
                 var closeButtonElt = $('<button></button>')
@@ -149,7 +149,7 @@ window.addEventListener('load', function(event) {
 
                 return closeButtonElt;
             },
-    
+
             addToList: function(flashMessageElt) {
 
                 var message  = flashMessageElt.find(".message").text().trim();
@@ -168,22 +168,22 @@ window.addEventListener('load', function(event) {
 
                 if(methods.settings.scrollUp) window.scrollTo(0, 0);
             },
-    
+
             display: function(flashMessageElt) {
 
                 setTimeout(
                     function() {
-                        
+
                         $(flashMessageElt).show(methods.settings.animation ? 'slow' : 0);
-                        if(methods.settings.autoHide) 
+                        if(methods.settings.autoHide)
                             $(flashMessageElt).delay(methods.settings.hideDelay).hide(methods.settings.animation ? 'fast' : 0, function() { $(this).remove(); } );
-                    
+
                     },
                     500
                 );
             }
         };
-    
+
         // Method calling logic
         if (methods[method]) {
             return methods[ method ].apply(this, Array.prototype.slice.call(arguments, 1));
@@ -193,14 +193,14 @@ window.addEventListener('load', function(event) {
             $.error('Method ' +  method + ' does not exist on jQuery.flashNotification');
         }
     };
-    
+
     $.fn.flashNotification.defaults = {
         'hideDelay'         : 9500,
         'autoHide'          : true,
         'animate'           : true,
         'scrollUp'          : true
     };
-    
+
     $('#flash-messages').flashNotification('init');
     lightbox.option({'wrapAround': true});
 
@@ -222,7 +222,7 @@ window.addEventListener('load', function(event) {
 
             return $([document.documentElement, document.body]).animate(
                 {scrollTop: $(el[0]).offset().top - parseInt(style["scroll-padding-top"])},
-                function() { 
+                function() {
                     form.addClass('was-validated');
                 }
             );
@@ -339,13 +339,13 @@ window.addEventListener('load', function(event) {
             if (countdown < 1 && _countdown > 0) {
 
                 clearInterval(x);
-                setTimeout(function() { 
+                setTimeout(function() {
 
                     if(reload) location.reload();
 
                 }, 1000);
             }
-            
+
             $(el).removeClass("invisible");
 
         }, 1000);
