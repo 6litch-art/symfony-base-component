@@ -324,7 +324,8 @@ form fieldset legend { font-size: 11pt; }
 }
 
 .content-header {
-    width:100%;
+    max-width: calc(100vw - var(--sidebar-max-width));
+
     padding: 1em 2.5em 1em 2.5em;
     position: sticky;
     background-color: var(--body-bg);
