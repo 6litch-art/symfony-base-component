@@ -519,10 +519,7 @@ body.ea-edit .content-header, body.ea-new .content-header {
 .content-wrapper { margin-top:2.5em; }
 
 .content-top .content-search .form-group  { display: flex; }
-.content-top .content-search .form-widget { padding-right: 5em; }
-@media (max-width: 992px) {
-    .content-top .content-search .form-widget { padding-right: 1em; }
-}
+.content-top .content-search .form-widget { padding-right: 1em; }
 
 .content-body
 {
@@ -1098,11 +1095,11 @@ ul.sidebar-menu a:hover { color: var(--sidebar-menu-submenu-color); }
     border-radius: 25em;
     padding-left: 1em;
 }
-.content-top .content-search .content-search-label input.is-blank:placeholder-shown { width: 0px; }
+.content-top .content-search .content-search-label input.is-blank:placeholder-shown { width: 150px; }
 .content-top .content-search .content-search-label input.is-blank:focus { width: 300px; }
 .content-top .content-search .content-search-label input.is-blank
 {
-    min-width: 100px;
+    min-width: 150px;
     width:300px;
     transition: all .5s;
     background-color:transparent;
@@ -1110,6 +1107,10 @@ ul.sidebar-menu a:hover { color: var(--sidebar-menu-submenu-color); }
 
 @media (max-width: 992px) {
 
+    .content-top .content-search input[type=search][name=query] {
+        background: transparent;
+        border: 0;
+    }
     table.datagrid:not(.datagrid-empty) tr:not(.empty-row) td.actions, table.datagrid:not(.datagrid-empty) tr:not(.empty-row) td.actions.actions-as-dropdown
     {
         display: flex;
