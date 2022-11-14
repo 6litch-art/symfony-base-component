@@ -152,6 +152,13 @@ textarea { min-height:150px !important; }
     border-radius: 5px !important;
 }
 
+.btn-raw {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
 mark {
     border-radius:0.25em;
     padding:0;
