@@ -188,8 +188,9 @@ $(document).on("DOMContentLoaded", function () {
                         return;
                     }
 
-                    var label   = slugger.target ? $('label[for="' + slugger.target.id + '"]') : undefined;
-                    var lock    = JSON.parse($(slugger.field).data("slug-lock") ?? null) && slugger.target != undefined;
+                    var label     = slugger.target ? $('label[for="' + slugger.target.id + '"]') : undefined;
+                    var lock      = JSON.parse($(slugger.field).data("slug-lock") ?? null) && slugger.target != undefined;
+                    var separator = $(slugger.field).data("slug-separator") ?? "-";
 
                     var targetCurrentSlug = slugger.target != undefined ? $(slugger.target).val() : $(slugger.field).val();
                     slugger.updateValue(targetCurrentSlug);
