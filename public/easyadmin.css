@@ -518,10 +518,16 @@ body.ea-edit .content-header, body.ea-new .content-header {
 .content-wrapper { padding:0; }
 .content-wrapper { margin-top:2.5em; }
 
+.content-top .content-search .form-group  { display: flex; }
+.content-top .content-search .form-widget { padding-right: 5em; }
+@media (max-width: 992px) {
+    .content-top .content-search .form-widget { padding-right: 1em; }
+}
+
 .content-body
 {
     padding: 2.5em var(--lg-content-padding-right) 5em var(--lg-content-padding-left);
-    padding-right: 0.5em;
+    padding-right: 1.5em;
     padding-left: 1.5em;
 }
 .content-body .ea-edit-form, .content-body .ea-new-form
@@ -700,7 +706,13 @@ body.ea-edit .content-header, body.ea-new .content-header {
     display:flex;
     flex-direction: row;
     justify-content:flex-end;
-    padding: 35px !important;
+}
+@media (min-width: 992px) {
+    .actions { padding: 35px !important; }
+}
+
+@media (max-width: 992px) {
+    .actions { padding: 5px !important; }
 }
 
 .responsive-menu { padding:1.25em; }
@@ -1075,7 +1087,37 @@ ul.sidebar-menu a:hover { color: var(--sidebar-menu-submenu-color); }
 .content-header .page-actions .btn-group { margin:0.25em; }
 .content-header .page-actions .btn { margin:0.25em 0; }
 
+.sidebar-wrapper { border-top:1px solid var(--content-top-border-color); }
+.form-control.is-valid, .was-validated .form-control:valid { background-image: none; }
+.form-control::placeholder { color:inherit; }
+.content-top .content-search .content-search-icon { color:inherit; }
+.content-top .content-search .form-widget
+{
+    color: var(--sidebar-menu-icon-color);
+    background-color: var(--sidebar-bg);
+    border-radius: 25em;
+    padding-left: 1em;
+}
+.content-top .content-search .content-search-label input.is-blank:placeholder-shown { width: 0px; }
+.content-top .content-search .content-search-label input.is-blank:focus { width: 300px; }
+.content-top .content-search .content-search-label input.is-blank
+{
+    min-width: 100px;
+    width:300px;
+    transition: all .5s;
+    background-color:transparent;
+}
+
 @media (max-width: 992px) {
+
+    table.datagrid:not(.datagrid-empty) tr:not(.empty-row) td.actions, table.datagrid:not(.datagrid-empty) tr:not(.empty-row) td.actions.actions-as-dropdown
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .content-header { max-width: calc(100vw); }
 
     .imageupload { flex-direction: column; align-items: center; }
     .imageupload > * { margin:0.5em 0 ; }

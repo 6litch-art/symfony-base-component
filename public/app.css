@@ -852,6 +852,7 @@ input.required:after, textarea.required:after, select.required:after {
     display: flex;
     flex-direction: column;
     justify-content: start;
+    width: 100%;
 }
 
 .imageupload-cropper-image { max-width: 100%; }
@@ -1510,8 +1511,11 @@ select.form-select2:empty { height: 38px; }
 
 .invalid-image { color:red; }
 
-
 @media (max-width: 992px) {
+    .form-cropper { flex-direction:column; }
+
+    .form-cropper .cropper {    border-right: initial; }
+    .form-cropper > div { width: 100%; }
 
     .form-password-block { flex-direction: column; }
     .form-password-block .form-password-details
