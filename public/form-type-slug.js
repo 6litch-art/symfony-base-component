@@ -194,10 +194,9 @@ $(document).on("DOMContentLoaded", function () {
                     var targetCurrentSlug = slugger.target != undefined ? $(slugger.target).val() : $(slugger.field).val();
                     slugger.updateValue(targetCurrentSlug);
 
-
                          if(lock === false ) slugger.unlock();
                     else if(lock === true ) slugger.lock();
-                    else if(slugger.compute(targetCurrentSlug) == slugger.currentSlug) slugger.lock();
+                    else if(slugger.compute(targetCurrentSlug) == slugger.currentSlug || slugger.currentSlug.startsWith(slugger.compute(targetCurrentSlug)+separator)) slugger.lock();
                     else slugger.unlock();
 
                     var isTargetRequired = (slugger.locked ? slugger.field.getAttribute("required") : slugger.target.getAttribute("data-required")) == "required";

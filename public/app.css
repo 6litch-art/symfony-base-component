@@ -845,6 +845,7 @@ input.required:after, textarea.required:after, select.required:after {
     display: flex;
     flex-direction: column;
     justify-content: start;
+    width: 100%;
 }
 
 .imageupload-cropper-image { max-width: 100%; }

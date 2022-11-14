@@ -1087,6 +1087,7 @@ ul.sidebar-menu a:hover { color: var(--sidebar-menu-submenu-color); }
 .content-header .page-actions .btn-group { margin:0.25em; }
 .content-header .page-actions .btn { margin:0.25em 0; }
 
+.form-control.is-valid, .was-validated .form-control:valid { background-image: none; }
 .form-control::placeholder { color:inherit; }
 .content-top .content-search .content-search-icon { color:inherit; }
 .content-top .content-search .form-widget
