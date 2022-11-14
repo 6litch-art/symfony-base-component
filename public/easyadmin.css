@@ -1091,8 +1091,8 @@ ul.sidebar-menu a:hover { color: var(--sidebar-menu-submenu-color); }
 .content-top .content-search .content-search-icon { color:inherit; }
 .content-top .content-search .form-widget
 {
-    color: var(--button-hover-color);
-    background-color: var(--button-secondary-bg);
+    color: var(--sidebar-menu-icon-color);
+    background-color: var(--sidebar-bg);
     border-radius: 25em;
     padding-left: 1em;
 }
