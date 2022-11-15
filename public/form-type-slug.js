@@ -190,14 +190,13 @@ $(document).on("DOMContentLoaded", function () {
 
                     var label     = slugger.target ? $('label[for="' + slugger.target.id + '"]') : undefined;
                     var lock      = JSON.parse($(slugger.field).data("slug-lock") ?? null) && slugger.target != undefined;
-                    var separator = $(slugger.field).data("slug-separator") ?? "-";
 
                     var targetCurrentSlug = slugger.target != undefined ? $(slugger.target).val() : $(slugger.field).val();
                     slugger.updateValue(targetCurrentSlug);
 
                          if(lock === false ) slugger.unlock();
                     else if(lock === true ) slugger.lock();
-                    else if(slugger.compute(targetCurrentSlug) == slugger.currentSlug || slugger.currentSlug.startsWith(slugger.compute(targetCurrentSlug)+separator)) slugger.lock();
+                    else if(slugger.compute(targetCurrentSlug) == slugger.currentSlug) slugger.lock();
                     else slugger.unlock();
 
                     var isTargetRequired = (slugger.locked ? slugger.field.getAttribute("required") : slugger.target.getAttribute("data-required")) == "required";
