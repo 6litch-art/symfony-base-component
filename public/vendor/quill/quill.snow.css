@@ -654,6 +654,7 @@ img, svg {
 }
 .ql-snow .ql-editor img {
   max-width: 100%;
+  max-height: 400px;
 }
 .ql-snow .ql-picker {
   color: #444;
