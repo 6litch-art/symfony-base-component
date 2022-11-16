@@ -733,13 +733,6 @@ body.ea-edit .content-header, body.ea-new .content-header {
 }
 
 .img-fluid { animation: blink 2s infinite; }
-@keyframes blink {
-	0%		{ background-color: transparent;}
-	25%		{ background-color: #FEFEFEAA;}
-	50%		{ background-color: transparent;}
-	75%		{ background-color: #FEFEFEAA;}
-	100%	{ background-color: transparent;}
-}
 
 .logo .logo-overlay:hover {
 	backdrop-filter: blur(5px);
