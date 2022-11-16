@@ -20,6 +20,8 @@ html, body { scroll-padding-top: 11em; }
     height:100%;
 }
 
+.ql-align-right img { float: right; }
+.ql-align-left img { float: left; }
 .ql-editor {
     text-align:inherit;
     white-space: pre-line;
@@ -339,6 +341,9 @@ form fieldset legend { font-size: 11pt; }
     align-items: center;
 }
 
+.main-content .content { 
+    max-width: calc(100vw - var(--sidebar-max-width));
+}
 .field-impersonate {
     font-size:14pt;
 }
@@ -416,7 +421,11 @@ a.dropdown-appearance-button
 
 #main-menu .menu .menu-item:hover > a .menu-item-label { color:var(--sidebar-menu-icon-color); }
 
-body { color: var(--button-color); }
+body {
+    color: var(--button-color);
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
 .navbar-custom-menu { height: 100%; }
 .user-menu-wrapper
 {
