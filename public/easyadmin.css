@@ -341,7 +341,7 @@ form fieldset legend { font-size: 11pt; }
     align-items: center;
 }
 
-.main-content .content { 
+.main-content .content {
     max-width: calc(100vw - var(--sidebar-max-width));
 }
 .field-impersonate {
@@ -724,12 +724,21 @@ body.ea-edit .content-header, body.ea-new .content-header {
 .responsive-menu { padding:1.25em; }
 .logo img
 {
-    background-color: #FFF5;
-    height:95%; width:95%;
+    /* background-color: #FFF5; */
+    height:100%; width:100%;
     object-fit:cover;
     margin:auto;
     border-radius: var(--border-radius);
     border: 1px solid var(--content-top-border-color);
+}
+
+.img-fluid { animation: blink 2s infinite; }
+@keyframes blink {
+	0%		{ background-color: transparent;}
+	25%		{ background-color: #FEFEFEAA;}
+	50%		{ background-color: transparent;}
+	75%		{ background-color: #FEFEFEAA;}
+	100%	{ background-color: transparent;}
 }
 
 .logo .logo-overlay:hover {

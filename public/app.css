@@ -16,15 +16,6 @@
 .badge .label:first-child { margin-right:0.35em; padding-right:0.5em; border-right:1.5px solid; }
 .badge .label:last-child  { margin-left:0.35em; padding-left:0.5em; border-left:1.5px solid; }
 
-.lazybox { animation: blink 2s infinite; }
-@keyframes blink {
-	0%		{ background-color: var(--primary-background);}
-	25%		{ background-color: var(--ternary-background);}
-	50%		{ background-color: var(--primary-background);}
-	75%		{ background-color: var(--ternary-background);}
-	100%	{ background-color: var(--primary-background);}
-}
-
 .label-wrapper a { font-size:11pt; }
 .badge > * {
     display:flex;
