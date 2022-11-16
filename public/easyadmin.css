@@ -732,7 +732,7 @@ body.ea-edit .content-header, body.ea-new .content-header {
     border: 1px solid var(--content-top-border-color);
 }
 
-.img-fluid { animation: blink 2s infinite; }
+.img-fluid.loading { animation: blink 2s infinite; }
 
 .logo .logo-overlay:hover {
 	backdrop-filter: blur(5px);

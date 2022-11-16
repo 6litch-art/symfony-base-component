@@ -173,6 +173,7 @@ $.fn.serializeObject = function () {
                                 image.onload = function() {
                                     this.classList.add("loaded");
                                     this.classList.remove("loading");
+                                    if(lazybox) lazybox.classList.add("loaded");
                                     if(lazybox) lazybox.classList.remove("loading");
                                 };
 
