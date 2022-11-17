@@ -1,0 +1,47 @@
+.imagine-item.zoom { animation: transform .2s; }
+.imagine-item.zoom:hover { transform: scale(0.90); }
+
+.imagine {
+    width: 500px;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    perspective: 400px;
+    cursor: pointer;
+}
+
+.imagine.active div {
+    transform: rotate(0deg) translateY(0);
+}
+
+.imagine div {
+    position: absolute;
+    z-index: 1;
+    background-repeat: no-repeat;
+    transform: rotateY(-50deg) scale(0.5);
+    transition: all 0.5s cubic-bezier(0.71, 0.05, 0.09, 0.91);
+    transition-delay: 0s;
+}
+
+.imagine.active {  opacity: 1; }
+.imagine {
+    transition: all 0.25s ease;
+    opacity: 0;
+}
+
+img[data-src] { transition:all 0.25s ease !important; }
+img[data-src]:not(.loaded) {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.lazybox.loading { animation: blink 2s infinite; }
+@keyframes blink {
+	0%		{ background-color: transparent;}
+	25%		{ background-color: #EFEFEFAA;}
+	50%		{ background-color: transparent;}
+	75%		{ background-color: #EFEFEFAA;}
+	100%	{ background-color: transparent;}
+}
