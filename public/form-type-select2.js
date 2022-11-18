@@ -234,6 +234,11 @@ $(document).on("DOMContentLoaded", function () {
             $('body > .select2-container input.select2-search__field').off();
             $('body > .select2-container input.select2-search__field').on("input", function() { page = "1.0"; });
 
+            $(field).on("click", function(e) {
+
+                console.log(e);
+            });
+
             $(field).parent().find('input.select2-search__field').off();
             $(field).parent().find('input.select2-search__field').on("input", function() { page = "1.0"; });
 
@@ -241,8 +246,13 @@ $(document).on("DOMContentLoaded", function () {
 
             var openClick = false;
             $(field).on("select2:opening", function() { openClick = true; });
-            $(window).on("click", function(e) {
+            $(window).on("click.select2", function(e) {
 
+                // Prevent opening select2 when clicking on link
+                // var links = e.target.closest("a, button");
+                // if(links.length > 0) $(field).select2("close");
+
+                var select2 = e.target.closest(".select2-container");
                 if(!openClick) {
 
                     let container = $(".select2-container").last();

@@ -10,6 +10,7 @@ $(document).on("DOMContentLoaded", function () {
             var id       = el.getAttribute("data-file-field");
 
             var dropzone    = $(el).data('file-dropzone');
+
             var dropzoneEl  = $("#"+id+"_dropzone");
             var entryIdList = dropzoneEl.data("entry-id") ?? [];
 
