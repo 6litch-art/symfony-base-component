@@ -1,9 +1,0 @@
-{
-  "label": "@picmo/popup-picker",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "title": "@picmo/popup-picker",
-    "description": "Add-on package that supports showing an emoji picker in a popup."
-  }
-}
