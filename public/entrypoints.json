@@ -1,0 +1,19 @@
+{
+  "entrypoints": {
+    "base": {
+      "js": [
+        "/bundles/base/base.js"
+      ]
+    },
+    "easyadmin": {
+      "js": [
+        "/bundles/base/easyadmin.js"
+      ]
+    },
+    "form": {
+      "js": [
+        "/bundles/base/form.js"
+      ]
+    }
+  }
+}
