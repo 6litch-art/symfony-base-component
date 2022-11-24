@@ -1,6 +1,9 @@
 {
+  "./base.css": "/bundles/base/base.css",
   "./base.js": "/bundles/base/base.js",
+  "./easyadmin.css": "/bundles/base/easyadmin.css",
   "./easyadmin.js": "/bundles/base/easyadmin.js",
+  "./form.css": "/bundles/base/form.css",
   "./form.js": "/bundles/base/form.js",
   "./fonts/fa-solid-900.svg": "/bundles/base/fonts/fa-solid-900.7a8b4f130182d19a2d7c67d80c090397.svg",
   "./fonts/fa-brands-400.svg": "/bundles/base/fonts/fa-brands-400.2f517e09eb2ca6650ff5bec5a95157ab.svg",

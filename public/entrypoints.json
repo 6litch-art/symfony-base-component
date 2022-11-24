@@ -1,16 +1,25 @@
 {
   "entrypoints": {
     "base": {
+      "css": [
+        "/bundles/base/base.css"
+      ],
       "js": [
         "/bundles/base/base.js"
       ]
     },
     "easyadmin": {
+      "css": [
+        "/bundles/base/easyadmin.css"
+      ],
       "js": [
         "/bundles/base/easyadmin.js"
       ]
     },
     "form": {
+      "css": [
+        "/bundles/base/form.css"
+      ],
       "js": [
         "/bundles/base/form.js"
       ]
