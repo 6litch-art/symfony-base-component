@@ -5,7 +5,7 @@
         "/bundles/base/base.c637b6b1.css"
       ],
       "js": [
-        "/bundles/base/base.1fe0f5c4.js"
+        "/bundles/base/base.86441283.js"
       ]
     },
     "easyadmin": {
@@ -18,10 +18,10 @@
     },
     "form": {
       "css": [
-        "/bundles/base/form.19ce2e95.css"
+        "/bundles/base/form.2fe24e17.css"
       ],
       "js": [
-        "/bundles/base/form.e7f93bd6.js"
+        "/bundles/base/form.d371f754.js"
       ]
     }
   }
