@@ -2,23 +2,23 @@
 
 namespace Base\DependencyInjection\Compiler;
 
-use Base\Service\IconProvider;
+use Base\Twig\Environment;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class IconProviderPass implements CompilerPassInterface
+class TagRendererPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
         // always first check if the primary service is defined
-        if (!$container->has(IconProvider::class))
+        if (!$container->has(Environment::class))
             return;
 
-        $definition = $container->findDefinition(IconProvider::class);
-        
-        $taggedServices = $container->findTaggedServiceIds('base.service.icon');
+        $definition = $container->findDefinition(Environment::class);
+
+        $taggedServices = $container->findTaggedServiceIds('twig.tag_renderer');
         foreach ($taggedServices as $id => $tags)
-            $definition->addMethodCall('addAdapter', [new Reference($id)]);
+            $definition->addMethodCall('addRenderer', [new Reference($id)]);
     }
 }
