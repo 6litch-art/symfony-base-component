@@ -2,26 +2,26 @@
   "entrypoints": {
     "base": {
       "css": [
-        "/bundles/base/base.c637b6b1.css"
+        "/bundles/base/base.css"
       ],
       "js": [
-        "/bundles/base/base.86441283.js"
+        "/bundles/base/base.js"
       ]
     },
     "easyadmin": {
       "css": [
-        "/bundles/base/easyadmin.e50cb57c.css"
+        "/bundles/base/easyadmin.css"
       ],
       "js": [
-        "/bundles/base/easyadmin.0c90392f.js"
+        "/bundles/base/easyadmin.js"
       ]
     },
     "form": {
       "css": [
-        "/bundles/base/form.2fe24e17.css"
+        "/bundles/base/form.css"
       ],
       "js": [
-        "/bundles/base/form.d371f754.js"
+        "/bundles/base/form.js"
       ]
     }
   }
