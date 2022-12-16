@@ -1,6 +1,6 @@
 {
   "./base.css": "/bundles/base/base.b2c6c941.css",
-  "./base.js": "/bundles/base/base.86441283.js",
+  "./base.js": "/bundles/base/base.2a930c35.js",
   "./easyadmin.css": "/bundles/base/easyadmin.f3211a8a.css",
   "./easyadmin.js": "/bundles/base/easyadmin.0c90392f.js",
   "./form.css": "/bundles/base/form.400ee7d3.css",
@@ -12,7 +12,6 @@
   "./metadata/icons.yml": "/bundles/base/metadata/icons.yml",
   "./fonts/fa-solid-900.eot": "/bundles/base/fonts/fa-solid-900.9bbb245e67a133f6e486d8d2545e14a5.eot",
   "./fonts/fa-solid-900.ttf": "/bundles/base/fonts/fa-solid-900.be9ee23c0c6390141475d519c2c5fb8f.ttf",
-  "./fonts/Source Code Pro.ttf": "/bundles/base/fonts/Source Code Pro.ttf",
   "./fonts/bootstrap-icons.woff?": "/bundles/base/fonts/bootstrap-icons.6959d0d9.woff",
   "./fonts/fa-regular-400.svg": "/bundles/base/fonts/fa-regular-400.4689f52cc96215721344e51e5831eec1.svg",
   "./images/fa-regular-400.svg": "/bundles/base/images/fa-regular-400.4689f52c.svg",
@@ -25,6 +24,7 @@
   "./images/bundles/UserBundle.png": "/bundles/base/images/bundles/UserBundle.png",
   "./fonts/fa-solid-900.woff2": "/bundles/base/fonts/fa-solid-900.1551f4f60c37af51121f106501f69b80.woff2",
   "./fonts/fa-brands-400.woff2": "/bundles/base/fonts/fa-brands-400.d878b0a6a1144760244ff0665888404c.woff2",
+  "./fonts/Source Code Pro.woff2": "/bundles/base/fonts/Source Code Pro.woff2",
   "./metadata/bootstrap-icons.json": "/bundles/base/metadata/bootstrap-icons.json",
   "./fonts/fa-regular-400.eot": "/bundles/base/fonts/fa-regular-400.77206a6bb316fa0aded5083cc57f92b9.eot",
   "./fonts/fa-regular-400.ttf": "/bundles/base/fonts/fa-regular-400.491974d108fe4002b2aaf7ffc48249a0.ttf",
