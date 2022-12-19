@@ -1,10 +1,10 @@
 {
-  "./base.defer.css": "/bundles/base/base.defer.b2c6c941.css",
-  "./base.defer.js": "/bundles/base/base.defer.44f97e78.js",
-  "./easyadmin.defer.css": "/bundles/base/easyadmin.defer.f3211a8a.css",
-  "./easyadmin.defer.js": "/bundles/base/easyadmin.defer.af4bf976.js",
-  "./form.defer.css": "/bundles/base/form.defer.192c3363.css",
-  "./form.defer.js": "/bundles/base/form.defer.491fa121.js",
+  "./base.defer.css": "/bundles/base/base.defer.css",
+  "./base.defer.js": "/bundles/base/base.defer.js",
+  "./easyadmin.defer.css": "/bundles/base/easyadmin.defer.css",
+  "./easyadmin.defer.js": "/bundles/base/easyadmin.defer.js",
+  "./form.defer.css": "/bundles/base/form.defer.css",
+  "./form.defer.js": "/bundles/base/form.defer.js",
   "./fonts/fa-solid-900.svg": "/bundles/base/fonts/fa-solid-900.7a8b4f130182d19a2d7c67d80c090397.svg",
   "./images/fa-solid-900.svg": "/bundles/base/images/fa-solid-900.7a8b4f13.svg",
   "./fonts/fa-brands-400.svg": "/bundles/base/fonts/fa-brands-400.2f517e09eb2ca6650ff5bec5a95157ab.svg",
@@ -293,5 +293,6 @@
   "./images/flags/MC.svg": "/bundles/base/images/flags/MC.svg",
   "./images/flags/ID.svg": "/bundles/base/images/flags/ID.svg",
   "./images/flags/AT.svg": "/bundles/base/images/flags/AT.svg",
-  "./images/flags/UNKNOWN.svg": "/bundles/base/images/flags/UNKNOWN.svg"
+  "./images/flags/UNKNOWN.svg": "/bundles/base/images/flags/UNKNOWN.svg",
+  "./fonts/Source Code Pro.woff2": "/bundles/base/fonts/Source Code Pro.woff2"
 }
