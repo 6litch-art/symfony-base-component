@@ -1,1 +1,0 @@
-(()=>{"use strict";window.addEventListener("load",(function(e){window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change",(function(){return CookieConsent.setCookie("user","necessary",getUser(),2592e3)}))})),window.addEventListener("load",(function(e){}))})();
