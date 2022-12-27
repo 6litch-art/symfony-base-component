@@ -1,6 +1,6 @@
 {
-  "./form-async.css": "/bundles/base/form-async.css",
-  "./form-async.js": "/bundles/base/form-async.js",
+  "./form-defer.css": "/bundles/base/form-defer.css",
+  "./form-defer.js": "/bundles/base/form-defer.js",
   "./easyadmin-async.css": "/bundles/base/easyadmin-async.css",
   "./easyadmin-async.js": "/bundles/base/easyadmin-async.js",
   "./base-async.css": "/bundles/base/base-async.css",

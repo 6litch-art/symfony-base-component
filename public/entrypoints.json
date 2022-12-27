@@ -16,12 +16,12 @@
         "/bundles/base/easyadmin-async.js"
       ]
     },
-    "form-async": {
+    "form-defer": {
       "css": [
-        "/bundles/base/form-async.css"
+        "/bundles/base/form-defer.css"
       ],
       "js": [
-        "/bundles/base/form-async.js"
+        "/bundles/base/form-defer.js"
       ]
     }
   }
