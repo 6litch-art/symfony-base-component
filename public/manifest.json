@@ -1,10 +1,10 @@
 {
   "./form-defer.css": "/bundles/base/form-defer.9bcbb893.css",
-  "./form-defer.js": "/bundles/base/form-defer.bdcfea5d.js",
+  "./form-defer.js": "/bundles/base/form-defer.1e71a038.js",
   "./easyadmin-async.css": "/bundles/base/easyadmin-async.75beec48.css",
   "./easyadmin-async.js": "/bundles/base/easyadmin-async.f4e22200.js",
-  "./base-async.css": "/bundles/base/base-async.de1ec41e.css",
-  "./base-async.js": "/bundles/base/base-async.56e4b95a.js",
+  "./base-async.css": "/bundles/base/base-async.8b44a48a.css",
+  "./base-async.js": "/bundles/base/base-async.6f342f27.js",
   "./easyadmin-async-desktop.css": "/bundles/base/easyadmin-async-desktop.ca49b08738ff63e098de.css",
   "./easyadmin-async-mobile.css": "/bundles/base/easyadmin-async-mobile.8203f23a5271df581543.css",
   "./easyadmin-async-mobile-landscape.css": "/bundles/base/easyadmin-async-mobile-landscape.83c9de5e5a7ad791d3f7.css",
