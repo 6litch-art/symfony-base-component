@@ -2,10 +2,18 @@
   "entrypoints": {
     "base-async": {
       "css": [
-        "/bundles/base/base-async.8b44a48a.css"
+        "/bundles/base/base-async.f3bcf768.css"
       ],
       "js": [
-        "/bundles/base/base-async.6f342f27.js"
+        "/bundles/base/base-async.9796ccbf.js"
+      ]
+    },
+    "base-defer": {
+      "css": [
+        "/bundles/base/base-defer.0a349daf.css"
+      ],
+      "js": [
+        "/bundles/base/base-defer.6ce3a523.js"
       ]
     },
     "easyadmin-async": {
@@ -18,10 +26,10 @@
     },
     "form-defer": {
       "css": [
-        "/bundles/base/form-defer.94bb96b6.css"
+        "/bundles/base/form-defer.9da2985a.css"
       ],
       "js": [
-        "/bundles/base/form-defer.1e71a038.js"
+        "/bundles/base/form-defer.4a44caee.js"
       ]
     }
   }
