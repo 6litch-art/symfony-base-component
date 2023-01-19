@@ -5,7 +5,7 @@
         "/bundles/base/base-async.f3bcf768.css"
       ],
       "js": [
-        "/bundles/base/base-async.460d3b0d.js"
+        "/bundles/base/base-async.bc40839b.js"
       ]
     },
     "base-defer": {
@@ -29,7 +29,7 @@
         "/bundles/base/form-defer.9da2985a.css"
       ],
       "js": [
-        "/bundles/base/form-defer.07368773.js"
+        "/bundles/base/form-defer.b9028446.js"
       ]
     }
   }
