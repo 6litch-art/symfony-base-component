@@ -2,7 +2,7 @@
   "entrypoints": {
     "base-async": {
       "css": [
-        "/bundles/base/base-async.33734ef7.css"
+        "/bundles/base/base-async.559c1928.css"
       ],
       "js": [
         "/bundles/base/base-async.bc40839b.js"
@@ -26,7 +26,7 @@
     },
     "form-defer": {
       "css": [
-        "/bundles/base/form-defer.8074fc5a.css"
+        "/bundles/base/form-defer.ddab0c39.css"
       ],
       "js": [
         "/bundles/base/form-defer.28443db9.js"
