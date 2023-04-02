@@ -2,34 +2,34 @@
   "entrypoints": {
     "base-async": {
       "css": [
-        "/bundles/base/base-async.7d31f1d5.css"
+        "/bundles/base/base-async.css"
       ],
       "js": [
-        "/bundles/base/base-async.d0104b90.js"
+        "/bundles/base/base-async.js"
       ]
     },
     "base-defer": {
       "css": [
-        "/bundles/base/base-defer.d8f09f5f.css"
+        "/bundles/base/base-defer.css"
       ],
       "js": [
-        "/bundles/base/base-defer.1a9037a0.js"
+        "/bundles/base/base-defer.js"
       ]
     },
     "easyadmin-async": {
       "css": [
-        "/bundles/base/easyadmin-async.a83e60a9.css"
+        "/bundles/base/easyadmin-async.css"
       ],
       "js": [
-        "/bundles/base/easyadmin-async.e7bbea40.js"
+        "/bundles/base/easyadmin-async.js"
       ]
     },
     "form-defer": {
       "css": [
-        "/bundles/base/form-defer.5f44e893.css"
+        "/bundles/base/form-defer.css"
       ],
       "js": [
-        "/bundles/base/form-defer.2c4b57f7.js"
+        "/bundles/base/form-defer.js"
       ]
     }
   }
