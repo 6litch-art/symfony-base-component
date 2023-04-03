@@ -2,7 +2,7 @@
   "entrypoints": {
     "base-async": {
       "css": [
-        "/bundles/base/base-async.4750103a.css"
+        "/bundles/base/base-async.261cfa3a.css"
       ],
       "js": [
         "/bundles/base/base-async.d0104b90.js"
