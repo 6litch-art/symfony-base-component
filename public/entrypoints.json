@@ -2,7 +2,7 @@
   "entrypoints": {
     "base-async": {
       "css": [
-        "/bundles/base/base-async.3437f432.css"
+        "/bundles/base/base-async.8d140048.css"
       ],
       "js": [
         "/bundles/base/base-async.067ff0dd.js"
@@ -13,12 +13,12 @@
         "/bundles/base/base-defer.5c6d43ac.css"
       ],
       "js": [
-        "/bundles/base/base-defer.c48cd605.js"
+        "/bundles/base/base-defer.5f86a5de.js"
       ]
     },
     "easyadmin-async": {
       "css": [
-        "/bundles/base/easyadmin-async.52c435ca.css"
+        "/bundles/base/easyadmin-async.a92557f3.css"
       ],
       "js": [
         "/bundles/base/easyadmin-async.817e5146.js"
@@ -71,7 +71,7 @@
     },
     "form-defer.wysiwyg": {
       "css": [
-        "/bundles/base/form-defer.wysiwyg.17353d91.css"
+        "/bundles/base/form-defer.wysiwyg.4c86c295.css"
       ],
       "js": [
         "/bundles/base/form-defer.wysiwyg.9d4ada9c.js"
@@ -95,7 +95,7 @@
         "/bundles/base/form-defer.dropzone.eb8b5f49.css"
       ],
       "js": [
-        "/bundles/base/form-defer.dropzone.070e1634.js"
+        "/bundles/base/form-defer.dropzone.6d9de717.js"
       ]
     }
   }
