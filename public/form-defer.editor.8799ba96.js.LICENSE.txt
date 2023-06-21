@@ -1,4 +1,20 @@
 /*!
+       * Codex JavaScript Notification module
+       * https://github.com/codex-team/js-notifier
+       */
+
+/*!
+ * CodeX.Tooltips
+ * 
+ * @version 1.0.5
+ * 
+ * @licence MIT
+ * @author CodeX <https://codex.so>
+ * 
+ * 
+ */
+
+/*!
  * Image tool
  * 
  * @version 2.8.1
@@ -9,33 +25,34 @@
  */
 
 /*!
- * Sizzle CSS Selector Engine v2.3.10
- * https://sizzlejs.com/
- *
- * Copyright JS Foundation and other contributors
- * Released under the MIT license
- * https://js.foundation/
- *
- * Date: 2023-02-14
+ * Library for handling keyboard shortcuts
+ * @copyright CodeX (https://codex.so)
+ * @license MIT
+ * @author CodeX (https://codex.so)
+ * @version 1.2.0
  */
 
 /*!
- * jQuery JavaScript Library v3.6.4
+ * jQuery JavaScript Library v3.7.0
  * https://jquery.com/
- *
- * Includes Sizzle.js
- * https://sizzlejs.com/
  *
  * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2023-03-08T15:28Z
+ * Date: 2023-05-11T18:29Z
  */
 
-/*! For license information please see editor.js.LICENSE.txt */
-
 /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
+
+/**
+       * Base Paragraph Block for the Editor.js.
+       * Represents simple paragraph
+       *
+       * @author CodeX (team@codex.so)
+       * @copyright CodeX 2018
+       * @license The MIT License (MIT)
+       */
 
 /**
  * CodeTool for Editor.js
@@ -44,6 +61,14 @@
  * @copyright CodeX 2018
  * @license MIT
  * @version 2.0.0
+ */
+
+/**
+ * Editor.js
+ *
+ * @license Apache-2.0
+ * @see Editor.js <https://editorjs.io>
+ * @author CodeX Team <https://codex.so>
  */
 
 /**
