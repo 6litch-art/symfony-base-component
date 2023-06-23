@@ -43,8 +43,6 @@
  * Date: 2023-05-11T18:29Z
  */
 
-/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
-
 /**
        * Base Paragraph Block for the Editor.js.
        * Represents simple paragraph
