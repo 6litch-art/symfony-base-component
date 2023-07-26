@@ -10,15 +10,15 @@
     },
     "base-defer": {
       "css": [
-        "/bundles/base/base-defer.5c6d43ac.css"
+        "/bundles/base/base-defer.9ddf6e79.css"
       ],
       "js": [
-        "/bundles/base/base-defer.abd3663f.js"
+        "/bundles/base/base-defer.c1ba84f2.js"
       ]
     },
     "easyadmin-async": {
       "css": [
-        "/bundles/base/easyadmin-async.bb6c1aaa.css"
+        "/bundles/base/easyadmin-async.864b1db4.css"
       ],
       "js": [
         "/bundles/base/easyadmin-async.50816852.js"
@@ -37,7 +37,7 @@
         "/bundles/base/form-defer.editor.f1d9a2cc.css"
       ],
       "js": [
-        "/bundles/base/form-defer.editor.1fa972d1.js"
+        "/bundles/base/form-defer.editor.4f714c12.js"
       ]
     },
     "form-defer.array": {
