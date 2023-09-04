@@ -3,21 +3,20 @@
 namespace Base\Form\Type;
 
 use Base\Form\Common\AbstractType;
-use Base\Form\Model\SecurityLoginModel;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Base\Form\Model\SecurityLoginTokenModel;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\Util\StringUtil;
 
 /**
  *
  */
-class SecurityLoginType extends AbstractType
+class SecurityLoginTokenType extends AbstractType
 {
     public function getBlockPrefix(): string
     {
@@ -27,9 +26,7 @@ class SecurityLoginType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => SecurityLoginModel::class,
-            'identifier' => null, // to pass variable from controller to Type
-            'allow_extra_fields' => true,
+            'data_class' => SecurityLoginTokenModel::class,
             'allow_login_token' => false
         ]);
     }
@@ -42,21 +39,11 @@ class SecurityLoginType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('identifier', TextType::class, [
+            ->add('email', TextType::class, [
                 'attr' => [
-                    'id' => "inputUsername",  // used in Symfony kernel
-                    'value' => $options["identifier"] ?? ""
+                    'id' => "inputEmail",  // used in Symfony kernel
+                    'value' => $options["email"] ?? ""
                 ]
-            ])
-            ->add('password', PasswordType::class, [
-                'attr' => [
-                    'id' => "inputPassword"  // used in Symfony kernel
-                ]
-            ])
-            ->add("_remember_me", CheckboxType::class, [
-                'mapped' => false,
-                'required' => false,
-                'attr' => ["checked" => "checked"]
             ]);
     }
 }
