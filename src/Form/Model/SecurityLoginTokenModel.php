@@ -8,16 +8,10 @@ use Base\Validator\Constraints as AssertBase;
 /**
  * @AssertBase\NotBlank
  */
-class SecurityLoginModel extends AbstractModel
+class SecurityLoginTokenModel extends AbstractModel
 {
     /**
      * @var ?string
      */
-    public /*?string*/ $identifier;
-
-    /**
-     * @var ?string
-     */
-    public /*?string*/ $password;
+    public /*?string*/ $email;
 }
-

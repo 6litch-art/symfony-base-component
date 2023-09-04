@@ -2,7 +2,7 @@
   "entrypoints": {
     "base-async": {
       "css": [
-        "/bundles/base/base-async.9d62680e.css"
+        "/bundles/base/base-async.8dc9eca3.css"
       ],
       "js": [
         "/bundles/base/base-async.16a5d247.js"
@@ -10,15 +10,15 @@
     },
     "base-defer": {
       "css": [
-        "/bundles/base/base-defer.1015bd37.css"
+        "/bundles/base/base-defer.d0393e1e.css"
       ],
       "js": [
-        "/bundles/base/base-defer.5421d100.js"
+        "/bundles/base/base-defer.9311b1a7.js"
       ]
     },
     "easyadmin-async": {
       "css": [
-        "/bundles/base/easyadmin-async.7084c802.css"
+        "/bundles/base/easyadmin-async.89bbf799.css"
       ],
       "js": [
         "/bundles/base/easyadmin-async.86aab8aa.js"
@@ -26,7 +26,7 @@
     },
     "form-defer": {
       "css": [
-        "/bundles/base/form-defer.5f5b97f8.css"
+        "/bundles/base/form-defer.aa3f0f4f.css"
       ],
       "js": [
         "/bundles/base/form-defer.be949b00.js"
@@ -34,10 +34,10 @@
     },
     "form-defer.editor": {
       "css": [
-        "/bundles/base/form-defer.editor.06a91863.css"
+        "/bundles/base/form-defer.editor.7162cf13.css"
       ],
       "js": [
-        "/bundles/base/form-defer.editor.9cbaf461.js"
+        "/bundles/base/form-defer.editor.eac035e5.js"
       ]
     },
     "form-defer.array": {
