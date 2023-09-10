@@ -10,7 +10,7 @@
     },
     "base-defer": {
       "css": [
-        "/bundles/base/base-defer.d0393e1e.css"
+        "/bundles/base/base-defer.440aaebd.css"
       ],
       "js": [
         "/bundles/base/base-defer.f210709d.js"
@@ -26,7 +26,7 @@
     },
     "form-defer": {
       "css": [
-        "/bundles/base/form-defer.aa3f0f4f.css"
+        "/bundles/base/form-defer.7a30bdb8.css"
       ],
       "js": [
         "/bundles/base/form-defer.be949b00.js"
@@ -34,10 +34,10 @@
     },
     "form-defer.editor": {
       "css": [
-        "/bundles/base/form-defer.editor.7162cf13.css"
+        "/bundles/base/form-defer.editor.50c58164.css"
       ],
       "js": [
-        "/bundles/base/form-defer.editor.eac035e5.js"
+        "/bundles/base/form-defer.editor.72db0286.js"
       ]
     },
     "form-defer.array": {
