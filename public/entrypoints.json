@@ -18,7 +18,7 @@
     },
     "easyadmin-async": {
       "css": [
-        "/bundles/base/easyadmin-async.75a58045.css"
+        "/bundles/base/easyadmin-async.ebfefc36.css"
       ],
       "js": [
         "/bundles/base/easyadmin-async.b5b6b20c.js"
@@ -26,7 +26,7 @@
     },
     "form-defer": {
       "css": [
-        "/bundles/base/form-defer.2c3ae249.css"
+        "/bundles/base/form-defer.6053fbb9.css"
       ],
       "js": [
         "/bundles/base/form-defer.e7bca8e4.js"
@@ -34,7 +34,7 @@
     },
     "form-defer.editor": {
       "css": [
-        "/bundles/base/form-defer.editor.ee0b32d9.css"
+        "/bundles/base/form-defer.editor.3de560cc.css"
       ],
       "js": [
         "/bundles/base/form-defer.editor.1c05368d.js"
