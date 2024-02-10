@@ -34,10 +34,10 @@
     },
     "form-defer.editor": {
       "css": [
-        "/bundles/base/form-defer.editor.3de560cc.css"
+        "/bundles/base/form-defer.editor.b340c16f.css"
       ],
       "js": [
-        "/bundles/base/form-defer.editor.1c05368d.js"
+        "/bundles/base/form-defer.editor.5bcc2357.js"
       ]
     },
     "form-defer.array": {
