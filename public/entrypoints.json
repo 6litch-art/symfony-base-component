@@ -2,18 +2,18 @@
   "entrypoints": {
     "base-async": {
       "css": [
-        "/bundles/base/base-async.7893101a.css"
+        "/bundles/base/base-async.60010be8.css"
       ],
       "js": [
-        "/bundles/base/base-async.9dc383a9.js"
+        "/bundles/base/base-async.51ff5f9b.js"
       ]
     },
     "base-defer": {
       "css": [
-        "/bundles/base/base-defer.74b8e530.css"
+        "/bundles/base/base-defer.479e1eba.css"
       ],
       "js": [
-        "/bundles/base/base-defer.b48a4b6d.js"
+        "/bundles/base/base-defer.9186ede1.js"
       ]
     },
     "easyadmin-async": {
@@ -21,7 +21,7 @@
         "/bundles/base/easyadmin-async.ae0c0027.css"
       ],
       "js": [
-        "/bundles/base/easyadmin-async.72aaaad3.js"
+        "/bundles/base/easyadmin-async.621965a4.js"
       ]
     },
     "form-defer": {
@@ -29,7 +29,7 @@
         "/bundles/base/form-defer.6053fbb9.css"
       ],
       "js": [
-        "/bundles/base/form-defer.79a9c7de.js"
+        "/bundles/base/form-defer.069f87ad.js"
       ]
     },
     "form-defer.editor": {
@@ -37,12 +37,12 @@
         "/bundles/base/form-defer.editor.24c0844c.css"
       ],
       "js": [
-        "/bundles/base/form-defer.editor.ea7a6cd5.js"
+        "/bundles/base/form-defer.editor.093e5ed3.js"
       ]
     },
     "form-defer.array": {
       "js": [
-        "/bundles/base/form-defer.array.dbc7e97f.js"
+        "/bundles/base/form-defer.array.9f3ff863.js"
       ]
     },
     "form-defer.datetime": {
@@ -50,7 +50,7 @@
         "/bundles/base/form-defer.datetime.125a01b3.css"
       ],
       "js": [
-        "/bundles/base/form-defer.datetime.d02210f4.js"
+        "/bundles/base/form-defer.datetime.48470b7f.js"
       ]
     },
     "form-defer.select2": {
@@ -58,15 +58,15 @@
         "/bundles/base/form-defer.select2.3567d0d3.css"
       ],
       "js": [
-        "/bundles/base/form-defer.select2.59d767cf.js"
+        "/bundles/base/form-defer.select2.1305e03b.js"
       ]
     },
     "form-defer.color": {
       "css": [
-        "/bundles/base/form-defer.color.599b99ca.css"
+        "/bundles/base/form-defer.color.c9742277.css"
       ],
       "js": [
-        "/bundles/base/form-defer.color.67abace8.js"
+        "/bundles/base/form-defer.color.d19a4794.js"
       ]
     },
     "form-defer.wysiwyg": {
@@ -74,7 +74,7 @@
         "/bundles/base/form-defer.wysiwyg.c8872d96.css"
       ],
       "js": [
-        "/bundles/base/form-defer.wysiwyg.9fcda4a7.js"
+        "/bundles/base/form-defer.wysiwyg.fd497b45.js"
       ]
     },
     "form-defer.cropper": {
@@ -82,12 +82,12 @@
         "/bundles/base/form-defer.cropper.31d6cfe0.css"
       ],
       "js": [
-        "/bundles/base/form-defer.cropper.bf0f988e.js"
+        "/bundles/base/form-defer.cropper.1de7aa39.js"
       ]
     },
     "form-defer.emoji": {
       "js": [
-        "/bundles/base/form-defer.emoji.5fdb80b0.js"
+        "/bundles/base/form-defer.emoji.75cfb28e.js"
       ]
     },
     "form-defer.dropzone": {
@@ -95,7 +95,7 @@
         "/bundles/base/form-defer.dropzone.6215fd66.css"
       ],
       "js": [
-        "/bundles/base/form-defer.dropzone.5c4038c6.js"
+        "/bundles/base/form-defer.dropzone.37263d8d.js"
       ]
     }
   }
