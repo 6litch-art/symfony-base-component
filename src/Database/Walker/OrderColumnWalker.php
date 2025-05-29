@@ -3,15 +3,10 @@
 namespace Base\Database\Walker;
 
 use Base\Database\Mapping\NamingStrategy;
-use Base\Database\Entity\Extension\TranslatableInterface;
-use Base\Database\Entity\Extension\TranslationInterface;
-use Base\DatabaseSubscriber\IntlSubscriber;
 use Base\Service\Localizer;
 use Doctrine\ORM\Query\QueryException;
 use Doctrine\ORM\Query\OutputWalker;
 use Doctrine\ORM\Query\AST;
-use RuntimeException;
-use Doctrine\ORM\Events;
 use Doctrine\ORM\Query\SqlOutputWalker;
 
 /**
@@ -111,17 +106,6 @@ class TranslatableWalker extends SqlOutputWalker implements OutputWalker
         return $sql;
     }
 
-    protected function getLocalizer(): Localizer
-    {
-        foreach ($this->getEntityManager()->getEventManager()->getListeners(Events::loadClassMetadata) as $listener) {
-            if ($listener instanceof IntlSubscriber) {
-                return $listener->getLocalizer();
-            }
-        }
-
-        throw new RuntimeException('Locale provider not found.');
-    }
-
     /**
      * @param $joinAssociationDeclaration
      * @param $joinType
@@ -132,73 +116,73 @@ class TranslatableWalker extends SqlOutputWalker implements OutputWalker
     public function walkJoinAssociationDeclaration($joinAssociationDeclaration, $joinType = AST\Join::JOIN_TYPE_INNER, $condExpr = null): string
     {
         $sql = parent::walkJoinAssociationDeclaration($joinAssociationDeclaration, $joinType, $condExpr);
-        $dqlAlias = $joinAssociationDeclaration->joinAssociationPathExpression->identificationVariable;
-        $joinedDqlAlias = $joinAssociationDeclaration->aliasIdentificationVariable;
+        // $dqlAlias = $joinAssociationDeclaration->joinAssociationPathExpression->identificationVariable;
+        // $joinedDqlAlias = $joinAssociationDeclaration->aliasIdentificationVariable;
 
-        $relation = $this->getQueryComponent($joinedDqlAlias)['relation'] ?? null;
-        if ($relation === null) {
-            return $sql;
-        }
+        // $relation = $this->getQueryComponent($joinedDqlAlias)['relation'] ?? null;
+        // if ($relation === null) {
+        //     return $sql;
+        // }
 
-        // Extract source class information
-        $sourceClass = $this->getEntityManager()->getClassMetadata($relation['sourceEntity']);
+        // // Extract source class information
+        // $sourceClass = $this->getEntityManager()->getClassMetadata($relation['sourceEntity']);
 
-        if (!class_implements_interface($sourceClass->getName(), TranslatableInterface::class)) {
-            return $sql;
-        }
+        // if (!class_implements_interface($sourceClass->getName(), TranslatableInterface::class)) {
+        //     return $sql;
+        // }
 
-        // Get target class
-        $targetClass = $this->getEntityManager()->getClassMetadata($relation['targetEntity']);
-        if (!class_implements_interface($targetClass->getName(), TranslationInterface::class)) {
-            return $sql;
-        }
+        // // Get target class
+        // $targetClass = $this->getEntityManager()->getClassMetadata($relation['targetEntity']);
+        // if (!class_implements_interface($targetClass->getName(), TranslationInterface::class)) {
+        //     return $sql;
+        // }
 
-        //
-        // Check whether target class is the root translation entity or not
-        $assoc = !$relation['isOwningSide'] ? $targetClass->associationMappings[$relation['mappedBy']] : $relation;
+        // //
+        // // Check whether target class is the root translation entity or not
+        // $assoc = !$relation['isOwningSide'] ? $targetClass->associationMappings[$relation['mappedBy']] : $relation;
 
-        // Get root target class to replace target class 'translation_id'
-        $rootTargetClass = $this->getEntityManager()->getClassMetadata($assoc['inherited'] ?? $relation['targetEntity']);
-        if (!class_implements_interface($rootTargetClass->getName(), TranslationInterface::class)) {
-            return $sql;
-        }
+        // // Get root target class to replace target class 'translation_id'
+        // $rootTargetClass = $this->getEntityManager()->getClassMetadata($assoc['inherited'] ?? $relation['targetEntity']);
+        // if (!class_implements_interface($rootTargetClass->getName(), TranslationInterface::class)) {
+        //     return $sql;
+        // }
 
-        // Get source alias and its intl alias
-        $sourceTableAlias = $this->getSQLTableAlias($sourceClass->getTableName(), $dqlAlias);
-        $sourceIntlTableAlias = $this->getSQLTableAlias($targetClass->getTableName(), $joinedDqlAlias);
+        // // Get source alias and its intl alias
+        // $sourceTableAlias = $this->getSQLTableAlias($sourceClass->getTableName(), $dqlAlias);
+        // $sourceIntlTableAlias = $this->getSQLTableAlias($targetClass->getTableName(), $joinedDqlAlias);
 
-        //
-        // Use `translatable_id` from root translation entity.
-        $rootIntlTableAlias = $this->getSQLTableAlias($rootTargetClass->getTableName(), $joinedDqlAlias);
-        $sql = str_replace(
-            $sourceIntlTableAlias . ".id = " . $rootIntlTableAlias . ".id",
-            $sourceTableAlias . ".id = " . $rootIntlTableAlias . "." . self::FOREIGN_KEY,
-            $sql
-        );
+        // //
+        // // Use `translatable_id` from root translation entity.
+        // $rootIntlTableAlias = $this->getSQLTableAlias($rootTargetClass->getTableName(), $joinedDqlAlias);
+        // $sql = str_replace(
+        //     $sourceIntlTableAlias . ".id = " . $rootIntlTableAlias . ".id",
+        //     $sourceTableAlias . ".id = " . $rootIntlTableAlias . "." . self::FOREIGN_KEY,
+        //     $sql
+        // );
 
-        //
-        // Replace target family clause accordingly to root translation entity ID.
-        $intlFamilyClass = array_map(fn($c) => $this->getEntityManager()->getClassMetadata($c), get_family_class($targetClass->getName()));
-        foreach ($intlFamilyClass as $currentClass) {
-            $intlTableAlias = $this->getSQLTableAlias($currentClass->getTableName(), $joinedDqlAlias);
+        // //
+        // // Replace target family clause accordingly to root translation entity ID.
+        // $intlFamilyClass = array_map(fn($c) => $this->getEntityManager()->getClassMetadata($c), get_family_class($targetClass->getName()));
+        // foreach ($intlFamilyClass as $currentClass) {
+        //     $intlTableAlias = $this->getSQLTableAlias($currentClass->getTableName(), $joinedDqlAlias);
 
-            if ($intlTableAlias == $rootIntlTableAlias) {
-                continue;
-            }
-            if ($intlTableAlias == $sourceIntlTableAlias) {
-                $sql = str_replace(
-                    $sourceTableAlias . ".id = " . $sourceIntlTableAlias . "." . self::FOREIGN_KEY,
-                    $sourceIntlTableAlias . ".id = " . $rootIntlTableAlias . ".id",
-                    $sql
-                );
-            } else {
-                $sql = str_replace(
-                    $sourceIntlTableAlias . ".id = " . $intlTableAlias . ".id",
-                    $intlTableAlias . ".id = " . $rootIntlTableAlias . ".id",
-                    $sql
-                );
-            }
-        }
+        //     if ($intlTableAlias == $rootIntlTableAlias) {
+        //         continue;
+        //     }
+        //     if ($intlTableAlias == $sourceIntlTableAlias) {
+        //         $sql = str_replace(
+        //             $sourceTableAlias . ".id = " . $sourceIntlTableAlias . "." . self::FOREIGN_KEY,
+        //             $sourceIntlTableAlias . ".id = " . $rootIntlTableAlias . ".id",
+        //             $sql
+        //         );
+        //     } else {
+        //         $sql = str_replace(
+        //             $sourceIntlTableAlias . ".id = " . $intlTableAlias . ".id",
+        //             $intlTableAlias . ".id = " . $rootIntlTableAlias . ".id",
+        //             $sql
+        //         );
+        //     }
+        // }
 
         return $sql;
     }
