@@ -2,7 +2,7 @@
   "entrypoints": {
     "base-async": {
       "css": [
-        "/bundles/base/base-async.74ad3870.css"
+        "/bundles/base/base-async.06c0b705.css"
       ],
       "js": [
         "/bundles/base/base-async.38e3532b.js"
@@ -18,7 +18,7 @@
     },
     "easyadmin-async": {
       "css": [
-        "/bundles/base/easyadmin-async.afdc5709.css"
+        "/bundles/base/easyadmin-async.48da27b7.css"
       ],
       "js": [
         "/bundles/base/easyadmin-async.ea893ba0.js"
