@@ -18,7 +18,7 @@
     },
     "easyadmin-async": {
       "css": [
-        "/bundles/base/easyadmin-async.38296d4e.css"
+        "/bundles/base/easyadmin-async.80bfa4dd.css"
       ],
       "js": [
         "/bundles/base/easyadmin-async.e5955b8f.js"
@@ -34,7 +34,7 @@
     },
     "form-defer.editor": {
       "css": [
-        "/bundles/base/form-defer.editor.89692424.css"
+        "/bundles/base/form-defer.editor.c9797f8f.css"
       ],
       "js": [
         "/bundles/base/form-defer.editor.84fe0350.js"
