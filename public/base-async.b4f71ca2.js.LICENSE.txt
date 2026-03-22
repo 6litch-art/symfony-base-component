@@ -1,5 +1,5 @@
 /*!
- * Lightbox v2.11.5
+ * Lightbox v2.12.0
  * by Lokesh Dhakar
  *
  * More info:
@@ -21,4 +21,15 @@
  * https://jquery.org/license
  *
  * Date: 2023-08-28T13:37Z
+ */
+
+/*!
+ * jQuery JavaScript Library v4.0.0
+ * https://jquery.com/
+ *
+ * Copyright OpenJS Foundation and other contributors
+ * Released under the MIT license
+ * https://jquery.com/license/
+ *
+ * Date: 2026-01-18T00:20Z
  */
