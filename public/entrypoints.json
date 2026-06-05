@@ -2,7 +2,7 @@
   "entrypoints": {
     "base-async": {
       "css": [
-        "/bundles/base/base-async.d1bb2ff3.css"
+        "/bundles/base/base-async.b78cb9e7.css"
       ],
       "js": [
         "/bundles/base/base-async.6630b6d8.js"
@@ -10,7 +10,7 @@
     },
     "base-defer": {
       "css": [
-        "/bundles/base/base-defer.479e1eba.css"
+        "/bundles/base/base-defer.5f32239b.css"
       ],
       "js": [
         "/bundles/base/base-defer.9c103c0f.js"
@@ -18,10 +18,10 @@
     },
     "easyadmin-async": {
       "css": [
-        "/bundles/base/easyadmin-async.7014c86a.css"
+        "/bundles/base/easyadmin-async.a4508e13.css"
       ],
       "js": [
-        "/bundles/base/easyadmin-async.af765f39.js"
+        "/bundles/base/easyadmin-async.00c6d9ed.js"
       ]
     },
     "form-defer": {
@@ -34,7 +34,7 @@
     },
     "form-defer.editor": {
       "css": [
-        "/bundles/base/form-defer.editor.744cc78d.css"
+        "/bundles/base/form-defer.editor.40ab0a16.css"
       ],
       "js": [
         "/bundles/base/form-defer.editor.9d40ff57.js"
@@ -47,7 +47,7 @@
     },
     "form-defer.datetime": {
       "css": [
-        "/bundles/base/form-defer.datetime.e1df42af.css"
+        "/bundles/base/form-defer.datetime.604c58d2.css"
       ],
       "js": [
         "/bundles/base/form-defer.datetime.b5bbd6be.js"
@@ -92,7 +92,7 @@
     },
     "form-defer.dropzone": {
       "css": [
-        "/bundles/base/form-defer.dropzone.aebae892.css"
+        "/bundles/base/form-defer.dropzone.063304f6.css"
       ],
       "js": [
         "/bundles/base/form-defer.dropzone.b1f02f4b.js"
