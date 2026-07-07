@@ -3,11 +3,15 @@
 namespace Base\Attributes\Attribute;
 
 /**
- * Attribute class for @Route().
+ * A plain Symfony Route attribute plus $translationKey support — unlike
+ * Route (this bundle's other Route subclass), it does NOT compose any
+ * host/domain/subdomain/machine templating, so it's safe as a drop-in
+ * replacement for Symfony's own #[Route] on any controller, with no change
+ * to host matching. Use Route instead when you specifically need its
+ * multi-tenant host templating (see ShortLinkController for an example).
  */
-
 #[\Attribute(\Attribute::IS_REPEATABLE | \Attribute::TARGET_CLASS | \Attribute::TARGET_METHOD)]
-class Route extends \Symfony\Component\Routing\Attribute\Route
+class LocalizedRoute extends \Symfony\Component\Routing\Attribute\Route
 {
     use RoutePathDictionaryTrait;
 
@@ -18,9 +22,6 @@ class Route extends \Symfony\Component\Routing\Attribute\Route
         array             $options = [],
         array             $defaults = [],
         ?string           $host = null,
-        ?string           $domain = null,
-        ?string           $subdomain = null,
-        ?string           $machine = null,
         array|string      $methods = [],
         array|string      $schemes = [],
         ?string           $condition = null,
@@ -37,17 +38,6 @@ class Route extends \Symfony\Component\Routing\Attribute\Route
             $path = self::resolveTranslationKey($translationKey);
         }
 
-        $parsedUrl = parse_url2($host ?? "");
-        if (!$parsedUrl) {
-            $parsedUrl = [];
-        }
-
-        $parsedUrl["domain"] ??= $domain ?? "\{_domain\}";
-        $parsedUrl["subdomain"] ??= $subdomain ?? "\{_subdomain\}";
-        $parsedUrl["machine"] ??= $machine ?? "\{_machine\}";
-        $parsedUrl["port"] ??= $port ?? "\{_port\}";
-
-        $host = compose_url(null, null, null, $parsedUrl["machine"], $parsedUrl["subdomain"], $parsedUrl["domain"], $parsedUrl["port"]);
         parent::__construct($path, $name, $requirements, $options, $defaults, $host, $methods, $schemes, $condition, $priority, $locale, $format, $utf8, $stateless, $env);
     }
 }
